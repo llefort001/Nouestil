@@ -1,0 +1,7 @@
+payments:
+    path:     /admin/payments
+    defaults: { _controller: AppBundle:Payment:index }
+
+deletePayment:
+    path:     /admin/delete-payment/{paymentId}
+    defaults: { _controller: AppBundle:Payment:deletePayment }

@@ -1,0 +1,7 @@
+parameters:
+
+    roles:
+        ROLE_USER: Utilisateur
+        ROLE_USER_VERIFIED: Utilisateur authentifé
+        ROLE_ADMIN: Administrateur
+        ROLE_SUPER_ADMIN: Super administrateur

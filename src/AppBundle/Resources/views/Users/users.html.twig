@@ -18,7 +18,11 @@
             <tr>
                 <th>#</th>
                 <th>Nom d'utilisateur</th>
+                <th>Nom</th>
+                <th>Prénom</th>
+                <th>Num Tel</th>
                 <th>Email</th>
+                <th>Contact</th>
                 <th>Groupe</th>
                 <th>Actions</th>
             </tr>
@@ -28,20 +32,43 @@
                 <tr>
                     <td>{{ user.id }}</td>
                     <td>{{ user.username }}</td>
+                    <td>{{ user.lastname }}</td>
+                    <td>{{ user.firstname }}</td>
+                    <td>{{ user.phoneNumber }}</td>
                     <td>{{ user.email }}</td>
+                    <td>
+                        <a href="#"><span class="label label-default" data-toggle="modal"
+                                          data-target="#contactModal_{{ user.contact.id }}">
+                            {{ user.contact.firstname }} {{ user.contact.lastname }}</span></a>
+
+                        <div class="modal fade" id="contactModal_{{ user.contact.id }}" tabindex="-1" role="dialog"
+                             aria-labelledby="myModalLabel">
+                            <div class="modal-dialog" role="document">
+                                <div class="modal-content">
+                                    <div class="modal-header">
+                                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                            <span aria-hidden="true">&times;</span></button>
+                                        <h4 class="modal-title" id="myModalLabel">
+                                            {{ user.contact.firstname }} {{ user.contact.lastname }}</h4>
+                                    </div>
+                                    <div class="modal-body">
+                                        Numéro de téléphone : {{ user.contact.phoneNumber }}
+                                    </div>
+                            </div>
+                    </td>
                     <td>
                         {% if user.group.id is defined %}
                             {{ user.group.name }}
                         {% endif %}
                     </td>
                     <td>
-                        <span class="label label-default" data-toggle="modal"
-                              data-target="#userModal_{{ user.id }}">+</span>
+                        <a href="#"><span class="label label-default" data-toggle="modal"
+                                          data-target="#userModal_{{ user.id }}">+</span></a>
                         {#<a class="label label-warning"  href="{{ path('base_homepage', {'_want_to_be': user.username}) }}" >Impersonate</a>#}
-                        {#{% if currentUser != user %}#}
-                        {#<a href="{{ path('base_deleteUser',{'userId': user.id}) }}"#}
-                        {#onclick="return confirm('Confirmer la suppression ?')"><span class="label label-danger">Supprimer</span></a>#}
-                        {#{% endif %}#}
+                        {% if currentUser != user %}
+                            <a href="{{ path('deleteUser',{'userId': user.id}) }}"
+                               onclick="return confirm('Confirmer la suppression ?')"><span class="label label-danger">Supprimer</span></a>
+                        {% endif %}
                         <div class="modal fade" id="userModal_{{ user.id }}" tabindex="-1" role="dialog"
                              aria-labelledby="myModalLabel">
                             <div class="modal-dialog" role="document">
@@ -72,6 +99,8 @@
                                             <div class="Group">
                                                 <h5>Modifier le groupe :</h5>
                                                 <select onchange="window.location.href=this.value" class="form-control">
+                                                    <option disabled selected value> -- Sélectionner une option --
+                                                    </option>
                                                     {% for key, group in groups %}
                                                         <option value="{{ path('updateGroupUser',{'userId': user.id,'group':group.id}) }}" {% if user.group.id is defined and  user.group.id==group.id %} selected="selected" {% endif %} >
                                                             {{ group }}
@@ -91,47 +120,43 @@
                                             {#<label>Activer le time tracking</label>#}
                                             {#</div>#}
                                             <hr/>
-                                            {#<label class="col-md-4 col-form-label">Transactions</label>#}
-                                            {#<table class="table">#}
-                                                {#<thead>#}
-                                                {#<tr>#}
-                                                    {#<th>#</th>#}
-                                                    {#<th>Source</th>#}
-                                                    {#<th>TransactionId</th>#}
-                                                    {#<th>OfferId</th>#}
-                                                    {#<th>Montant</th>#}
-                                                    {#<th>Date</th>#}
-                                                {#</tr>#}
-                                                {#</thead>#}
-                                                {#<tbody>#}
-                                                {#{% for transaction in user.transaction %}#}
-                                                    {#<tr>#}
-                                                        {#<td>{{ transaction.id }}</td>#}
-                                                        {#<td>{{ transaction.source }}</td>#}
-                                                        {#<td>{{ transaction.transactionId }}</td>#}
-                                                        {#<td>{{ transaction.offerId }}</td>#}
-                                                        {#<td>{{ transaction.amount }}</td>#}
-                                                        {#<td>{{ transaction.datetime|date('d-m-Y H:i:s') }}</td>#}
-                                                    {#</tr>#}
-                                                {#{% endfor %}#}
-                                                {#</tbody>#}
-                                            {#</table>#}
+                                            <label class="col-md-4 col-form-label">Paiements</label>
+                                            <table class="table">
+                                                <thead>
+                                                <tr>
+                                                    <th>#</th>
+                                                    <th>Montant</th>
+                                                    <th>Methode</th>
+                                                    <th>Date</th>
+                                                </tr>
+                                                </thead>
+                                                <tbody>
+                                                {% for payment in user.payments %}
+                                                    <tr>
+                                                        <td>{{ payment.id }}</td>
+                                                        <td>{{ payment.amount }} €</td>
+                                                        <td>{{ payment.method }}</td>
+                                                        <td>{{ payment.datetime|date('Y-m-d H:i:s') }}</td>
+                                                    </tr>
+                                                {% endfor %}
+                                                </tbody>
+                                            </table>
                                             {#<div class="form-group row">#}
                                             {#<label class="col-md-4 col-form-label">Disponibilité Mensuelle</label>#}
                                             {#<div class="col-md-8">#}
                                             {#<input class="form-control" type="number" max="200" name="monthly_availability" value="{{ user.monthlyAvailability }}">#}
                                             {#</div>#}
                                             {#</div>#}
-                                            {#</div>#}
-                                            <div class="modal-footer">
-                                                <input type="hidden" name="id" value="{{ user.id }}">
-                                                <button type="button" class="btn btn-default"
-                                                        data-dismiss="modal">Close
-                                                </button>
-                                                <button type="submit" class="btn btn-primary">Save changes
-                                                </button>
-                                            </div>
                                         </div>
+                                        <div class="modal-footer">
+                                            <input type="hidden" name="id" value="{{ user.id }}">
+                                            <button type="button" class="btn btn-default"
+                                                    data-dismiss="modal">Close
+                                            </button>
+                                            <button type="submit" class="btn btn-primary">Save changes
+                                            </button>
+                                        </div>
+                                    </div>
                                 </form>
                             </div>
                         </div>

@@ -21,4 +21,3 @@ updateGroupUser:
 base_user_list:
     path:     /users-list/
     defaults: { _controller: AppBundle:User:userList }
-

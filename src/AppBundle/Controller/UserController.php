@@ -17,17 +17,42 @@ class UserController extends Controller
      * Lists all Users.
      *
      */
+//    public function indexAction() // C'est comme ça qu'on faisait avant l'utilisation du userManager maison
+//    {
+//        $userManager = $this->get('fos_user.user_manager');
+//        $entityManager = $this->getDoctrine()->getManager();
+//        $users = $userManager->findUsers();
+//        $groups = $entityManager->getRepository('AppBundle:Group')->findAll();
+//        return $this->render('AppBundle:Users:users.html.twig', array(
+//            'users' => $users,
+//            'groups' => $groups,
+//        ));
+//    }
+
     public function indexAction()
     {
-        $userManager = $this->get('fos_user.user_manager');
+        $user = $this->getUser();
         $entityManager = $this->getDoctrine()->getManager();
-        $users = $userManager->findUsers();
+        $roles = $this->container->getParameter('roles');
         $groups = $entityManager->getRepository('AppBundle:Group')->findAll();
-        return $this->render('AppBundle:Users:users.html.twig', array(
-            'users' => $users,
-            'groups' => $groups,
-        ));
+        $users = $this->get('nouestil.user');
+        return $this->render('AppBundle:Users:users.html.twig', array('users' => $users->getUsersList(), "roles" => $roles, "groups" => $groups, "currentUser" => $user));
+
     }
+
+    public function deleteUserAction($userId)
+    {
+        $userManager = $this->get('nouestil.user');
+        $userToDelete = $userManager->getUser($userId);
+        if ($userToDelete == $this->getUser()) {
+            $this->addFlash('Erreur', 'Impossible de supprimer l\'utilisateur actuellement connecté.');
+        } else {
+            $userManager->deleteUser($userToDelete);
+        }
+        return $this->redirect($this->generateUrl('users'));
+
+    }
+
 
     public function withdrawAction($userId)
     {
@@ -82,6 +107,5 @@ class UserController extends Controller
         }
         return $this->redirect($this->generateUrl('users'));
     }
-
 
 }

@@ -4,3 +4,6 @@ users:
 homepage:
     path:     /
     defaults: { _controller: AppBundle:Default:index }
+
+payments:
+    resource: '@AppBundle/Resources/config/routing/payments.yml'
