@@ -1,0 +1,24 @@
+users:
+    path:     /admin/users
+    defaults: { _controller: AppBundle:User:index }
+
+deleteUser:
+    path:     /admin/delete-user/{userId}
+    defaults: { _controller: AppBundle:User:deleteUser }
+
+updateRolesUser:
+    path:     /admin/update-roles-user/{userId}/{role}
+    defaults: { _controller: AppBundle:User:updateRolesUser}
+
+updateUser:
+    path:     /admin/update-user/
+    defaults: { _controller: AppBundle:User:updateUser}
+
+updateGroupUser:
+    path:     /admin/update-group-user/{userId}/{group}
+    defaults: { _controller: AppBundle:User:updateGroupUser }
+
+base_user_list:
+    path:     /users-list/
+    defaults: { _controller: AppBundle:User:userList }
+
