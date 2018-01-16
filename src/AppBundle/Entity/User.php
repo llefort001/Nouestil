@@ -33,6 +33,19 @@ class User extends BaseUser
      * @ORM\Column(type="string", length=10)
      */
     protected $phoneNumber;
+    /**
+     * @ORM\Column(type="string", length=255)
+     */
+    public $publicNote;
+    /**
+     * @ORM\Column(type="string", length=255)
+     */
+    public $privateNote;
+
+    /**
+     * @ORM\Column(type="date")
+     */
+    protected $birthDate;
 
     /**
      * @ORM\ManyToOne(targetEntity="Group", inversedBy="users", cascade={"persist"})
@@ -165,6 +178,54 @@ class User extends BaseUser
     public function setPhoneNumber($phoneNumber)
     {
         $this->phoneNumber = $phoneNumber;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getPublicNote()
+    {
+        return $this->publicNote;
+    }
+
+    /**
+     * @param mixed $note
+     */
+    public function setPublicNote($note)
+    {
+        $this->publicNote = $note;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getBirthDate()
+    {
+        return $this->birthDate;
+    }
+
+    /**
+     * @param mixed $birthDate
+     */
+    public function setBirthDate($birthDate)
+    {
+        $this->birthDate = $birthDate;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getPrivateNote()
+    {
+        return $this->privateNote;
+    }
+
+    /**
+     * @param mixed $privateNote
+     */
+    public function setPrivateNote($privateNote)
+    {
+        $this->privateNote = $privateNote;
     }
 
 

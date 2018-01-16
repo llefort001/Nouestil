@@ -20,6 +20,7 @@
                 <th>Nom d'utilisateur</th>
                 <th>Nom</th>
                 <th>Prénom</th>
+                <th>Date de Naissance</th>
                 <th>Num Tel</th>
                 <th>Email</th>
                 <th>Contact</th>
@@ -34,6 +35,7 @@
                     <td>{{ user.username }}</td>
                     <td>{{ user.lastname }}</td>
                     <td>{{ user.firstname }}</td>
+                    <td>{{ user.birthdate|date('d-m-Y') }}</td>
                     <td>{{ user.phoneNumber }}</td>
                     <td>{{ user.email }}</td>
                     <td>
@@ -54,7 +56,7 @@
                                     <div class="modal-body">
                                         Numéro de téléphone : {{ user.contact.phoneNumber }}
                                     </div>
-                            </div>
+                                </div>
                     </td>
                     <td>
                         {% if user.group.id is defined %}
@@ -82,6 +84,14 @@
                                                 {{ user.username }} </h4>
                                         </div>
                                         <div class="modal-body">
+                                            <div>
+                                                <p>Note publique: {{ user.publicNote }}</p>
+                                            </div>
+                                            <hr/>
+                                            <div>
+                                                <p>Note privée: {{ user.privateNote }}</p>
+                                            </div>
+                                            <hr/>
                                             {#<div class="Role">#}
                                             {#<h5>Modifier le rôle :</h5>#}
                                             {#<select onchange="window.location.href=this.value" class="form-control">#}
@@ -108,7 +118,6 @@
                                                     {% endfor %}
                                                 </select>
                                             </div>
-                                            <hr/>
                                             {#<div class="form-group col-md-6">#}
                                             {#<input type="checkbox" name="ressource_planner"#}
                                             {#{% if user.ressourcePlanner %} checked {% endif %} />#}
