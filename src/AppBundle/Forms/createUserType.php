@@ -1,7 +1,9 @@
 <?php
+namespace AppBundle\Forms;
 
+class createUserType{
 
-
+}
 //lama
 /**
  * Created by PhpStorm.
