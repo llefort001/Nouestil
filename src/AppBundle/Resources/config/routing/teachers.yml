@@ -1,0 +1,3 @@
+listUser:
+    path:     /teacher/user-list
+    defaults: { _controller: AppBundle:Teacher:userList }
