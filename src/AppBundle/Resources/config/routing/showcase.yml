@@ -1,0 +1,12 @@
+home:
+    path:     /
+    defaults: { _controller: AppBundle:Showcase:index }
+gallery:
+    path:     /
+    defaults: { _controller: AppBundle:Showcase:gallery }
+contact:
+    path:     /
+    defaults: { _controller: AppBundle:Showcase:contact }
+courses:
+    path:     /
+    defaults: { _controller: AppBundle:Showcase:courses }
