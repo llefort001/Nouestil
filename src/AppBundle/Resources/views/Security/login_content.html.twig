@@ -1,0 +1,28 @@
+{% trans_default_domain 'FOSUserBundle' %}
+
+{% if error is defined and error is not empty %}
+    <div class="alert alert-danger">
+        <strong>Attention</strong> {{ error.messageKey|trans(error.messageData, 'security') }}
+    </div>
+{% endif %}
+
+<form class="m-t" role="form" method="post" action="{{ path("fos_user_security_check") }}">
+    {% if csrf_token %}
+        <input type="hidden" name="_csrf_token" value="{{ csrf_token }}" />
+    {% endif %}
+    <div class="form-group">
+        <input type="text" id="username" name="_username" class="form-control" value="{{ last_username }}" required="required" placeholder="Nom D'utilisateur" />
+    </div>
+
+    <div class="form-group">
+        <input type="password" id="password" name="_password" class="form-control" required="required" placeholder="Mot de Passe" />
+    </div>
+
+    <div class="form-group">
+        <input type="checkbox" id="remember_me" name="_remember_me" value="on" />
+        <label for="remember_me">{{ 'Se souvenir de moi' }}</label>
+    </div>
+    <button type="submit" class="btn btn-primary block full-width m-b">Connexion</button>
+
+    <a href="{{ path('fos_user_resetting_request') }}"><small>Mot de passe oublié ?</small></a>
+</form>
