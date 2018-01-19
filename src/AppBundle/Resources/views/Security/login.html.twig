@@ -1,0 +1,39 @@
+{% extends 'base.html.twig' %}
+{% block body %}
+    {% for type, messages in app.session.flashbag.all() %}
+        {% for key, message in messages %}
+            <div class="flash-{{ type }}">
+                {{ message|trans({}, 'FOSUserBundle') }}
+            </div>
+        {% endfor %}
+    {% endfor %}
+
+    {% if is_granted("IS_AUTHENTICATED_REMEMBERED") %}
+        {{ 'Connecté' }}
+        <a href="{{ path('fos_user_security_logout') }}">
+            Se déconnecter
+        </a>
+    {% else %}
+        <body class="gray-bg">
+
+        <div class="middle-box text-center loginscreen animated fadeInDown">
+            <div>
+                <div>
+
+                    <h1 class="logo-name">NE</h1>
+
+                </div>
+                <h3>Bienvenue sur Nouestil</h3>
+                <p>Texte exemple.
+                </p>
+                {% block fos_user_content %}
+                    {{ include('@FOSUser/Security/login_content.html.twig') }}
+                {% endblock fos_user_content %}
+                <p class="m-t">
+                    <small>Nouestil © 2018</small>
+                </p>
+            </div>
+        </div>
+        </body>
+    {% endif %}
+{% endblock body %}
