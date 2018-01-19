@@ -7,3 +7,6 @@ homepage:
 
 payments:
     resource: '@AppBundle/Resources/config/routing/payments.yml'
+
+teachers:
+    resource: '@AppBundle/Resources/config/routing/teachers.yml'
