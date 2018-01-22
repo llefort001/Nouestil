@@ -39,6 +39,7 @@
                     <td>{{ user.phoneNumber }}</td>
                     <td>{{ user.email }}</td>
                     <td>
+                        {% if user.contact.id is defined %}
                         <a href="#"><span class="label label-default" data-toggle="modal"
                                           data-target="#contactModal_{{ user.contact.id }}">
                             {{ user.contact.firstname }} {{ user.contact.lastname }}</span></a>
@@ -57,7 +58,10 @@
                                         Numéro de téléphone : {{ user.contact.phoneNumber }}
                                     </div>
                                 </div>
+                            </div>
+                        </div>
                     </td>
+                    {% endif %}
                     <td>
                         {% if user.group.id is defined %}
                             {{ user.group.name }}
