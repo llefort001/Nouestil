@@ -2,6 +2,7 @@
 
 namespace AppBundle\Controller;
 
+use AppBundle\Form\RegistrationType;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 
@@ -106,6 +107,36 @@ class UserController extends Controller
 
         }
         return $this->redirect($this->generateUrl('users'));
+    }
+    public function createUserAction(Request $request)
+    {
+        $formRegistration = $this->createForm(RegistrationType::class);
+
+        if ($request->isMethod('POST')) {
+
+            // On récupère le gestionnaire d'entités
+            $em = $this->getDoctrine()->getManager();
+
+            $formRegistration->submit($request->request->get($formRegistration->getName()));
+            // Enregistrer après soumission du formulaire les données dans l'objet $user
+
+            if ($formRegistration->isSubmitted() && $formRegistration->isValid()) {
+
+
+
+                $userData = $formRegistration->getData();
+                $this->get('nouestil.user')->save($userData);
+
+
+                // on redirige l'administrateur vers la liste des clients si aucune erreur
+                return $this->redirect($this->generateUrl("users"));
+            }
+        }
+
+
+        return $this->render('AppBundle:Users:create.html.twig', array(
+            'formRegistration' => $formRegistration->createView(),
+        ));
     }
 
 }

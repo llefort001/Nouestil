@@ -179,7 +179,7 @@ class UserManager
      * @param $lastName
      * @return User
      */
-    public function createUser($username, $email, $password, $firstName, $lastName)
+    public function createUser($username, $email, $password, $firstName, $lastName, $phoneNumber, $birthDate)
     {
         $user = new User();
         $user->setEmail($email);
@@ -187,6 +187,8 @@ class UserManager
         $user->setPlainPassword($password);
         $user->setFirstName($firstName);
         $user->setLastName($lastName);
+        $user->setPhoneNumber($phoneNumber);
+        $user->setBirthDate($birthDate);
         $user->setUsername($username);
         $user->setUsernameCanonical($username);
         $user->setEnabled(1);

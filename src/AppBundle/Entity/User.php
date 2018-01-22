@@ -34,13 +34,13 @@ class User extends BaseUser
      */
     protected $phoneNumber;
     /**
-     * @ORM\Column(type="string", length=255)
+     * @ORM\Column(type="string", length=255, nullable=true)
      */
     public $publicNote;
     /**
-     * @ORM\Column(type="string", length=255)
+     * @ORM\Column(type="string", length=255, nullable=true)
      */
-    public $privateNote;
+    protected $privateNote;
 
     /**
      * @ORM\Column(type="date")
