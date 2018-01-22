@@ -2,11 +2,11 @@ home:
     path:     /
     defaults: { _controller: AppBundle:Showcase:index }
 gallery:
-    path:     /
+    path:     /gallery
     defaults: { _controller: AppBundle:Showcase:gallery }
 contact:
-    path:     /
+    path:     /contact
     defaults: { _controller: AppBundle:Showcase:contact }
 courses:
-    path:     /
+    path:     /courses
     defaults: { _controller: AppBundle:Showcase:courses }
