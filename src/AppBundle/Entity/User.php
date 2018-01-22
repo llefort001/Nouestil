@@ -73,6 +73,11 @@ class User extends BaseUser
      */
     protected $courses;
 
+    /**
+     * @ORM\OneToMany(targetEntity="Notification", mappedBy="user", cascade={"persist"})
+     */
+    protected $notifications;
+
 
     public function __construct()
     {
@@ -271,6 +276,22 @@ class User extends BaseUser
     public function setCourses($courses)
     {
         $this->courses = $courses;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getNotifications()
+    {
+        return $this->notifications;
+    }
+
+    /**
+     * @param mixed $notifications
+     */
+    public function setNotifications($notifications)
+    {
+        $this->notifications = $notifications;
     }
 
 

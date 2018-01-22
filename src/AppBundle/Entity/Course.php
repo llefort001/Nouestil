@@ -27,13 +27,25 @@ class Course
      *
      * @ORM\Column(name="name", type="string", length=255, unique=true)
      */
-    private $name;
+    protected $name;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="professor", type="integer")
+     * @return User
+     */
+    protected $professor;
 
     /** @ORM\ManyToMany(targetEntity="User", mappedBy="courses") */
     protected $users;
 
+    /** @ORM\OneToMany(targetEntity="Checklist", mappedBy="course") */
+    protected $checklists;
+
     public function __construct() {
         $this->users = new ArrayCollection();
+        $this->checklists = new ArrayCollection();
     }
 
 
@@ -85,6 +97,38 @@ class Course
     public function setUsers($users)
     {
         $this->users = $users;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getProfessor()
+    {
+        return $this->professor;
+    }
+
+    /**
+     * @param mixed $professor
+     */
+    public function setProfessor($professor)
+    {
+        $this->professor = $professor;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getChecklists()
+    {
+        return $this->checklists;
+    }
+
+    /**
+     * @param mixed $checklists
+     */
+    public function setChecklists($checklists)
+    {
+        $this->checklists = $checklists;
     }
 
 }
