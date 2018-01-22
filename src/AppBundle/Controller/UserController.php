@@ -53,33 +53,11 @@ class UserController extends Controller
 
     }
 
-
-    public function withdrawAction($userId)
-    {
-        $entityManager = $this->getDoctrine()->getManager();
-        $userToWithdraw = $entityManager->getRepository('AppBundle:User')->find(array("id" => $userId));
-
-        if ($userToWithdraw instanceof User) {
-            $old_roticoin = $userToWithdraw->getRoticoin();
-            $value = 20000;
-            $new_roticoin = $old_roticoin - $value;
-            if ($new_roticoin < 0) {
-                $this->addFlash('Erreur', 'Impossible de retirer, solde insuffisant.');
-            } else {
-                $userToWithdraw->setRoticoin($new_roticoin);
-                $entityManager->flush();
-                //TODO:Actions a faire suite a un retrait
-            }
-        }
-        return $this->redirect($this->generateUrl('users'));
-
-
-    }
-
     public function updateGroupUserAction($userId, $group)
     {
         $entityManager = $this->getDoctrine()->getManager();
-        $userToUpdate = $entityManager->getRepository('AppBundle:User')->find(array("id" => $userId));
+        $userManager = $this->get('nouestil.user');
+        $userToUpdate = $userManager->getUser($userId);
 
         if ($userToUpdate instanceof User) {
             $groupToUpdate = $entityManager->getRepository('AppBundle:Group')->find(array("id" => $group));

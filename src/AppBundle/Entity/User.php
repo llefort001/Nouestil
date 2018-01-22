@@ -5,6 +5,7 @@ namespace AppBundle\Entity;
 
 use FOS\UserBundle\Model\User as BaseUser;
 use Doctrine\ORM\Mapping as ORM;
+use Doctrine\Common\Collections\ArrayCollection;
 
 /**
  * @ORM\Entity
@@ -34,11 +35,11 @@ class User extends BaseUser
      */
     protected $phoneNumber;
     /**
-     * @ORM\Column(type="string", length=255)
+     * @ORM\Column(type="string", length=255, nullable=true)
      */
     public $publicNote;
     /**
-     * @ORM\Column(type="string", length=255)
+     * @ORM\Column(type="string", length=255, nullable=true)
      */
     public $privateNote;
 
@@ -46,6 +47,11 @@ class User extends BaseUser
      * @ORM\Column(type="date")
      */
     protected $birthDate;
+
+    /**
+     * @ORM\Column(type="string", length=255, nullable=true)
+     */
+    protected $address;
 
     /**
      * @ORM\ManyToOne(targetEntity="Group", inversedBy="users", cascade={"persist"})
@@ -62,10 +68,17 @@ class User extends BaseUser
      */
     protected $payments;
 
+    /**
+     * @ORM\ManyToMany(targetEntity="Course", inversedBy="users", cascade={"persist"})
+     */
+    protected $courses;
+
+
     public function __construct()
     {
         parent::__construct();
 // Add role
+        $this->courses = new ArrayCollection();
         $this->addRole("ROLE_USER");    }
 
     /**
@@ -226,6 +239,38 @@ class User extends BaseUser
     public function setPrivateNote($privateNote)
     {
         $this->privateNote = $privateNote;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getAddress()
+    {
+        return $this->address;
+    }
+
+    /**
+     * @param mixed $address
+     */
+    public function setAddress($address)
+    {
+        $this->address = $address;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getCourses()
+    {
+        return $this->courses;
+    }
+
+    /**
+     * @param mixed $courses
+     */
+    public function setCourses($courses)
+    {
+        $this->courses = $courses;
     }
 
 

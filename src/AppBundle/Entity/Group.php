@@ -2,6 +2,8 @@
 
 namespace AppBundle\Entity;
 use Doctrine\ORM\Mapping as ORM;
+use Doctrine\Common\Collections\ArrayCollection;
+
 
 /**
  * Group
@@ -37,9 +39,7 @@ class Group
     }
 
 
-    public function __construct()
-    {
-
+    public function __construct() {
         $this->users = new ArrayCollection();
     }
     public function getId()
@@ -78,7 +78,7 @@ class Group
      */
     public function removeUserGroup(User $user)
     {
-        $this->resources->removeElement($user);
+        $this->users->removeElement($user);
     }
 
 }
