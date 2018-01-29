@@ -32,6 +32,13 @@ class Course
     /**
      * @var string
      *
+     * @ORM\Column(name="session", type="string", length=255, unique=true)
+     */
+    protected $session;
+
+    /**
+     * @var string
+     *
      * @ORM\Column(name="professor", type="integer")
      * @return User
      */
@@ -129,6 +136,22 @@ class Course
     public function setChecklists($checklists)
     {
         $this->checklists = $checklists;
+    }
+
+    /**
+     * @return string
+     */
+    public function getSession()
+    {
+        return $this->session;
+    }
+
+    /**
+     * @param string $session
+     */
+    public function setSession($session)
+    {
+        $this->session = $session;
     }
 
 }

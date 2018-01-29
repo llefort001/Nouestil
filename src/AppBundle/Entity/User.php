@@ -31,7 +31,7 @@ class User extends BaseUser
     protected $lastname;
 
     /**
-     * @ORM\Column(type="string", length=10)
+     * @ORM\Column(type="string", length=10, nullable=true)
      */
     protected $phoneNumber;
     /**
@@ -42,16 +42,15 @@ class User extends BaseUser
      * @ORM\Column(type="string", length=255, nullable=true)
      */
     public $privateNote;
-
-    /**
-     * @ORM\Column(type="date")
-     */
-    protected $birthDate;
-
     /**
      * @ORM\Column(type="string", length=255, nullable=true)
      */
-    protected $address;
+    public $address;
+
+    /**
+     * @ORM\Column(type="date", nullable=true)
+     */
+    protected $birthDate;
 
     /**
      * @ORM\ManyToOne(targetEntity="Group", inversedBy="users", cascade={"persist"})
@@ -84,7 +83,8 @@ class User extends BaseUser
         parent::__construct();
 // Add role
         $this->courses = new ArrayCollection();
-        $this->addRole("ROLE_USER");    }
+        $this->addRole("ROLE_USER");
+    }
 
     /**
      * @return mixed

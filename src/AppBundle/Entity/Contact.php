@@ -3,6 +3,7 @@
 namespace AppBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use Doctrine\Common\Collections\ArrayCollection;
 
 /**
  * Contact
@@ -36,7 +37,21 @@ class Contact
     private $lastname;
 
     /**
-     * @var int
+     * @var string
+     *
+     * @ORM\Column(name="email", type="string", length=255)
+     */
+    private $email;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="kinship", type="string", length=255)
+     */
+    private $kinship;
+
+    /**
+     * @var string
      *
      * @ORM\Column(name="phoneNumber", type="string", length=10)
      */
@@ -44,6 +59,11 @@ class Contact
 
     /** @ORM\OneToMany(targetEntity="User", mappedBy="contact") */
     protected $users;
+
+    public function __construct()
+    {
+        $this->users = new ArrayCollection();
+    }
 
     /**
      * Get id
@@ -126,5 +146,54 @@ class Contact
     {
         return $this->phoneNumber;
     }
+
+    /**
+     * @return string
+     */
+    public function getEmail()
+    {
+        return $this->email;
+    }
+
+    /**
+     * @param string $email
+     */
+    public function setEmail($email)
+    {
+        $this->email = $email;
+    }
+
+    /**
+     * @return string
+     */
+    public function getKinship()
+    {
+        return $this->kinship;
+    }
+
+    /**
+     * @param string $kinship
+     */
+    public function setKinship($kinship)
+    {
+        $this->kinship = $kinship;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getUsers()
+    {
+        return $this->users;
+    }
+
+    /**
+     * @param mixed $users
+     */
+    public function setUsers($users)
+    {
+        $this->users = $users;
+    }
+
 }
 
