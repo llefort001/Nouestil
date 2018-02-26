@@ -18,6 +18,6 @@ updateGroupUser:
     path:     /admin/update-group-user/{userId}/{group}
     defaults: { _controller: AppBundle:User:updateGroupUser }
 
-base_user_list:
-    path:     /users-list/
-    defaults: { _controller: AppBundle:User:userList }
+createUser:
+    path:     /admin/create-user/
+    defaults: { _controller: AppBundle:User:createUser}

@@ -4,19 +4,18 @@ namespace AppBundle\Manager;
 
 use AppBundle\Entity\Payment;
 use Doctrine\ORM\EntityManager;
-use Symfony\Component\HttpFoundation\Session\Session;
 
 /**
- * Class PaymentManager
+ * Class UserManager
  * @package AppBundle\Manager
  */
 class PaymentManager
 {
 
-    protected $login;
-    protected $roles;
-    protected $group;
-    protected $payments;
+    protected $amount;
+    protected $user;
+    protected $method;
+    protected $datetime;
     protected $em;
 
     /**
@@ -30,84 +29,25 @@ class PaymentManager
     }
 
     /**
-     * @return array
+     * @param Payment $payment
      */
-    public function getRoles()
+    public function deletePayment(Payment $payment)
     {
-        $roles = array();
-        if (is_array($this->roles) && sizeof($this->roles) > 0) {
-            foreach ($this->roles as $role) {
-                $roles[] = $role->name;
-            }
-        }
-
-        return $roles;
-    }
-
-    /**
-     * @return bool
-     */
-    public function isAdmin()
-    {
-        return (in_array('admin', $this->getRoles())) ? true : false;
-    }
-
-
-    /**
-     * @return bool
-     */
-    public function getLogin()
-    {
-        return ($this->login !== NULL) ? $this->login : 'Unknown user';
-    }
-
-    /**
-     * @param $login
-     * @return bool
-     */
-    public function userEmailRegistered($login)
-    {
-
-        // check if the user have already register his account
-        $user = $this->em
-            ->getRepository('AppBundle:User')
-            ->findByEmail($login);
-        return (sizeof($user) == 0) ? false : true;
-
-    }
-
-    public function deleteUser(User $user)
-    {
-        $this->em->remove($user);
+        $this->em->remove($payment);
         $this->em->flush();
     }
 
     /**
-     * @param $username
-     * @return bool
-     */
-    public function userUsernameRegistered($username)
-    {
-
-        // check if the user have already register his account
-        $user = $this->em
-            ->getRepository('AppBundle:User')
-            ->findByUsername($username);
-        return (sizeof($user) == 0) ? false : true;
-
-    }
-
-    /**
      * @return array
      */
-    public function getUsersList()
+    public function getPaymentList()
     {
 
-        $user = $this->em
-            ->getRepository('AppBundle:User')
+        $payments = $this->em
+            ->getRepository('AppBundle:Payment')
             ->findAll();
 
-        return $user;
+        return $payments;
 
     }
 
@@ -115,35 +55,19 @@ class PaymentManager
      * @param $id
      * @return mixed
      */
-    public function getUser($id)
+    public function getPayment($id)
     {
 
-        $user = $this->em
-            ->getRepository('AppBundle:User')
+        $payment = $this->em
+            ->getRepository('AppBundle:Payment')
             ->findOneById($id);
 
-        if (!$user instanceof User) {
+        if (!$payment instanceof Payment) {
             throw $this->createNotFoundException(
-                'Pas d\'utilisateurs '
+                'Pas de paiements '
             );
         }
-        return $user;
-
-    }
-
-    public function getUserByUsername($username)
-    {
-
-        $user = $this->em
-            ->getRepository('AppBundle:User')
-            ->findOneByUsername($username);
-
-        if (!$user instanceof User) {
-            throw $this->createNotFoundException(
-                'Pas d\'utilisateurs '
-            );
-        }
-        return $user;
+        return $payment;
 
     }
 
@@ -151,58 +75,45 @@ class PaymentManager
      * @param $usersList
      * @return array
      */
-    public function filterUsersList($usersList)
+    public function filterPaymentsList($paymentsList)
     {
-        if (isset($usersList) && sizeof($usersList) > 0) {
+        if (isset($paymentsList) && sizeof($paymentsList) > 0) {
             $usersArray = array();
-            foreach ($usersList as $user) {
+            foreach ($paymentsList as $payment) {
                 $usersArray[] = array(
-                    "id" => $user->getId(),
-                    "name" => $user->getFirstName(),
-                    "lastname" => $user->getLastName());
+                    "id" => $payment->getId());
             }
             return $usersArray;
         }
         return array();
     }
 
-    /**
-     * @param $username
-     * @param $email
-     * @param $password
-     * @param $firstName
-     * @param $lastName
-     * @return User
-     */
-    public function createUser($username, $email, $password, $firstName, $lastName)
+
+    public function createPayment($amount, $user, $method, $datetime)
     {
-        $user = new User();
-        $user->setEmail($email);
-        $user->setEmailCanonical($email);
-        $user->setPlainPassword($password);
-        $user->setFirstName($firstName);
-        $user->setLastName($lastName);
-        $user->setUsername($username);
-        $user->setUsernameCanonical($username);
-        $user->setEnabled(1);
+        $payment = new Payment();
+        $user->setAmount($amount);
+        $user->setUser($user);
+        $user->setMethod($method);
+        $user->setDateTime($datetime);
         try {
-            $this->em->persist($user);
+            $this->em->persist($payment);
             $this->em->flush();
         } catch (\Exception $e) {
 //            dump($e->getMessage());
         }
-        return $user;
+        return $payment;
     }
 
-    public function save(User $user){
+    public function save(Payment $payment){
 
-        if (!$user instanceof User) {
+        if (!$payment instanceof Payment) {
             throw $this->createNotFoundException(
-                'Pas d\'utilisateurs '
+                'Pas de paiement '
             );
         }
 
-        $this->em->persist($user);
+        $this->em->persist($payment);
         $this->em->flush();
     }
 }

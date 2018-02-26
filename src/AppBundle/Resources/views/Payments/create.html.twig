@@ -1,0 +1,43 @@
+{% extends 'base.html.twig' %}
+{% block body %}
+    {% for type, messages in app.session.flashbag.all() %}
+        {% for key, message in messages %}
+            <div class="flash-{{ type }}">
+            </div>
+        {% endfor %}
+    {% endfor %}
+    <div class="ibox-content">
+        <div class="loginColumns animated fadeInDown">
+            <div class="row">
+
+                <div class="col-md-6">
+
+                    <h2 class="font-bold">Créer un nouveau paiement</h2>
+                    <p>
+                        texte exemple
+                    </p>
+                </div>
+                <div class="col-md-6">
+                    <div class="ibox-content">
+                        {% if error is defined and error is not empty %}
+                            <div class="alert alert-danger">
+                                <strong>Attention</strong> {{ error }}
+                            </div>
+                        {% endif %}
+                        {{ form_start(formCreatePayment, {'method': 'post'}) }}
+                        <div class="form-group">{{ form_row(formCreatePayment.amount) }}</div>
+                        <div class="form-group">{{ form_row(formCreatePayment.user) }}</div>
+                        <div class="form-group">{{ form_row(formCreatePayment.method) }}</div>
+                        <div class="form-group">{{ form_row(formCreatePayment.datetime) }}</div>
+                        <input type="submit" class="btn btn-primary block full-width m-b" value="Créer">
+                        {{ form_end(formCreatePayment) }}
+                        <p class="m-t">
+                            <small>Nouestil © 2018</small>
+                        </p>
+                    </div>
+                </div>
+            </div>
+            <hr>
+        </div>
+    </div>
+{% endblock body %}
