@@ -2,7 +2,7 @@
 
 namespace AppBundle\Controller;
 
-use AppBundle\Form\RegistrationType;
+use AppBundle\Form\UserType;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 
@@ -110,7 +110,7 @@ class UserController extends Controller
     }
     public function createUserAction(Request $request)
     {
-        $formRegistration = $this->createForm(RegistrationType::class);
+        $formRegistration = $this->createForm(UserType::class);
 
         if ($request->isMethod('POST')) {
 
@@ -129,6 +129,7 @@ class UserController extends Controller
 
 
                 // on redirige l'administrateur vers la liste des clients si aucune erreur
+                $this->addFlash('Success', 'L\'utilisateur a bien été enregistré');
                 return $this->redirect($this->generateUrl("users"));
             }
         }

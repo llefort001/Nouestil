@@ -4,3 +4,8 @@ services:
             class: AppBundle\Manager\UserManager
             arguments:
                 - '@doctrine.orm.entity_manager'
+
+    nouestil.payment:
+            class: AppBundle\Manager\PaymentManager
+            arguments:
+                - '@doctrine.orm.entity_manager'
