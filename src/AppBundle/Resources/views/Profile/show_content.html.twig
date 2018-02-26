@@ -1,0 +1,57 @@
+<div class="wrapper wrapper-content">
+    <div class="row animated fadeInRight">
+        <div class="col-md-12">
+            <div class="ibox float-e-margins">
+                <div class="ibox-title">
+                    <h5>Détails</h5>
+                    <div class="ibox-tools">
+                        <a class="close-link">
+                            <i class="fa fa-wrench"></i>
+                        </a>
+                    </div>
+                </div>
+                <div>
+                    <div class="ibox-content profile-content">
+                        <div class="row" align="center">
+                            <h3><strong>{{ user.firstname }} {{ user.lastname }}</strong></h3>
+                        </div>
+                        <hr>
+                        <h4><strong>Nom d'utilisateur : {{ user.username }}</strong></h4>
+                        {% if user.group.id is defined %}
+                            <p><i class="fa fa-users"></i> {{ user.group.name }}</p>
+                        {% endif %}
+                        <div class="row m-t-lg">
+                            <div class="col-md-6">
+                                <h5>Numéro de téléphone: <strong>{{ user.phoneNumber }}</strong></h5>
+                            </div>
+                            <div class="col-md-6">
+                                <h5>Date de naissance: <strong>{{ user.birthdate|date('d-m-Y') }}</strong></h5>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-12">
+            <div class="ibox float-e-margins">
+                <div class="ibox-title">
+                    <h5>Paiements effectués</h5>
+                </div>
+                <div class="ibox-content">
+                    <div>
+                        <div class="feed-activity-list">
+                            {% for payment in user.payments %}
+                                <div class="feed-element">
+                                    <div class="media-body ">
+                                        <strong>Paiement n° {{ payment.id }} : + {{ payment.amount }} € en {{ payment.method }}</strong><br/>
+                                        <small class="text-muted">{{ payment.datetime|date('d-m-Y H:i:s') }}</small>
+                                    </div>
+                                </div>
+                            {% endfor %}
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
