@@ -6,6 +6,6 @@ deletePayment:
     path:     /admin/delete-payment/{paymentId}
     defaults: { _controller: AppBundle:Payment:deletePayment }
 
-createUser:
+createPayment:
     path:     /admin/create-payment/
     defaults: { _controller: AppBundle:Payment:createPayment}

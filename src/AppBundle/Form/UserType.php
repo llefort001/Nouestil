@@ -36,6 +36,9 @@ class UserType extends AbstractType
             ->add('birth_date', DateType::class, array('label' =>false,
                 'attr' => array('class' => 'form-control','placeholder' => 'Date de naissance','required' => 'required')
             ))
+            ->add('address', TextType::class, array('label' =>false,
+                'attr' => array('class' => 'form-control','placeholder' => 'Adresse','required' => 'required')
+            ))
             ->add('plainPassword', PasswordType::class, array('label' =>false,
                 'attr' => array('class' => 'form-control','placeholder' => 'Mot de passe','required' => 'required')
             ));
