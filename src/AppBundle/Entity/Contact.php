@@ -57,7 +57,7 @@ class Contact
      */
     private $phoneNumber;
 
-    /** @ORM\OneToMany(targetEntity="User", mappedBy="contact") */
+    /** @ORM\ManyToMany(targetEntity="User", mappedBy="contacts") */
     protected $users;
 
     public function __construct()
