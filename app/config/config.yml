@@ -73,7 +73,7 @@ swiftmailer:
 assetic:
     debug:          "%kernel.debug%"
     use_controller: false
-    bundles:    [ ]
+    bundles:    [ 'AppBundle' ]
    #java: /usr/bin/java
     java: C:\Program Files\Java\jdk1.8.0_65\bin\java.exe
     filters:
