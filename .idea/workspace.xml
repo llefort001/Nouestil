@@ -1,14 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="88c7186d-f868-46db-acd0-ffc53d71a9bf" name="Default" comment="payment manager wip">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/AppBundle/Manager/ContactManager.php" />
+    <list default="true" id="88c7186d-f868-46db-acd0-ffc53d71a9bf" name="Default" comment="">
       <change type="DELETED" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.gitignore" afterPath="$PROJECT_DIR$/.gitignore" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/AppBundle/Entity/User.php" afterPath="$PROJECT_DIR$/src/AppBundle/Entity/User.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/AppBundle/Form/UserType.php" afterPath="$PROJECT_DIR$/src/AppBundle/Form/UserType.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/AppBundle/Manager/UserManager.php" afterPath="$PROJECT_DIR$/src/AppBundle/Manager/UserManager.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/AppBundle/Resources/views/Users/create.html.twig" afterPath="$PROJECT_DIR$/src/AppBundle/Resources/views/Users/create.html.twig" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />
@@ -439,11 +433,18 @@
       <option name="project" value="LOCAL" />
       <updated>1519635516317</updated>
     </task>
-    <option name="localTasksCounter" value="8" />
+    <task id="LOCAL-00008" summary="contact managr wip + user creation improvements">
+      <created>1519722285088</created>
+      <option name="number" value="00008" />
+      <option name="presentableId" value="LOCAL-00008" />
+      <option name="project" value="LOCAL" />
+      <updated>1519722285088</updated>
+    </task>
+    <option name="localTasksCounter" value="9" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="68388000" />
+    <option name="totallyTimeSpent" value="68455000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -552,7 +553,8 @@
     <MESSAGE value="update bd" />
     <MESSAGE value="typo resolve" />
     <MESSAGE value="payment manager wip" />
-    <option name="LAST_COMMIT_MESSAGE" value="payment manager wip" />
+    <MESSAGE value="contact managr wip + user creation improvements" />
+    <option name="LAST_COMMIT_MESSAGE" value="contact managr wip + user creation improvements" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager />
