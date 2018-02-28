@@ -45,7 +45,7 @@ class User extends BaseUser
     /**
      * @ORM\Column(type="string", length=255, nullable=true)
      */
-    public $address;
+    public $city;
 
     /**
      * @ORM\Column(type="date", nullable=true)
@@ -58,9 +58,9 @@ class User extends BaseUser
     protected $group;
 
     /**
-     * @ORM\ManyToOne(targetEntity="Contact", inversedBy="users", cascade={"persist"})
+     * @ORM\ManyToMany(targetEntity="Contact", inversedBy="users", cascade={"persist"})
      */
-    protected $contact;
+    protected $contacts;
 
     /**
      * @ORM\OneToMany(targetEntity="Payment", mappedBy="user", cascade={"persist"})
@@ -78,10 +78,15 @@ class User extends BaseUser
     protected $notifications;
 
 
+    /**
+     * User constructor.
+     */
     public function __construct()
     {
         parent::__construct();
 // Add role
+        $this->contacts = new ArrayCollection();
+        $this->payments = new ArrayCollection();
         $this->courses = new ArrayCollection();
         $this->addRole("ROLE_USER");
     }
@@ -89,17 +94,9 @@ class User extends BaseUser
     /**
      * @return mixed
      */
-    public function getContact()
+    public function getContacts()
     {
-        return $this->contact;
-    }
-
-    /**
-     * @param mixed $contact
-     */
-    public function setContact($contact)
-    {
-        $this->contact = $contact;
+        return $this->contacts;
     }
 
     /**
@@ -140,14 +137,6 @@ class User extends BaseUser
     public function getPayments()
     {
         return $this->payments;
-    }
-
-    /**
-     * @param mixed $payments
-     */
-    public function setPayments($payments)
-    {
-        $this->payments = $payments;
     }
 
     /**
@@ -249,17 +238,17 @@ class User extends BaseUser
     /**
      * @return mixed
      */
-    public function getAddress()
+    public function getCity()
     {
-        return $this->address;
+        return $this->city;
     }
 
     /**
-     * @param mixed $address
+     * @param mixed $city
      */
-    public function setAddress($address)
+    public function setCity($city)
     {
-        $this->address = $address;
+        $this->city = $city;
     }
 
     /**
@@ -268,6 +257,23 @@ class User extends BaseUser
     public function getCourses()
     {
         return $this->courses;
+    }
+
+
+    /**
+     * @return mixed
+     */
+    public function getNotifications()
+    {
+        return $this->notifications;
+    }
+
+    /**
+     * @param mixed $contacts
+     */
+    public function setContacts($contacts)
+    {
+        $this->contacts = $contacts;
     }
 
     /**
@@ -279,11 +285,11 @@ class User extends BaseUser
     }
 
     /**
-     * @return mixed
+     * @param mixed $payments
      */
-    public function getNotifications()
+    public function setPayments($payments)
     {
-        return $this->notifications;
+        $this->payments = $payments;
     }
 
     /**
