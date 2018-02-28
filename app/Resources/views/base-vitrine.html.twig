@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8"/>
+    <title>{% block title %}Nou Estil | Escola de ball{% endblock %}</title>
+    {% block stylesheets %}
+        <link href="{{ asset('css/main.css') }}" type="text/css" rel="stylesheet" media="all"/>
+        <link href="{{ asset('css/personnalize.css') }}" type="text/css" rel="stylesheet" media="all"/>
+        <script src="{{ asset('js/jquery.js') }}"></script>
+        <script src="{{ asset('js/scripts.js') }}"></script>
+
+    {% endblock %}
+    <link rel="icon" type="image/x-icon" href="{{ asset('favicon.ico') }}"/>
+</head>
+<body>
+<header>
+    {% block header %}{% endblock %}
+</header>
+<nav>
+    {% block nav %}
+        <ul id="navigation">
+            <li><a href="school.html.twig">La Escola</a></li>
+            <li><a href="courses.html.twig">Courses</a></li>
+            <li><a href="gallery.html.twig">Gallery</a></li>
+            <li><a href="contact.html.twig">Contact</a></li>
+        </ul>
+    {% endblock %}
+</nav>
+
+{% block body %}{% endblock %}
+{% block javascripts %}{% endblock %}
+
+<footer>
+    {% block footer %}&copy; Copyright 2018 by IUT de Bayonne et Pays Basque {% endblock %}
+</footer>
+</body>
+
+</html>

@@ -1,4 +1,3 @@
-/.idea/
 /.web-server-pid
 /app/config/parameters.yml
 /build/
@@ -16,4 +15,5 @@
 !var/SymfonyRequirements.php
 /vendor/
 /web/bundles/
-.idea/
+/.idea/workspace.xml
+.idea/workspace.xml
