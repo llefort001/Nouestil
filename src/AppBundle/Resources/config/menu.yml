@@ -1,0 +1,96 @@
+parameters:
+    topbar:
+        title: Dashboarding SI Marketing
+    leftMenu:
+        -
+            icon:   fa-th-large
+            label:  Production
+            path:   pichet_portailmkg_dashboard
+            scope : userVerified
+            items:
+                -
+                    icon:   fa-th-large
+                    label:  Bugzilla Dashboard
+                    path:   pichet_portailmkg_dashboard
+                    scope : all
+                -
+                    icon:   fa-sitemap
+                    label:  Time tracking
+                    path:   pichet_portailmkg_daily_work
+                    scope : time-tracking
+
+                -
+                    icon:   fa-sitemap
+                    label:  Planning preview
+                    path:   pichet_ressourcesplanner_simplified
+                    scope : pwp
+                -
+                   icon:   fa-tasks
+                   label:  Bugzilla Kanban
+                   path:   pichet_portailmkg_kanban
+                   scope : all
+
+        -
+            icon:   fa-pie-chart
+            label:  Report
+            scope : admin
+            items:
+                -
+                    label:  Report week
+                    path:   pichet_portailmkg_graphs_report_week
+
+
+        -
+            icon:   fa-book
+            label:  Documentation
+            path: pichet_portailmkg_documentation
+            scope : userVerified
+        -
+            icon:    fa-wrench
+            label:  Tools
+            path:   pichet_portailmkg_listmd5
+            scope : userVerified
+            items:
+                -
+                    icon:   fa-file-excel-o
+                    label:  MD5 conversion
+                    path:   pichet_portailmkg_listmd5
+                    scope : all
+                -
+                    label: Health pages [DEV]
+                    path:   pichet_portailmkg_health_pages
+                    params:
+                        environment: dev
+                        port: 32951
+                -
+                    label: Health pages [PREPROD]
+                    path:   pichet_portailmkg_health_pages
+                    params:
+                        environment: preprod
+                -
+                    label: Health pages [PROD]
+                    path:   pichet_portailmkg_health_pages
+                    params:
+                        environment: prod
+
+                -
+                    label:  Taleo [WSDL Status]
+                    path:   pichet_portailmkg_taleo_status
+                -
+                    label:  Taleo [API Sandbox]
+                    path:   pichet_portailmkg_taleo_sandbox
+        -
+            icon:   fa-lock
+            label:  Admin
+            scope: admin
+            items:
+                -
+                    label: Utilisateurs
+                    path : pichet_portailmkg_users
+
+                -
+                    icon:   fa-calendar
+                    label:  Ressources Planner
+                    path:   pichet_ressourcesplanner_homepage
+                    scope : all
+
