@@ -37,12 +37,10 @@ class Course
     protected $session;
 
     /**
-     * @var string
-     *
-     * @ORM\Column(name="professor", type="integer")
+     * @ORM\ManyToOne(targetEntity="User", inversedBy="coursesTeach")
      * @return User
      */
-    protected $professor;
+    protected $userTeach;
 
     /** @ORM\ManyToMany(targetEntity="User", mappedBy="courses") */
     protected $users;
@@ -101,25 +99,28 @@ class Course
     /**
      * @param mixed $users
      */
-    public function setUsers($users)
+    public function setUsers(User $users)
     {
-        $this->users = $users;
+        $this->users[] = $users;
+    }
+
+    /**
+     * @param $userTeach
+     * @return $this
+     */
+    public function setUserTeach($userTeach)
+    {
+        $this->userTeach = $userTeach;
+
+        return $this;
     }
 
     /**
      * @return mixed
      */
-    public function getProfessor()
+    public function getUserTeach()
     {
-        return $this->professor;
-    }
-
-    /**
-     * @param mixed $professor
-     */
-    public function setProfessor($professor)
-    {
-        $this->professor = $professor;
+        return $this->userTeach;
     }
 
     /**
@@ -135,7 +136,7 @@ class Course
      */
     public function setChecklists($checklists)
     {
-        $this->checklists = $checklists;
+        $this->checklists[] = $checklists;
     }
 
     /**

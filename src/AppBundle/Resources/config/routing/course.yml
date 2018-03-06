@@ -1,0 +1,15 @@
+listCourse:
+    path:     /course/list-course
+    defaults: { _controller: AppBundle:Course:listCourse }
+
+updateCourse:
+    path:     /course/update-course/
+    defaults: { _controller: AppBundle:Course:updateCourse }
+
+deleteCourse:
+    path:     /course/delete-course/{courseId}
+    defaults: { _controller: AppBundle:Course:deleteCourse }
+
+addCourse:
+    path:     /course/add-course/
+    defaults:  { _controller: AppBundle:Course:addCourse }

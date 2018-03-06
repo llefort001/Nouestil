@@ -103,6 +103,8 @@ class UserController extends Controller
 
 
                 $userData = $formRegistration->getData();
+                dump($request);
+                dump($userData);die;
                 $this->get('nouestil.user')->save($userData);
 
 

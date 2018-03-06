@@ -8,4 +8,4 @@ showcase:
     resource: '@AppBundle/Resources/config/routing/showcase.yml'
 
 teachers:
-    resource: '@AppBundle/Resources/config/routing/teachers.yml'
+    resource: '@AppBundle/Resources/config/routing/course.yml'

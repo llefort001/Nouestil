@@ -2,106 +2,112 @@
 
 namespace AppBundle\Manager;
 
-use AppBundle\Entity\Contact;
+use AppBundle\Entity\Course;
 use Doctrine\ORM\EntityManager;
 
 /**
- * Class ContactManager
+ * Class CourseManager
  * @package AppBundle\Manager
  */
-class ContactManager
+class CourseManager
 {
-
-    protected $firstname;
-    protected $lastname;
-    protected $email;
-    protected $phoneNumber;
-    protected $kinship;
-    protected $users;
+    protected $name;
+    protected $session;
+    protected $professor;
     protected $em;
 
     /**
-     * ContactManager constructor.
+     * CourseManager constructor.
      * @param EntityManager $em
      */
     public function __construct(EntityManager $em)
     {
-        $this->em = $em;
-
+        $this->em= $em;
     }
+
 
     /**
-     * @return array
+     * @param Course $course
+     * @throws \Doctrine\ORM\OptimisticLockException
      */
-    public function getUsers()
+    public function deleteCourse(Course $course)
     {
-        $users = array();
-        if (is_array($this->users) && sizeof($this->users) > 0) {
-            foreach ($this->users as $user) {
-                $users[] = $user->name;
-            }
-        }
-
-        return $users;
-    }
-
-    public function deleteContact(Contact $contact)
-    {
-        $this->em->remove($contact);
+        $this->em->remove($course);
         $this->em->flush();
     }
 
     /**
-     * @return array
+     * @return mixed
      */
-    public function getContactsList()
+    public function getCourseList()
     {
-
-        $contacts = $this->em
-            ->getRepository('AppBundle:Contact')
+        $course = $this->em
+            ->getRepository('AppBundle:Course')
             ->findAll();
-
-        return $contacts;
-
+        return $course;
     }
 
     /**
-     * @param $username
-     * @param $email
-     * @param $password
-     * @param $firstName
-     * @param $lastName
-     * @param $phoneNumber
-     * @param $birthDate
-     * @param $city
-     * @return Contact
+     * @param $id
+     * @param $name
+     * @param $session
+     * @return null|object
      */
-    public function createUser($email, $firstName, $lastName, $phoneNumber,$kinship)
+    public function updateCourse($id, $name, $session, $userTeach)
     {
-        $contact = new Contact();
-        $contact->setEmail($email);
-        $contact->setFirstName($firstName);
-        $contact->setLastName($lastName);
-        $contact->setPhoneNumber($phoneNumber);
-        $contact->setKinship($kinship);
-        try {
-            $this->em->persist($contact);
+        $course= $this->em
+            ->getRepository('AppBundle:Course')
+            ->findOneById($id);
+        $course->setName($name);
+        $course->setSession($session);
+        $teacher = $this->em->getRepository('AppBundle:User')->findById($userTeach);
+        $course->setUserTeach($teacher[0]);
+        try{
+            $this->em->persist($course);
             $this->em->flush();
-        } catch (\Exception $e) {
-//            dump($e->getMessage());
+        } catch (\exception $e){
+            dump($e->getMessage());
         }
-        return $contact;
+
+        return $course;
     }
 
-    public function save(Contact $contact){
-
-        if (!$contact instanceof Contact) {
+    /**
+     * @param $id
+     * @return mixed
+     */
+    public function getCourse($id)
+    {
+        $course= $this->em
+            ->getRepository('AppBundle:Course')
+            ->findOneById($id);
+        if (!$course instanceof Course){
             throw $this->createNotFoundException(
-                'Ce n\'est pas un contact '
+                'Pas de cours'
             );
         }
-
-        $this->em->persist($contact);
-        $this->em->flush();
+        return $course;
     }
+
+    public function addCourse($name, $session, $userTeach)
+    {
+        $course =new Course();
+        $course->setName($name);
+        $course->setSession($session);
+        $teacher = $this->em->getRepository('AppBundle:User')->findById($userTeach);
+        $course->setUserTeach($teacher[0]);
+        try{
+            $this->em->persist($course);
+            $this->em->flush();
+        } catch (\exception $e){
+            dump($e->getMessage());
+        }
+           return $course;
+    }
+
+    public function getProfesssor()
+    {
+        return findProfessor();
+    }
+
 }

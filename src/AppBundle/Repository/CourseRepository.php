@@ -2,6 +2,8 @@
 
 namespace AppBundle\Repository;
 
+use Doctrine\ORM\EntityRepository;
+
 /**
  * CourseRepository
  *
@@ -10,4 +12,5 @@ namespace AppBundle\Repository;
  */
 class CourseRepository extends \Doctrine\ORM\EntityRepository
 {
+
 }
