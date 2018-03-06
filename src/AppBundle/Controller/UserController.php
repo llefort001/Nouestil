@@ -91,7 +91,6 @@ class UserController extends Controller
             // Enregistrer après soumission du formulaire les données dans l'objet $user
             if ($formRegistration->isSubmitted() && $formRegistration->isValid()) {
                 $userData = $formRegistration->getData();
-                dump($userData);die;
                 $this->get('nouestil.user')->save($userData);
                 // on redirige l'administrateur vers la liste des clients si aucune erreur
                 $this->addFlash('success', 'L\'utilisateur a bien été enregistré, veuillez maintenant lui créer un contact.');

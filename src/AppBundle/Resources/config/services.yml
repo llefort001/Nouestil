@@ -14,3 +14,8 @@ services:
             class: AppBundle\Manager\ContactManager
             arguments:
                 - '@doctrine.orm.entity_manager'
+
+    nouestil.course:
+            class: AppBundle\Manager\CourseManager
+            arguments:
+                - '@doctrine.orm.entity_manager'

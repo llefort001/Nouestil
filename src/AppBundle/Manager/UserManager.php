@@ -32,7 +32,6 @@ class UserManager
     public function __construct(EntityManager $em)
     {
         $this->em = $em;
-
     }
 
     /**
