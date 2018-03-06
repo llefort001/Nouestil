@@ -1,13 +1,6 @@
 {% extends 'base.html.twig' %}
 
 {% block body %}
-    {% for type, flash_messages in app.session.flashBag.all %}
-        {% for flash_message in flash_messages %}
-            <br/>
-            <div class="alert alert-danger">
-                {{ flash_message }}
-            </div>
-        {% endfor %}
     {% endfor %}
     {% block fos_user_content %}
         {% include "@FOSUser/Profile/show_content.html.twig" %}

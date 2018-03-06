@@ -1,0 +1,15 @@
+contacts:
+    path:     /admin/contacts
+    defaults: { _controller: AppBundle:Contact:index }
+
+deleteContact:
+    path:     /admin/delete-contact/{contactId}
+    defaults: { _controller: AppBundle:Contact:deleteContact }
+
+updateContact:
+    path:     /admin/update-user/
+    defaults: { _controller: AppBundle:User:updateUser}
+
+createContact:
+    path:     /admin/create-contact/
+    defaults: { _controller: AppBundle:Contact:createContact}

@@ -1,14 +1,6 @@
 {% extends 'base.html.twig' %}
 
 {% block body %}
-    {% for type, flash_messages in app.session.flashBag.all %}
-        {% for flash_message in flash_messages %}
-            <br/>
-            <pre class="alert alert-danger">
-                {{- flash_message -}}
-            </pre>
-        {% endfor %}
-    {% endfor %}
     <div class="ibox-title">
     <h5>Utilisateurs</h5>
     <div class="ibox-content">
@@ -23,7 +15,7 @@
                 <th>Date de Naissance</th>
                 <th>Num Tel</th>
                 <th>Email</th>
-                <th>Contact</th>
+                <th>Contacts</th>
                 <th>Groupe</th>
                 <th>Actions</th>
             </tr>
@@ -39,41 +31,47 @@
                     <td>{{ user.phoneNumber }}</td>
                     <td>{{ user.email }}</td>
                     <td>
-                        {% if user.contact.id is defined %}
-                        <a href="#"><span class="label label-default" data-toggle="modal"
-                                          data-target="#contactModal_{{ user.contact.id }}">
-                            {{ user.contact.firstname }} {{ user.contact.lastname }}</span></a>
-
-                        <div class="modal fade" id="contactModal_{{ user.contact.id }}" tabindex="-1" role="dialog"
-                             aria-labelledby="myModalLabel">
-                            <div class="modal-dialog" role="document">
-                                <div class="modal-content">
-                                    <div class="modal-header">
-                                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                            <span aria-hidden="true">&times;</span></button>
-                                        <h4 class="modal-title" id="myModalLabel">
-                                            {{ user.contact.firstname }} {{ user.contact.lastname }}</h4>
-                                    </div>
-                                    <div class="modal-body">
-                                        Numéro de téléphone : {{ user.contact.phoneNumber }}
+                        {% for key, contact in user.contacts %}
+                            <a href="#"><span class="label label-default" data-toggle="modal"
+                                              data-target="#contactModal{{ contact.id }}">
+                            {{ contact.firstname }} {{ contact.lastname }}</span></a>
+                            <div class="modal fade" id="contactModal{{ contact.id }}" tabindex="-1" role="dialog"
+                                 aria-labelledby="myModalLabel">
+                                <div class="modal-dialog" role="document">
+                                    <div class="modal-content">
+                                        <div class="modal-header">
+                                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                <span aria-hidden="true">&times;</span></button>
+                                            <h4 class="modal-title" id="myModalLabel">
+                                                {{ contact.firstname }} {{ contact.lastname }}</h4>
+                                        </div>
+                                        <div class="modal-body">
+                                            Numéro de téléphone : {{ contact.phoneNumber }}
+                                            <div class="col-12">
+                                                <a class="btn btn-w-m btn-danger"
+                                                   href="{{ path('unlinkContact',{'userId' : user.id,'contactId': contact.id}) }}"
+                                                   onclick="return confirm('Délier ce contact de l\'utilisateur ?')">Délier
+                                                    ce contact de l'utilisateur</a>
+                                                <a class="btn btn-w-m btn-danger"
+                                                   href="{{ path('deleteContact',{'contactId': contact.id}) }}"
+                                                   onclick="return confirm('Confirmer la suppression du contact ?')">Supprimer
+                                                    le contact</a>
+                                            </div>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
-                        </div>
+                        {% endfor %}
                     </td>
-                    {% endif %}
                     <td>
                         {% if user.group.id is defined %}
                             {{ user.group.name }}
                         {% endif %}
                     </td>
                     <td>
-                        <a href="#"><span class="label label-default" data-toggle="modal" data-target="#userModal_{{ user.id }}">+</span></a>
+                        <a href="#"><span class="label label-default" data-toggle="modal"
+                                          data-target="#userModal_{{ user.id }}">Modifier</span></a>
                         {#<a class="label label-warning"  href="{{ path('base_homepage', {'_want_to_be': user.username}) }}" >Impersonate</a>#}
-                        {% if currentUser != user %}
-                            <a href="{{ path('deleteUser',{'userId': user.id}) }}"
-                               onclick="return confirm('Confirmer la suppression ?')"><span class="label label-danger">Supprimer</span></a>
-                        {% endif %}
                         <div class="modal fade" id="userModal_{{ user.id }}" tabindex="-1" role="dialog"
                              aria-labelledby="myModalLabel">
                             <div class="modal-dialog" role="document">
@@ -153,14 +151,12 @@
                                                 {% endfor %}
                                                 </tbody>
                                             </table>
-                                            {#<div class="form-group row">#}
-                                            {#<label class="col-md-4 col-form-label">Disponibilité Mensuelle</label>#}
-                                            {#<div class="col-md-8">#}
-                                            {#<input class="form-control" type="number" max="200" name="monthly_availability" value="{{ user.monthlyAvailability }}">#}
-                                            {#</div>#}
-                                            {#</div>#}
                                         </div>
                                         <div class="modal-footer">
+                                            {% if currentUser != user %}
+                                                <a class="btn btn-w-m btn-danger pull-left" href="{{ path('deleteUser',{'userId': user.id}) }}"
+                                                   onclick="return confirm('Supprimer {{ user.firstname }} {{ user.lastname }} ?')">Supprimer l'utilisateur</a>
+                                            {% endif %}
                                             <input type="hidden" name="id" value="{{ user.id }}">
                                             <button type="button" class="btn btn-default"
                                                     data-dismiss="modal">Close
@@ -177,6 +173,7 @@
             {% endfor %}
             </tbody>
         </table>
+        <a class="btn btn-w-m btn-primary" href="{{ path('createUser') }}">Créer un utilisateur</a>
         {% if errorMessage is defined %}
             <br/>
             <div class="alert alert-danger">

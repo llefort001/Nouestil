@@ -1,0 +1,105 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <div class="ibox-title">
+    <h5>Contacts</h5>
+    <div class="ibox-content">
+
+        <table class="table">
+            <thead>
+            <tr>
+                <th>#</th>
+                <th>Nom</th>
+                <th>Prénom</th>
+                <th>Email</th>
+                <th>Num Tel</th>
+                <th>Utilisateurs</th>
+                <th>Actions</th>
+            </tr>
+            </thead>
+            <tbody>
+            {% for contact in contacts %}
+                <tr>
+                    <td>{{ contact.id }}</td>
+                    <td>{{ contact.lastname }}</td>
+                    <td>{{ contact.firstname }}</td>
+                    <td>{{ contact.email }}</td>
+                    <td>{{ contact.phoneNumber }}</td>
+                    <td>
+                        {% for key, user in contact.users %}
+                                <a href="#"><span class="label label-default" data-toggle="modal"
+                                                  data-target="#userModal_{{ user.id }}">
+                            {{ user.firstname }} {{ user.lastname }}</span></a>
+                                {#{{ user }}#}
+                                <div class="modal fade" id="userModal_{{ user.id }}" tabindex="-1" role="dialog"
+                                     aria-labelledby="myModalLabel">
+                                    <div class="modal-dialog" role="document">
+                                        <div class="modal-content">
+                                            <div class="modal-header">
+                                                <button type="button" class="close" data-dismiss="modal"
+                                                        aria-label="Close">
+                                                    <span aria-hidden="true">&times;</span></button>
+                                                <h4 class="modal-title" id="myModalLabel">
+                                                    {{ user.firstname }} {{ user.lastname }}</h4>
+                                            </div>
+                                            <div class="modal-body">
+                                                Numéro de téléphone : {{ user.phoneNumber }}
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                        {% endfor %}
+
+                    </td>
+                    <td>
+                        <a href="#"><span class="label label-default" data-toggle="modal"
+                                          data-target="#contactModal_{{ contact.id }}">+</span></a>
+                        {#<a class="label label-warning"  href="{{ path('base_homepage', {'_want_to_be': contact.username}) }}" >Impersonate</a>#}
+                        <a href="{{ path('deleteContact',{'contactId': contact.id}) }}"
+                           onclick="return confirm('Confirmer la suppression ?')"><span class="label label-danger">Supprimer</span></a>
+                        <div class="modal fade" id="contactModal_{{ contact.id }}" tabindex="-1" role="dialog"
+                             aria-labelledby="myModalLabel">
+                            <div class="modal-dialog" role="document">
+                                <form method="post" action="{{ path('updateContact') }}" name="update-contact"
+                                      class="form-horizontal">
+                                    <div class="modal-content">
+                                        <div class="modal-header">
+                                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                <span aria-hidden="true">&times;</span></button>
+                                            <h4 class="modal-title" id="myModalLabel">
+                                                {{ contact.firstname }} {{ contact.lastname }}</h4>
+                                        </div>
+                                        <div class="modal-body">
+                                            <div class="Group">
+                                                <h5>Modifier le contact :</h5>
+                                            </div>
+                                            <hr/>
+                                        </div>
+                                        <div class="modal-footer">
+                                            <input type="hidden" name="id" value="{{ contact.id }}">
+                                            <button type="button" class="btn btn-default"
+                                                    data-dismiss="modal">Close
+                                            </button>
+                                            <button type="submit" class="btn btn-primary">Save changes
+                                            </button>
+                                        </div>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                    </td>
+                </tr>
+            {% endfor %}
+            </tbody>
+        </table>
+        <a class="btn btn-w-m btn-primary" href="{{ path('createContact') }}">Créer un contact</a>
+        {% if errorMessage is defined %}
+            <br/>
+            <div class="alert alert-danger">
+                {{ error }}
+            </div>
+
+        {% endif %}
+
+    </div>
+{% endblock %}

@@ -57,8 +57,8 @@ class Contact
      */
     private $phoneNumber;
 
-    /** @ORM\ManyToMany(targetEntity="User", mappedBy="contacts") */
-    protected $users;
+    /** @ORM\ManyToMany(targetEntity="User", mappedBy="contacts", cascade={"persist"},fetch="EAGER") */
+    private $users;
 
     public function __construct()
     {
@@ -188,12 +188,27 @@ class Contact
     }
 
     /**
-     * @param mixed $users
+     * Add user
+     *
+     * @param \AppBundle\Entity\User $user
+     *
+     *
      */
-    public function setUsers($users)
+    public function addUser(User $user)
     {
-        $this->users = $users;
+        if (!$this->users->contains($user)) {
+            $this->users->add($user);
+        }
+    }
+
+    /**
+     * Remove user
+     *
+     * @param \AppBundle\Entity\User $user
+     */
+    public function removeUser(\AppBundle\Entity\User $user)
+    {
+        $this->users->removeElement($user);
     }
 
 }
-

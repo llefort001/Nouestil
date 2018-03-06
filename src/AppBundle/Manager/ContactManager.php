@@ -3,6 +3,7 @@
 namespace AppBundle\Manager;
 
 use AppBundle\Entity\Contact;
+use AppBundle\Entity\User;
 use Doctrine\ORM\EntityManager;
 
 /**
@@ -27,6 +28,27 @@ class ContactManager
     public function __construct(EntityManager $em)
     {
         $this->em = $em;
+
+    }
+
+
+    /**
+     * @param $id
+     * @return mixed
+     */
+    public function getContact($id)
+    {
+
+        $contact = $this->em
+            ->getRepository('AppBundle:Contact')
+            ->findOneById($id);
+
+        if (!$contact instanceof Contact) {
+            throw $this->createNotFoundException(
+                'Pas un contact '
+            );
+        }
+        return $contact;
 
     }
 
@@ -66,17 +88,15 @@ class ContactManager
     }
 
     /**
-     * @param $username
      * @param $email
-     * @param $password
      * @param $firstName
      * @param $lastName
      * @param $phoneNumber
-     * @param $birthDate
-     * @param $city
+     * @param $kinship
+     * @param User $user
      * @return Contact
      */
-    public function createUser($email, $firstName, $lastName, $phoneNumber,$kinship)
+    public function createContact($email, $firstName, $lastName, $phoneNumber,$kinship,User $user)
     {
         $contact = new Contact();
         $contact->setEmail($email);
@@ -84,11 +104,16 @@ class ContactManager
         $contact->setLastName($lastName);
         $contact->setPhoneNumber($phoneNumber);
         $contact->setKinship($kinship);
+        $user->addContact($contact);
+
         try {
+            dump($contact);
             $this->em->persist($contact);
+            $this->em->persist($user);
+
             $this->em->flush();
         } catch (\Exception $e) {
-//            dump($e->getMessage());
+            dump($e->getMessage());
         }
         return $contact;
     }
