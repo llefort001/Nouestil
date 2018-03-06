@@ -21,3 +21,7 @@ updateGroupUser:
 createUser:
     path:     /admin/create-user/
     defaults: { _controller: AppBundle:User:createUser}
+
+unlinkContact:
+    path:     /admin/unlink-contact/{userId}/{contactId}
+    defaults: { _controller: AppBundle:User:unlinkContact }

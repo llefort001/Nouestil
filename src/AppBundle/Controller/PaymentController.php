@@ -100,7 +100,7 @@ class PaymentController extends Controller
 
 
                 // on redirige l'administrateur vers la liste des clients si aucune erreur
-                $this->addFlash('Success', 'L\'utilisateur a bien été enregistré');
+                $this->addFlash('success', 'L\'utilisateur a bien été enregistré');
                 return $this->redirect($this->generateUrl("users"));
             }
         }

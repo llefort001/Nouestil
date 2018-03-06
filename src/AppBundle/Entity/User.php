@@ -58,7 +58,14 @@ class User extends BaseUser
     protected $group;
 
     /**
-     * @ORM\ManyToMany(targetEntity="Contact", inversedBy="users", cascade={"persist"})
+     * @ORM\ManyToMany(targetEntity="Contact", inversedBy="users", cascade={"persist"},fetch="EAGER")
+     * @ORM\JoinTable(name="users_contacts",joinColumns={
+     *      @ORM\JoinColumn(name="user_id", referencedColumnName="id")
+     *  },
+     *  inverseJoinColumns={
+     *      @ORM\JoinColumn(name="userContact_id", referencedColumnName="id")
+     *  }
+     * ))
      */
     protected $contacts;
 
@@ -84,10 +91,11 @@ class User extends BaseUser
     public function __construct()
     {
         parent::__construct();
-// Add role
+//      Default constructor, initializes collections
         $this->contacts = new ArrayCollection();
         $this->payments = new ArrayCollection();
         $this->courses = new ArrayCollection();
+        // Add role
         $this->addRole("ROLE_USER");
     }
 
@@ -300,5 +308,19 @@ class User extends BaseUser
         $this->notifications = $notifications;
     }
 
+    public function addContact(Contact $contact)
+    {
+        if (!$this->contacts->contains($contact)) {
+            $this->contacts->add($contact);
+            $contact->addUser($this); // synchronously updating inverse side
+        }
+    }
 
+    public function removeContact(Contact $contact)
+    {
+        if ($this->contacts->contains($contact)) {
+            $this->contacts->removeElement($contact);
+            $contact->removeUser($this); // synchronously updating inverse side
+        }
+    }
 }
