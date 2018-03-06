@@ -11,7 +11,7 @@ use AppBundle\Entity\User;
 
 class CourseController extends controller{
 
-    public function listCourseAction (){
+    public function listCoursesAction (){
         $formCreateCourse= $this->createForm(CourseType::class);
         $courses= $this->get('nouestil.course');
         $repository= $this->getDoctrine()->getManager()->getRepository('AppBundle:User');
@@ -32,7 +32,7 @@ class CourseController extends controller{
             $course= $this->get('nouestil.course');
             $course->updateCourse($data['id'],$data['name'],$data['session'],$data['userTeach']);
         }
-        return $this->redirect($this->generateUrl('listCourse'));
+        return $this->redirect($this->generateUrl('listCourses'));
     }
 
     public function deleteCourseAction($courseId)
@@ -41,7 +41,7 @@ class CourseController extends controller{
         $courseToDelete = $course->getCourse($courseId);
         $course->deleteCourse($courseToDelete);
 
-        return $this->redirect($this->generateUrl('listCourse'));
+        return $this->redirect($this->generateUrl('listCourses'));
     }
 
     public function addCourseAction(Request $request)
@@ -52,8 +52,8 @@ class CourseController extends controller{
             $courseManager= $this->get('nouestil.course');
             $courseManager->addCourse($dataCourse['name'],$dataCourse['session'],$dataCourse['userTeach']);
 
-            return $this->redirect($this->generateUrl('listCourse'));
+            return $this->redirect($this->generateUrl('listCourses'));
         }
-        return $this->redirect($this->generateUrl('listCourse'));
+        return $this->redirect($this->generateUrl('listCourses'));
     }
 }
