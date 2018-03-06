@@ -1,0 +1,15 @@
+courses:
+    path:     /admin/courses
+    defaults: { _controller: AppBundle:Course:index }
+
+updateCourse:
+    path:     /admin/update-course/
+    defaults: { _controller: AppBundle:Course:updateCourse }
+
+deleteCourse:
+    path:     /admin/delete-course/{courseId}
+    defaults: { _controller: AppBundle:Course:deleteCourse }
+
+addCourse:
+    path:     /admin/add-course/
+    defaults:  { _controller: AppBundle:Course:addCourse }
