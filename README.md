@@ -1,13 +1,11 @@
-Branche de Lucas :
+Branche de Laurene :
 
-F1Système d’authentification
+F21Consulter page d’accueil
 
-F2Inscrire un utilisateur
+F22Consulter galerie photos
 
-F3Modifier les informations d’un utilisateur
+F23Consulter page présentation des cours
 
-F4Consulter les informations d’un utilisateur
+F24Consulter page de contact
 
-F6Filtrer et trier des utilisateurs
-
-F16Filtrer et trier des impayés.
+F25Consulter page de login (portail CRM)
