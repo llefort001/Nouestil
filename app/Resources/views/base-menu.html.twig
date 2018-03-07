@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8"/>
+    <title>{% block title %}NOUESTIL | Dashboard{% endblock %}</title>
+    {% block stylesheets %}
+        <link href="{{ asset('css/main.css') }}" type="text/css" rel="stylesheet" media="all"/>
+        <script src="{{ asset('js/jquery.js') }}"></script>
+        <script src="{{ asset('js/scripts.js') }}"></script>
+    {% endblock %}
+    <link rel="icon" type="image/x-icon" href="{{ asset('favicon.ico') }}"/>
+</head>
+<body>
+<div id="wrapper">
+    {{ render(controller( 'AppBundle:Menu:sideMenu' )) }}
+    <div id="page-wrapper" class="gray-bg">
+        {#{{ render(controller( 'PortailMkgBundle:Archi:topMenu' )) }}#}
+        {% block messages %}
+            {% for label, messages in app.flashes %}
+                {% for message in messages %}
+                    <div class="alert alert-{{ label }} alert-dismissible">
+                        <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+                        {{ message|trans({}, 'FOSUserBundle') }}
+                    </div>
+                {% endfor %}
+            {% endfor %}
+        {% endblock %}
+        {% block body %}{% endblock %}
+    </div>
+</div>
+
+{% block javascripts %}{% endblock %}
+</body>
+</html>
