@@ -26,95 +26,68 @@
             </thead>
             <tbody>
             {% for payment in payments %}
-                <p>Je suis lucas</p>
                 <tr>
                     <td>{{ payment.id }}</td>
                     <td>{{ payment.user }}</td>
                     <td>{{ payment.amount }}</td>
                     <td>{{ payment.method }}</td>
-                    <td>{{ payment.datetime|date('Y-m-d H:i:s') }}</td>
+                    <td>{{ payment.datetime|date('Y-m-d') }}</td>
                     <td>
-                        {#<span class="label label-default" data-toggle="modal" data-target="#userModal_{{ user.id }}">Modifier</span>#}
+                        <span class="label label-default" data-toggle="modal" data-target="#paymentModal_{{ payment.id }}">+</span>
                         {#<a class="label label-warning"  href="{{ path('base_homepage', {'_want_to_be': user.username}) }}" >Impersonate</a>#}
                         {#{% if currentUser != user %}#}
                         <a href="{{ path('deletePayment',{'paymentId': payment.id}) }}"
                         onclick="return confirm('Confirmer la suppression ?')"><span class="label label-danger">Supprimer</span></a>
                         {#{% endif %}#}
-                        {#<div class="modal fade" id="userModal_{{ user.id }}" tabindex="-1" role="dialog"#}
-                             {#aria-labelledby="myModalLabel">#}
-                            {#<div class="modal-dialog" role="document">#}
-                                {#<form method="post" action="{{ path('base_updateUser') }}" name="update-user"#}
-                                      {#class="form-horizontal">#}
-                                    {#<div class="modal-content">#}
-                                        {#<div class="modal-header">#}
-                                            {#<button type="button" class="close" data-dismiss="modal" aria-label="Close">#}
-                                                {#<span aria-hidden="true">&times;</span></button>#}
-                                            {#<h4 class="modal-title" id="myModalLabel">#}
-                                                {#Modifier {{ user.username }} </h4>#}
-                                        {#</div>#}
-                                        {#<div class="modal-body">#}
-                                            {#<div class="Role">#}
-                                            {#<h5>Modifier le rôle :</h5>#}
-                                            {#<select onchange="window.location.href=this.value" class="form-control">#}
-                                            {#<option>#}
-                                            {#-#}
-                                            {#</option>#}
-                                            {#{% for key, role in roles %}#}
-                                            {#<option value="{{ path('pichet_portailmkg_updateRolesUser',{'userId': user.id,'role':key}) }}" {% if user.roles[0]==key %} selected="selected" {% endif %} >#}
-                                            {#{{ role }}#}
-                                            {#</option>#}
-                                            {#{% endfor %}#}
-                                            {#</select>#}
-                                            {#</div>#}
-                                            {#<br/>#}
-                                            {#<div class="Group">#}
-                                                {#<h5>Modifier le groupe :</h5>#}
-                                                {#<select onchange="window.location.href=this.value" class="form-control">#}
-                                                    {#{% for key, group in groups %}#}
-                                                        {#<option value="{{ path('base_updateGroupUser',{'userId': user.id,'group':group.id}) }}" {% if user.group.id is defined and  user.group.id==group.id %} selected="selected" {% endif %} >#}
-                                                            {#{{ group }}#}
-                                                        {#</option>#}
-                                                    {#{% endfor %}#}
-                                                {#</select>#}
-                                            {#</div>#}
-                                            {#<hr/>#}
-                                            {#<div class="form-group col-md-6">#}
-                                            {#<input type="checkbox" name="ressource_planner"#}
-                                            {#{% if user.ressourcePlanner %} checked {% endif %} />#}
-                                            {#<label>Activer le ressource planner</label>#}
-                                            {#</div>#}
-                                            {#<div class="form-group col-md-6">#}
-                                            {#<input type="checkbox" name="time_tracking"#}
-                                            {#{% if user.timeTracking %} checked {% endif %} />#}
-                                            {#<label>Activer le time tracking</label>#}
-                                            {#</div>#}
-                                            {#<div class="form-group row">#}
-                                                {#<label class="col-md-4 col-form-label">Roticoins</label>#}
-                                                {#<div class="col-md-8">#}
-                                                    {#<input class="form-control" type="number" name="roticoin"  value="{{ user.roticoin }}">#}
-                                                {#</div>#}
-                                            {#</div>#}
-                                            {#<div class="form-group row">#}
-                                            {#<label class="col-md-4 col-form-label">Disponibilité Mensuelle</label>#}
-                                            {#<div class="col-md-8">#}
-                                            {#<input class="form-control" type="number" max="200" name="monthly_availability" value="{{ user.monthlyAvailability }}">#}
-                                            {#</div>#}
-                                            {#</div>#}
-                                            {#</div>#}
-                                            {#<div class="modal-footer">#}
-                                                {#<input type="hidden" name="id" value="{{ user.id }}">#}
-                                                {#<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>#}
-                                                {#<button type="submit" class="btn btn-primary">Save changes</button>#}
-                                            {#</div>#}
-                                        {#</div>#}
-                                {#</form>#}
-                            {#</div>#}
-                        {#</div>#}
+                        <div class="modal fade" id="paymentModal_{{ payment.id }}" tabindex="-1" role="dialog"
+                             aria-labelledby="myModalLabel">
+                            <div class="modal-dialog" role="document">#}
+                                <form method="post" action="{{ path('updatePayment') }}" name="update-payment" class="form-horizontal">
+                                    <div class="modal-content">
+                                        <div class="modal-header">
+                                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                <span aria-hidden="true">&times;</span></button>
+                                            <h4 class="modal-title" id="myModalLabel">Modifier Payment #{{ payment.id }} </h4>
+                                        </div>
+                                        <div class="modal-body">
+                                            <div>
+                                                <p>Montant: <input type="number" name="amount" value="{{ payment.amount }}"></p>
+                                            </div>
+                                            <br/>
+                                            <div>
+                                                <p>Date: <input type="date" name="datetime" value="{{ payment.datetime|date('Y-m-d') }}"></p>
+                                            </div>
+                                            <br/>
+                                            <div>
+                                                <p>Methode:
+                                                    <select name="method" name="method" value="{{ payment.method }}">
+                                                        <option value="cb">CB</option>
+                                                        <option value="especes">Especes</option>
+                                                        <option value="paypal">PayPal</option>
+                                                        <option value="autre">Autre</option>
+                                                    </select>
+                                                </p>
+                                            </div>
+                                            <br/>
+                                            <div class="modal-footer">
+                                                <input type="hidden" name="id" value="{{ payment.id }}">
+                                                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                                                <button type="submit" class="btn btn-primary">Save changes</button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
                     </td>
                 </tr>
             {% endfor %}
             </tbody>
         </table>
+
+
+        <a class="btn btn-w-m btn-primary" href="{{ path('createPayment') }}" >Ajouter Paiment</a>
+
         {% if errorMessage is defined %}
             <br/>
             <div class="alert alert-danger">

@@ -16,15 +16,89 @@ class PaymentController extends Controller
      */
     public function indexAction()
     {
-//        $userManager = $this->get('fos_user.user_manager');
+        $userManager = $this->get('fos_user.user_manager');
         $entityManager = $this->getDoctrine()->getManager();
-//        $users = $userManager->findUsers();
+        $users = $userManager->findUsers();
         $payments = $entityManager->getRepository('AppBundle:Payment')->findAll();
         return $this->render('AppBundle:Payments:payments.html.twig', array(
-//            'users' => $users,
+            'users' => $users,
             'payments' => $payments,
         ));
     }
+
+
+    public function createPaymentAction(Request $request)
+    {
+        $formCreatePayment = $this->createForm(PaymentType::class);
+
+        if ($request->isMethod('POST')) {
+
+            // On récupère le gestionnaire d'entités
+            $em = $this->getDoctrine()->getManager();
+
+            $formCreatePayment->submit($request->request->get($formCreatePayment->getName()));
+            // Enregistrer après soumission du formulaire les données dans l'objet $user
+
+            if ($formCreatePayment->isSubmitted() && $formCreatePayment->isValid()) {
+
+
+                $paymentData = $formCreatePayment->getData();
+                $this->get('nouestil.payment')->save($paymentData);
+
+
+                // on redirige l'administrateur vers la liste des clients si aucune erreur
+                $this->addFlash('success', 'Les payments ont bien été enregistrés');
+                return $this->redirect($this->generateUrl("payments"));
+            }
+        }
+
+
+        return $this->render('AppBundle:Payments:create.html.twig', array(
+            'formCreatePayment' => $formCreatePayment->createView(),
+        ));
+    }
+
+    public function deletePaymentAction($paymentId)
+    {
+        $paymentManager = $this->get('nouestil.payment');
+        $paymentToDelete = $paymentManager->getPayment($paymentId);
+        $paymentManager->deletePayment($paymentToDelete);
+
+        // on redirige l'administrateur vers la liste des clients si aucune erreur
+        $this->addFlash('Success', 'Les payments ont bien été supprimés');
+        return $this->redirect($this->generateUrl("payments"));
+
+    }
+    public function updatePaymentAction(Request $request)
+    {
+
+        if ($request->isMethod('POST')) {
+            $data = $request->request->all();
+
+            $payment= $this->get('nouestil.payment');
+            $payment->updatePayment($data['id'], $data['amount'], $data['datetime'], $data['method']);
+        }
+
+        $this->addFlash('Success', 'Les payments ont bien été modifiés');
+        return $this->redirect($this->generateUrl('payments'));
+    }
+
+
+    public function updateUserPaymentAction($paymentId, $user)
+    {
+        $entityManager = $this->getDoctrine()->getManager();
+        $paymentManager = $this->get('nouestil.payment');
+        $paymentToUpdate = $paymentManager->getPayment($paymentId);
+
+        if ($paymentToUpdate instanceof Payment) {
+            $userToUpdate = $entityManager->getRepository('AppBundle:User')->find(array("id" => $user));
+            $paymentToUpdate->setUser($userToUpdate);
+            $userToUpdate->addPaymentUser($paymentToUpdate);
+            $entityManager->flush();
+        }
+        return $this->redirect($this->generateUrl('payments'));
+    }
+
 
 //    public function withdrawAction($userId)
 //    {
@@ -79,35 +153,4 @@ class PaymentController extends Controller
 //        }
 //        return $this->redirect($this->generateUrl('base_users'));
 //    }
-
-    public function createPaymentAction(Request $request)
-    {
-        $formCreatePayment = $this->createForm(PaymentType::class);
-
-        if ($request->isMethod('POST')) {
-
-            // On récupère le gestionnaire d'entités
-            $em = $this->getDoctrine()->getManager();
-
-            $formCreatePayment->submit($request->request->get($formCreatePayment->getName()));
-            // Enregistrer après soumission du formulaire les données dans l'objet $user
-
-            if ($formCreatePayment->isSubmitted() && $formCreatePayment->isValid()) {
-
-
-                $paymentData = $formCreatePayment->getData();
-                $this->get('nouestil.payment')->save($paymentData);
-
-
-                // on redirige l'administrateur vers la liste des clients si aucune erreur
-                $this->addFlash('Success', 'L\'utilisateur a bien été enregistré');
-                return $this->redirect($this->generateUrl("users"));
-            }
-        }
-
-
-        return $this->render('AppBundle:Payments:create.html.twig', array(
-            'formCreatePayment' => $formCreatePayment->createView(),
-        ));
-    }
 }
