@@ -1,3 +1,6 @@
+imports:
+    - { resource: "@AppBundle/Resources/config/menu.yml" }
+
 services:
 
     nouestil.user:
