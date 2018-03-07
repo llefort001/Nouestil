@@ -32,7 +32,6 @@ class CourseController extends controller{
             $course= $this->get('nouestil.course');
             $course->updateCourse($data['id'],$data['name'],$data['session'],$data['userTeach']);
             $this->addFlash('success', 'Le cours a bien été modifié.');
-
         }
         return $this->redirect($this->generateUrl('courses'));
     }
@@ -57,5 +56,15 @@ class CourseController extends controller{
             $this->addFlash('success', 'Le cours a bien été enregistré.');
         }
         return $this->redirect($this->generateUrl('courses'));
+            $this->addFlash('success', 'Le cours a bien été enregistré.');
+        }
+        return $this->redirect($this->generateUrl('listCourses'));
+    }
+
+    public function usersCourseAction($courseId){
+        $course= $this->get('nouestil.course')->getCourse($courseId);
+        return $this->render('AppBundle:Course:usersListCourse.html.twig', array(
+            'course' => $course
+        ));
     }
 }

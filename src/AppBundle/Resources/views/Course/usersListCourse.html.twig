@@ -1,0 +1,72 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    {% for type, flash_message in app.session.flashBag.all %}
+        {% for flash_message in flash_message %}
+            <br />>
+            <pre class="alert alert-danger">
+                {{- flash_message -}}
+            </pre>
+        {% endfor %}
+    {% endfor %}
+    <div class="ibox-title">
+        <h5>{{ course.name }} - {{  course.session }}</h5>
+        <div class="ibox-content">
+            <table class="table">
+                <thead>
+                <tr>
+                    <th>#</th>
+                    <th>Nom d'utilisateur</th>
+                    <th>name</th>
+                    <th>Prénom</th>
+                    <th>Date de Naissance</th>
+                </tr>
+                </thead>
+                <tbody>
+                {% for user in course.users %}
+                    <tr>
+                        <td>{{ user.id }}</td>
+                        <td>{{ user.username }}</td>
+                        <td>{{ user.lastname }}</td>
+                        <td>{{ user.firstname }}</td>
+
+                    </tr>
+                {% endfor %}
+                </tbody>
+            </table>
+        </div>
+        <a href="#"><span class="label label-default" data-toggle="modal" data-target="#addCourseModal">Ajouter un nouveau cour</span></a>
+        <div class="modal fade" id="addUserCourseModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+            <div class="modal-dialog" role="document">
+                {{ form_start(formCreateCourse, {'action': path('addCourse') }) }}
+                {{ form_errors(formCreateCourse) }}
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                        <h4 class="modal-title" id="myModalLabel">
+                            Ajouter un nouveau cour
+                        </h4>
+                    </div>
+                    <div class=modal-body">
+                        {{ form_row(formCreateCourse.name) }}
+                        {{ form_row(formCreateCourse.session) }}
+                        {{ form_row(formCreateCourse.userTeach) }}
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                        <button type="submit" class="btn btn-primary">Valider</button>
+                    </div>
+                </div>
+                {{ form_end(formCreateCourse) }}
+            </div>
+        </div>
+        {% if errorMessage is defined %}
+            <br/>
+            <div class="alert alert-danger">
+                {{ error }}
+            </div>
+        {% endif %}
+    </div>
+{% endblock %}
