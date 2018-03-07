@@ -1,14 +1,6 @@
 {% extends 'base.html.twig' %}
 
 {% block body %}
-    {% for type, flash_messages in app.session.flashBag.all %}
-        {% for flash_message in flash_messages %}
-            <br/>
-            <pre class="alert alert-danger">
-                {{- flash_message -}}
-            </pre>
-        {% endfor %}
-    {% endfor %}
     <div class="ibox-title">
     <h5>Paiements</h5>
     <div class="ibox-content">

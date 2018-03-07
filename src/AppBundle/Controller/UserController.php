@@ -46,7 +46,7 @@ class UserController extends Controller
         $userManager = $this->get('nouestil.user');
         $userToDelete = $userManager->getUser($userId);
         if ($userToDelete == $this->getUser()) {
-            $this->addFlash('Erreur', 'Impossible de supprimer l\'utilisateur actuellement connecté.');
+            $this->addFlash('danger', 'Impossible de supprimer l\'utilisateur actuellement connecté.');
         } else {
             $userManager->deleteUser($userToDelete);
         }
@@ -76,12 +76,8 @@ class UserController extends Controller
         if ($request->isMethod('POST')) {
             $data = $request->request->all();
 
-            $entityManager = $this->getDoctrine()->getManager();
-            $userToUpdate = $entityManager->getRepository('AppBundle:User')->find(array("id" => $data['id']));
-
-//            $userToUpdate->setRoticoin($data['roticoin']);
-            $entityManager->flush();
-
+            $userManager = $this->get('nouestil.user');
+            $userToUpdate = $userManager->getUser($data['id']);
 
         }
         return $this->redirect($this->generateUrl('users'));
@@ -91,31 +87,29 @@ class UserController extends Controller
         $formRegistration = $this->createForm(UserType::class);
 
         if ($request->isMethod('POST')) {
-
-            // On récupère le gestionnaire d'entités
-            $em = $this->getDoctrine()->getManager();
-
             $formRegistration->submit($request->request->get($formRegistration->getName()));
             // Enregistrer après soumission du formulaire les données dans l'objet $user
-
             if ($formRegistration->isSubmitted() && $formRegistration->isValid()) {
-
-
-
                 $userData = $formRegistration->getData();
                 $this->get('nouestil.user')->save($userData);
-
-
                 // on redirige l'administrateur vers la liste des clients si aucune erreur
-                $this->addFlash('Success', 'L\'utilisateur a bien été enregistré');
-                return $this->redirect($this->generateUrl("users"));
+                $this->addFlash('success', 'L\'utilisateur a bien été enregistré, veuillez maintenant lui créer un contact.');
+                return $this->redirect($this->generateUrl("createContact"));
             }
         }
-
-
         return $this->render('AppBundle:Users:create.html.twig', array(
             'formRegistration' => $formRegistration->createView(),
         ));
+    }
+
+    public function unlinkContactAction($userId, $contactId)
+    {
+        $userManager = $this->get('nouestil.user');
+        $contactToDelete = $userManager->getContactById($contactId);
+        $userManager->unlinkContact($userId,$contactToDelete);
+        $this->addFlash('success', 'Le contact a bien été délié');
+        return $this->redirect($this->generateUrl('users'));
+
     }
 
 }

@@ -9,3 +9,13 @@ services:
             class: AppBundle\Manager\PaymentManager
             arguments:
                 - '@doctrine.orm.entity_manager'
+
+    nouestil.contact:
+            class: AppBundle\Manager\ContactManager
+            arguments:
+                - '@doctrine.orm.entity_manager'
+
+    nouestil.course:
+            class: AppBundle\Manager\CourseManager
+            arguments:
+                - '@doctrine.orm.entity_manager'

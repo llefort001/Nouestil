@@ -1,12 +1,12 @@
 {% extends 'base.html.twig' %}
 {% block body %}
-        <div class="ibox-content">
+<div class="ibox-content">
             <div class="loginColumns animated fadeInDown">
                 <div class="row">
 
                     <div class="col-md-6">
 
-                        <h2 class="font-bold">Créer un nouvel utilisateur</h2>
+                        <h2 class="font-bold">Créer un nouveau contact</h2>
                         <p>
                             texte exemple
                         </p>
@@ -18,17 +18,15 @@
                                     <strong>Attention</strong> {{ error }}
                                 </div>
                             {% endif %}
-                            {{ form_start(formRegistration, {'method': 'post'}) }}
-                            <div class="form-group">{{ form_row(formRegistration.email) }}</div>
-                            <div class="form-group">{{ form_row(formRegistration.firstname) }}</div>
-                            <div class="form-group">{{ form_row(formRegistration.lastname) }}</div>
-                            <div class="form-group">{{ form_row(formRegistration.phone_number) }}</div>
-                            <div class="form-group">{{ form_row(formRegistration.birth_date) }}</div>
-                            <div class="form-group">{{ form_row(formRegistration.city) }}</div>
-                            <div class="form-group">{{ form_row(formRegistration.username) }}</div>
-                            <div class="form-group">{{ form_row(formRegistration.plainPassword) }}</div>
+                            {{ form_start(formContact, {'method': 'post'}) }}
+                            <div class="form-group">{{ form_row(formContact.user) }}</div>
+                            <div class="form-group">{{ form_row(formContact.email) }}</div>
+                            <div class="form-group">{{ form_row(formContact.firstname) }}</div>
+                            <div class="form-group">{{ form_row(formContact.lastname) }}</div>
+                            <div class="form-group">{{ form_row(formContact.phone_number) }}</div>
+                            <div class="form-group">{{ form_row(formContact.kinship) }}</div>
                             <input type="submit" class="btn btn-primary block full-width m-b" value="Créer">
-                            {{ form_end(formRegistration) }}
+                            {{ form_end(formContact) }}
                             <p class="m-t">
                                 <small>Nouestil © 2018</small>
                             </p>

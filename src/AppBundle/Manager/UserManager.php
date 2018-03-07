@@ -2,6 +2,7 @@
 
 namespace AppBundle\Manager;
 
+use AppBundle\Entity\Contact;
 use AppBundle\Entity\User;
 use Doctrine\ORM\EntityManager;
 use Symfony\Component\HttpFoundation\Session\Session;
@@ -31,7 +32,6 @@ class UserManager
     public function __construct(EntityManager $em)
     {
         $this->em = $em;
-
     }
 
     /**
@@ -215,5 +215,44 @@ class UserManager
 
         $this->em->persist($user);
         $this->em->flush();
+    }
+
+
+    /**
+     * @return array
+     */
+    public function getContacts()
+    {
+        $contacts = array();
+        if (is_array($this->contacts) && sizeof($this->contacts) > 0) {
+            foreach ($this->contacts as $contact) {
+                $users[] = $contact->name;
+            }
+        }
+
+        return $contacts;
+    }
+
+    /**
+     * @return array
+     */
+    public function getContactById($id)
+    {
+        $contact = $this->em
+            ->getRepository('AppBundle:Contact')
+            ->findOneById($id);
+
+        if (!$contact instanceof Contact) {
+            throw $this->createNotFoundException(
+                'N\'est pas un contact'
+            );
+        }
+        return $contact;
+    }
+
+    public function unlinkContact($userId, $contactId){
+        $this->getUser($userId)->removeContact($contactId);
+        $this->em->flush();
+
     }
 }

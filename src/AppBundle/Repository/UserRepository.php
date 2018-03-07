@@ -1,7 +1,7 @@
 <?php
 
 namespace AppBundle\Repository;
-use AppBundle\Entity\User;
+
 
 /**
  * UserRepository
@@ -27,4 +27,17 @@ class UserRepository extends \Doctrine\ORM\EntityRepository
 
         return $query->getResult();
     }
+
+    public function findProfessor(){
+
+    $qb= $this->_em->createQueryBuilder();
+    $qb->select('u','g')
+        ->from('AppBundle\Entity\User','u')
+        ->leftJoin('u.group','g')
+        ->where('g.name= :prof')
+        ->setParameter('prof', 'professor');
+    $query= $qb->getQuery();
+    return $qb;
+    }
+
 }
