@@ -71,6 +71,8 @@ class PaymentManager
 
     }
 
+
+
     /**
      * @param $usersList
      * @return array
@@ -115,5 +117,24 @@ class PaymentManager
 
         $this->em->persist($payment);
         $this->em->flush();
+    }
+
+    public function updatePayment($id, $amount, $datetime, $method){
+
+        $payment = $this->em
+            ->getRepository('AppBundle:Payment')
+            ->findOneById($id);
+        $payment->setAmount($amount);
+        $payment->setMethod($method);
+
+        $payment->setDateTime( new \DateTime($datetime) );
+
+        try{
+            $this->em->persist($payment);
+            $this->em->flush();
+        }catch(\exception $e){
+            $e->getMessage();
+        }
+        return $payment;
     }
 }
