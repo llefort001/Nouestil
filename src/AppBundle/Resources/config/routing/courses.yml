@@ -13,3 +13,7 @@ deleteCourse:
 addCourse:
     path:     /course/add-course/
     defaults:  { _controller: AppBundle:Course:addCourse }
+
+usersCourse:
+    path:     /admin/users-course/{courseId}
+    defaults: { _controller: AppBundle:Course:usersCourse }

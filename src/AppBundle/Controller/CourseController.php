@@ -31,6 +31,7 @@ class CourseController extends controller{
             $data = $request->request->all();
             $course= $this->get('nouestil.course');
             $course->updateCourse($data['id'],$data['name'],$data['session'],$data['userTeach']);
+            $this->addFlash('success', 'Le cours a bien été modifié.');
         }
         return $this->redirect($this->generateUrl('listCourses'));
     }
@@ -40,6 +41,7 @@ class CourseController extends controller{
         $course = $this->get('nouestil.course');
         $courseToDelete = $course->getCourse($courseId);
         $course->deleteCourse($courseToDelete);
+        $this->addFlash('success', 'Le cours a bien été supprimé.');
 
         return $this->redirect($this->generateUrl('listCourses'));
     }
@@ -51,9 +53,15 @@ class CourseController extends controller{
             $dataCourse= $data['course'];
             $courseManager= $this->get('nouestil.course');
             $courseManager->addCourse($dataCourse['name'],$dataCourse['session'],$dataCourse['userTeach']);
-
-            return $this->redirect($this->generateUrl('listCourses'));
+            $this->addFlash('success', 'Le cours a bien été enregistré.');
         }
         return $this->redirect($this->generateUrl('listCourses'));
+    }
+
+    public function usersCourseAction($courseId){
+        $course= $this->get('nouestil.course')->getCourse($courseId);
+        return $this->render('AppBundle:Course:usersListCourse.html.twig', array(
+            'course' => $course
+        ));
     }
 }
