@@ -11,13 +11,13 @@ use AppBundle\Entity\User;
 
 class CourseController extends controller{
 
-    public function listCoursesAction (){
+    public function indexAction (){
         $formCreateCourse= $this->createForm(CourseType::class);
         $courses= $this->get('nouestil.course');
         $repository= $this->getDoctrine()->getManager()->getRepository('AppBundle:User');
         $usersTeach= $repository->findProfessor()->getQuery()->getResult();
 
-        return $this->render('AppBundle:Course:courseList.html.twig', array(
+        return $this->render('AppBundle:Course:courses.html.twig', array(
             'courses' => $courses->getCourseList(),
             'formCreateCourse' => $formCreateCourse->createView(),
             'usersTeach' => $usersTeach
@@ -31,8 +31,10 @@ class CourseController extends controller{
             $data = $request->request->all();
             $course= $this->get('nouestil.course');
             $course->updateCourse($data['id'],$data['name'],$data['session'],$data['userTeach']);
+            $this->addFlash('success', 'Le cours a bien été modifié.');
+
         }
-        return $this->redirect($this->generateUrl('listCourses'));
+        return $this->redirect($this->generateUrl('courses'));
     }
 
     public function deleteCourseAction($courseId)
@@ -40,8 +42,9 @@ class CourseController extends controller{
         $course = $this->get('nouestil.course');
         $courseToDelete = $course->getCourse($courseId);
         $course->deleteCourse($courseToDelete);
+        $this->addFlash('success', 'Le cours a bien été supprimé.');
 
-        return $this->redirect($this->generateUrl('listCourses'));
+        return $this->redirect($this->generateUrl('courses'));
     }
 
     public function addCourseAction(Request $request)
@@ -51,9 +54,8 @@ class CourseController extends controller{
             $dataCourse= $data['course'];
             $courseManager= $this->get('nouestil.course');
             $courseManager->addCourse($dataCourse['name'],$dataCourse['session'],$dataCourse['userTeach']);
-
-            return $this->redirect($this->generateUrl('listCourses'));
+            $this->addFlash('success', 'Le cours a bien été enregistré.');
         }
-        return $this->redirect($this->generateUrl('listCourses'));
+        return $this->redirect($this->generateUrl('courses'));
     }
 }

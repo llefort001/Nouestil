@@ -22,16 +22,15 @@ class Payment
     private $id;
 
     /**
-     * @var int
+     * @var float
      *
-     * @ORM\Column(name="amount", type="integer")
+     * @ORM\Column(name="amount", type="float")
      */
     private $amount;
 
     /**
-     * @var string
-     *
      * @ORM\ManyToOne(targetEntity="User", inversedBy="payments")
+     * @return User
      */
     private $user;
 
@@ -62,7 +61,7 @@ class Payment
     /**
      * Set user
      *
-     * @param string $user
+     *
      *
      * @return Payment
      */
@@ -76,7 +75,7 @@ class Payment
     /**
      * Get user
      *
-     * @return string
+     *
      */
     public function getUser()
     {

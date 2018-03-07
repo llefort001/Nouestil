@@ -7,7 +7,7 @@ payments:
 showcase:
     resource: '@AppBundle/Resources/config/routing/showcase.yml'
 
-teachers:
+courses:
     resource: '@AppBundle/Resources/config/routing/courses.yml'
 
 contacts:
