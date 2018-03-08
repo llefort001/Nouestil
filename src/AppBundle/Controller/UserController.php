@@ -14,22 +14,6 @@ use AppBundle\Entity\User;
  */
 class UserController extends Controller
 {
-    /**
-     * Lists all Users.
-     *
-     */
-//    public function indexAction() // C'est comme ça qu'on faisait avant l'utilisation du userManager maison
-//    {
-//        $userManager = $this->get('fos_user.user_manager');
-//        $entityManager = $this->getDoctrine()->getManager();
-//        $users = $userManager->findUsers();
-//        $groups = $entityManager->getRepository('AppBundle:Group')->findAll();
-//        return $this->render('AppBundle:Users:users.html.twig', array(
-//            'users' => $users,
-//            'groups' => $groups,
-//        ));
-//    }
-
     public function indexAction()
     {
         $user = $this->getUser();
@@ -105,7 +89,8 @@ class UserController extends Controller
     public function unlinkContactAction($userId, $contactId)
     {
         $userManager = $this->get('nouestil.user');
-        $contactToDelete = $userManager->getContactById($contactId);
+        $contactManager = $this->get('nouestil.contact');
+        $contactToDelete = $contactManager->getContactById($contactId);
         $userManager->unlinkContact($userId,$contactToDelete);
         $this->addFlash('success', 'Le contact a bien été délié');
         return $this->redirect($this->generateUrl('users'));

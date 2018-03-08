@@ -12,9 +12,9 @@
 </head>
 <body>
 <div id="wrapper">
-    {{ render(controller( 'AppBundle:Menu:sideMenu' )) }}
+    {{ render(controller( 'AppBundle:Menu:leftMenu' )) }}
     <div id="page-wrapper" class="gray-bg">
-        {#{{ render(controller( 'PortailMkgBundle:Archi:topMenu' )) }}#}
+        {{ render(controller( 'AppBundle:Menu:topMenu' )) }}
         {% block messages %}
             {% for label, messages in app.flashes %}
                 {% for message in messages %}

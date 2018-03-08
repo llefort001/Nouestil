@@ -1,0 +1,30 @@
+<div class="row border-bottom">
+    <nav class="navbar navbar-static-top" role="navigation" style="margin-bottom: 0">
+    <div class="navbar-header">
+        <a class="navbar-minimalize minimalize-styl-2 btn btn-primary " href="#"><i class="fa fa-bars"></i> </a>
+    </div>
+        <ul class="nav navbar-top-links navbar-right">
+            {% if is_granted('ROLE_PREVIOUS_ADMIN') %}
+            <li>
+                {#<a href="{{ path('pichet_portailmkg_homepage', {'_want_to_be': '_exit'}) }}" class="m-r-sm text-muted welcome-message"><span class="label label-warning">Exit impersonation</span></a>#}
+            </li>
+            {% endif %}
+            <li>
+                <span class="m-r-sm text-muted welcome-message">{{ config.title }}</span>
+            </li>
+            {% if is_granted("IS_AUTHENTICATED_REMEMBERED") %}
+            <li>
+                <a href="{{ path( "fos_user_profile_show" ) }}" > <i class="fa fa-user"></i> Mon profil </a>
+            </li>
+            <li>
+                <a href="{{ path( "fos_user_security_logout" ) }}" > <i class="fa fa-sign-out"></i> Déconnexion </a>
+            </li>
+            {% else %}
+            <li>
+                <a href="{{ path( "fos_user_security_login" ) }}" > <i class="fa fa-sign-in"></i> Connexion </a>
+            </li>
+            {% endif %}
+
+        </ul>
+    </nav>
+</div>
