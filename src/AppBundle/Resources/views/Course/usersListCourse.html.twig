@@ -35,31 +35,34 @@
                 </tbody>
             </table>
         </div>
-        <a href="#"><span class="label label-default" data-toggle="modal" data-target="#addCourseModal">Ajouter un nouveau cour</span></a>
+        <a href="#"><span class="label label-default" data-toggle="modal" data-target="#addUserCourseModal">Ajouter des élèves à ce cour</span></a>
         <div class="modal fade" id="addUserCourseModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
             <div class="modal-dialog" role="document">
-                {{ form_start(formCreateCourse, {'action': path('addCourse') }) }}
-                {{ form_errors(formCreateCourse) }}
                 <div class="modal-content">
                     <div class="modal-header">
                         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                             <span aria-hidden="true">&times;</span>
                         </button>
                         <h4 class="modal-title" id="myModalLabel">
-                            Ajouter un nouveau cour
+                            Ajouter des élèves à ce cour
                         </h4>
                     </div>
                     <div class=modal-body">
-                        {{ form_row(formCreateCourse.name) }}
-                        {{ form_row(formCreateCourse.session) }}
-                        {{ form_row(formCreateCourse.userTeach) }}
+                        {{ form_start(form) }}
+                        {{ form_widget(form) }}
+                        {{ form_end(form) }}
+
+                        [{% for user in results -%}
+                        {{ {id: user.id, label: user.firstname, value: user.fistname}|json_encode|raw }}
+                        {# use "value" instead of "id" key, if you use jquery-ui #}
+                        {%- if not loop.last %},{% endif -%}
+                        {%- endfor %}]
                     </div>
                     <div class="modal-footer">
                         <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
                         <button type="submit" class="btn btn-primary">Valider</button>
                     </div>
                 </div>
-                {{ form_end(formCreateCourse) }}
             </div>
         </div>
         {% if errorMessage is defined %}
@@ -69,4 +72,30 @@
             </div>
         {% endif %}
     </div>
+{% endblock %}
+{% block javascripts %}
+    < script  src = " //code.jquery.com/jquery-3.1.1.min.js " > < / script >
+    < script  src = " //code.jquery.com/ui/1.12.1/jquery-ui.min.js " > < / script >
+    < script  src = " {{asset ('paquets / pugxautocompleter / js / autocompleter-jqueryui.js')}} " > < / script >
+    < script  src = " {{asset ('js / app.js')}} " > < / script >
+    <script>$('#book_user').autocompleter({
+            url_list: '/user_search',
+            url_get: '/user_get/'
+        });
+        $(document).ready(function () {
+            'use strict';
+            $('#form_titre').autocompleter({
+                url_list: '/search-article',
+                url_get: '/?term='
+            });
+
+
+            $("#ui-id-1").click(function(){
+                var id = $("#form_titre").val();
+
+                if(id.toString().length > 0){
+                    $(location).attr('href', '/article/'+id.toString());
+                }
+            })
+        }); </script>
 {% endblock %}

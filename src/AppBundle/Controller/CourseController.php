@@ -3,6 +3,7 @@
 namespace AppBundle\Controller;
 
 use AppBundle\Form\CourseType;
+use AppBundle\Form\autocompleteUsersType;
 use AppBundle\Repository\UserRepository;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
@@ -55,16 +56,28 @@ class CourseController extends controller{
             $courseManager->addCourse($dataCourse['name'],$dataCourse['session'],$dataCourse['userTeach']);
             $this->addFlash('success', 'Le cours a bien été enregistré.');
         }
-        return $this->redirect($this->generateUrl('courses'));
             $this->addFlash('success', 'Le cours a bien été enregistré.');
-        }
-        return $this->redirect($this->generateUrl('listCourses'));
+        return $this->redirect($this->generateUrl('courses'));
     }
 
-    public function usersCourseAction($courseId){
+    public function usersCourseAction($courseId, Request $request){
         $course= $this->get('nouestil.course')->getCourse($courseId);
+
+        $q = $request->query->get('term');
+        $results = $this->getDoctrine()->getRepository('AppBundle:User')->findLikeName($q);
+
+        dump($results);die;
+
         return $this->render('AppBundle:Course:usersListCourse.html.twig', array(
-            'course' => $course
+            'course' => $course,
+            'results' => $results
         ));
+    }
+
+    public function getAuthorAction($id = null)
+    {
+        $user = $this->getDoctrine()->getRepository('AppBundle:User')->find($id);
+
+        return new Response($user->getName());
     }
 }

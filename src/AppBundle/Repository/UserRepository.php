@@ -40,4 +40,17 @@ class UserRepository extends \Doctrine\ORM\EntityRepository
     return $qb;
     }
 
+    public function findLikeName($name)
+    {
+        return $this
+            ->createQueryBuilder('u')
+            ->where('u.firstname LIKE :name')
+            ->setParameter( 'name', "%$name%")
+            ->orderBy('u.firstname')
+            ->setMaxResults(5)
+            ->getQuery()
+            ->execute()
+            ;
+    }
+
 }
