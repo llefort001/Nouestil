@@ -21,12 +21,12 @@ parameters:
 
                 -
                     icon:   fa-calendar
-                    label:  Courses
+                    label:  Cours
                     path:   courses
                     scope: all
                 -
                    icon:   fa-money
-                   label:  Payments
+                   label:  Paiements
                    path:   payments
                    scope: all
 

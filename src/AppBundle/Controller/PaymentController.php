@@ -16,12 +16,9 @@ class PaymentController extends Controller
      */
     public function indexAction()
     {
-        $userManager = $this->get('fos_user.user_manager');
-        $entityManager = $this->getDoctrine()->getManager();
-        $users = $userManager->findUsers();
-        $payments = $entityManager->getRepository('AppBundle:Payment')->findAll();
+        $paymentManager = $this->get('nouestil.payment');
+        $payments = $paymentManager->getPaymentList();
         return $this->render('AppBundle:Payments:payments.html.twig', array(
-            'users' => $users,
             'payments' => $payments,
         ));
     }
@@ -33,11 +30,8 @@ class PaymentController extends Controller
 
         if ($request->isMethod('POST')) {
 
-            // On récupère le gestionnaire d'entités
-            $em = $this->getDoctrine()->getManager();
-
             $formCreatePayment->submit($request->request->get($formCreatePayment->getName()));
-            // Enregistrer après soumission du formulaire les données dans l'objet $user
+            // Enregistrer après soumission du formulaire les données dans l'objet payment
 
             if ($formCreatePayment->isSubmitted() && $formCreatePayment->isValid()) {
 
@@ -47,7 +41,7 @@ class PaymentController extends Controller
 
 
                 // on redirige l'administrateur vers la liste des clients si aucune erreur
-                $this->addFlash('success', 'Les payments ont bien été enregistrés');
+                $this->addFlash('success', 'Le paiement a bien été enregistré');
                 return $this->redirect($this->generateUrl("payments"));
             }
         }
@@ -64,8 +58,8 @@ class PaymentController extends Controller
         $paymentToDelete = $paymentManager->getPayment($paymentId);
         $paymentManager->deletePayment($paymentToDelete);
 
-        // on redirige l'administrateur vers la liste des clients si aucune erreur
-        $this->addFlash('Success', 'Les payments ont bien été supprimés');
+        // on redirige l'administrateur vers la liste des paiements si aucune erreur
+        $this->addFlash('success', 'Les payments ont bien été supprimés');
         return $this->redirect($this->generateUrl("payments"));
 
     }
@@ -79,7 +73,7 @@ class PaymentController extends Controller
             $payment->updatePayment($data['id'], $data['amount'], $data['datetime'], $data['method']);
         }
 
-        $this->addFlash('Success', 'Les payments ont bien été modifiés');
+        $this->addFlash('success', 'Le paieent a bien été modifié');
         return $this->redirect($this->generateUrl('payments'));
     }
 
