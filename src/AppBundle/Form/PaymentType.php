@@ -5,8 +5,6 @@ namespace AppBundle\Form;
 use AppBundle\Entity\User;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
-use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
-use Symfony\Component\Form\Extension\Core\Type\NumberType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
@@ -22,31 +20,29 @@ class PaymentType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('amount', NumberType::class, array('label' =>false,
-                'attr' => array('class' => 'form-control','placeholder' => 'Montant','required' => 'required')
+            ->add('amount', TextType::class, array('label' => false,
+                'attr' => array('class' => 'form-control', 'placeholder' => 'Montant en €', 'required' => 'required')
             ))
-            ->add('datetime', DateType::class, array('label' =>false,
-                'attr' => array('class' => 'form-control','placeholder' => 'datetime','required' => 'required' ),
-                'widget' => 'single_text',
-                'years' => range(date('Y'), date('Y')+100),
-                'months' => range(date('m'), 12),
-                'days' => range(date('d'), 31),
+            ->add('user', User::class, array('label' => false,
+                'attr' => array('class' => 'form-control', 'placeholder' => 'Nom d\'utilisateur', 'required' => 'required')
             ))
-            ->add('user', EntityType::class, array('label' =>false,
-
-                'class' => User::class,
-                'choice_label' => 'username',
-                'attr' => array('class' => 'form-control','placeholder' => 'user','required' => 'required')
+            ->add('user', EntityType::class, array(
+                'label' => 'Nom d\'utilisateur ',
+                'class' => 'PortailMkgBundle\Entity\User',
+                'choice_label' => 'Nom d\'utilisateur',
+                'query_builder' => function (\Doctrine\ORM\EntityRepository $er) use ($user) {
+                    return $er->queryNotUserApis($userApi->getIdFosUser());
+                },
+                'attr' => array('class' => 'form-control')
             ))
-            ->add('method', ChoiceType::class, array('label' =>false,
-                'choices' => array(
-                    'CB' => 'cb',
-                    'Especes' => 'especes',
-                    'PayPal' => 'paypal',
-                    'Autre' => 'autre'
-                ),
-                'attr' => array('class' => 'form-control','placeholder' => 'user','required' => 'required')
+            ->add('method', TextType::class, array('label' => false,
+                'attr' => array('class' => 'form-control', 'placeholder' => 'Méthode', 'required' => 'required')
+            ))
+            ->add('datetime', DateTimeType::class, array('label' => false,
+                'attr' => array('class' => 'form-control', 'placeholder' => 'Date du paiement', 'required' => 'required')
             ));
+
+
     }
 
     /**

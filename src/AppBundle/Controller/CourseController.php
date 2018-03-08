@@ -56,9 +56,9 @@ class CourseController extends controller{
             $courseManager->addCourse($dataCourse['name'],$dataCourse['session'],$dataCourse['userTeach']);
             $this->addFlash('success', 'Le cours a bien été enregistré.');
         }
-            $this->addFlash('success', 'Le cours a bien été enregistré.');
-        return $this->redirect($this->generateUrl('courses'));
+        return $this->redirect($this->generateUrl('listCourses'));
     }
+
 
     public function usersCourseAction($courseId, Request $request){
         $course= $this->get('nouestil.course')->getCourse($courseId);
@@ -66,7 +66,7 @@ class CourseController extends controller{
         $q = $request->query->get('term');
         $results = $this->getDoctrine()->getRepository('AppBundle:User')->findLikeName($q);
 
-        dump($results);die;
+        dump($results);
 
         return $this->render('AppBundle:Course:usersListCourse.html.twig', array(
             'course' => $course,

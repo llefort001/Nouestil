@@ -48,17 +48,12 @@
                                             </div>
                                             <div class=modal-body">
                                                 <div>
-                                                    <label for="name"> Nom du cours <input type="text" name="name" value="{{ course.name }}" /></label><br />
-                                                    <label for="session"> Session du cours <input type="text" name="session" value="{{ course.session }}" /></label><br />
-                                                    <select required="required" class="form-control" name="userTeach">
+                                                    <label for="name"> Nom du cours <input type="text" name="name" placeholder="{{ course.name }}" /></label><br />
+                                                    <label for="session"> Session du cours <input type="text" name="session" placeholder="{{ course.session }}" /></label><br />
+                                                    <select class="form-control" name="userTeach">
                                                         <option disabled selected value> -- Sélectionner un professeur --
                                                         </option>
                                                         {% for userTeach in usersTeach %}
-                                                            {% if course.userTeach == userTeach %}
-                                                                <option selected="selected">
-                                                                    {{ userTeach.firstname }}
-                                                                </option>
-                                                        {% endif %}
                                                             <option value="{{ userTeach.id   }}">
                                                                 {{ userTeach.firstname }}
                                                             </option>
