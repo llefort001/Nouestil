@@ -16,4 +16,8 @@ updatePayment:
 
 updateUserPayment:
     path:     /admin/update-user-payment/
-    defaults:  { _controller: AppBundle:Payment:updateUserPayment}
+    defaults: { _controller: AppBundle:Payment:updateUserPayment}
+
+exportPayment:
+    path:     /admin/export-payment/
+    defaults:  { _controller: AppBundle:Payment:generateCsv }

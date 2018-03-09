@@ -10,4 +10,22 @@ namespace AppBundle\Repository;
  */
 class PaymentRepository extends \Doctrine\ORM\EntityRepository
 {
+
+    public function findPaymentByUser($id = null)
+    {
+        if (!isset($id))
+            return null;
+
+        $qb = $this->_em->createQueryBuilder();
+        $qb->select('p')
+            ->from('AppBundle\Entity\Payment', 'p')
+            ->where('p.user_id = :id')
+            ->setParameter('id', $id);
+
+        $query = $qb->getQuery();
+
+        return $query->getResult();
+    }
+
+
 }

@@ -22,31 +22,35 @@ class PaymentType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('amount', NumberType::class, array('label' =>false,
-                'attr' => array('class' => 'form-control','placeholder' => 'Montant','required' => 'required')
+            ->add('amount', NumberType::class, array('label' => false,
+                'attr' => array('class' => 'form-control', 'placeholder' => 'Montant', 'required' => 'required')
             ))
-            ->add('datetime', DateType::class, array('label' =>false,
-                'attr' => array('class' => 'form-control','placeholder' => 'datetime','required' => 'required' ),
+            ->add('datetime', DateType::class, array('label' => false,
+                'attr' => array('class' => 'form-control', 'placeholder' => 'datetime', 'required' => 'required'),
                 'widget' => 'single_text',
-                'years' => range(date('Y'), date('Y')+100),
+                'years' => range(date('Y'), date('Y') + 100),
                 'months' => range(date('m'), 12),
                 'days' => range(date('d'), 31),
             ))
-            ->add('user', EntityType::class, array('label' =>false,
+            ->add('user', EntityType::class, array('label' => false,
 
                 'class' => User::class,
                 'choice_label' => 'username',
-                'attr' => array('class' => 'form-control','placeholder' => 'user','required' => 'required')
+                'attr' => array('class' => 'form-control', 'placeholder' => 'user', 'required' => 'required')
             ))
-            ->add('method', ChoiceType::class, array('label' =>false,
+            ->add('note', TextType::class, array('label' =>false,
+                'attr' => array('class' => 'form-control','placeholder' => 'Nom d\'utilisateur','required' => 'required')
+            ))
+            ->add('method', ChoiceType::class, array('label' => false,
                 'choices' => array(
                     'CB' => 'cb',
                     'Especes' => 'especes',
                     'PayPal' => 'paypal',
                     'Autre' => 'autre'
                 ),
-                'attr' => array('class' => 'form-control','placeholder' => 'user','required' => 'required')
+                'attr' => array('class' => 'form-control', 'placeholder' => 'user', 'required' => 'required')
             ));
+
     }
 
     /**
