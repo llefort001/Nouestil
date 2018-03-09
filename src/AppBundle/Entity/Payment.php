@@ -50,6 +50,12 @@ class Payment
     private $method;
 
     /**
+     * @ORM\Column(type="string", length=255, nullable=true)
+     */
+    public $note;
+
+
+    /**
      * Get id
      *
      * @return int
@@ -134,6 +140,22 @@ class Payment
     public function setMethod($method)
     {
         $this->method = $method;
+    }
+
+    /**
+     * @return string
+     */
+    public function getComment()
+    {
+        return $this->note;
+    }
+
+    /**
+     * @param string $commentaire
+     */
+    public function setComment($note)
+    {
+        $this->$note = $note;
     }
 
 
