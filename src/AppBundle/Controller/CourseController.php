@@ -66,17 +66,16 @@ class CourseController extends controller
 //        $repository = $this->getDoctrine()->getManager()->getRepository('AppBundle:User');
 //        $results= $repository->queryNotUserCourse($courseId)->getQuery()->getResult();
 //        dump($results);die;
-        $course= $this->get('nouestil.course')->getCourse($courseId);
-        $results= $this->get('nouestil.user')->getUsersList();
+        $nouestilCourse= $this->get('nouestil.course');
+        $course= $nouestilCourse->getCourse($courseId);
 
 //        if ($request->isMethod('POST')) {
 //            $data = $request->request->all();
-//            $course = $this->get('nouestil.course');
-//            dump($request);dump($data);die;
-//            $course->updateCourse($data['id'], $data['name'], $data['session'], $data['userTeach']);
-//            $this->addFlash('success', 'Le cours a bien été modifié.');
+//            $addCourse= $nouestilCourse->addUsersCourse($data['users'], $data['id']);
+//            $this->addFlash('success', 'Les élève ont bien été ajoutés.');
 //        }
 
+        $results= $this->get('nouestil.user')->getUsersList();
         return $this->render('AppBundle:Course:usersCourse.html.twig', array(
             'results' => $results,
             'course' => $course
