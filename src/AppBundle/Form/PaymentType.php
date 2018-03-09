@@ -5,8 +5,6 @@ namespace AppBundle\Form;
 use AppBundle\Entity\User;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
-use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
-use Symfony\Component\Form\Extension\Core\Type\NumberType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
@@ -50,7 +48,6 @@ class PaymentType extends AbstractType
                 ),
                 'attr' => array('class' => 'form-control', 'placeholder' => 'user', 'required' => 'required')
             ));
-
     }
 
     /**

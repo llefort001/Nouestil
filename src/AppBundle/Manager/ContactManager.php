@@ -129,4 +129,21 @@ class ContactManager
         $this->em->persist($contact);
         $this->em->flush();
     }
+
+    /**
+     * @return Contact
+     */
+    public function getContactById($id)
+    {
+        $contact = $this->em
+            ->getRepository('AppBundle:Contact')
+            ->findOneById($id);
+
+        if (!$contact instanceof Contact) {
+            throw $this->createNotFoundException(
+                'N\'est pas un contact'
+            );
+        }
+        return $contact;
+    }
 }

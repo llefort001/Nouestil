@@ -79,8 +79,7 @@ class PaymentManager
             ->findAll();
         return $payment;
     }
-
-
+  
     /**
      * @param $usersList
      * @return array
@@ -155,3 +154,4 @@ class PaymentManager
         return $payment;
     }
 }
+

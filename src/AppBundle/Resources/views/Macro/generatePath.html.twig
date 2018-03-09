@@ -1,0 +1,13 @@
+{% macro params(item) %}
+{% spaceless %}
+    {% if item.path is defined %}
+        {% set params = [] %}
+        {% if item.params is defined %}
+            {% set params = item.params %}
+        {% endif %}
+        {{ path(item.path, params) }}
+    {% else %}
+        #
+    {% endif %}
+{% endspaceless %}
+{% endmacro %}

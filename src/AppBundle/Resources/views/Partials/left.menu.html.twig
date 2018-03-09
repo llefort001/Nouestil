@@ -1,0 +1,49 @@
+<nav class="navbar-default navbar-static-side" role="navigation">
+    <div class="sidebar-collapse">
+        <ul class="nav metismenu" id="side-menu">
+            <li class="nav-header">
+                <div class="dropdown profile-element">
+                    <span>
+                        <img alt="image" class="img-circle" src="{{ asset('favicon.ico') }}"/>
+                    </span>
+                    <a data-toggle="dropdown" class="dropdown-toggle" href="#">
+                        <span class="clear">
+                            <span class="block m-t-xs">
+                                ?Nom utilisateur?
+                            </span>
+                            <span class="text-muted text-xs block">Nouestil</span>
+                        </span>
+                    </a>
+                </div>
+                <div class="logo-element">
+                    N E
+                </div>
+            </li>
+            {% import 'AppBundle:Macro:generatePath.html.twig' as generatePath %}
+            {% for item in menu %}
+                <li {% if (item.path is defined) and (parentRequest.attributes.get('_route') == item.path) %}class="active"{% endif %}>
+                    <a {% if item.path is defined %} href="{{generatePath.params(item)}}" rel="{{item.path}}" {% endif %}>
+                        <i class="fa {{ item.icon }}"></i>
+                        <span class="nav-label">{{ item.label|trans }}</span>
+                        {% if item.items is defined %}
+                            <span class="fa arrow"></span>
+                        {% endif %}
+                    </a>
+                    {% if item.items is defined %}
+                        <ul class="nav nav-second-level">
+                            {% for subitem in item.items %}
+                                <li>
+                                    <a href="{{generatePath.params(subitem)}}">
+                                        <i class="fa {{ subitem.icon }}"></i>
+                                        {{ subitem.label|trans }}</a>
+                                </li>
+                            {% endfor %}
+                        </ul>
+                    {% endif %}
+                </li>
+            {% endfor %}
+
+        </ul>
+
+    </div>
+</nav>
