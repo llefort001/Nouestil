@@ -10,18 +10,18 @@
             </li>
             {% endif %}
             <li>
-                <span class="m-r-sm text-muted welcome-message">{{ config.title }}</span>
+                {#<span class="m-r-sm text-muted welcome-message">{{ config.title }}</span>#}
             </li>
             {% if is_granted("IS_AUTHENTICATED_REMEMBERED") %}
             <li>
-                <a href="{{ path( "fos_user_profile_show" ) }}" > <i class="fa fa-user"></i> Mon profil </a>
+                <a href="{{ path( "fos_user_profile_show" ) }}" > <i class="fa fa-user"></i> {{ "Mon Profil"|trans }} </a>
             </li>
             <li>
-                <a href="{{ path( "fos_user_security_logout" ) }}" > <i class="fa fa-sign-out"></i> Déconnexion </a>
+                <a href="{{ path( "fos_user_security_logout" ) }}" > <i class="fa fa-sign-out"></i> {{ "Déconnexion"|trans }} </a>
             </li>
             {% else %}
             <li>
-                <a href="{{ path( "fos_user_security_login" ) }}" > <i class="fa fa-sign-in"></i> Connexion </a>
+                <a href="{{ path( "fos_user_security_login" ) }}" > <i class="fa fa-sign-in"></i> {{ "Connexion"|trans }} </a>
             </li>
             {% endif %}
 

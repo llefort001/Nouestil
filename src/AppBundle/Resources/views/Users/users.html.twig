@@ -2,22 +2,22 @@
 
 {% block body %}
     <div class="ibox-title">
-    <h5>Utilisateurs</h5>
+    <h5>{{ "Utilisateurs"|trans }}</h5>
     <div class="ibox-content">
 
         <table class="table">
             <thead>
             <tr>
                 <th>#</th>
-                <th>Nom d'utilisateur</th>
-                <th>Nom</th>
-                <th>Prénom</th>
-                <th>Date de Naissance</th>
-                <th>Num Tel</th>
-                <th>Email</th>
-                <th>Contacts</th>
-                <th>Groupe</th>
-                <th>Actions</th>
+                <th>{{ "Nom d'utilisateur"|trans }}</th>
+                <th>{{ "Nom"|trans }}</th>
+                <th>{{ "Prénom"|trans }}</th>
+                <th>{{ "Date de naissance"|trans }}</th>
+                <th>{{ "Num tel"|trans }}</th>
+                <th>{{ "Email"|trans }}</th>
+                <th>{{ "Contacts"|trans }}</th>
+                <th>{{ "Groupe"|trans }}</th>
+                <th>{{ "Actions"|trans }}</th>
             </tr>
             </thead>
             <tbody>
@@ -46,16 +46,14 @@
                                                 {{ contact.firstname }} {{ contact.lastname }}</h4>
                                         </div>
                                         <div class="modal-body">
-                                            Numéro de téléphone : {{ contact.phoneNumber }}
+                                            {{ "Num tel"|trans }} : {{ contact.phoneNumber }}
                                             <div class="col-12">
                                                 <a class="btn btn-w-m btn-danger"
                                                    href="{{ path('unlinkContact',{'userId' : user.id,'contactId': contact.id}) }}"
-                                                   onclick="return confirm('Délier ce contact de l\'utilisateur ?')">Délier
-                                                    ce contact de l'utilisateur</a>
+                                                   onclick="return confirm('Délier ce contact de l\'utilisateur ?')">{{ "Délier ce contact de l'utilisateur"|trans }}</a>
                                                 <a class="btn btn-w-m btn-danger"
                                                    href="{{ path('deleteContact',{'contactId': contact.id}) }}"
-                                                   onclick="return confirm('Confirmer la suppression du contact ?')">Supprimer
-                                                    le contact</a>
+                                                   onclick="return confirm('Confirmer la suppression du contact ?')">{{ "Supprimer"|trans }}</a>
                                             </div>
                                         </div>
                                     </div>
@@ -70,7 +68,7 @@
                     </td>
                     <td>
                         <a href="#"><span class="label label-default" data-toggle="modal"
-                                          data-target="#userModal_{{ user.id }}">Modifier</span></a>
+                                          data-target="#userModal_{{ user.id }}">{{ "Modifier"|trans }}</span></a>
                         {#<a class="label label-warning"  href="{{ path('base_homepage', {'_want_to_be': user.username}) }}" >Impersonate</a>#}
                         <div class="modal fade" id="userModal_{{ user.id }}" tabindex="-1" role="dialog"
                              aria-labelledby="myModalLabel">
@@ -86,11 +84,11 @@
                                         </div>
                                         <div class="modal-body">
                                             <div>
-                                                <p>Note publique: {{ user.publicNote }}</p>
+                                                <p>{{ "Note publique:"|trans }}{{ user.publicNote }}</p>
                                             </div>
                                             <hr/>
                                             <div>
-                                                <p>Note privée: {{ user.privateNote }}</p>
+                                                <p>{{ "Note privée:"|trans }} {{ user.privateNote }}</p>
                                             </div>
                                             <hr/>
                                             {#<div class="Role">#}
@@ -108,9 +106,9 @@
                                             {#</div>#}
                                             <br/>
                                             <div class="Group">
-                                                <h5>Modifier le groupe :</h5>
+                                                <h5>{{ "Modifier le groupe"|trans }}</h5>
                                                 <select onchange="window.location.href=this.value" class="form-control">
-                                                    <option disabled selected value> -- Sélectionner une option --
+                                                    <option disabled selected value> -- {{ "Sélectionner une option"|trans }} --
                                                     </option>
                                                     {% for key, group in groups %}
                                                         <option value="{{ path('updateGroupUser',{'userId': user.id,'group':group.id}) }}" {% if user.group.id is defined and  user.group.id==group.id %} selected="selected" {% endif %} >
@@ -130,14 +128,14 @@
                                             {#<label>Activer le time tracking</label>#}
                                             {#</div>#}
                                             <hr/>
-                                            <label class="col-md-4 col-form-label">Paiements</label>
+                                            <label class="col-md-4 col-form-label">{{ "Paiements"|trans }}</label>
                                             <table class="table">
                                                 <thead>
                                                 <tr>
                                                     <th>#</th>
-                                                    <th>Montant</th>
-                                                    <th>Methode</th>
-                                                    <th>Date</th>
+                                                    <th>{{ "Montant"|trans }}</th>
+                                                    <th>{{ "Méthode"|trans }}</th>
+                                                    <th>{{ "Date"|trans }}</th>
                                                 </tr>
                                                 </thead>
                                                 <tbody>
@@ -155,13 +153,13 @@
                                         <div class="modal-footer">
                                             {% if currentUser != user %}
                                                 <a class="btn btn-w-m btn-danger pull-left" href="{{ path('deleteUser',{'userId': user.id}) }}"
-                                                   onclick="return confirm('Supprimer {{ user.firstname }} {{ user.lastname }} ?')">Supprimer l'utilisateur</a>
+                                                   onclick="return confirm('Supprimer {{ user.firstname }} {{ user.lastname }} ?')">{{ "Supprimer l'utilisateur"|trans }}</a>
                                             {% endif %}
                                             <input type="hidden" name="id" value="{{ user.id }}">
                                             <button type="button" class="btn btn-default"
-                                                    data-dismiss="modal">Close
+                                                    data-dismiss="modal">{{ "Fermer"|trans }}
                                             </button>
-                                            <button type="submit" class="btn btn-primary">Sauvegarder
+                                            <button type="submit" class="btn btn-primary">{{ "Sauvegarder"|trans }}
                                             </button>
                                         </div>
                                     </div>
@@ -173,7 +171,7 @@
             {% endfor %}
             </tbody>
         </table>
-        <a class="btn btn-w-m btn-primary" href="{{ path('createUser') }}">Créer un utilisateur</a>
+        <a class="btn btn-w-m btn-primary" href="{{ path('createUser') }}">{{ "Créer un utilisateur"|trans }}</a>
         {% if errorMessage is defined %}
             <br/>
             <div class="alert alert-danger">

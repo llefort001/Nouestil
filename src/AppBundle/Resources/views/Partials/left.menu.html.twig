@@ -16,7 +16,7 @@
                     </a>
                 </div>
                 <div class="logo-element">
-                    IN+
+                    N E
                 </div>
             </li>
             {% import 'AppBundle:Macro:generatePath.html.twig' as generatePath %}
@@ -24,7 +24,7 @@
                 <li {% if (item.path is defined) and (parentRequest.attributes.get('_route') == item.path) %}class="active"{% endif %}>
                     <a {% if item.path is defined %} href="{{generatePath.params(item)}}" rel="{{item.path}}" {% endif %}>
                         <i class="fa {{ item.icon }}"></i>
-                        <span class="nav-label">{{ item.label }}</span>
+                        <span class="nav-label">{{ item.label|trans }}</span>
                         {% if item.items is defined %}
                             <span class="fa arrow"></span>
                         {% endif %}
@@ -35,7 +35,7 @@
                                 <li>
                                     <a href="{{generatePath.params(subitem)}}">
                                         <i class="fa {{ subitem.icon }}"></i>
-                                        {{ subitem.label }}</a>
+                                        {{ subitem.label|trans }}</a>
                                 </li>
                             {% endfor %}
                         </ul>

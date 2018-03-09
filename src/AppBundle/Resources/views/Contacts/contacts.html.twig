@@ -1,20 +1,20 @@
-{% extends 'base.html.twig' %}
+{% extends 'base-menu.html.twig' %}
 
 {% block body %}
     <div class="ibox-title">
-    <h5>Contacts</h5>
+    <h5>{{ "Contacts"|trans }}</h5>
     <div class="ibox-content">
 
         <table class="table">
             <thead>
             <tr>
                 <th>#</th>
-                <th>Nom</th>
-                <th>Prénom</th>
-                <th>Email</th>
-                <th>Num Tel</th>
-                <th>Utilisateurs</th>
-                <th>Actions</th>
+                <th>{{ "Nom"|trans }}</th>
+                <th>{{ "Prénom"|trans }}</th>
+                <th>{{ "Email"|trans }}</th>
+                <th>{{ "Num tel"|trans }}</th>
+                <th>{{ "Utilisateurs"|trans }}</th>
+                <th>{{ "Actions"|trans }}</th>
             </tr>
             </thead>
             <tbody>
@@ -43,7 +43,7 @@
                                                     {{ user.firstname }} {{ user.lastname }}</h4>
                                             </div>
                                             <div class="modal-body">
-                                                Numéro de téléphone : {{ user.phoneNumber }}
+                                                {{ "Num tel"|trans }} : {{ user.phoneNumber }}
                                             </div>
                                         </div>
                                     </div>
@@ -71,16 +71,16 @@
                                         </div>
                                         <div class="modal-body">
                                             <div class="Group">
-                                                <h5>Modifier le contact :</h5>
+                                                <h5>{{ "Modifier le contact"|trans }}</h5>
                                             </div>
                                             <hr/>
                                         </div>
                                         <div class="modal-footer">
                                             <input type="hidden" name="id" value="{{ contact.id }}">
                                             <button type="button" class="btn btn-default"
-                                                    data-dismiss="modal">Fermer
+                                                    data-dismiss="modal">{{ "Fermer"|trans }}
                                             </button>
-                                            <button type="submit" class="btn btn-primary">Sauvegarder
+                                            <button type="submit" class="btn btn-primary">{{ "Sauvegarder"|trans }}
                                             </button>
                                         </div>
                                     </div>
@@ -92,7 +92,7 @@
             {% endfor %}
             </tbody>
         </table>
-        <a class="btn btn-w-m btn-primary" href="{{ path('createContact') }}">Créer un contact</a>
+        <a class="btn btn-w-m btn-primary" href="{{ path('createContact') }}">{{ "Créer un contact"|trans }}</a>
         {% if errorMessage is defined %}
             <br/>
             <div class="alert alert-danger">
