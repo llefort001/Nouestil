@@ -105,6 +105,26 @@ class CourseManager
            return $course;
     }
 
+    public function addUsersCourse($users, $id)
+    {
+//        $course= $this->em
+//            ->getRepository('AppBundle:Course')
+//            ->findOneById($id);
+//
+//        foreach ($users as $value){
+//            $user= $this->em
+//                ->getRepository('AppBundle:User')
+//                ->findOneById($value);
+//            if (!$user instanceof User) {
+//                throw $this->createNotFoundException(
+//                    'User incorecct'
+//                );
+//            }
+//
+//            $course->setUser($user);
+//        }
+    }
+
     public function getProfesssor()
     {
         return findProfessor();

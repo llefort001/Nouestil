@@ -3,19 +3,22 @@
 namespace AppBundle\Controller;
 
 use AppBundle\Form\CourseType;
+use AppBundle\Form\autocompleteUsersType;
 use AppBundle\Repository\UserRepository;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 
 use AppBundle\Entity\User;
 
-class CourseController extends controller{
+class CourseController extends controller
+{
 
-    public function indexAction (){
-        $formCreateCourse= $this->createForm(CourseType::class);
-        $courses= $this->get('nouestil.course');
-        $repository= $this->getDoctrine()->getManager()->getRepository('AppBundle:User');
-        $usersTeach= $repository->findProfessor()->getQuery()->getResult();
+    public function indexAction()
+    {
+        $formCreateCourse = $this->createForm(CourseType::class);
+        $courses = $this->get('nouestil.course');
+        $repository = $this->getDoctrine()->getManager()->getRepository('AppBundle:User');
+        $usersTeach = $repository->findProfessor()->getQuery()->getResult();
 
         return $this->render('AppBundle:Course:courses.html.twig', array(
             'courses' => $courses->getCourseList(),
@@ -29,10 +32,9 @@ class CourseController extends controller{
 
         if ($request->isMethod('POST')) {
             $data = $request->request->all();
-            $course= $this->get('nouestil.course');
-            $course->updateCourse($data['id'],$data['name'],$data['session'],$data['userTeach']);
+            $course = $this->get('nouestil.course');
+            $course->updateCourse($data['id'], $data['name'], $data['session'], $data['userTeach']);
             $this->addFlash('success', 'Le cours a bien été modifié.');
-
         }
         return $this->redirect($this->generateUrl('courses'));
     }
@@ -49,13 +51,34 @@ class CourseController extends controller{
 
     public function addCourseAction(Request $request)
     {
-        if ($request->isMethod('POST')){
-            $data= $request->request->all();
-            $dataCourse= $data['course'];
-            $courseManager= $this->get('nouestil.course');
-            $courseManager->addCourse($dataCourse['name'],$dataCourse['session'],$dataCourse['userTeach']);
+        if ($request->isMethod('POST')) {
+            $data = $request->request->all();
+            $dataCourse = $data['course'];
+            $courseManager = $this->get('nouestil.course');
+            $courseManager->addCourse($dataCourse['name'], $dataCourse['session'], $dataCourse['userTeach']);
             $this->addFlash('success', 'Le cours a bien été enregistré.');
         }
-        return $this->redirect($this->generateUrl('courses'));
+        return $this->redirect($this->generateUrl('listCourses'));
+    }
+
+    public function usersCourseAction($courseId, Request $request)
+    {
+//        $repository = $this->getDoctrine()->getManager()->getRepository('AppBundle:User');
+//        $results= $repository->queryNotUserCourse($courseId)->getQuery()->getResult();
+//        dump($results);die;
+        $nouestilCourse= $this->get('nouestil.course');
+        $course= $nouestilCourse->getCourse($courseId);
+
+//        if ($request->isMethod('POST')) {
+//            $data = $request->request->all();
+//            $addCourse= $nouestilCourse->addUsersCourse($data['users'], $data['id']);
+//            $this->addFlash('success', 'Les élève ont bien été ajoutés.');
+//        }
+
+        $results= $this->get('nouestil.user')->getUsersList();
+        return $this->render('AppBundle:Course:usersCourse.html.twig', array(
+            'results' => $results,
+            'course' => $course
+        ));
     }
 }

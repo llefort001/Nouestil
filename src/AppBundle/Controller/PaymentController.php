@@ -16,6 +16,7 @@ class PaymentController extends Controller
      */
     public function indexAction()
     {
+
         $paymentManager = $this->get('nouestil.payment');
         $payments = $paymentManager->getPaymentList();
         return $this->render('AppBundle:Payments:payments.html.twig', array(
@@ -23,8 +24,7 @@ class PaymentController extends Controller
         ));
     }
 
-
-    public function createPaymentAction(Request $request)
+  public function createPaymentAction(Request $request)
     {
         $formCreatePayment = $this->createForm(PaymentType::class);
 
@@ -78,73 +78,19 @@ class PaymentController extends Controller
     }
 
 
-    public function updateUserPaymentAction($paymentId, $user)
-    {
-        $entityManager = $this->getDoctrine()->getManager();
-        $paymentManager = $this->get('nouestil.payment');
-        $paymentToUpdate = $paymentManager->getPayment($paymentId);
-
-        if ($paymentToUpdate instanceof Payment) {
-            $userToUpdate = $entityManager->getRepository('AppBundle:User')->find(array("id" => $user));
-            $paymentToUpdate->setUser($userToUpdate);
-            $userToUpdate->addPaymentUser($paymentToUpdate);
-            $entityManager->flush();
-        }
-        return $this->redirect($this->generateUrl('payments'));
-    }
-
-
-//    public function withdrawAction($userId)
+//    public function updateUserPaymentAction($paymentId, $user)
 //    {
 //        $entityManager = $this->getDoctrine()->getManager();
-//        $userToWithdraw = $entityManager->getRepository('AppBundle:User')->find(array("id" => $userId));
+//        $paymentManager = $this->get('nouestil.payment');
+//        $paymentToUpdate = $paymentManager->getPayment($paymentId);
 //
-//        if ($userToWithdraw instanceof User) {
-//            $old_roticoin = $userToWithdraw->getRoticoin();
-//            $value = 20000;
-//            $new_roticoin = $old_roticoin - $value;
-//            if ($new_roticoin < 0) {
-//                $this->addFlash('Erreur', 'Impossible de retirer, solde insuffisant.');
-//            } else {
-//                $userToWithdraw->setRoticoin($new_roticoin);
-//                $entityManager->flush();
-//                //TODO:Actions a faire suite a un retrait
-//            }
-//        }
-//        return $this->redirect($this->generateUrl('base_users'));
-//
-//
-//    }
-//
-//    public function updateGroupUserAction($userId, $group)
-//    {
-//        $entityManager = $this->getDoctrine()->getManager();
-//        $userToUpdate = $entityManager->getRepository('AppBundle:User')->find(array("id" => $userId));
-//
-//        if ($userToUpdate instanceof User) {
-//            $groupToUpdate = $entityManager->getRepository('AppBundle:Group')->find(array("id" => $group));
-//            $userToUpdate->setGroup($groupToUpdate);
-//            $groupToUpdate->addUserGroup($userToUpdate);
+//        if ($paymentToUpdate instanceof Payment) {
+//            $userToUpdate = $entityManager->getRepository('AppBundle:User')->find(array("id" => $user));
+//            $paymentToUpdate->setUser($userToUpdate);
+//            $userToUpdate->addPaymentUser($paymentToUpdate);
 //            $entityManager->flush();
-//
 //        }
-//        return $this->redirect($this->generateUrl('base_users'));
+//        return $this->redirect($this->generateUrl('payments'));
 //    }
-//
-//    public function updateUserAction(Request $request)
-//    {
-//
-//        if ($request->isMethod('POST')) {
-//            $data = $request->request->all();
-//
-//            $entityManager = $this->getDoctrine()->getManager();
-//            $userToUpdate = $entityManager->getRepository('AppBundle:User')->find(array("id" => $data['id']));
-//
-//            $userToUpdate->setRoticoin($data['roticoin']);
-//            $entityManager->flush();
-//
-//
-//        }
-//        return $this->redirect($this->generateUrl('base_users'));
-//    }
+
 }

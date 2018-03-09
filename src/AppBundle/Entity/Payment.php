@@ -22,15 +22,16 @@ class Payment
     private $id;
 
     /**
-     * @var float
+     * @var int
      *
-     * @ORM\Column(name="amount", type="float")
+     * @ORM\Column(name="amount", type="integer")
      */
     private $amount;
 
     /**
+     * @var string
+     *
      * @ORM\ManyToOne(targetEntity="User", inversedBy="payments")
-     * @return User
      */
     private $user;
 
@@ -49,6 +50,12 @@ class Payment
     private $method;
 
     /**
+     * @ORM\Column(type="string", length=255, nullable=true)
+     */
+    public $note;
+
+
+    /**
      * Get id
      *
      * @return int
@@ -61,7 +68,7 @@ class Payment
     /**
      * Set user
      *
-     *
+     * @param string $user
      *
      * @return Payment
      */
@@ -75,7 +82,7 @@ class Payment
     /**
      * Get user
      *
-     *
+     * @return string
      */
     public function getUser()
     {
@@ -133,6 +140,22 @@ class Payment
     public function setMethod($method)
     {
         $this->method = $method;
+    }
+
+    /**
+     * @return string
+     */
+    public function getComment()
+    {
+        return $this->note;
+    }
+
+    /**
+     * @param string $commentaire
+     */
+    public function setComment($note)
+    {
+        $this->$note = $note;
     }
 
 

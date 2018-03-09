@@ -16,6 +16,7 @@ class PaymentManager
     protected $user;
     protected $method;
     protected $datetime;
+    protected $note;
     protected $em;
 
     /**
@@ -71,8 +72,14 @@ class PaymentManager
 
     }
 
-
-
+    public function getPaymentListQuery()
+    {
+        $payment = $this->em
+            ->getRepository('AppBundle:Payment')
+            ->findAll();
+        return $payment;
+    }
+  
     /**
      * @param $usersList
      * @return array
@@ -91,13 +98,19 @@ class PaymentManager
     }
 
 
-    public function createPayment($amount, $user, $method, $datetime)
+    public function createPayment($amount, $user, $method, $datetime, $note)
     {
         $payment = new Payment();
         $user->setAmount($amount);
         $user->setUser($user);
         $user->setMethod($method);
         $user->setDateTime($datetime);
+
+        //dump($user->setComment($comment));die;
+
+        $user->setComment($note);
+
+
         try {
             $this->em->persist($payment);
             $this->em->flush();
@@ -119,13 +132,16 @@ class PaymentManager
         $this->em->flush();
     }
 
-    public function updatePayment($id, $amount, $datetime, $method){
+    public function updatePayment($id, $amount, $datetime, $method, $note){
 
         $payment = $this->em
             ->getRepository('AppBundle:Payment')
             ->findOneById($id);
         $payment->setAmount($amount);
         $payment->setMethod($method);
+        $payment->setComment($note);
+
+        //dump($payment->setComment($note));die;
 
         $payment->setDateTime( new \DateTime($datetime) );
 
@@ -138,3 +154,4 @@ class PaymentManager
         return $payment;
     }
 }
+

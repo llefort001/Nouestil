@@ -20,9 +20,10 @@
                         {% endif %}
                         {{ form_start(formCreatePayment, {'method': 'post'}) }}
                         <div class="form-group">{{ form_row(formCreatePayment.amount) }}</div>
-                        <div class="form-group">{{ form_row(formCreatePayment.datetime) }}</div>
                         <div class="form-group">{{ form_row(formCreatePayment.user) }}</div>
                         <div class="form-group">{{ form_row(formCreatePayment.method) }}</div>
+                        <div class="form-group">{{ form_row(formCreatePayment.note) }}</div>
+                        <div class="form-group">{{ form_row(formCreatePayment.datetime) }}</div>
                         <input type="submit" class="btn btn-primary block full-width m-b" value="{{ "Créer un paiement"|trans }}">
                         {{ form_end(formCreatePayment) }}
                         <p class="m-t">
