@@ -13,18 +13,19 @@
                 <th>{{ "Montant"|trans }}</th>
                 <th>{{ "Méthode"|trans }}</th>
                 <th>{{ "Date"|trans }}</th>
+                <th>{{ "Commentaires"|trans }}</th>
                 <th>{{ "Actions"|trans }}</th>
             </tr>
             </thead>
             <tbody>
             {% for payment in payments %}
-                <p>Je suis lucas</p>
                 <tr>
                     <td>{{ payment.id }}</td>
                     <td>{{ payment.user }}</td>
                     <td>{{ payment.amount }}</td>
                     <td>{{ payment.method }}</td>
-                    <td>{{ payment.datetime|date('Y-m-d H:i:s') }}</td>
+                    <td>{{ payment.datetime|date('Y-m-d') }}</td>
+                    <td>{{ payment.note }}</td>
                     <td>
                         {#<span class="label label-default" data-toggle="modal" data-target="#userModal_{{ user.id }}">Modifier</span>#}
                         {#<a class="label label-warning"  href="{{ path('base_homepage', {'_want_to_be': user.username}) }}" >Impersonate</a>#}
@@ -34,7 +35,7 @@
                         {#{% endif %}#}
                         <div class="modal fade" id="paymentModal_{{ payment.id }}" tabindex="-1" role="dialog"
                              aria-labelledby="myModalLabel">
-                            <div class="modal-dialog" role="document">#}
+                            <div class="modal-dialog" role="document">
                                 <form method="post" action="{{ path('updatePayment') }}" name="update-payment" class="form-horizontal">
                                     <div class="modal-content">
                                         <div class="modal-header">
@@ -62,6 +63,10 @@
                                                 </p>
                                             </div>
                                             <br/>
+                                            <div>
+                                                <p>Commentaires: <input type="text" name="note" value="{{ payment.note }}"></p>
+                                            </div>
+                                            <br/>
                                             <div class="modal-footer">
                                                 <input type="hidden" name="id" value="{{ payment.id }}">
                                                 <button type="button" class="btn btn-default" data-dismiss="modal">{{ "Fermer"|trans }}</button>
@@ -78,6 +83,7 @@
             </tbody>
         </table>
         <a class="btn btn-w-m btn-primary" href="{{ path('createPayment') }}" >{{ "Créer un paiement"|trans }}</a>
+        <a class="btn btn-w-m btn-primary" href="{{ path('exportPayment') }}" >{{ "Exporter les paiements"|trans }}</a>
         {% if errorMessage is defined %}
             <br/>
             <div class="alert alert-danger">
