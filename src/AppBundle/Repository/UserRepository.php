@@ -28,29 +28,28 @@ class UserRepository extends \Doctrine\ORM\EntityRepository
         return $query->getResult();
     }
 
-    public function findProfessor(){
-
-    $qb= $this->_em->createQueryBuilder();
-    $qb->select('u','g')
-        ->from('AppBundle\Entity\User','u')
-        ->leftJoin('u.group','g')
-        ->where('g.name= :prof')
-        ->setParameter('prof', 'professor');
-    $query= $qb->getQuery();
-    return $qb;
+    public function findProfessor()
+    {
+        $qb= $this->_em->createQueryBuilder();
+        $qb->select('u','g')
+            ->from('AppBundle\Entity\User','u')
+            ->leftJoin('u.group','g')
+            ->where('g.name= :prof')
+            ->setParameter('prof', 'professor');
+        $query= $qb->getQuery();
+        return $qb;
     }
 
-    public function findLikeName($name)
+    public function queryNotUserCourse($courseId)
     {
-        return $this
-            ->createQueryBuilder('u')
-            ->where('u.firstname LIKE :name')
-            ->setParameter( 'name', "%$name%")
-            ->orderBy('u.firstname')
-            ->setMaxResults(5)
-            ->getQuery()
-            ->execute()
-            ;
+        $qb2= $this->_em->createQueryBuilder();
+        $qb2->select('c')
+            ->from('AppBundle\Entity\Course','c')
+            ->where('c.id= :id')
+            ->setParameter('id', $courseId);
+
+
+        return $qb2;
     }
 
 }
