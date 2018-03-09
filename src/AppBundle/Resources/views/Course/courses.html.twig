@@ -44,6 +44,7 @@
                                             </div>
                                             <div class=modal-body">
                                                 <div>
+
                                                     <label for="name"> {{ "Intitulé"|trans }} <input type="text"
                                                                                                      name="name"
                                                                                                      value="{{ course.name }}"/></label><br/>
@@ -61,6 +62,7 @@
                                                                 </option>
                                                             {% endif %}
                                                             <option value="{{ userTeach.id }}">
+
                                                                 {{ userTeach.firstname }}
                                                             </option>
                                                         {% endfor %}
@@ -78,6 +80,9 @@
                                     </form>
                                 </div>
                             </div>
+                        </td>
+                        <td>
+                            <a href="{{ path('usersCourse',{'courseId': course.id}) }}"><i class="fa fa-group"></i> </a>
                         </td>
                     </tr>
                 {% endfor %}

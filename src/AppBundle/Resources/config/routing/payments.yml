@@ -9,11 +9,3 @@ deletePayment:
 createPayment:
     path:     /admin/create-payment/
     defaults: { _controller: AppBundle:Payment:createPayment}
-
-updatePayment:
-    path:     /admin/update-payment/
-    defaults: { _controller: AppBundle:Payment:updatePayment}
-
-updateUserPayment:
-    path:     /admin/update-user-payment/
-    defaults:  { _controller: AppBundle:Payment:updateUserPayment}

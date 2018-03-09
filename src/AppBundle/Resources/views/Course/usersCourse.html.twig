@@ -1,0 +1,76 @@
+{% extends 'base.html.twig' %}
+{% block stylesheets %}
+    {{ parent() }}
+<link href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.6-rc.0/css/select2.min.css" rel="stylesheet" />
+{% endblock %}
+{% block body %}
+    {% for type, flash_message in app.session.flashBag.all %}
+        {% for flash_message in flash_message %}
+            <br />>
+            <pre class="alert alert-danger">
+                {{- flash_message -}}
+            </pre>
+        {% endfor %}
+    {% endfor %}
+    <div class="ibox-title">
+        <h5>{{ course.name }} - {{  course.session }}</h5>
+        <div class="ibox-content">
+            <table class="table">
+                <thead>
+                <tr>
+                    <th>#</th>
+                    <th>Nom d'utilisateur</th>
+                    <th>name</th>
+                    <th>Prénom</th>
+                    <th>Date de Naissance</th>
+                </tr>
+                </thead>
+                <tbody>
+                {% for user in course.users %}
+                    <tr>
+                        <td>{{ user.id }}</td>
+                        <td>{{ user.username }}</td>
+                        <td>{{ user.lastname }}</td>
+                        <td>{{ user.firstname }}</td>
+
+                    </tr>
+                {% endfor %}
+                </tbody>
+            </table>
+        </div>
+        <hr />
+        <form method="POST" action="{{ path('usersCourse',{'courseId' : course.id}) }}" name="usersCourse" class="form-horizontal">
+            <div class="form-group">
+                <label class="font-noraml">Ajouter des utilisateurs</label>
+                <div class="input-group">
+                    <select data-placeholder="Choisir des élèves..." class="user" multiple="" name="users[]" style="width: 350px; display: none;" tabindex="-1">
+                        <option disabled> -- {{ "Selectionner des utilisateurs"|trans }} --</option>
+                        {% for user in results %}
+                        <option value="{{ user.id }}">{{ user.firstname }} {{ user.lastname }}</option>
+                        {% endfor %}
+                    </select>
+                </div>
+                <input type="hidden" name="id" value="{{ course.id }}">
+                <button type="submit" class="btn btn-primary">Save</button>
+            </div>
+        </form>
+        {#{{ form_start(form) }}#}
+        {#{{ form_widget(form, {'id': 'tags'}) }}#}
+        {#{{ form_end(form) }}#}
+        {% if errorMessage is defined %}
+            <br/>
+            <div class="alert alert-danger">
+                {{ error }}
+            </div>
+        {% endif %}
+    </div>
+{% endblock %}
+{% block javascripts %}
+    {{ parent() }}
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.6-rc.0/js/select2.min.js"></script>
+    <script>
+    $(document).ready(function(){
+        $('.user').select2();
+    });
+    </script>
+{% endblock %}
