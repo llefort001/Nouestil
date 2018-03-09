@@ -1,0 +1,48 @@
+Contacts: Contactos
+Nom: Apellido
+Prénom: Nombre
+Email: Correo electrónico
+'Num tel': 'Número de teléfono'
+Utilisateurs: Usuarios
+Actions: Acciones
+'Modifier le contact': 'Editar contacto'
+Fermer: Cerrar
+Sauvegarder: Guardar
+'Créer un contact': 'Crear un contacto'
+'Liste des cours': 'Lista de cursos'
+Intitulé: Título
+Session: Sesión
+Professeur: Profesor
+Supprimer: Eliminar
+'Sélectionner un professeur': 'Seleccionar un profesor'
+'Créer un cours': 'Crear un curso'
+'Mon Profil': 'Mi perfil'
+Déconnexion: Desconectar
+Connexion: Conectar
+'Créer un paiement': 'Crear un pago'
+'Descriptif créer un paiement': 'Descripción crear un pago'
+Paiements: Pagos
+'Nom d''utilisateur': 'Nombre de usuario'
+Montant: Monto
+Méthode: Método
+Date: Fecha
+'Modifier paiement #%payment.id% effectué par %payment.user.firstname% %payment.user.lastname%.': 'Cambiar pago #%payment.id% realizado  por %payment.user.firstname% %payment.user.lastname%.'
+'Carte bancaire': 'Tarjeta bancaria'
+'Créer un utilisateur': 'Crear un usario'
+'Date de naissance': 'Fecha de nacimiento'
+Groupe: Groupo
+Espèces: Especie
+Paypal: Paypal
+Autre: Otro
+Modifier: Editar
+'Note publique:': 'Nota pública:'
+'Note privée:': 'Nota privada:'
+'Modifier le groupe': 'Editar grupo'
+'Sélectionner une option': 'Seleccionar una opción'
+'Supprimer l''utilisateur': 'Eliminar usuario'
+'Délier ce contact de l''utilisateur': 'Eliminar el contacto de este usuario'
+'Administration': Administración
+'Cours': Curso
+'Documentation': Documentación
+'Tutoriels': Tutoriales
+

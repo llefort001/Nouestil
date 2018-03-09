@@ -1,4 +1,4 @@
-{% extends 'base.html.twig' %}
+{% extends 'base-menu.html.twig' %}
 {% block body %}
         <div class="ibox-content">
             <div class="loginColumns animated fadeInDown">
@@ -27,7 +27,7 @@
                             <div class="form-group">{{ form_row(formRegistration.city) }}</div>
                             <div class="form-group">{{ form_row(formRegistration.username) }}</div>
                             <div class="form-group">{{ form_row(formRegistration.plainPassword) }}</div>
-                            <input type="submit" class="btn btn-primary block full-width m-b" value="Créer">
+                            <input type="submit" class="btn btn-primary block full-width m-b" value="{{ "Créer un utilisateur"|trans }}">
                             {{ form_end(formRegistration) }}
                             <p class="m-t">
                                 <small>Nouestil © 2018</small>

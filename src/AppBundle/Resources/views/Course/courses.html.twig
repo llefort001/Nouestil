@@ -1,27 +1,18 @@
-{% extends 'base.html.twig' %}
+{% extends 'base-menu.html.twig' %}
 
 {% block body %}
-    {% for type, flash_message in app.session.flashBag.all %}
-        {% for flash_message in flash_message %}
-            <br />>
-            <pre class="alert alert-danger">
-                {{- flash_message -}}
-            </pre>
-        {% endfor %}
-    {% endfor %}
     <div class="ibox-title">
-        <h5>Liste des cours</h5>
+        <h5>{{ "Liste des cours"|trans }}</h5>
         <div class="ibox-content">
             <table class="table">
                 <thead>
-                    <tr>
-                        <th>#</th>
-                        <th>Intitulé</th>
-                        <th>Session</th>
-                        <th>Professeur</th>
-                        <th>Actions</th>
-                        <th>Liste des élèves</th>
-                    </tr>
+                <tr>
+                    <th>#</th>
+                    <th>{{ "Intitulé"|trans }}</th>
+                    <th>{{ "Session"|trans }}</th>
+                    <th>{{ "Professeur"|trans }}</th>
+                    <th>{{ "Actions"|trans }}</th>
+                </tr>
                 </thead>
                 <tbody>
                 {% for course in courses %}
@@ -31,15 +22,20 @@
                         <td>{{ course.session }}</td>
                         <td>{{ course.userTeach.firstname }}</td>
                         <td>
-                            <a href="#"><span class="label label-default" data-toggle="modal" data-target="#courseModal_{{ course.id }}">+</span></a>
+                            <a href="#"><span class="label label-default" data-toggle="modal"
+                                              data-target="#courseModal_{{ course.id }}">+</span></a>
                             <a href="{{ path('deleteCourse',{'courseId': course.id}) }}"
-                               onclick="return confirm('Confirmer la suppression ?')"><span class="label label-danger">Supprimer</span></a>
-                            <div class="modal fade" id="courseModal_{{ course.id }}" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+                               onclick="return confirm('Confirmer la suppression ?')"><span
+                                        class="label label-danger">{{ "Supprimer"|trans }}</span></a>
+                            <div class="modal fade" id="courseModal_{{ course.id }}" tabindex="-1" role="dialog"
+                                 aria-labelledby="myModalLabel">
                                 <div class="modal-dialog" role="document">
-                                    <form method="post" action="{{ path('updateCourse') }}" name="update-course" class="form-horizontal">
+                                    <form method="post" action="{{ path('updateCourse') }}" name="update-course"
+                                          class="form-horizontal">
                                         <div class="modal-content">
                                             <div class="modal-header">
-                                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                <button type="button" class="close" data-dismiss="modal"
+                                                        aria-label="Close">
                                                     <span aria-hidden="true">&times;</span>
                                                 </button>
                                                 <h4 class="modal-title" id="myModalLabel">
@@ -48,13 +44,25 @@
                                             </div>
                                             <div class=modal-body">
                                                 <div>
-                                                    <label for="name"> Nom du cours <input type="text" name="name" placeholder="{{ course.name }}" /></label><br />
-                                                    <label for="session"> Session du cours <input type="text" name="session" placeholder="{{ course.session }}" /></label><br />
-                                                    <select class="form-control" name="userTeach">
-                                                        <option disabled selected value> -- Sélectionner un professeur --
+
+                                                    <label for="name"> {{ "Intitulé"|trans }} <input type="text"
+                                                                                                     name="name"
+                                                                                                     value="{{ course.name }}"/></label><br/>
+                                                    <label for="session"> {{ "Session"|trans }} <input type="text"
+                                                                                                       name="session"
+                                                                                                       value="{{ course.session }}"/></label><br/>
+                                                    <select required="required" class="form-control" name="userTeach">
+                                                        <option disabled selected value>
+                                                            -- {{ "Sélectionner un professeur"|trans }} --
                                                         </option>
                                                         {% for userTeach in usersTeach %}
-                                                            <option value="{{ userTeach.id   }}">
+                                                            {% if course.userTeach == userTeach %}
+                                                                <option selected="selected">
+                                                                    {{ userTeach.firstname }}
+                                                                </option>
+                                                            {% endif %}
+                                                            <option value="{{ userTeach.id }}">
+
                                                                 {{ userTeach.firstname }}
                                                             </option>
                                                         {% endfor %}
@@ -63,8 +71,10 @@
                                             </div>
                                             <div class="modal-footer">
                                                 <input type="hidden" name="id" value="{{ course.id }}">
-                                                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-                                                <button type="submit" class="btn btn-primary">Save</button>
+                                                <button type="button" class="btn btn-default"
+                                                        data-dismiss="modal">{{ "Fermer"|trans }}</button>
+                                                <button type="submit"
+                                                        class="btn btn-primary">{{ "Sauvegarder"|trans }}</button>
                                             </div>
                                         </div>
                                     </form>
@@ -78,30 +88,31 @@
                 {% endfor %}
                 </tbody>
             </table>
-            <a href="#"><span class="label label-default" data-toggle="modal" data-target="#addCourseModal">Ajouter un nouveau cour</span></a>
+            <a href="#"><span class="label label-default" data-toggle="modal"
+                              data-target="#addCourseModal">{{ "Créer un cours"|trans }}</span></a>
             <div class="modal fade" id="addCourseModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
                 <div class="modal-dialog" role="document">
                     {{ form_start(formCreateCourse, {'action': path('addCourse') }) }}
                     {{ form_errors(formCreateCourse) }}
-                        <div class="modal-content">
-                            <div class="modal-header">
-                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                    <span aria-hidden="true">&times;</span>
-                                </button>
-                                <h4 class="modal-title" id="myModalLabel">
-                                    Ajouter un nouveau cour
-                                </h4>
-                            </div>
-                            <div class=modal-body">
-                                {{ form_row(formCreateCourse.name) }}
-                                {{ form_row(formCreateCourse.session) }}
-                                {{ form_row(formCreateCourse.userTeach) }}
-                            </div>
-                            <div class="modal-footer">
-                                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-                                <button type="submit" class="btn btn-primary">Valider</button>
-                            </div>
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                            <h4 class="modal-title" id="myModalLabel">
+                                {{ "Créer un cours"|trans }}
+                            </h4>
                         </div>
+                        <div class=modal-body">
+                            {{ form_row(formCreateCourse.name) }}
+                            {{ form_row(formCreateCourse.session) }}
+                            {{ form_row(formCreateCourse.userTeach) }}
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-default" data-dismiss="modal">{{ "Fermer"|trans }}</button>
+                            <button type="submit" class="btn btn-primary">{{ "Sauvegarder"|trans }}</button>
+                        </div>
+                    </div>
                     {{ form_end(formCreateCourse) }}
                 </div>
             </div>

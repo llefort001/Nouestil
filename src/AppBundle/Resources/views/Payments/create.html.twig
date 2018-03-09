@@ -1,4 +1,4 @@
-{% extends 'base.html.twig' %}
+{% extends 'base-menu.html.twig' %}
 {% block body %}
     <div class="ibox-content">
         <div class="loginColumns animated fadeInDown">
@@ -6,9 +6,9 @@
 
                 <div class="col-md-6">
 
-                    <h2 class="font-bold">Créer un nouveau paiement</h2>
+                    <h2 class="font-bold">{{ "Créer un paiement"|trans }}</h2>
                     <p>
-                        texte exemple
+                        {{ "Descriptif créer un paiement"|trans }}
                     </p>
                 </div>
                 <div class="col-md-6">
@@ -23,7 +23,7 @@
                         <div class="form-group">{{ form_row(formCreatePayment.user) }}</div>
                         <div class="form-group">{{ form_row(formCreatePayment.method) }}</div>
                         <div class="form-group">{{ form_row(formCreatePayment.datetime) }}</div>
-                        <input type="submit" class="btn btn-primary block full-width m-b" value="Créer">
+                        <input type="submit" class="btn btn-primary block full-width m-b" value="{{ "Créer un paiement"|trans }}">
                         {{ form_end(formCreatePayment) }}
                         <p class="m-t">
                             <small>Nouestil © 2018</small>

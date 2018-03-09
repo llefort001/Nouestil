@@ -1,0 +1,48 @@
+'Nom d''utilisateur': 'Nom d''utilisateur'
+Nom: Nom
+Prénom: Prénom
+Contacts: Contacts
+Email: Email
+'Num tel': 'Num tel'
+Utilisateurs: Utilisateurs
+Actions: Actions
+'Modifier le contact': 'Modifier le contact'
+Fermer: Fermer
+Sauvegarder: Sauvegarder
+'Créer un contact': 'Créer un contact'
+'Liste des cours': 'Liste des cours'
+Intitulé: Intitulé
+Session: Session
+Professeur: Professeur
+Supprimer: Supprimer
+'Sélectionner un professeur': 'Sélectionner un professeur'
+'Créer un cours': 'Créer un cours'
+'Mon Profil': 'Mon Profil'
+Déconnexion: Déconnexion
+Connexion: Connexion
+'Créer un paiement': 'Créer un paiement'
+'Descriptif créer un paiement': 'Descriptif créer un paiement'
+Paiements: Paiements
+Montant: Montant
+Méthode: Méthode
+Date: Date
+'Modifier paiement #%payment.id% effectué par %payment.user.firstname% %payment.user.lastname%.': 'Modifier paiement #%payment.id% effectué par %payment.user.firstname% %payment.user.lastname%.'
+'Carte bancaire': 'Carte bancaire'
+Espèces: Espèces
+Paypal: Paypal
+Autre: Autre
+'Créer un utilisateur': 'Créer un utilisateur'
+'Date de naissance': 'Date de naissance'
+Groupe: Groupe
+'Numéro de téléphone :': 'Numéro de téléphone :'
+Modifier: Modifier
+'Note publique:': 'Note publique:'
+'Note privée:': 'Note privée:'
+'Modifier le groupe': 'Modifier le groupe'
+'Sélectionner une option': 'Sélectionner une option'
+'Supprimer l''utilisateur': 'Supprimer l''utilisateur'
+'Délier ce contact de l''utilisateur': 'Délier ce contact de l''utilisateur'
+'Administration': Administration
+'Cours': Cours
+'Documentation': Documentation
+'Tutoriels': Tutoriels
