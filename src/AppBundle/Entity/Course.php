@@ -42,7 +42,10 @@ class Course
      */
     protected $userTeach;
 
-    /** @ORM\ManyToMany(targetEntity="User", mappedBy="courses") */
+    /**
+     * @ORM\ManyToMany(targetEntity="User", inversedBy="courses", cascade= {"persist"})
+     * @ORM\JoinTable(name="user_course")
+     */
     protected $users;
 
     /** @ORM\OneToMany(targetEntity="Checklist", mappedBy="course") */
@@ -97,11 +100,19 @@ class Course
     }
 
     /**
-     * @param mixed $users
+     * @param User $user
      */
-    public function setUsers(User $users)
+    public function addUser(User $user)
     {
-        $this->users[] = $users;
+        $this->users[]= $user;
+    }
+
+    /**
+     * @param User $user
+     */
+    public function removeUser(User $user)
+    {
+        $this->users->removeElement($user);
     }
 
     /**

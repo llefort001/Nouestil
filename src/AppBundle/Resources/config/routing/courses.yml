@@ -17,3 +17,7 @@ addCourse:
 usersCourse:
     path:     /admin/course-users/{courseId}
     defaults: { _controller: AppBundle:Course:usersCourse }
+
+deleteUserCourse:
+    path:     /admin/delete-user-course/{userId}/{courseId}
+    defaults: { _controller: AppBundle:Course:deleteUserCourse }

@@ -76,7 +76,7 @@ class User extends BaseUser
     protected $payments;
 
     /**
-     * @ORM\ManyToMany(targetEntity="Course", inversedBy="users", cascade={"persist"})
+     * @ORM\ManyToMany(targetEntity="Course", mappedBy="users", cascade={"persist"})
      */
     protected $courses;
 

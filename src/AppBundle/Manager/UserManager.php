@@ -214,4 +214,27 @@ class UserManager
         $this->em->flush();
 
     }
+
+    public function getNotUsersCourse($courseId){
+        $usersCourse= $this->em
+            ->getRepository('AppBundle:User')
+            ->findUsersInCourse($courseId);
+        $allUsers= $this->em
+            ->getRepository('AppBundle:User')
+            ->usersListExceptAdim();
+        $array1 = $array2 = $array3 = $array4= array();
+        foreach ($allUsers as $user){
+            array_push($array1,$user->getId());
+        }
+        foreach ($usersCourse as $user){
+            array_push($array2,$user->getId());
+        }
+        $array3= array_diff($array1,$array2);
+        $user = $this->em
+            ->getRepository('AppBundle:User');
+        foreach ($array3 as $id){
+            array_push($array4,$user->findOneById($id));
+        }
+        return $array4;
+    }
 }

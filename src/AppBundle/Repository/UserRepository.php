@@ -36,20 +36,51 @@ class UserRepository extends \Doctrine\ORM\EntityRepository
             ->leftJoin('u.group','g')
             ->where('g.name= :prof')
             ->setParameter('prof', 'professor');
-        $query= $qb->getQuery();
         return $qb;
     }
 
-    public function queryNotUserCourse($courseId)
+    public function queryNotUsersCourse($courseId)
+    {
+//        $qb2= $this->_em->createQueryBuilder();
+//        $qb2->select('u','c')
+//            ->from('AppBundle\Entity\User','u')
+//            ->leftJoin('u.courses','c')
+//            ->where('c.id = :id')
+//            ->setParameter('id',$courseId);
+//
+//
+//        $qb1= $this->_em->createQueryBuilder();
+//        $qb1->select('u','g')
+//            ->from('AppBundle\Entity\User','u')
+//            ->leftJoin('u.group', 'g')
+//            ->where('g.name != :admin')
+//            ->setParameter('admin', 'admin');
+//
+//        $result=array_diff_assoc($qb1->getQuery()->getResult(),$qb2->getQuery()->getResult());
+//        dump($qb1->getQuery()->getResult());dump($qb2->getQuery()->getResult());dump($result);die;
+//        return $result;
+    }
+
+    public function findUsersInCourse($courseId)
     {
         $qb2= $this->_em->createQueryBuilder();
-        $qb2->select('c')
-            ->from('AppBundle\Entity\Course','c')
-            ->where('c.id= :id')
-            ->setParameter('id', $courseId);
+        $qb2->select('u','c')
+            ->from('AppBundle\Entity\User','u')
+            ->leftJoin('u.courses','c')
+            ->where('c.id = :id')
+            ->setParameter('id',$courseId);
+        return $qb2->getQuery()->getResult();
+    }
 
-
-        return $qb2;
+    public function usersListExceptAdim()
+    {
+        $qb= $this->_em->createQueryBuilder();
+        $qb->select('u','g')
+            ->from('AppBundle\Entity\User','u')
+            ->leftJoin('u.group', 'g')
+            ->where('g.name != :admin')
+            ->setParameter('admin', 'admin');
+        return $qb->getQuery()->getResult();
     }
 
 }
