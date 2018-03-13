@@ -9,6 +9,8 @@ use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\Extension\Core\Type\DateType;
+use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
+use Symfony\Component\Form\Extension\Core\Type\NumberType;
 use Symfony\Component\Validator\Constraints\DateTime;
 use Symfony\Component\Form\Extension\Core\Type\DateTimeType;
 
@@ -37,7 +39,7 @@ class PaymentType extends AbstractType
                 'attr' => array('class' => 'form-control', 'placeholder' => 'user', 'required' => 'required')
             ))
             ->add('note', TextType::class, array('label' =>false,
-                'attr' => array('class' => 'form-control','placeholder' => 'Nom d\'utilisateur','required' => 'required')
+                'attr' => array('class' => 'form-control','placeholder' => 'Commentaire',)
             ))
             ->add('method', ChoiceType::class, array('label' => false,
                 'choices' => array(

@@ -40,6 +40,7 @@ class UserManager
     {
         return (in_array('ROLE_ADMIN', $user->getRoles())) ? true : false;
     }
+
     /**
      * @return bool
      */
@@ -186,7 +187,7 @@ class UserManager
         $user->setcity($city);
         $user->setUsername($username);
         $user->setUsernameCanonical($username);
-        $user->setEnabled(1);
+        $user->setEnabled(true);
         try {
             $this->em->persist($user);
             $this->em->flush();
@@ -196,20 +197,24 @@ class UserManager
         return $user;
     }
 
-    public function save(User $user){
+    public function save(User $user)
+    {
 
         if (!$user instanceof User) {
             throw $this->createNotFoundException(
                 'Pas d\'utilisateurs '
             );
         }
-
+        if (!$user->isEnabled()) {
+            $user->setEnabled(true);
+        }
         $this->em->persist($user);
         $this->em->flush();
     }
 
 
-    public function unlinkContact($userId, $contactId){
+    public function unlinkContact($userId, $contactId)
+    {
         $this->getUser($userId)->removeContact($contactId);
         $this->em->flush();
 
