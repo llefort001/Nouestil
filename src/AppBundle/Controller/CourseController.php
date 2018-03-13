@@ -31,10 +31,10 @@ class CourseController extends controller
     {
 
         if ($request->isMethod('POST')) {
-            $data = $request->request->all();
-            $course = $this->get('nouestil.course');
-            $course->updateCourse($data['id'], $data['name'], $data['session'], $data['userTeach']);
-            $this->addFlash('success', 'Le cours a bien été modifié.');
+                $data = $request->request->all();
+                $course = $this->get('nouestil.course');
+                $course->updateCourse($data['id'], $data['name'], $data['session'], $data['userTeach']);
+                $this->addFlash('success', 'Le cours a bien été modifié.');
         }
         return $this->redirect($this->generateUrl('courses'));
     }
@@ -58,16 +58,13 @@ class CourseController extends controller
             $courseManager->addCourse($dataCourse['name'], $dataCourse['session'], $dataCourse['userTeach']);
             $this->addFlash('success', 'Le cours a bien été enregistré.');
         }
-        return $this->redirect($this->generateUrl('listCourses'));
+        return $this->redirect($this->generateUrl('courses'));
     }
 
     public function usersCourseAction($courseId, Request $request)
     {
         $courseService= $this->get('nouestil.course');
         $userService= $this->get('nouestil.user');
-
-//        $repository = $this->getDoctrine()->getManager()->getRepository('AppBundle:User');
-//        $results = $repository->queryNotUsersCourse($courseId);
 
         if ($request->isMethod('POST')) {
             $data = $request->request->all();

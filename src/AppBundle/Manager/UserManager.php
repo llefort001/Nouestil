@@ -216,25 +216,17 @@ class UserManager
     }
 
     public function getNotUsersCourse($courseId){
-        $usersCourse= $this->em
+        $results= $this->em
             ->getRepository('AppBundle:User')
-            ->findUsersInCourse($courseId);
-        $allUsers= $this->em
-            ->getRepository('AppBundle:User')
-            ->usersListExceptAdim();
-        $array1 = $array2 = $array3 = $array4= array();
-        foreach ($allUsers as $user){
-            array_push($array1,$user->getId());
+            ->queryNotCourseUsers($courseId);
+        foreach ($results[0] as $userInscrit){
+            foreach ($results[1] as $index => $allUsers){
+                if ($userInscrit == $allUsers){
+                    unset($results[1][$index]);
+                    break;
+                }
+            }
         }
-        foreach ($usersCourse as $user){
-            array_push($array2,$user->getId());
-        }
-        $array3= array_diff($array1,$array2);
-        $user = $this->em
-            ->getRepository('AppBundle:User');
-        foreach ($array3 as $id){
-            array_push($array4,$user->findOneById($id));
-        }
-        return $array4;
+        return $results[1];
     }
 }

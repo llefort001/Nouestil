@@ -30,57 +30,29 @@ class UserRepository extends \Doctrine\ORM\EntityRepository
 
     public function findProfessor()
     {
-        $qb= $this->_em->createQueryBuilder();
-        $qb->select('u','g')
-            ->from('AppBundle\Entity\User','u')
-            ->leftJoin('u.group','g')
+        $qb = $this->_em->createQueryBuilder();
+        $qb->select('u', 'g')
+            ->from('AppBundle\Entity\User', 'u')
+            ->leftJoin('u.group', 'g')
             ->where('g.name= :prof')
             ->setParameter('prof', 'professor');
         return $qb;
     }
 
-    public function queryNotUsersCourse($courseId)
+    public function queryNotCourseUsers($courseId)
     {
-//        $qb2= $this->_em->createQueryBuilder();
-//        $qb2->select('u','c')
-//            ->from('AppBundle\Entity\User','u')
-//            ->leftJoin('u.courses','c')
-//            ->where('c.id = :id')
-//            ->setParameter('id',$courseId);
-//
-//
-//        $qb1= $this->_em->createQueryBuilder();
-//        $qb1->select('u','g')
-//            ->from('AppBundle\Entity\User','u')
-//            ->leftJoin('u.group', 'g')
-//            ->where('g.name != :admin')
-//            ->setParameter('admin', 'admin');
-//
-//        $result=array_diff_assoc($qb1->getQuery()->getResult(),$qb2->getQuery()->getResult());
-//        dump($qb1->getQuery()->getResult());dump($qb2->getQuery()->getResult());dump($result);die;
-//        return $result;
-    }
-
-    public function findUsersInCourse($courseId)
-    {
-        $qb2= $this->_em->createQueryBuilder();
-        $qb2->select('u','c')
-            ->from('AppBundle\Entity\User','u')
-            ->leftJoin('u.courses','c')
+        $qb2 = $this->_em->createQueryBuilder();
+        $qb2->select('u', 'c')
+            ->from('AppBundle\Entity\User', 'u')
+            ->leftJoin('u.courses', 'c')
             ->where('c.id = :id')
-            ->setParameter('id',$courseId);
-        return $qb2->getQuery()->getResult();
-    }
+            ->setParameter('id', $courseId);
 
-    public function usersListExceptAdim()
-    {
-        $qb= $this->_em->createQueryBuilder();
-        $qb->select('u','g')
-            ->from('AppBundle\Entity\User','u')
-            ->leftJoin('u.group', 'g')
-            ->where('g.name != :admin')
-            ->setParameter('admin', 'admin');
-        return $qb->getQuery()->getResult();
+        $qb = $this->_em->createQueryBuilder();
+        $qb->select('u')
+            ->from('AppBundle\Entity\User', 'u');
+        $results = array($qb2->getQuery()->getResult(), $qb->getQuery()->getResult());
+        return $results;
     }
 
 }

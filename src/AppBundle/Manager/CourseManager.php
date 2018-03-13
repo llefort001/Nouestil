@@ -101,6 +101,7 @@ class CourseManager
             $this->em->flush();
         } catch (\exception $e){
             $e->getMessage();
+            dump($e);
         }
            return $course;
     }
