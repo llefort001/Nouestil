@@ -140,8 +140,17 @@ fos_user:
     firewall_name: main
     user_class: AppBundle\Entity\User
     from_email:
-        address: "%mailer_user%"
+        address: "%mailer_address%"
         sender_name: "%mailer_user%"
     registration:
+        confirmation:
+            template:   FOSUserBundle:Registration:email.txt.twig
         form:
             type: AppBundle\Form\UserType
+        confirmation:
+                    enabled: true
+    service:
+            mailer: fos_user.mailer.twig_swift
+    resetting:
+        email:
+            template:   email/password_resetting.email.twig
