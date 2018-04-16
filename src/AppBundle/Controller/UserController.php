@@ -5,6 +5,8 @@ namespace AppBundle\Controller;
 use AppBundle\Form\UserType;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
+use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
+
 
 use AppBundle\Entity\User;
 
@@ -66,16 +68,33 @@ class UserController extends Controller
         }
         return $this->redirect($this->generateUrl('users'));
     }
+
     public function createUserAction(Request $request)
     {
+        $userManager = $this->get('nouestil.user');
         $formRegistration = $this->createForm(UserType::class);
 
         if ($request->isMethod('POST')) {
             $formRegistration->submit($request->request->get($formRegistration->getName()));
             // Enregistrer après soumission du formulaire les données dans l'objet $user
             if ($formRegistration->isSubmitted() && $formRegistration->isValid()) {
-                $userData = $formRegistration->getData();
-                $this->get('nouestil.user')->save($userData);
+                $user = $formRegistration->getData();
+                $tokenGenerator = $this->get('fos_user.util.token_generator');
+                $password = substr($tokenGenerator->generateToken(), 0, 8); // 8 chars
+                $user->setUsername(strtolower
+                    (substr($user->getFirstname(), 0, 1)
+                        . $user->getLastname())
+                );
+                $users = $userManager->getUsersLike($user->getUsername());
+                if (!empty($users)) {
+                    $user->setUsername(strtolower
+                        (substr($user->getFirstname(), 0, 1)
+                            . $user->getLastname())
+                        .sizeof($users)
+                    );
+                }
+                $user->setPlainpassword($password);
+                $this->get('nouestil.user')->save($user);
                 // on redirige l'administrateur vers la liste des clients si aucune erreur
                 $this->addFlash('success', 'L\'utilisateur a bien été enregistré, veuillez maintenant lui créer un contact.');
                 return $this->redirect($this->generateUrl("createContact"));
@@ -91,7 +110,7 @@ class UserController extends Controller
         $userManager = $this->get('nouestil.user');
         $contactManager = $this->get('nouestil.contact');
         $contactToDelete = $contactManager->getContactById($contactId);
-        $userManager->unlinkContact($userId,$contactToDelete);
+        $userManager->unlinkContact($userId, $contactToDelete);
         $this->addFlash('success', 'Le contact a bien été délié');
         return $this->redirect($this->generateUrl('users'));
 

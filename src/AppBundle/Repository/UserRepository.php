@@ -52,4 +52,14 @@ class UserRepository extends \Doctrine\ORM\EntityRepository
         return $qb2;
     }
 
+    public function findUsersLike($username){
+        $qb= $this->_em->createQueryBuilder();
+        $qb->select('u')
+            ->from('AppBundle\Entity\User', 'u')
+            ->where('u.username like :username')
+            ->setParameter('username',$username.'%');
+        return $qb->getQuery()->getResult();
+
+    }
+
 }

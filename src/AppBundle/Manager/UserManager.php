@@ -5,6 +5,8 @@ namespace AppBundle\Manager;
 use AppBundle\Entity\Contact;
 use AppBundle\Entity\User;
 use Doctrine\ORM\EntityManager;
+use Doctrine\ORM\ORMException;
+use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 
 /**
  * Class UserManager
@@ -115,33 +117,40 @@ class UserManager
     public function getUser($id)
     {
 
-        $user = $this->em
-            ->getRepository('AppBundle:User')
-            ->findOneById($id);
-
-        if (!$user instanceof User) {
-            throw $this->createNotFoundException(
-                'Pas d\'utilisateurs '
-            );
+        try {
+            $user = $this->em
+                ->getRepository('AppBundle:User')
+                ->findOneById($id);
+        } catch (ORMException $e) {
+            throw new NotFoundHttpException('No user');
         }
         return $user;
 
     }
 
-    public function getUserByUsername($username)
+
+    public function getUsersLike($username)
     {
-
-        $user = $this->em
-            ->getRepository('AppBundle:User')
-            ->findOneByUsername($username);
-
-        if (!$user instanceof User) {
-            throw $this->createNotFoundException(
-                'Pas d\'utilisateurs '
-            );
+        try {
+            $user = $this->em
+                ->getRepository('AppBundle:User')
+                ->findUsersLike($username);
+        } catch (ORMException $e) {
+            throw new NotFoundHttpException('No user');
         }
         return $user;
+    }
 
+    public function getUserByUsername($username)
+    {
+        try {
+            $user = $this->em
+                ->getRepository('AppBundle:User')
+                ->findOneByUsername($username);
+        } catch (ORMException $e) {
+            throw new NotFoundHttpException('No user');
+        }
+        return $user;
     }
 
     /**
