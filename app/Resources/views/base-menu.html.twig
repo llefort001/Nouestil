@@ -2,19 +2,22 @@
 <html>
 <head>
     <meta charset="UTF-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>{% block title %}NOUESTIL | Dashboard{% endblock %}</title>
     {% block stylesheets %}
-        <link href="{{ asset('css/main.css') }}" type="text/css" rel="stylesheet" media="all"/>
-        <script src="{{ asset('js/jquery.js') }}"></script>
-        <script src="{{ asset('js/scripts.js') }}"></script>
+        <link href="{{ asset('css/bootstrap.min.css') }}" rel="stylesheet">
+        <link href="{{ asset('font-awesome/css/font-awesome.css') }}" rel="stylesheet">
+        <link href="{{ asset('css/animate.css') }}" rel="stylesheet">
+        <link href="{{ asset('css/style.css') }}" rel="stylesheet">
     {% endblock %}
+    {% block pageStylesheets %}{% endblock %}
     <link rel="icon" type="image/x-icon" href="{{ asset('favicon.ico') }}"/>
 </head>
 <body>
 <div id="wrapper">
     {{ render(controller( 'AppBundle:Menu:leftMenu' )) }}
     <div id="page-wrapper" class="gray-bg">
-        {{ render(controller( 'AppBundle:Menu:topMenu' )) }}
+    {{ render(controller( 'AppBundle:Menu:topMenu' )) }}
         {% block messages %}
             {% for label, messages in app.flashes %}
                 {% for message in messages %}
@@ -29,6 +32,18 @@
     </div>
 </div>
 
-{% block javascripts %}{% endblock %}
+{% block javascripts %}
+    <!-- Mainly scripts -->
+    <script src="{{ asset('js/jquery-3.1.1.min.js') }}"></script>
+    <script src="{{ asset('js/bootstrap.min.js') }}"></script>
+    <script src="{{ asset('js/plugins/metisMenu/jquery.metisMenu.js') }}"></script>
+    <script src="{{ asset('js/plugins/slimscroll/jquery.slimscroll.min.js') }}"></script>
+
+    <!-- Custom and plugin javascript -->
+    <script src="{{ asset('js/inspinia.js') }}"></script>
+    <script src="{{ asset('js/plugins/pace/pace.min.js') }}"></script>
+{% endblock %}
+{% block pageScripts %}
+{% endblock %}
 </body>
 </html>

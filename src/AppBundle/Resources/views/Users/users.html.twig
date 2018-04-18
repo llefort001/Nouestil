@@ -1,184 +1,235 @@
 {% extends 'base-menu.html.twig' %}
-
+{% block pageStylesheets %}
+    <link href="{{ asset('css/plugins/dataTables/datatables.min.css') }}" rel="stylesheet">
+{% endblock %}
 {% block body %}
-    <div class="ibox-title">
-    <h5>{{ "Utilisateurs"|trans }}</h5>
-    <div class="ibox-content">
+    <div class="wrapper wrapper-content animated fadeInRight">
+        <div class="row">
+            <div class="col-lg-12">
+                <div class="ibox float-e-margins">
+                    <div class="ibox-title">
+                        <h5>{{ "Utilisateurs"|trans }}</h5>
+                    </div>
+                    <div class="ibox-content">
 
-        <table class="table">
-            <thead>
-            <tr>
-                <th>#</th>
-                <th>{{ "Nom d'utilisateur"|trans }}</th>
-                <th>{{ "Nom"|trans }}</th>
-                <th>{{ "Prénom"|trans }}</th>
-                <th>{{ "Date de naissance"|trans }}</th>
-                <th>{{ "Num tel"|trans }}</th>
-                <th>{{ "Email"|trans }}</th>
-                <th>{{ "Contacts"|trans }}</th>
-                <th>{{ "Groupe"|trans }}</th>
-                <th>{{ "Actions"|trans }}</th>
-            </tr>
-            </thead>
-            <tbody>
-            {% for user in users %}
-                <tr>
-                    <td>{{ user.id }}</td>
-                    <td>{{ user.username }}</td>
-                    <td>{{ user.lastname }}</td>
-                    <td>{{ user.firstname }}</td>
-                    <td>{{ user.birthdate|date('d-m-Y') }}</td>
-                    <td>{{ user.phoneNumber }}</td>
-                    <td>{{ user.email }}</td>
-                    <td>
-                        {% for key, contact in user.contacts %}
-                            <a href="#"><span class="label label-default" data-toggle="modal"
-                                              data-target="#contactModal{{ contact.id }}">
+                        <div class="table-responsive">
+                            <table class="table table-striped table-bordered table-hover dataTables-example">
+                                <thead>
+                                <tr>
+                                    <th>#</th>
+                                    <th>{{ "Nom d'utilisateur"|trans }}</th>
+                                    <th>{{ "Nom"|trans }}</th>
+                                    <th>{{ "Prénom"|trans }}</th>
+                                    <th>{{ "Date de naissance"|trans }}</th>
+                                    <th>{{ "Num tel"|trans }}</th>
+                                    <th>{{ "Email"|trans }}</th>
+                                    <th>{{ "Contacts"|trans }}</th>
+                                    <th>{{ "Groupe"|trans }}</th>
+                                    <th>{{ "Actions"|trans }}</th>
+                                </tr>
+                                </thead>
+                                <tbody>
+                                {% for user in users %}
+                                    <tr>
+                                        <td>{{ user.id }}</td>
+                                        <td>{{ user.username }}</td>
+                                        <td>{{ user.lastname }}</td>
+                                        <td>{{ user.firstname }}</td>
+                                        <td>{{ user.birthdate|date('d-m-Y') }}</td>
+                                        <td>{{ user.phoneNumber }}</td>
+                                        <td>{{ user.email }}</td>
+                                        <td>{% for key, contact in user.contacts %}
+                                                <a href="#"><span class="label label-default" data-toggle="modal"
+                                                                  data-target="#contactModal{{ contact.id }}">
                             {{ contact.firstname }} {{ contact.lastname }}</span></a>
-                            <div class="modal fade" id="contactModal{{ contact.id }}" tabindex="-1" role="dialog"
-                                 aria-labelledby="myModalLabel">
-                                <div class="modal-dialog" role="document">
-                                    <div class="modal-content">
-                                        <div class="modal-header">
-                                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                                <span aria-hidden="true">&times;</span></button>
-                                            <h4 class="modal-title" id="myModalLabel">
-                                                {{ contact.firstname }} {{ contact.lastname }}</h4>
-                                        </div>
-                                        <div class="modal-body">
-                                            {{ "Num tel"|trans }} : {{ contact.phoneNumber }}
-                                            <div class="col-12">
-                                                <a class="btn btn-w-m btn-danger"
-                                                   href="{{ path('unlinkContact',{'userId' : user.id,'contactId': contact.id}) }}"
-                                                   onclick="return confirm('Délier ce contact de l\'utilisateur ?')">{{ "Délier ce contact de l'utilisateur"|trans }}</a>
-                                                <a class="btn btn-w-m btn-danger"
-                                                   href="{{ path('deleteContact',{'contactId': contact.id}) }}"
-                                                   onclick="return confirm('Confirmer la suppression du contact ?')">{{ "Supprimer"|trans }}</a>
+                                                <div class="modal fade" id="contactModal{{ contact.id }}" tabindex="-1"
+                                                     role="dialog"
+                                                     aria-labelledby="myModalLabel">
+                                                    <div class="modal-dialog" role="document">
+                                                        <div class="modal-content">
+                                                            <div class="modal-header">
+                                                                <button type="button" class="close" data-dismiss="modal"
+                                                                        aria-label="Close">
+                                                                    <span aria-hidden="true">&times;</span></button>
+                                                                <h4 class="modal-title" id="myModalLabel">
+                                                                    {{ contact.firstname }} {{ contact.lastname }}</h4>
+                                                            </div>
+                                                            <div class="modal-body">
+                                                                {{ "Num tel"|trans }} : {{ contact.phoneNumber }}
+                                                                <div class="col-12">
+                                                                    <a class="btn btn-w-m btn-danger"
+                                                                       href="{{ path('unlinkContact',{'userId' : user.id,'contactId': contact.id}) }}"
+                                                                       onclick="return confirm('Délier ce contact de l\'utilisateur ?')">{{ "Délier ce contact de l'utilisateur"|trans }}</a>
+                                                                    <a class="btn btn-w-m btn-danger"
+                                                                       href="{{ path('deleteContact',{'contactId': contact.id}) }}"
+                                                                       onclick="return confirm('Confirmer la suppression du contact ?')">{{ "Supprimer"|trans }}</a>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            {% endfor %}</td>
+                                        <td>{% if user.group.id is defined %}{{ user.group }}{% endif %}</td>
+                                        <td>
+                                            <a href="#"><span class="label label-default" data-toggle="modal"
+                                                              data-target="#userModal_{{ user.id }}">{{ "Modifier"|trans }}</span></a>
+                                            {#<a class="label label-warning"#}
+                                            {#href="{{ path('base_homepage', {'_want_to_be': user.username}) }}">Impersonate</a>#}
+                                            <div class="modal fade" id="userModal_{{ user.id }}" tabindex="-1"
+                                                 role="dialog"
+                                                 aria-labelledby="myModalLabel">
+                                                <div class="modal-dialog" role="document">
+                                                    <form method="post" action="{{ path('updateUser') }}"
+                                                          name="update-user"
+                                                          class="form-horizontal">
+                                                        <div class="modal-content">
+                                                            <div class="modal-header">
+                                                                <button type="button" class="close" data-dismiss="modal"
+                                                                        aria-label="Close">
+                                                                    <span aria-hidden="true">&times;</span></button>
+                                                                <h4 class="modal-title" id="myModalLabel">
+                                                                    {{ user.username }} </h4>
+                                                            </div>
+                                                            <div class="modal-body">
+                                                                <div>
+                                                                    <p>{{ "Note publique:"|trans }}{{ user.publicNote }}</p>
+                                                                </div>
+                                                                <hr/>
+                                                                <div>
+                                                                    <p>{{ "Note privée:"|trans }} {{ user.privateNote }}</p>
+                                                                </div>
+                                                                <hr/>
+                                                                {#<div class="Role">#}
+                                                                {#<h5>Modifier le rôle :</h5>#}
+                                                                {#<select onchange="window.location.href=this.value"#}
+                                                                {#class="form-control">#}
+                                                                {#<option>#}
+                                                                {#-#}
+                                                                {#</option>#}
+                                                                {#{% for key, role in roles %}#}
+                                                                {#<option value="{{ path('pichet_portailmkg_updateRolesUser',{'userId': user.id,'role':key}) }}" {% if user.roles[0]==key %} selected="selected" {% endif %} >#}
+                                                                {#{{ role }}#}
+                                                                {#</option>#}
+                                                                {#{% endfor %}#}
+                                                                {#</select>#}
+                                                                {#</div>#}
+                                                                <br/>
+                                                                <div class="Group">
+                                                                    <h5>{{ "Modifier le groupe"|trans }}</h5>
+                                                                    <select onchange="window.location.href=this.value"
+                                                                            class="form-control">
+                                                                        <option disabled selected value>
+                                                                            -- {{ "Sélectionner une option"|trans }} --
+                                                                        </option>
+                                                                        {% for key, group in groups %}
+                                                                            <option value="{{ path('updateGroupUser',{'userId': user.id,'group':group.id}) }}" {% if user.group.id is defined and  user.group.id==group.id %} selected="selected" {% endif %} >
+                                                                                {{ group }}
+                                                                            </option>
+                                                                        {% endfor %}
+                                                                    </select>
+                                                                    {#</div>#}
+                                                                    {#<div class="form-group col-md-6">#}
+                                                                    {#<input type="checkbox" name="ressource_planner"#}
+                                                                    {#{% if user.ressourcePlanner %} checked {% endif %} />#}
+                                                                    {#<label>Activer le ressource planner</label>#}
+                                                                    {#</div>#}
+                                                                    {#<div class="form-group col-md-6">#}
+                                                                    {#<input type="checkbox" name="time_tracking"#}
+                                                                    {#{% if user.timeTracking %} checked {% endif %} />#}
+                                                                    {#<label>Activer le time tracking</label>#}
+                                                                    {#</div>#}
+                                                                    <hr/>
+                                                                    <label class="col-md-4 col-form-label">{{ "Paiements"|trans }}</label>
+                                                                    <table class="table">
+                                                                        <thead>
+                                                                        <tr>
+                                                                            <th>#</th>
+                                                                            <th>{{ "Montant"|trans }}</th>
+                                                                            <th>{{ "Méthode"|trans }}</th>
+                                                                            <th>{{ "Date"|trans }}</th>
+                                                                        </tr>
+                                                                        </thead>
+                                                                        <tbody>
+                                                                        {% for payment in user.payments %}
+                                                                            <tr>
+                                                                                <td>{{ payment.id }}</td>
+                                                                                <td>{{ payment.amount }} €</td>
+                                                                                <td>{{ payment.method }}</td>
+                                                                                <td>{{ payment.datetime|date('Y-m-d H:i:s') }}</td>
+                                                                            </tr>
+                                                                        {% endfor %}
+                                                                        </tbody>
+                                                                    </table>
+                                                                </div>
+                                                                <div class="modal-footer">
+                                                                    {% if currentUser != user %}
+                                                                        <a class="btn btn-w-m btn-danger pull-left"
+                                                                           href="{{ path('deleteUser',{'userId': user.id}) }}"
+                                                                           onclick="return confirm('Supprimer {{ user.firstname }} {{ user.lastname }} ?')">{{ "Supprimer l'utilisateur"|trans }}</a>
+                                                                    {% endif %}
+                                                                    <input type="hidden" name="id"
+                                                                           value="{{ user.id }}">
+                                                                    <button type="button" class="btn btn-default"
+                                                                            data-dismiss="modal">{{ "Fermer"|trans }}
+                                                                    </button>
+                                                                    <button type="submit"
+                                                                            class="btn btn-primary">{{ "Sauvegarder"|trans }}
+                                                                    </button>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </form>
+                                                </div>
                                             </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        {% endfor %}
-                    </td>
-                    <td>
-                        {% if user.group.id is defined %}
-                            {{ user.group.name }}
-                        {% endif %}
-                    </td>
-                    <td>
-                        <a href="#"><span class="label label-default" data-toggle="modal"
-                                          data-target="#userModal_{{ user.id }}">{{ "Modifier"|trans }}</span></a>
-                        {#<a class="label label-warning"  href="{{ path('base_homepage', {'_want_to_be': user.username}) }}" >Impersonate</a>#}
-                        <div class="modal fade" id="userModal_{{ user.id }}" tabindex="-1" role="dialog"
-                             aria-labelledby="myModalLabel">
-                            <div class="modal-dialog" role="document">
-                                <form method="post" action="{{ path('updateUser') }}" name="update-user"
-                                      class="form-horizontal">
-                                    <div class="modal-content">
-                                        <div class="modal-header">
-                                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                                <span aria-hidden="true">&times;</span></button>
-                                            <h4 class="modal-title" id="myModalLabel">
-                                                {{ user.username }} </h4>
-                                        </div>
-                                        <div class="modal-body">
-                                            <div>
-                                                <p>{{ "Note publique:"|trans }}{{ user.publicNote }}</p>
-                                            </div>
-                                            <hr/>
-                                            <div>
-                                                <p>{{ "Note privée:"|trans }} {{ user.privateNote }}</p>
-                                            </div>
-                                            <hr/>
-                                            {#<div class="Role">#}
-                                            {#<h5>Modifier le rôle :</h5>#}
-                                            {#<select onchange="window.location.href=this.value" class="form-control">#}
-                                            {#<option>#}
-                                            {#-#}
-                                            {#</option>#}
-                                            {#{% for key, role in roles %}#}
-                                            {#<option value="{{ path('pichet_portailmkg_updateRolesUser',{'userId': user.id,'role':key}) }}" {% if user.roles[0]==key %} selected="selected" {% endif %} >#}
-                                            {#{{ role }}#}
-                                            {#</option>#}
-                                            {#{% endfor %}#}
-                                            {#</select>#}
-                                            {#</div>#}
-                                            <br/>
-                                            <div class="Group">
-                                                <h5>{{ "Modifier le groupe"|trans }}</h5>
-                                                <select onchange="window.location.href=this.value" class="form-control">
-                                                    <option disabled selected value> -- {{ "Sélectionner une option"|trans }} --
-                                                    </option>
-                                                    {% for key, group in groups %}
-                                                        <option value="{{ path('updateGroupUser',{'userId': user.id,'group':group.id}) }}" {% if user.group.id is defined and  user.group.id==group.id %} selected="selected" {% endif %} >
-                                                            {{ group }}
-                                                        </option>
-                                                    {% endfor %}
-                                                </select>
-                                            </div>
-                                            {#<div class="form-group col-md-6">#}
-                                            {#<input type="checkbox" name="ressource_planner"#}
-                                            {#{% if user.ressourcePlanner %} checked {% endif %} />#}
-                                            {#<label>Activer le ressource planner</label>#}
-                                            {#</div>#}
-                                            {#<div class="form-group col-md-6">#}
-                                            {#<input type="checkbox" name="time_tracking"#}
-                                            {#{% if user.timeTracking %} checked {% endif %} />#}
-                                            {#<label>Activer le time tracking</label>#}
-                                            {#</div>#}
-                                            <hr/>
-                                            <label class="col-md-4 col-form-label">{{ "Paiements"|trans }}</label>
-                                            <table class="table">
-                                                <thead>
-                                                <tr>
-                                                    <th>#</th>
-                                                    <th>{{ "Montant"|trans }}</th>
-                                                    <th>{{ "Méthode"|trans }}</th>
-                                                    <th>{{ "Date"|trans }}</th>
-                                                </tr>
-                                                </thead>
-                                                <tbody>
-                                                {% for payment in user.payments %}
-                                                    <tr>
-                                                        <td>{{ payment.id }}</td>
-                                                        <td>{{ payment.amount }} €</td>
-                                                        <td>{{ payment.method }}</td>
-                                                        <td>{{ payment.datetime|date('Y-m-d H:i:s') }}</td>
-                                                    </tr>
-                                                {% endfor %}
-                                                </tbody>
-                                            </table>
-                                        </div>
-                                        <div class="modal-footer">
-                                            {% if currentUser != user %}
-                                                <a class="btn btn-w-m btn-danger pull-left" href="{{ path('deleteUser',{'userId': user.id}) }}"
-                                                   onclick="return confirm('Supprimer {{ user.firstname }} {{ user.lastname }} ?')">{{ "Supprimer l'utilisateur"|trans }}</a>
-                                            {% endif %}
-                                            <input type="hidden" name="id" value="{{ user.id }}">
-                                            <button type="button" class="btn btn-default"
-                                                    data-dismiss="modal">{{ "Fermer"|trans }}
-                                            </button>
-                                            <button type="submit" class="btn btn-primary">{{ "Sauvegarder"|trans }}
-                                            </button>
-                                        </div>
-                                    </div>
-                                </form>
-                            </div>
+                                        </td>
+                                    </tr>
+                                {% endfor %}
+                                </tbody>
+                                <tfoot>
+                                <tr>
+                                    <th>#</th>
+                                    <th>{{ "Nom d'utilisateur"|trans }}</th>
+                                    <th>{{ "Nom"|trans }}</th>
+                                    <th>{{ "Prénom"|trans }}</th>
+                                    <th>{{ "Date de naissance"|trans }}</th>
+                                    <th>{{ "Num tel"|trans }}</th>
+                                    <th>{{ "Email"|trans }}</th>
+                                    <th>{{ "Contacts"|trans }}</th>
+                                    <th>{{ "Groupe"|trans }}</th>
+                                    <th>{{ "Actions"|trans }}</th>
+                                </tr>
+                                </tfoot>
+                            </table>
                         </div>
-                    </td>
-                </tr>
-            {% endfor %}
-            </tbody>
-        </table>
-        <a class="btn btn-w-m btn-primary" href="{{ path('createUser') }}">{{ "Créer un utilisateur"|trans }}</a>
-        {% if errorMessage is defined %}
-            <br/>
-            <div class="alert alert-danger">
-                {{ error }}
+
+                    </div>
+                </div>
             </div>
-
-        {% endif %}
-
+        </div>
     </div>
+{% endblock %}
+{% block pageScripts %}
+    <!-- Page-Level Scripts -->
+    <script src="{{ asset('js/plugins/dataTables/datatables.min.js') }}"></script>
+    <script>
+        $(document).ready(function () {
+            var locale = "{{ asset('js/plugins/dataTables/') }}"+"{{ app.request.get('_locale') }}"+".json";
+            $('.dataTables-example').DataTable({
+                pageLength: 25,
+                responsive: true,
+                dom: '<"html5buttons"B>lTfgitp',
+                buttons: [
+                    {extend: 'copy'},
+                    {extend: 'csv', title: 'ExportUsers'},
+                    {extend: 'excel', title: 'ExportUsers'}
+                ],
+                language: {
+                    url: locale
+                }
+
+            });
+
+        });
+
+    </script>
 {% endblock %}
