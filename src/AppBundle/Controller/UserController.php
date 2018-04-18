@@ -81,22 +81,22 @@ class UserController extends Controller
                 $user = $formRegistration->getData();
                 $tokenGenerator = $this->get('fos_user.util.token_generator');
                 $password = substr($tokenGenerator->generateToken(), 0, 8); // 8 chars
-                $user->setUsername(strtolower
-                    (substr($user->getFirstname(), 0, 1)
-                        . $user->getLastname())
-                );
-                $users = $userManager->getUsersLike($user->getUsername());
+                $username = strtolower
+                (substr($user->getFirstname(), 0, 1)
+                    . $user->getLastname());
+                $users = $userManager->getUsersLike($username);
                 if (!empty($users)) {
-                    $user->setUsername(strtolower
-                        (substr($user->getFirstname(), 0, 1)
-                            . $user->getLastname())
-                        .sizeof($users)
-                    );
+                    dump($users);
+                    $tempUsernameCount = $users[0]->getUsername();
+                    $tempUsernameCount = str_replace($username, '', $tempUsernameCount);
+                    $user->setUsername($username . ($tempUsernameCount + 1));
+                } else {
+                    $user->setUsername($username);
                 }
                 $user->setPlainpassword($password);
                 $this->get('nouestil.user')->save($user);
                 // on redirige l'administrateur vers la liste des clients si aucune erreur
-                $this->addFlash('success', 'L\'utilisateur a bien été enregistré, veuillez maintenant lui créer un contact.');
+                $this->addFlash('success', 'L\'utilisateur ' . $user->getUsername() . ' a bien été enregistré, veuillez maintenant lui créer un contact.');
                 return $this->redirect($this->generateUrl("createContact"));
             }
         }

@@ -57,6 +57,7 @@ class UserRepository extends \Doctrine\ORM\EntityRepository
         $qb->select('u')
             ->from('AppBundle\Entity\User', 'u')
             ->where('u.username like :username')
+            ->orderBy('u.id','desc')
             ->setParameter('username',$username.'%');
         return $qb->getQuery()->getResult();
 
