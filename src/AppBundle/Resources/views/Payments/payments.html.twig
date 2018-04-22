@@ -1,96 +1,176 @@
 {% extends 'base-menu.html.twig' %}
-
+{% block pageStylesheets %}
+    <link href="{{ asset('css/plugins/dataTables/datatables.min.css') }}" rel="stylesheet">
+{% endblock %}
 {% block body %}
-    <div class="ibox-title">
-    <h5>{{ "Paiements"|trans }}</h5>
-    <div class="ibox-content">
-
-        <table class="table">
-            <thead>
-            <tr>
-                <th>#</th>
-                <th>{{ "Nom d'utilisateur"|trans }}</th>
-                <th>{{ "Montant"|trans }}</th>
-                <th>{{ "Méthode"|trans }}</th>
-                <th>{{ "Date"|trans }}</th>
-                <th>{{ "Commentaires"|trans }}</th>
-                <th>{{ "Actions"|trans }}</th>
-            </tr>
-            </thead>
-            <tbody>
-            {% for payment in payments %}
-                <tr>
-                    <td>{{ payment.id }}</td>
-                    <td>{{ payment.user }}</td>
-                    <td>{{ payment.amount }}</td>
-                    <td>{{ payment.method }}</td>
-                    <td>{{ payment.datetime|date('Y-m-d') }}</td>
-                    <td>{{ payment.note }}</td>
-                    <td>
-                        {#<span class="label label-default" data-toggle="modal" data-target="#userModal_{{ user.id }}">Modifier</span>#}
-                        {#<a class="label label-warning"  href="{{ path('base_homepage', {'_want_to_be': user.username}) }}" >Impersonate</a>#}
-                        {#{% if currentUser != user %}#}
-                        <a href="{{ path('deletePayment',{'paymentId': payment.id}) }}"
-                        onclick="return confirm('Confirmer la suppression ?')"><span class="label label-danger">{{ "Supprimer"|trans }}</span></a>
-                        {#{% endif %}#}
-                        <div class="modal fade" id="paymentModal_{{ payment.id }}" tabindex="-1" role="dialog"
-                             aria-labelledby="myModalLabel">
-                            <div class="modal-dialog" role="document">
-                                <form method="post" action="{{ path('updatePayment') }}" name="update-payment" class="form-horizontal">
-                                    <div class="modal-content">
-                                        <div class="modal-header">
-                                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                                <span aria-hidden="true">&times;</span></button>
-                                            <h4 class="modal-title" id="myModalLabel">{{ "Modifier paiement #%payment.id% effectué par %payment.user.firstname% %payment.user.lastname%."|trans({'%payment.id%':payment.id,'%payment.user.firstname%':payment.user.firstname,'%payment.user.lastname%':payment.user.lastname }) }}</h4>
-                                        </div>
-                                        <div class="modal-body">
-                                            <div>
-                                                <p>{{ "Montant"|trans }}: <input type="number" name="amount" value="{{ payment.amount }}"></p>
-                                            </div>
-                                            <br/>
-                                            <div>
-                                                <p>{{ "Date"|trans }}: <input type="date" name="datetime" value="{{ payment.datetime|date('Y-m-d') }}"></p>
-                                            </div>
-                                            <br/>
-                                            <div>
-                                                <p>{{ "Méthode"|trans }}:
-                                                    <select name="method" name="method" value="{{ payment.method }}">
-                                                        <option value="cb">{{ "Carte bancaire"|trans }}</option>
-                                                        <option value="especes">{{ "Espèces"|trans }}</option>
-                                                        <option value="paypal">{{ "Paypal"|trans }}</option>
-                                                        <option value="autre">{{ "Autre"|trans }}</option>
-                                                    </select>
-                                                </p>
-                                            </div>
-                                            <br/>
-                                            <div>
-                                                <p>Commentaires: <input type="text" name="note" value="{{ payment.note }}"></p>
-                                            </div>
-                                            <br/>
-                                            <div class="modal-footer">
-                                                <input type="hidden" name="id" value="{{ payment.id }}">
-                                                <button type="button" class="btn btn-default" data-dismiss="modal">{{ "Fermer"|trans }}</button>
-                                                <button type="submit" class="btn btn-primary">{{ "Sauvegarder"|trans }}</button>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </form>
-                            </div>
+    <div class="wrapper wrapper-content animated fadeInRight">
+        <div class="row">
+            <div class="col-lg-12">
+                <div class="ibox float-e-margins">
+                    <div class="ibox-title">
+                        <h5>{{ "Paiements"|trans }}</h5>
+                        <div class="ibox-tools">
+                            <a href="{{ path('createPayment') }}"
+                               class="btn btn-primary btn-xs">{{ "Créer un paiement"|trans }}</a>
                         </div>
-                    </td>
-                </tr>
-            {% endfor %}
-            </tbody>
-        </table>
-        <a class="btn btn-w-m btn-primary" href="{{ path('createPayment') }}" >{{ "Créer un paiement"|trans }}</a>
-        <a class="btn btn-w-m btn-primary" href="{{ path('exportPayment') }}" >{{ "Exporter les paiements"|trans }}</a>
-        {% if errorMessage is defined %}
-            <br/>
-            <div class="alert alert-danger">
-                {{ error }}
+                    </div>
+                    <div class="ibox-content">
+                        <div class="table-responsive">
+                            <table class="table table-striped table-bordered table-hover dataTables-example">
+                                <thead>
+                                <tr>
+                                    <th class="exportable">#</th>
+                                    <th class="exportable">{{ "Nom d'utilisateur"|trans }}</th>
+                                    <th class="exportable">{{ "Montant"|trans }}</th>
+                                    <th class="exportable">{{ "Méthode"|trans }}</th>
+                                    <th class="exportable">{{ "Date"|trans }}</th>
+                                    <th class="exportable">{{ "Commentaires"|trans }}</th>
+                                    <th>{{ "Actions"|trans }}</th>
+                                </tr>
+                                </thead>
+                                <tbody>
+                                {% for payment in payments %}
+                                    <tr>
+                                        <td class="exportable">{{ payment.id }}</td>
+                                        <td class="exportable">{{ payment.user }}</td>
+                                        <td class="exportable">{{ payment.amount }}</td>
+                                        <td class="exportable">{{ payment.method }}</td>
+                                        <td class="exportable">{{ payment.datetime|date('d-m-Y') }}</td>
+                                        <td class="exportable">{{ payment.note }}</td>
+                                        <td>
+                                            {#<span class="label label-default" data-toggle="modal" data-target="#userModal_{{ user.id }}">Modifier</span>#}
+                                            {#<a class="label label-warning"  href="{{ path('base_homepage', {'_want_to_be': user.username}) }}" >Impersonate</a>#}
+                                            {#{% if currentUser != user %}#}
+                                            <a href="{{ path('deletePayment',{'paymentId': payment.id}) }}"
+                                               onclick="return confirm('Confirmer la suppression ?')"><span
+                                                        class="label label-danger">{{ "Supprimer"|trans }}</span></a>
+                                            {#{% endif %}#}
+                                            <div class="modal fade" id="paymentModal_{{ payment.id }}" tabindex="-1"
+                                                 role="dialog"
+                                                 aria-labelledby="myModalLabel">
+                                                <div class="modal-dialog" role="document">
+                                                    <form method="post" action="{{ path('updatePayment') }}"
+                                                          name="update-payment"
+                                                          class="form-horizontal">
+                                                        <div class="modal-content">
+                                                            <div class="modal-header">
+                                                                <button type="button" class="close" data-dismiss="modal"
+                                                                        aria-label="Close">
+                                                                    <span aria-hidden="true">&times;</span></button>
+                                                                <h4 class="modal-title"
+                                                                    id="myModalLabel">{{ "Modifier paiement #%payment.id% effectué par %payment.user.firstname% %payment.user.lastname%."|trans({'%payment.id%':payment.id,'%payment.user.firstname%':payment.user.firstname,'%payment.user.lastname%':payment.user.lastname }) }}</h4>
+                                                            </div>
+                                                            <div class="modal-body">
+                                                                <div>
+                                                                    <p>{{ "Montant"|trans }}: <input type="number"
+                                                                                                     name="amount"
+                                                                                                     value="{{ payment.amount }}">
+                                                                    </p>
+                                                                </div>
+                                                                <br/>
+                                                                <div>
+                                                                    <p>{{ "Date"|trans }}: <input type="date"
+                                                                                                  name="datetime"
+                                                                                                  value="{{ payment.datetime|date('d-m-Y') }}">
+                                                                    </p>
+                                                                </div>
+                                                                <br/>
+                                                                <div>
+                                                                    <p>{{ "Méthode"|trans }}:
+                                                                        <select name="method" name="method"
+                                                                                value="{{ payment.method }}">
+                                                                            <option value="cb">{{ "Carte bancaire"|trans }}</option>
+                                                                            <option value="especes">{{ "Espèces"|trans }}</option>
+                                                                            <option value="paypal">{{ "Paypal"|trans }}</option>
+                                                                            <option value="autre">{{ "Autre"|trans }}</option>
+                                                                        </select>
+                                                                    </p>
+                                                                </div>
+                                                                <br/>
+                                                                <div>
+                                                                    <p>Commentaires: <input type="text" name="note"
+                                                                                            value="{{ payment.note }}">
+                                                                    </p>
+                                                                </div>
+                                                                <br/>
+                                                                <div class="modal-footer">
+                                                                    <input type="hidden" name="id"
+                                                                           value="{{ payment.id }}">
+                                                                    <button type="button" class="btn btn-default"
+                                                                            data-dismiss="modal">{{ "Fermer"|trans }}</button>
+                                                                    <button type="submit"
+                                                                            class="btn btn-primary">{{ "Sauvegarder"|trans }}</button>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </form>
+                                                </div>
+                                            </div>
+                                        </td>
+                                    </tr>
+                                {% endfor %}
+                                </tbody>
+                                <tfoot>
+                                <tr>
+                                    <th>#</th>
+                                    <th>{{ "Nom d'utilisateur"|trans }}</th>
+                                    <th>{{ "Montant"|trans }}</th>
+                                    <th>{{ "Méthode"|trans }}</th>
+                                    <th>{{ "Date"|trans }}</th>
+                                    <th>{{ "Commentaires"|trans }}</th>
+                                    <th>{{ "Actions"|trans }}</th>
+                                </tr>
+                                </tfoot>
+                            </table>
+                        </div>
+                    </div>
+                </div>
             </div>
-
-        {% endif %}
-
+        </div>
     </div>
+{% endblock %}
+{% block pageScripts %}
+    <!-- Page-Level Scripts -->
+    <script src="{{ asset('js/plugins/dataTables/datatables.min.js') }}"></script>
+    <script>
+        $(document).ready(function () {
+            var locale = "{{ asset('js/plugins/dataTables/') }}" + "{{ app.request.get('_locale') }}" + ".json";
+            var buttonCommon = {
+                exportOptions: {
+                    columns: '.exportable'
+                }
+            };
+            $('.dataTables-example').DataTable({
+                pageLength: 25,
+                responsive: true,
+                dom: '<"html5buttons"B>lTfgitp',
+                buttons: [
+                    $.extend(true, {}, buttonCommon, {
+                        extend: 'copyHtml5'
+                    }),
+                    $.extend(true, {}, buttonCommon, {
+                        extend: 'csvHtml5',
+                        title: 'NOUESTIL Payments Export'
+                    }),
+                    $.extend(true, {}, buttonCommon, {
+                        extend: 'excelHtml5',
+                        title: 'NOUESTIL Payments Export'
+                    }),
+                    $.extend(true, {}, buttonCommon, {
+                        extend: 'print'
+                    }),
+                    $.extend(true, {}, buttonCommon, {
+                        extend: 'pdfHtml5',
+                        title: 'NOUESTIL Payments Export'
+                    })
+                ],
+                language: {
+                    url: locale
+                }
+
+            });
+
+        });
+
+    </script>
 {% endblock %}
