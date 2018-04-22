@@ -6,6 +6,7 @@
     <title>{% block title %}NOUESTIL | Dashboard{% endblock %}</title>
     {% block stylesheets %}
         <link href="{{ asset('css/bootstrap.min.css') }}" rel="stylesheet">
+        <link href="{{ asset('css/plugins/toastr/toastr.min.css') }}" rel="stylesheet">
         <link href="{{ asset('font-awesome/css/font-awesome.css') }}" rel="stylesheet">
         <link href="{{ asset('css/animate.css') }}" rel="stylesheet">
         <link href="{{ asset('css/style.css') }}" rel="stylesheet">
@@ -18,16 +19,6 @@
     {{ render(controller( 'AppBundle:Menu:leftMenu' )) }}
     <div id="page-wrapper" class="gray-bg">
     {{ render(controller( 'AppBundle:Menu:topMenu' )) }}
-        {% block messages %}
-            {% for label, messages in app.flashes %}
-                {% for message in messages %}
-                    <div class="alert alert-{{ label }} alert-dismissible">
-                        <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
-                        {{ message|trans({}, 'FOSUserBundle') }}
-                    </div>
-                {% endfor %}
-            {% endfor %}
-        {% endblock %}
         {% block body %}{% endblock %}
     </div>
 </div>
@@ -42,6 +33,37 @@
     <!-- Custom and plugin javascript -->
     <script src="{{ asset('js/inspinia.js') }}"></script>
     <script src="{{ asset('js/plugins/pace/pace.min.js') }}"></script>
+    <script src="{{ asset('js/plugins/toastr/toastr.min.js') }}"></script>
+
+
+{% block messages %}
+    {% for label, messages in app.flashes %}
+    {% for message in messages %}
+    <script>
+        $(function() {
+            toastr.options = {
+                "closeButton": true,
+                "debug": false,
+                "progressBar": true,
+                "preventDuplicates": false,
+                "positionClass": "toast-top-right",
+                "onclick": null,
+                "showDuration": "400",
+                "hideDuration": "1000",
+                "timeOut": "7000",
+                "extendedTimeOut": "1000",
+                "showEasing": "swing",
+                "hideEasing": "linear",
+                "showMethod": "fadeIn",
+                "hideMethod": "fadeOut"
+            };
+            toastr.{{ label }}('{{ message|trans({}, 'FOSUserBundle') }}');
+        });
+    </script>
+    {% endfor %}
+    {% endfor %}
+{% endblock %}
+
 {% endblock %}
 {% block pageScripts %}
 {% endblock %}
