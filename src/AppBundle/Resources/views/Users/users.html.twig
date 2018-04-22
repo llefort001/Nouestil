@@ -26,7 +26,7 @@
                                     <th class="exportable">{{ "Date de naissance"|trans }}</th>
                                     <th class="exportable">{{ "Num tel"|trans }}</th>
                                     <th class="exportable">{{ "Email"|trans }}</th>
-                                    <th>{{ "Contacts"|trans }}</th>
+                                    <th class="exportable">{{ "Contacts"|trans }}</th>
                                     <th class="exportable">{{ "Groupe"|trans }}</th>
                                     <th>{{ "Actions"|trans }}</th>
                                 </tr>
@@ -35,155 +35,24 @@
                                 {% for user in users %}
                                     <tr>
                                         <td class="exportable">{{ user.id }}</td>
-                                        <td class="export">{{ user.username }}</td>
+                                        <td class="exportable">{{ user.username }}</td>
                                         <td class="exportable">{{ user.lastname }}</td>
                                         <td class="exportable">{{ user.firstname }}</td>
                                         <td class="exportable">{{ user.birthdate|date('d-m-Y') }}</td>
                                         <td class="exportable">{{ user.phoneNumber }}</td>
                                         <td class="exportable">{{ user.email }}</td>
-                                        <td>{% for key, contact in user.contacts %}
+                                        <td class="exportable">{% for key, contact in user.contacts %}
                                                 <a href="#"><span class="label label-default" data-toggle="modal"
                                                                   data-target="#contactModal{{ contact.id }}">
                             {{ contact.firstname }} {{ contact.lastname }}</span></a>
-                                                <div class="modal fade" id="contactModal{{ contact.id }}" tabindex="-1"
-                                                     role="dialog"
-                                                     aria-labelledby="myModalLabel">
-                                                    <div class="modal-dialog" role="document">
-                                                        <div class="modal-content">
-                                                            <div class="modal-header">
-                                                                <button type="button" class="close" data-dismiss="modal"
-                                                                        aria-label="Close">
-                                                                    <span aria-hidden="true">&times;</span></button>
-                                                                <h4 class="modal-title" id="myModalLabel">
-                                                                    {{ contact.firstname }} {{ contact.lastname }}</h4>
-                                                            </div>
-                                                            <div class="modal-body">
-                                                                {{ "Num tel"|trans }} : {{ contact.phoneNumber }}
-                                                                <div class="col-12">
-                                                                    <a class="btn btn-w-m btn-danger"
-                                                                       href="{{ path('unlinkContact',{'userId' : user.id,'contactId': contact.id}) }}"
-                                                                       onclick="return confirm('Délier ce contact de l\'utilisateur ?')">{{ "Délier ce contact de l'utilisateur"|trans }}</a>
-                                                                    <a class="btn btn-w-m btn-danger"
-                                                                       href="{{ path('deleteContact',{'contactId': contact.id}) }}"
-                                                                       onclick="return confirm('Confirmer la suppression du contact ?')">{{ "Supprimer"|trans }}</a>
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            {% endfor %}</td>
+                                            {% endfor %}
+                                        </td>
                                         <td class="exportable">{% if user.group.id is defined %}{{ user.group }}{% endif %}</td>
                                         <td>
                                             <a href="#"><span class="label label-default" data-toggle="modal"
                                                               data-target="#userModal_{{ user.id }}">{{ "Modifier"|trans }}</span></a>
                                             {#<a class="label label-warning"#}
                                             {#href="{{ path('base_homepage', {'_want_to_be': user.username}) }}">Impersonate</a>#}
-                                            <div class="modal fade" id="userModal_{{ user.id }}" tabindex="-1"
-                                                 role="dialog"
-                                                 aria-labelledby="myModalLabel">
-                                                <div class="modal-dialog" role="document">
-                                                    <form method="post" action="{{ path('updateUser') }}"
-                                                          name="update-user"
-                                                          class="form-horizontal">
-                                                        <div class="modal-content">
-                                                            <div class="modal-header">
-                                                                <button type="button" class="close" data-dismiss="modal"
-                                                                        aria-label="Close">
-                                                                    <span aria-hidden="true">&times;</span></button>
-                                                                <h4 class="modal-title" id="myModalLabel">
-                                                                    {{ user.username }} </h4>
-                                                            </div>
-                                                            <div class="modal-body">
-                                                                <div>
-                                                                    <p>{{ "Note publique:"|trans }}{{ user.publicNote }}</p>
-                                                                </div>
-                                                                <hr/>
-                                                                <div>
-                                                                    <p>{{ "Note privée:"|trans }} {{ user.privateNote }}</p>
-                                                                </div>
-                                                                <hr/>
-                                                                {#<div class="Role">#}
-                                                                {#<h5>Modifier le rôle :</h5>#}
-                                                                {#<select onchange="window.location.href=this.value"#}
-                                                                {#class="form-control">#}
-                                                                {#<option>#}
-                                                                {#-#}
-                                                                {#</option>#}
-                                                                {#{% for key, role in roles %}#}
-                                                                {#<option value="{{ path('pichet_portailmkg_updateRolesUser',{'userId': user.id,'role':key}) }}" {% if user.roles[0]==key %} selected="selected" {% endif %} >#}
-                                                                {#{{ role }}#}
-                                                                {#</option>#}
-                                                                {#{% endfor %}#}
-                                                                {#</select>#}
-                                                                {#</div>#}
-                                                                <br/>
-                                                                <div class="Group">
-                                                                    <h5>{{ "Modifier le groupe"|trans }}</h5>
-                                                                    <select onchange="window.location.href=this.value"
-                                                                            class="form-control">
-                                                                        <option disabled selected value>
-                                                                            -- {{ "Sélectionner une option"|trans }} --
-                                                                        </option>
-                                                                        {% for key, group in groups %}
-                                                                            <option value="{{ path('updateGroupUser',{'userId': user.id,'group':group.id}) }}" {% if user.group.id is defined and  user.group.id==group.id %} selected="selected" {% endif %} >
-                                                                                {{ group }}
-                                                                            </option>
-                                                                        {% endfor %}
-                                                                    </select>
-                                                                    {#</div>#}
-                                                                    {#<div class="form-group col-md-6">#}
-                                                                    {#<input type="checkbox" name="ressource_planner"#}
-                                                                    {#{% if user.ressourcePlanner %} checked {% endif %} />#}
-                                                                    {#<label>Activer le ressource planner</label>#}
-                                                                    {#</div>#}
-                                                                    {#<div class="form-group col-md-6">#}
-                                                                    {#<input type="checkbox" name="time_tracking"#}
-                                                                    {#{% if user.timeTracking %} checked {% endif %} />#}
-                                                                    {#<label>Activer le time tracking</label>#}
-                                                                    {#</div>#}
-                                                                    <hr/>
-                                                                    <label class="col-md-4 col-form-label">{{ "Paiements"|trans }}</label>
-                                                                    <table class="table">
-                                                                        <thead>
-                                                                        <tr>
-                                                                            <th>#</th>
-                                                                            <th>{{ "Montant"|trans }}</th>
-                                                                            <th>{{ "Méthode"|trans }}</th>
-                                                                            <th>{{ "Date"|trans }}</th>
-                                                                        </tr>
-                                                                        </thead>
-                                                                        <tbody>
-                                                                        {% for payment in user.payments %}
-                                                                            <tr>
-                                                                                <td>{{ payment.id }}</td>
-                                                                                <td>{{ payment.amount }} €</td>
-                                                                                <td>{{ payment.method }}</td>
-                                                                                <td>{{ payment.datetime|date('Y-m-d H:i:s') }}</td>
-                                                                            </tr>
-                                                                        {% endfor %}
-                                                                        </tbody>
-                                                                    </table>
-                                                                </div>
-                                                                <div class="modal-footer">
-                                                                    {% if currentUser != user %}
-                                                                        <a class="btn btn-w-m btn-danger pull-left"
-                                                                           href="{{ path('deleteUser',{'userId': user.id}) }}"
-                                                                           onclick="return confirm('Supprimer {{ user.firstname }} {{ user.lastname }} ?')">{{ "Supprimer l'utilisateur"|trans }}</a>
-                                                                    {% endif %}
-                                                                    <input type="hidden" name="id"
-                                                                           value="{{ user.id }}">
-                                                                    <button type="button" class="btn btn-default"
-                                                                            data-dismiss="modal">{{ "Fermer"|trans }}
-                                                                    </button>
-                                                                    <button type="submit"
-                                                                            class="btn btn-primary">{{ "Sauvegarder"|trans }}
-                                                                    </button>
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                    </form>
-                                                </div>
-                                            </div>
                                         </td>
                                     </tr>
                                 {% endfor %}
@@ -204,7 +73,139 @@
                                 </tfoot>
                             </table>
                         </div>
-
+                        {% for user in users %}
+                            <div class="modal fade" id="userModal_{{ user.id }}" tabindex="-1"
+                                 role="dialog"
+                                 aria-labelledby="myModalLabel">
+                                <div class="modal-dialog" role="document">
+                                    <form method="post" action="{{ path('updateUser') }}"
+                                          name="update-user"
+                                          class="form-horizontal">
+                                        <div class="modal-content">
+                                            <div class="modal-header">
+                                                <button type="button" class="close" data-dismiss="modal"
+                                                        aria-label="Close">
+                                                    <span aria-hidden="true">&times;</span></button>
+                                                <h4 class="modal-title" id="myModalLabel">
+                                                    {{ user.username }} </h4>
+                                            </div>
+                                            <div class="modal-body">
+                                                <div>
+                                                    <p>{{ "Note publique:"|trans }}{{ user.publicNote }}</p>
+                                                </div>
+                                                <hr/>
+                                                <div>
+                                                    <p>{{ "Note privée:"|trans }} {{ user.privateNote }}</p>
+                                                </div>
+                                                <hr/>
+                                                {#<div class="Role">#}
+                                                {#<h5>Modifier le rôle :</h5>#}
+                                                {#<select onchange="window.location.href=this.value"#}
+                                                {#class="form-control">#}
+                                                {#<option>#}
+                                                {#-#}
+                                                {#</option>#}
+                                                {#{% for key, role in roles %}#}
+                                                {#<option value="{{ path('pichet_portailmkg_updateRolesUser',{'userId': user.id,'role':key}) }}" {% if user.roles[0]==key %} selected="selected" {% endif %} >#}
+                                                {#{{ role }}#}
+                                                {#</option>#}
+                                                {#{% endfor %}#}
+                                                {#</select>#}
+                                                {#</div>#}
+                                                <br/>
+                                                <div class="Group">
+                                                    <h5>{{ "Modifier le groupe"|trans }}</h5>
+                                                    <select onchange="window.location.href=this.value"
+                                                            class="form-control">
+                                                        <option disabled selected value>
+                                                            -- {{ "Sélectionner une option"|trans }} --
+                                                        </option>
+                                                        {% for key, group in groups %}
+                                                            <option value="{{ path('updateGroupUser',{'userId': user.id,'group':group.id}) }}" {% if user.group.id is defined and  user.group.id==group.id %} selected="selected" {% endif %} >
+                                                                {{ group }}
+                                                            </option>
+                                                        {% endfor %}
+                                                    </select>
+                                                    {#</div>#}
+                                                    {#<div class="form-group col-md-6">#}
+                                                    {#<input type="checkbox" name="ressource_planner"#}
+                                                    {#{% if user.ressourcePlanner %} checked {% endif %} />#}
+                                                    {#<label>Activer le ressource planner</label>#}
+                                                    {#</div>#}
+                                                    {#<div class="form-group col-md-6">#}
+                                                    {#<input type="checkbox" name="time_tracking"#}
+                                                    {#{% if user.timeTracking %} checked {% endif %} />#}
+                                                    {#<label>Activer le time tracking</label>#}
+                                                    {#</div>#}
+                                                    <hr/>
+                                                    <label class="col-md-4 col-form-label">{{ "Paiements"|trans }}</label>
+                                                    <table class="table">
+                                                        <thead>
+                                                        <tr>
+                                                            <th>#</th>
+                                                            <th>{{ "Montant"|trans }}</th>
+                                                            <th>{{ "Méthode"|trans }}</th>
+                                                            <th>{{ "Date"|trans }}</th>
+                                                        </tr>
+                                                        </thead>
+                                                        <tbody>
+                                                        {% for payment in user.payments %}
+                                                            <tr>
+                                                                <td>{{ payment.id }}</td>
+                                                                <td>{{ payment.amount }} €</td>
+                                                                <td>{{ payment.method }}</td>
+                                                                <td>{{ payment.datetime|date('d-m-Y') }}</td>
+                                                            </tr>
+                                                        {% endfor %}
+                                                        </tbody>
+                                                    </table>
+                                                </div>
+                                                <div class="modal-footer">
+                                                    {% if currentUser != user %}
+                                                        <a class="btn btn-w-m btn-danger pull-left"
+                                                           href="{{ path('deleteUser',{'userId': user.id}) }}"
+                                                           onclick="return confirm('Supprimer {{ user.firstname }} {{ user.lastname }} ?')">{{ "Supprimer l'utilisateur"|trans }}</a>
+                                                    {% endif %}
+                                                    <input type="hidden" name="id"
+                                                           value="{{ user.id }}">
+                                                    <button type="submit"
+                                                            class="btn btn-primary">{{ "Sauvegarder"|trans }}
+                                                    </button>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </form>
+                                </div>
+                            </div>
+                            {% for key, contact in user.contacts %}
+                                <div class="modal fade" id="contactModal{{ contact.id }}" tabindex="-1"
+                                     role="dialog"
+                                     aria-labelledby="myModalLabel">
+                                    <div class="modal-dialog" role="document">
+                                        <div class="modal-content">
+                                            <div class="modal-header">
+                                                <button type="button" class="close" data-dismiss="modal"
+                                                        aria-label="Close">
+                                                    <span aria-hidden="true">&times;</span></button>
+                                                <h4 class="modal-title" id="myModalLabel">
+                                                    {{ contact.firstname }} {{ contact.lastname }}</h4>
+                                            </div>
+                                            <div class="modal-body">
+                                                {{ "Num tel"|trans }} : {{ contact.phoneNumber }}
+                                                <div class="col-12">
+                                                    <a class="btn btn-w-m btn-danger"
+                                                       href="{{ path('unlinkContact',{'userId' : user.id,'contactId': contact.id}) }}"
+                                                       onclick="return confirm('Délier ce contact de l\'utilisateur ?')">{{ "Délier ce contact de l'utilisateur"|trans }}</a>
+                                                    <a class="btn btn-w-m btn-danger"
+                                                       href="{{ path('deleteContact',{'contactId': contact.id}) }}"
+                                                       onclick="return confirm('Confirmer la suppression du contact ?')">{{ "Supprimer"|trans }}</a>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            {% endfor %}
+                        {% endfor %}
                     </div>
                 </div>
             </div>

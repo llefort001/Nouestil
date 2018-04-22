@@ -23,7 +23,7 @@
                                         <th class="exportable">{{ "Prénom"|trans }}</th>
                                         <th class="exportable">{{ "Email"|trans }}</th>
                                         <th class="exportable">{{ "Num tel"|trans }}</th>
-                                        <th>{{ "Utilisateurs"|trans }}</th>
+                                        <th class="exportable">{{ "Utilisateurs"|trans }}</th>
                                         <th>{{ "Actions"|trans }}</th>
                                     </tr>
                                     </thead>
@@ -35,31 +35,12 @@
                                             <td class="exportable">{{ contact.firstname }}</td>
                                             <td class="exportable">{{ contact.email }}</td>
                                             <td class="exportable">{{ contact.phoneNumber }}</td>
-                                            <td>
+                                            <td class="exportable">
                                                 {% for key, user in contact.users %}
                                                     <a href="#"><span class="label label-default" data-toggle="modal"
                                                                       data-target="#userModal_{{ user.id }}">
                             {{ user.firstname }} {{ user.lastname }}</span></a>
                                                     {#{{ user }}#}
-                                                    <div class="modal fade" id="userModal_{{ user.id }}" tabindex="-1"
-                                                         role="dialog"
-                                                         aria-labelledby="myModalLabel">
-                                                        <div class="modal-dialog" role="document">
-                                                            <div class="modal-content">
-                                                                <div class="modal-header">
-                                                                    <button type="button" class="close"
-                                                                            data-dismiss="modal"
-                                                                            aria-label="Close">
-                                                                        <span aria-hidden="true">&times;</span></button>
-                                                                    <h4 class="modal-title" id="myModalLabel">
-                                                                        {{ user.firstname }} {{ user.lastname }}</h4>
-                                                                </div>
-                                                                <div class="modal-body">
-                                                                    {{ "Num tel"|trans }} : {{ user.phoneNumber }}
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                    </div>
                                                 {% endfor %}
 
                                             </td>
@@ -70,42 +51,6 @@
                                                 <a href="{{ path('deleteContact',{'contactId': contact.id}) }}"
                                                    onclick="return confirm('Confirmer la suppression ?')"><span
                                                             class="label label-danger">Supprimer</span></a>
-                                                <div class="modal fade" id="contactModal_{{ contact.id }}" tabindex="-1"
-                                                     role="dialog"
-                                                     aria-labelledby="myModalLabel">
-                                                    <div class="modal-dialog" role="document">
-                                                        <form method="post" action="{{ path('updateContact') }}"
-                                                              name="update-contact"
-                                                              class="form-horizontal">
-                                                            <div class="modal-content">
-                                                                <div class="modal-header">
-                                                                    <button type="button" class="close"
-                                                                            data-dismiss="modal"
-                                                                            aria-label="Close">
-                                                                        <span aria-hidden="true">&times;</span></button>
-                                                                    <h4 class="modal-title" id="myModalLabel">
-                                                                        {{ contact.firstname }} {{ contact.lastname }}</h4>
-                                                                </div>
-                                                                <div class="modal-body">
-                                                                    <div class="Group">
-                                                                        <h5>{{ "Modifier le contact"|trans }}</h5>
-                                                                    </div>
-                                                                    <hr/>
-                                                                </div>
-                                                                <div class="modal-footer">
-                                                                    <input type="hidden" name="id"
-                                                                           value="{{ contact.id }}">
-                                                                    <button type="button" class="btn btn-default"
-                                                                            data-dismiss="modal">{{ "Fermer"|trans }}
-                                                                    </button>
-                                                                    <button type="submit"
-                                                                            class="btn btn-primary">{{ "Sauvegarder"|trans }}
-                                                                    </button>
-                                                                </div>
-                                                            </div>
-                                                        </form>
-                                                    </div>
-                                                </div>
                                             </td>
                                         </tr>
                                     {% endfor %}
@@ -123,6 +68,62 @@
                                     </tfoot>
                                 </table>
                             </div>
+                            {% for contact in contacts %}
+                                <div class="modal fade" id="contactModal_{{ contact.id }}" tabindex="-1"
+                                     role="dialog"
+                                     aria-labelledby="myModalLabel">
+                                    <div class="modal-dialog" role="document">
+                                        <form method="post" action="{{ path('updateContact') }}"
+                                              name="update-contact"
+                                              class="form-horizontal">
+                                            <div class="modal-content">
+                                                <div class="modal-header">
+                                                    <button type="button" class="close"
+                                                            data-dismiss="modal"
+                                                            aria-label="Close">
+                                                        <span aria-hidden="true">&times;</span></button>
+                                                    <h4 class="modal-title" id="myModalLabel">
+                                                        {{ contact.firstname }} {{ contact.lastname }}</h4>
+                                                </div>
+                                                <div class="modal-body">
+                                                    <div class="Group">
+                                                        <h5>{{ "Modifier le contact"|trans }}</h5>
+                                                    </div>
+                                                    <hr/>
+                                                </div>
+                                                <div class="modal-footer">
+                                                    <input type="hidden" name="id"
+                                                           value="{{ contact.id }}">
+                                                    <button type="submit"
+                                                            class="btn btn-primary">{{ "Sauvegarder"|trans }}
+                                                    </button>
+                                                </div>
+                                            </div>
+                                        </form>
+                                    </div>
+                                </div>
+                                {% for key, user in contact.users %}
+                                    <div class="modal fade" id="userModal_{{ user.id }}" tabindex="-1"
+                                         role="dialog"
+                                         aria-labelledby="myModalLabel">
+                                        <div class="modal-dialog" role="document">
+                                            <div class="modal-content">
+                                                <div class="modal-header">
+                                                    <button type="button" class="close"
+                                                            data-dismiss="modal"
+                                                            aria-label="Close">
+                                                        <span aria-hidden="true">&times;</span></button>
+                                                    <h4 class="modal-title" id="myModalLabel">
+                                                        {{ user.firstname }} {{ user.lastname }}</h4>
+                                                </div>
+                                                <div class="modal-body">
+                                                    {{ "Num tel"|trans }} : {{ user.phoneNumber }}
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                {% endfor %}
+                            {% endfor %}
                         </div>
                     </div>
                 </div>
