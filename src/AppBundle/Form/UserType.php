@@ -21,9 +21,6 @@ class UserType extends AbstractType
             ->add('email', EmailType::class, array('label' =>false,
                 'attr' => array('class' => 'form-control','placeholder' => 'Email','required' => 'required')
             ))
-            ->add('username', TextType::class, array('label' =>false,
-                'attr' => array('class' => 'form-control','placeholder' => 'Nom d\'utilisateur','required' => 'required')
-            ))
             ->add('firstname', TextType::class, array('label' =>false,
                 'attr' => array('class' => 'form-control','placeholder' => 'Prénom','required' => 'required')
             ))
@@ -40,9 +37,7 @@ class UserType extends AbstractType
             ->add('city', TextType::class, array('label' =>false,
                 'attr' => array('class' => 'form-control','placeholder' => 'Adresse','required' => 'required')
             ))
-            ->add('plainPassword', PasswordType::class, array('label' =>false,
-                'attr' => array('class' => 'form-control','placeholder' => 'Mot de passe','required' => 'required')
-            ));
+            ;
 
 
     }
