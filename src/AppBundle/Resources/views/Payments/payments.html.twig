@@ -47,11 +47,11 @@
                                         </div>
                                         <div class="modal-body">
                                             <div>
-                                                <p>{{ "Montant"|trans }}: <input type="number" name="amount" value="{{ payment.amount }}"></p>
+                                                <p>{{ "Montant"|trans }}: <input type="number" name="amount" step="0.01" value="{{ payment.amount }}"></p>
                                             </div>
                                             <br/>
                                             <div>
-                                                <p>{{ "Date"|trans }}: <input type="date" name="datetime" value="{{ payment.datetime|date('Y-m-d') }}"></p>
+                                                <p>{{ "Date"|trans }}: <input type="date" name="datetime" min="2017-01-01" value="{{ payment.datetime|date('Y-m-d') }}"></p>
                                             </div>
                                             <br/>
                                             <div>
