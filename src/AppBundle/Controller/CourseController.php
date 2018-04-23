@@ -31,10 +31,10 @@ class CourseController extends controller
     {
 
         if ($request->isMethod('POST')) {
-            $data = $request->request->all();
-            $course = $this->get('nouestil.course');
-            $course->updateCourse($data['id'], $data['name'], $data['session'], $data['userTeach']);
-            $this->addFlash('success', 'Le cours a bien été modifié.');
+                $data = $request->request->all();
+                $course = $this->get('nouestil.course');
+                $course->updateCourse($data['id'], $data['name'], $data['session'], $data['userTeach']);
+                $this->addFlash('success', 'Le cours a bien été modifié.');
         }
         return $this->redirect($this->generateUrl('courses'));
     }
@@ -58,27 +58,33 @@ class CourseController extends controller
             $courseManager->addCourse($dataCourse['name'], $dataCourse['session'], $dataCourse['userTeach']);
             $this->addFlash('success', 'Le cours a bien été enregistré.');
         }
-        return $this->redirect($this->generateUrl('listCourses'));
+        return $this->redirect($this->generateUrl('courses'));
     }
 
     public function usersCourseAction($courseId, Request $request)
     {
-//        $repository = $this->getDoctrine()->getManager()->getRepository('AppBundle:User');
-//        $results= $repository->queryNotUserCourse($courseId)->getQuery()->getResult();
-//        dump($results);die;
-        $nouestilCourse= $this->get('nouestil.course');
-        $course= $nouestilCourse->getCourse($courseId);
+        $courseService= $this->get('nouestil.course');
+        $userService= $this->get('nouestil.user');
 
-//        if ($request->isMethod('POST')) {
-//            $data = $request->request->all();
-//            $addCourse= $nouestilCourse->addUsersCourse($data['users'], $data['id']);
-//            $this->addFlash('success', 'Les élève ont bien été ajoutés.');
-//        }
+        if ($request->isMethod('POST')) {
+            $data = $request->request->all();
+            $addCourse= $courseService->addUsersCourse($data['users'], $data['id']);
+            $this->addFlash('success', 'Les élèves ont bien été ajoutés.');
+            return $this->redirect($this->generateUrl('usersCourse', array('courseId' => $courseId)));
+        }
 
-        $results= $this->get('nouestil.user')->getUsersList();
         return $this->render('AppBundle:Course:usersCourse.html.twig', array(
-            'results' => $results,
-            'course' => $course
+            'results' => $userService->getNotUsersCourse($courseId),
+            'course' => $courseService->getCourse($courseId)
         ));
+    }
+
+    public function deleteUserCourseAction($userId,$courseId){
+        $courseService= $this->get('nouestil.course');
+        $userService= $this->get('nouestil.user');
+        $userCourseToDelete= $courseService->removeUserCourse($userId, $courseId);
+        $this->addFlash('success', 'Les élèves ont bien été supprimé.');
+
+        return $this->redirect($this->generateUrl('usersCourse', array('courseId' => $courseId)));
     }
 }

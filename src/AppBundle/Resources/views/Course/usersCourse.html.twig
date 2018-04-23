@@ -1,4 +1,4 @@
-{% extends 'base.html.twig' %}
+{% extends 'base-menu.html.twig' %}
 {% block stylesheets %}
     {{ parent() }}
 <link href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.6-rc.0/css/select2.min.css" rel="stylesheet" />
@@ -19,10 +19,10 @@
                 <thead>
                 <tr>
                     <th>#</th>
-                    <th>Nom d'utilisateur</th>
-                    <th>name</th>
-                    <th>Prénom</th>
-                    <th>Date de Naissance</th>
+                    <th>{{ "Nom d\'utilisateur"|trans }}</th>
+                    <th>{{ "Nom"|trans }}</th>
+                    <th>{{ "Prénom"|trans }}</th>
+                    <th>{{ "Action"|trans }}</th>
                 </tr>
                 </thead>
                 <tbody>
@@ -32,7 +32,9 @@
                         <td>{{ user.username }}</td>
                         <td>{{ user.lastname }}</td>
                         <td>{{ user.firstname }}</td>
-
+                        <td><a href="{{ path('deleteUserCourse',{'userId': user.id, 'courseId': course.Id}) }}"
+                               onclick="return confirm('Confirmer la suppression ?')">
+                                <span class="label label-danger">{{ "Supprimer"|trans }}</span></a></td>
                     </tr>
                 {% endfor %}
                 </tbody>

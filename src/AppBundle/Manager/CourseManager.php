@@ -100,34 +100,46 @@ class CourseManager
             $this->em->persist($course);
             $this->em->flush();
         } catch (\exception $e){
-            dump($e->getMessage());
+            $e->getMessage();
+            dump($e);
         }
            return $course;
     }
 
     public function addUsersCourse($users, $id)
     {
-//        $course= $this->em
-//            ->getRepository('AppBundle:Course')
-//            ->findOneById($id);
-//
-//        foreach ($users as $value){
-//            $user= $this->em
-//                ->getRepository('AppBundle:User')
-//                ->findOneById($value);
-//            if (!$user instanceof User) {
-//                throw $this->createNotFoundException(
-//                    'User incorecct'
-//                );
-//            }
-//
-//            $course->setUser($user);
-//        }
+        $course= $this->em
+            ->getRepository('AppBundle:Course')
+            ->findOneById($id);
+        foreach ($users as $value){
+            $user= $this->em
+                ->getRepository('AppBundle:User')
+                ->findOneById($value);
+            $course->addUser($user);
+            try{
+                $this->em->persist($course);
+                $this->em->flush();
+            } catch (\exception $e){
+                $e->getMessage();
+            }
+        }
     }
 
-    public function getProfesssor()
+    public function removeUserCourse($userId, $courseId)
     {
-        return findProfessor();
+        $course= $this->em
+            ->getRepository('AppBundle:Course')
+            ->findOneById($courseId);
+        $user= $this->em
+            ->getRepository('AppBundle:User')
+            ->findOneById($userId);
+        $course->removeUser($user);
+        try{
+            $this->em->persist($course);
+            $this->em->flush();
+        } catch(\exception $e){
+            $e->getMessage();
+        }
     }
 
 }
