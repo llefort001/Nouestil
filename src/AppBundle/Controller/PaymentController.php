@@ -70,10 +70,13 @@ class PaymentController extends Controller
             $data = $request->request->all();
 
             $payment= $this->get('nouestil.payment');
-            $payment->updatePayment($data['id'], $data['amount'], $data['datetime'], $data['method']);
+            $payment->updatePayment($data['id'], $data['amount'], $data['datetime'], $data['method'], $data['note']);
+
+            //dump($data['note']); die;
         }
 
-        $this->addFlash('success', 'Le paieent a bien été modifié');
+
+        $this->addFlash('success', 'Le paiement a bien été modifié');
         return $this->redirect($this->generateUrl('payments'));
     }
 

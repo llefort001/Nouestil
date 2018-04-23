@@ -43,6 +43,10 @@ class UserManager
         return (in_array('ROLE_ADMIN', $user->getRoles())) ? true : false;
     }
 
+    public function isProf($user)
+    {
+        return (in_array('ROLE_PROF', $user->getRoles())) ? true : false;
+    }
     /**
      * @return bool
      */
@@ -214,9 +218,7 @@ class UserManager
                 'Pas d\'utilisateurs '
             );
         }
-        if (!$user->isEnabled()) {
-            $user->setEnabled(true);
-        }
+
         $this->em->persist($user);
         $this->em->flush();
     }
