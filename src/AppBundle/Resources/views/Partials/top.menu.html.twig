@@ -6,11 +6,11 @@
         <ul class="nav navbar-top-links navbar-right">
             {% if is_granted('ROLE_PREVIOUS_ADMIN') %}
             <li>
-                {#<a href="{{ path('pichet_portailmkg_homepage', {'_want_to_be': '_exit'}) }}" class="m-r-sm text-muted welcome-message"><span class="label label-warning">Exit impersonation</span></a>#}
+                <a href="{{ path('users', {'_want_to_be': '_exit'}) }}" class="m-r-sm text-muted welcome-message"><span class="label label-warning">Quitter la vue utilisateur</span></a>
             </li>
             {% endif %}
             <li>
-                {#<span class="m-r-sm text-muted welcome-message">{{ config.title }}</span>#}
+                <span class="m-r-sm text-muted welcome-message">{{ config.title }}</span>
             </li>
             {% if is_granted("IS_AUTHENTICATED_REMEMBERED") %}
             <li>
