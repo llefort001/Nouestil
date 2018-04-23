@@ -30,6 +30,8 @@
                         {#<span class="label label-default" data-toggle="modal" data-target="#userModal_{{ user.id }}">Modifier</span>#}
                         {#<a class="label label-warning"  href="{{ path('base_homepage', {'_want_to_be': user.username}) }}" >Impersonate</a>#}
                         {#{% if currentUser != user %}#}
+                        <a href="#"><span class="label label-default" data-toggle="modal"
+                                          data-target="#paymentModal_{{ payment.id }}">{{ "Modifier"|trans }}</span></a>
                         <a href="{{ path('deletePayment',{'paymentId': payment.id}) }}"
                         onclick="return confirm('Confirmer la suppression ?')"><span class="label label-danger">{{ "Supprimer"|trans }}</span></a>
                         {#{% endif %}#}
