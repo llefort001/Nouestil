@@ -228,4 +228,19 @@ class UserManager
         $this->em->flush();
 
     }
+
+    public function getNotUsersCourse($courseId){
+        $results= $this->em
+            ->getRepository('AppBundle:User')
+            ->queryNotCourseUsers($courseId);
+        foreach ($results[0] as $userInscrit){
+            foreach ($results[1] as $index => $allUsers){
+                if ($userInscrit == $allUsers){
+                    unset($results[1][$index]);
+                    break;
+                }
+            }
+        }
+        return $results[1];
+    }
 }

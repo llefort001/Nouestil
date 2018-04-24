@@ -42,14 +42,18 @@ class UserRepository extends \Doctrine\ORM\EntityRepository
 
     public function queryNotUserCourse($courseId)
     {
-        $qb2= $this->_em->createQueryBuilder();
-        $qb2->select('c')
-            ->from('AppBundle\Entity\Course','c')
-            ->where('c.id= :id')
+        $qb2 = $this->_em->createQueryBuilder();
+        $qb2->select('u', 'c')
+            ->from('AppBundle\Entity\User', 'u')
+            ->leftJoin('u.courses', 'c')
+            ->where('c.id = :id')
             ->setParameter('id', $courseId);
 
-
-        return $qb2;
+        $qb = $this->_em->createQueryBuilder();
+        $qb->select('u')
+            ->from('AppBundle\Entity\User', 'u');
+        $results = array($qb2->getQuery()->getResult(), $qb->getQuery()->getResult());
+        return $results;
     }
 
     public function findUsersLike($username){
