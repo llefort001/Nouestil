@@ -326,7 +326,7 @@ li.dropdown{
 }*/
 /*welcome block*/
 .welcome-block-full-image{
-    background: url('../images/banner.jpg')
+    background: url('../images/welcome.jpg')
 }
 .welcome-block-full-image > div {
     background: rgba(0, 0, 0, 0.6) none repeat scroll 0 0;
@@ -498,7 +498,7 @@ button.close:hover {
     margin-right: auto;
 }
 .book-block-full-image{
-    background: url('../images/banner.jpg');
+    background: url('../images/banner3.jpg');
     margin-top: 135px;
     padding: 65px 0;
 }
@@ -621,7 +621,7 @@ button.close:hover {
 }
 /*subscribe*/
 .subscribe-full-image{
-    background: url('../images/banner.jpg') no-repeat scroll 0 0 / cover ;
+    background: url('../images/subcribe_img.jpg') no-repeat scroll 0 0 / cover ;
     padding: 110px 0;
     color: #fff;
 
@@ -665,7 +665,7 @@ button.close:hover {
 }
 /*contact form*/
 .contact-block-full-image{
-    background: url('../images/Home/Image26.png') no-repeat scroll 0 0 / cover ;
+    background: url('../images/banner2.jpg') no-repeat scroll 0 0 / cover ;
     margin-top: 135px;
     padding: 65px 0;
 }
