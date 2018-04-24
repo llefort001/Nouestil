@@ -1,0 +1,21 @@
+{# app/Resources/TwigBundle/views/Exception/error403.html.twig #}
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    {% if is_granted('IS_AUTHENTICATED_FULLY') %}
+        <div class="middle-box text-center animated fadeInDown">
+            <h1>403</h1>
+            <h3 class="font-bold">Access denied</h3>
+
+            <div class="error-desc">
+                Assurez vous que votre compte a été et que vous disposez des droits nécessaires pour
+                accéder à cette ressource.
+                <p>
+                    Pour toute demande de support : <a href="mailto:contact@nouestil.com">contact@nouestil.com</a>
+                </p>
+            </div>
+        </div>
+    {% endif %}
+
+    {# ... #}
+{% endblock %}

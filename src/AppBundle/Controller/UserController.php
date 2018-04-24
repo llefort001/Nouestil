@@ -19,11 +19,11 @@ class UserController extends Controller
     public function indexAction()
     {
         $user = $this->getUser();
+//        $user->setRoles(['ROLE_PROF']);
         $entityManager = $this->getDoctrine()->getManager();
-        $roles = $this->container->getParameter('roles');
         $groups = $entityManager->getRepository('AppBundle:Group')->findAll();
         $users = $this->get('nouestil.user');
-        return $this->render('AppBundle:Users:users.html.twig', array('users' => $users->getUsersList(), "roles" => $roles, "groups" => $groups, "currentUser" => $user));
+        return $this->render('AppBundle:Users:users.html.twig', array('users' => $users->getUsersList(), "groups" => $groups, "currentUser" => $user));
 
     }
 

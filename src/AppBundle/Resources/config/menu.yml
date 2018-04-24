@@ -6,17 +6,17 @@ parameters:
             icon:   fa-user
             label:  Utilisateurs
             path:   users
-            scope : all
+            scope : prof
         -
             icon:   fa-link
             label:  Contacts
             path:   contacts
-            scope: all
+            scope: prof
         -
             icon:   fa-calendar
             label:  Cours
             path:   courses
-            scope: all
+            scope: prof
         -
            icon:   fa-money
            label:  Paiements
@@ -26,4 +26,4 @@ parameters:
            icon:   fa-list
            label:  Listes d'appel
            path:   payments
-           scope: all
+           scope: prof
