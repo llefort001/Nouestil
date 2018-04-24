@@ -39,4 +39,19 @@ class ShowcaseController extends Controller
         ]);
     }
 
+    public function aboutAction(Request $request)
+    {
+        $parametre = "laurene est très puissante";
+        return $this->render('AppBundle:Showcase:about.html.twig', [
+            'parametre' => $parametre
+        ]);
+    }
+
+    public function loginAction(Request $request)
+    {
+        $parametre = "laurene est très puissante";
+        return $this->render('AppBundle:Showcase:login.html.twig', [
+            'parametre' => $parametre
+        ]);
+    }
 }
