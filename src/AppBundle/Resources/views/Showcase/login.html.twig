@@ -1,0 +1,19 @@
+{% extends 'base-vitrine.html.twig' %}
+
+{% block body %}
+    <div class="row">
+        <div class="col-4">
+
+            <form  class="form-group" action="" method="">
+                <div class="form-group">
+                    <label class="control-label"><h2>Nom d'utilisateur ou Email<h2></label>
+                    <input class="form-control" type="text" id="login_username_id">
+                    <label class="control-label"><h2>Mot de passe</h2></label>
+                    <input class="form-control" type="password" id="login_password_id">
+                </div>
+                <input type="submit" id="login_form_submit_id" value="login" class="btn btn-default">
+            </form>
+        </div>
+    </div>
+
+{% endblock %}

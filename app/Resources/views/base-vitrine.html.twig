@@ -13,20 +13,46 @@
     {% endblock %}
     <link rel="icon" type="image/x-icon" href="{{ asset('favicon.ico') }}"/>
 </head>
-<body>
+<body class="body">
 <header>
-    {% block header %}{% endblock %}
-</header>
-<nav>
-    {% block nav %}
-        <ul id="navigation">
-            <li><a href="school.html.twig">La Escola</a></li>
-            <li><a href="courses.html.twig">Courses</a></li>
-            <li><a href="gallery.html.twig">Gallery</a></li>
-            <li><a href="contact.html.twig">Contact</a></li>
-        </ul>
+    {% block header %}
+        <header class="header">
+            <div class="container">
+                <div class="header__logo">
+                    <a href="" class="logo_item"><img src="{{ asset('images/logoNouEstilreduit.png') }}" id="logoNouEstil" alt="logo_NouEstil"></a>
+                </div>
+            </div>
+        </header>
     {% endblock %}
-</nav>
+    {% block nav %}
+        <!-- Navigation -->
+        <nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top">
+            <div class="container">
+                <div class="collapse navbar-collapse" id="navbarResponsive">
+                    <ul class="navbar-nav ml-auto">
+                        <li class="nav-item active">
+                            <a class="nav-link" href="#">Home
+                                <span class="sr-only">(current)</span>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="#">Tarifs et planning</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="{{path('about')}}">About</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="{{path('contact')}}">Contact</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="{{path('login')}}">Login</a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </nav>
+    {% endblock %}
+</header>
 
 {% block body %}{% endblock %}
 {% block javascripts %}
@@ -41,7 +67,9 @@
 {% endblock %}
 
 <footer>
-    {% block footer %}&copy; Copyright 2018 by IUT de Bayonne et Pays Basque {% endblock %}
+    {% block footer %}
+        <p>&copy; Copyright 2018 by IUT de Bayonne et Pays Basque</p>
+         {% endblock %}
 </footer>
 </body>
 
