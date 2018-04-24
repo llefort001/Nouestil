@@ -1,0 +1,45 @@
+Contacts: __Contacts
+Nom: __Nom
+Prénom: __Prénom
+Email: __Email
+'Num tel': '__Num tel'
+Utilisateurs: __Utilisateurs
+Actions: __Actions
+'Modifier le contact': '__Modifier le contact'
+Fermer: __Fermer
+Sauvegarder: __Sauvegarder
+'Créer un contact': '__Créer un contact'
+'Liste des cours': '__Liste des cours'
+Intitulé: __Intitulé
+Session: __Session
+Professeur: __Professeur
+Supprimer: __Supprimer
+'Sélectionner un professeur': '__Sélectionner un professeur'
+'Créer un cours': '__Créer un cours'
+'Mon Profil': '__Mon Profil'
+Déconnexion: __Déconnexion
+Connexion: __Connexion
+'Créer un paiement': '__Créer un paiement'
+'Descriptif créer un paiement': '__Descriptif créer un paiement'
+Paiements: __Paiements
+'Nom d''utilisateur': '__Nom d''utilisateur'
+Montant: __Montant
+Méthode: __Méthode
+Date: __Date
+'Modifier paiement #%payment.id% effectué par %payment.user.firstname% %payment.user.lastname%.': '__Modifier paiement #%payment.id% effectué par %payment.user.firstname% %payment.user.lastname%.'
+'Carte bancaire': '__Carte bancaire'
+Espèces: __Espèces
+Paypal: __Paypal
+Autre: __Autre
+'Créer un utilisateur': '__Créer un utilisateur'
+'Date de naissance': '__Date de naissance'
+Groupe: __Groupe
+'Numéro de téléphone :': '__Numéro de téléphone :'
+"Délier\n                                                    ce contact de l'utilisateur": "__Délier\n                                                    ce contact de l'utilisateur"
+Modifier: __Modifier
+'Note publique:': '__Note publique:'
+'Note privée:': '__Note privée:'
+'Modifier le groupe': '__Modifier le groupe'
+'Sélectionner une option': '__Sélectionner une option'
+'Supprimer l''utilisateur': '__Supprimer l''utilisateur'
+'Délier ce contact de l''utilisateur': '__Délier ce contact de l''utilisateur'
