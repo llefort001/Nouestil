@@ -52,6 +52,21 @@ class PaymentController extends Controller
         ));
     }
 
+    public function updatePaymentAction(Request $request)
+    {
+        if ($request->isMethod('POST')) {
+            $data = $request->request->all();
+
+            $payment= $this->get('nouestil.payment');
+            $payment->updatePayment($data['id'], $data['amount'], $data['datetime'], $data['method'], $data['note']);
+
+            //dump($data['note']); die;
+        }
+
+        $this->addFlash('success', 'Le paiement a bien été modifié');
+        return $this->redirect($this->generateUrl('payments'));
+    }
+
     public function deletePaymentAction($paymentId)
     {
         $paymentManager = $this->get('nouestil.payment');
@@ -63,34 +78,5 @@ class PaymentController extends Controller
         return $this->redirect($this->generateUrl("payments"));
 
     }
-    public function updatePaymentAction(Request $request)
-    {
-
-        if ($request->isMethod('POST')) {
-            $data = $request->request->all();
-
-            $payment= $this->get('nouestil.payment');
-            $payment->updatePayment($data['id'], $data['amount'], $data['datetime'], $data['method']);
-        }
-
-        $this->addFlash('success', 'Le paieent a bien été modifié');
-        return $this->redirect($this->generateUrl('payments'));
-    }
-
-
-//    public function updateUserPaymentAction($paymentId, $user)
-//    {
-//        $entityManager = $this->getDoctrine()->getManager();
-//        $paymentManager = $this->get('nouestil.payment');
-//        $paymentToUpdate = $paymentManager->getPayment($paymentId);
-//
-//        if ($paymentToUpdate instanceof Payment) {
-//            $userToUpdate = $entityManager->getRepository('AppBundle:User')->find(array("id" => $user));
-//            $paymentToUpdate->setUser($userToUpdate);
-//            $userToUpdate->addPaymentUser($paymentToUpdate);
-//            $entityManager->flush();
-//        }
-//        return $this->redirect($this->generateUrl('payments'));
-//    }
 
 }
