@@ -18,8 +18,11 @@ security:
             form_login:
                 provider: fos_userbundle
                 csrf_token_generator: security.csrf.token_manager
+                check_path: fos_user_security_check
+            logout:
+                path:   fos_user_security_logout
 
-            logout:       true
+#            logout:       true
             anonymous:    true
             switch_user: { role: ROLE_ADMIN, parameter: _want_to_be }
 
