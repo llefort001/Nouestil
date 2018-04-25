@@ -3,6 +3,7 @@
 namespace AppBundle\Controller;
 
 use AppBundle\Form\UserType;
+use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
@@ -80,13 +81,16 @@ class UserController extends Controller
             if ($formRegistration->isSubmitted() && $formRegistration->isValid()) {
                 $user = $formRegistration->getData();
                 $tokenGenerator = $this->get('fos_user.util.token_generator');
+                if (null === $user->getConfirmationToken()) {
+                    $token = substr($tokenGenerator->generateToken(), 0, 20);
+                    $user->setConfirmationToken($token);
+                }
                 $password = substr($tokenGenerator->generateToken(), 0, 8); // 8 chars
                 $username = strtolower
                 (substr($user->getFirstname(), 0, 1)
                     . $user->getLastname());
                 $users = $userManager->getUsersLike($username);
                 if (!empty($users)) {
-                    dump($users);
                     $tempUsernameCount = $users[0]->getUsername();
                     $tempUsernameCount = str_replace($username, '', $tempUsernameCount);
                     $user->setUsername($username . ($tempUsernameCount + 1));
@@ -94,7 +98,14 @@ class UserController extends Controller
                     $user->setUsername($username);
                 }
                 $user->setPlainpassword($password);
-                $this->get('nouestil.user')->save($user);
+                $userManager->save($user);
+                $view= $this->renderView('email/register_confirmed.html.twig', array(
+                    'user' => $user,
+                    'password' => $password
+                ));
+                $mailFrom= $this->getParameter('mailer_user');
+                $mailTo= $user->getEmail();
+                $this->get('mailer')->send($userManager->sendConfirmMail($view,$mailFrom, $mailTo));
                 // on redirige l'administrateur vers la liste des clients si aucune erreur
                 $this->addFlash('success', 'L\'utilisateur ' . $user->getUsername() . ' a bien été enregistré, veuillez maintenant lui créer un contact.');
                 return $this->redirect($this->generateUrl("createContact"));
@@ -114,6 +125,22 @@ class UserController extends Controller
         $this->addFlash('success', 'Le contact a bien été délié');
         return $this->redirect($this->generateUrl('users'));
 
+    }
+
+    public function confirmUserAction($token, $userId){
+        $userManager= $this->get('nouestil.user');
+        $userToConfirm= $userManager->getUser($userId);
+        if (!is_null($userToConfirm) && $userToConfirm->getConfirmationToken() === $token){
+            $userToConfirm->setEnabled(true);
+            $userManager->save($userToConfirm);
+            $url = $this->generateUrl('fos_user_registration_confirmed');
+            $response = new RedirectResponse($url);
+            $this->addFlash('success',  'Succes your account has been activate');
+            return $response;
+        }
+        $url = $this->generateUrl('fos_user_registration_confirmed');
+        $response = new RedirectResponse($url);
+        return $response;
     }
 
 }
