@@ -13,6 +13,3 @@ courses:
 about:
     path:     /about
     defaults: { _controller: AppBundle:Showcase:about }
-login:
-    path:     /login
-    defaults: { _controller: AppBundle:Showcase:login }
