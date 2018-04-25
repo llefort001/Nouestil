@@ -41,5 +41,7 @@ monolog:
 #    delivery_addresses: ['me@example.com']
 swiftmailer:
     transport: gmail
-    username:  '%mailer_user%'
-    password:  '%mailer_password%'
+    username: '%mailer_user%'
+    password: '%mailer_password%'
+    host: '%mailer_host%'
+    spool: { type: memory }

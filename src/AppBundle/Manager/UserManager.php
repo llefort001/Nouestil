@@ -25,6 +25,7 @@ class UserManager
     protected $payments;
     protected $contacts;
     protected $em;
+    protected $tokenGenerator;
 
     /**
      * UserManager constructor.
@@ -132,6 +133,10 @@ class UserManager
 
     }
 
+    public function getTokenGenerator($userId){
+        $userToToken= $this->getUser($userId);
+        return $userToToken->confirmationToken;
+    }
 
     public function getUsersLike($username)
     {
@@ -208,6 +213,18 @@ class UserManager
 //            dump($e->getMessage());
         }
         return $user;
+    }
+
+    public function sendConfirmMail($view, $mailFrom, $mailTo){
+        $message= \Swift_Message::newInstance()
+            ->setSubject('confirmer email')
+            ->setFrom($mailFrom)
+            ->setTo($mailTo)
+            ->setCharset('utf-8')
+            ->setContentType('text/html')
+            ->setBody($view);
+        return $message;
+
     }
 
     public function save(User $user)
