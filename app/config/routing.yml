@@ -4,4 +4,14 @@ app:
     requirements:
             _locale: en|fr|es
 fos_user:
-    resource: "@FOSUserBundle/Resources/config/routing/all.xml"
+    resource: "fosuser_routing.yml"
+    prefix:   /{_locale}/
+    requirements:
+            _locale: en|fr|es
+
+root:
+    path: /
+    defaults:
+        _controller: FrameworkBundle:Redirect:redirect
+        route: home
+        permanent: true
