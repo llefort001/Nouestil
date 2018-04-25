@@ -98,28 +98,6 @@ class PaymentManager
     }
 
 
-    public function createPayment($amount, $user, $method, $datetime, $note)
-    {
-        $payment = new Payment();
-        $user->setAmount($amount);
-        $user->setUser($user);
-        $user->setMethod($method);
-        $user->setDateTime($datetime);
-
-        //dump($user->setComment($comment));die;
-
-        $user->setComment($note);
-
-
-        try {
-            $this->em->persist($payment);
-            $this->em->flush();
-        } catch (\Exception $e) {
-//            dump($e->getMessage());
-        }
-        return $payment;
-    }
-
     public function save(Payment $payment){
 
         if (!$payment instanceof Payment) {
@@ -132,6 +110,7 @@ class PaymentManager
         $this->em->flush();
     }
 
+
     public function updatePayment($id, $amount, $datetime, $method, $note){
 
         $payment = $this->em
@@ -140,8 +119,6 @@ class PaymentManager
         $payment->setAmount($amount);
         $payment->setMethod($method);
         $payment->setComment($note);
-
-        //dump($payment->setComment($note));die;
 
         $payment->setDateTime( new \DateTime($datetime) );
 

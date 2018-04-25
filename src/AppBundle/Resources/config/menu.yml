@@ -3,39 +3,27 @@ parameters:
         title: Administration Nouestil
     leftMenu:
         -
-            icon:   fa-th-large
-            label:  Administration
-            scope : admin
-            items:
-                -
-                    icon :   fa-users
-                    label:  Utilisateurs
-                    path:   users
-                    scope: admin
-                -
-                    icon:   fa-user
-                    label:  Contacts
-                    path:   contacts
-                    scope: all
-
-                -
-                    icon:   fa-calendar
-                    label:  Cours
-                    path:   courses
-                    scope: all
-                -
-                   icon:   fa-money
-                   label:  Paiements
-                   path:   payments
-                   scope: all
-
+            icon:   fa-user
+            label:  Utilisateurs
+            path:   users
+            scope : all
         -
-            icon:   fa-book
-            label:  Documentation
-            scope : user
-            items:
-                -
-                    icon: fa-file-video-o
-                    label:  Tutoriels
-                    path:   home
-                    scope: all
+            icon:   fa-link
+            label:  Contacts
+            path:   contacts
+            scope: all
+        -
+            icon:   fa-calendar
+            label:  Cours
+            path:   courses
+            scope: all
+        -
+           icon:   fa-money
+           label:  Paiements
+           path:   payments
+           scope: admin
+        -
+           icon:   fa-list
+           label:  Listes d'appel
+           path:   payments
+           scope: all

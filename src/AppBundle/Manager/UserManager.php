@@ -25,7 +25,6 @@ class UserManager
     protected $payments;
     protected $contacts;
     protected $em;
-    protected $tokenGenerator;
 
     /**
      * UserManager constructor.
@@ -44,6 +43,11 @@ class UserManager
         return (in_array('ROLE_ADMIN', $user->getRoles())) ? true : false;
     }
 
+
+    public function isProf($user)
+    {
+        return (in_array('ROLE_PROF', $user->getRoles())) ? true : false;
+    }
     /**
      * @return bool
      */
@@ -223,10 +227,9 @@ class UserManager
 
     }
 
-    public function save(User $user)
-    {
+    public function save(User $user){
 
-           if (!$user instanceof User) {
+        if (!$user instanceof User) {
             throw $this->createNotFoundException(
                 'Pas d\'utilisateurs '
             );
