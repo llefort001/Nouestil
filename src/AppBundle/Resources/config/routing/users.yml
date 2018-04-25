@@ -25,3 +25,7 @@ createUser:
 unlinkContact:
     path:     /admin/unlink-contact/{userId}/{contactId}
     defaults: { _controller: AppBundle:User:unlinkContact }
+
+confirmUser:
+    path:    /confirm-user/{token}/{userId}
+    defaults: { _controller: AppBundle:User:confirmUser }
