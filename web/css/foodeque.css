@@ -53,6 +53,12 @@ body a:focus, a:hover {
     text-decoration: none;
 }
 
+
+#oui{
+    max-width: 100%;
+    height: auto;
+}
+
 input[type="button"], input[type="submit"], button.btn, button.btn:hover {
     transition: 0.2s all;
     -webkit-transition: 0.2s all;
@@ -1413,4 +1419,3 @@ mark, .mark {
          /*float: left;*/
          position: relative;
        }
-        
