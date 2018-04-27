@@ -15,18 +15,10 @@ class ShowcaseController extends Controller
         ]);
     }
 
-    public function galleryAction(Request $request)
+    public function stylesAction(Request $request)
     {
         $parametre = "laurene est très puissante";
-        return $this->render('AppBundle:Showcase:gallery.html.twig', [
-            'parametre' => $parametre
-        ]);
-    }
-
-    public function coursesAction(Request $request)
-    {
-        $parametre = "laurene est très puissante";
-        return $this->render('AppBundle:Showcase:courses.html.twig', [
+        return $this->render('AppBundle:Showcase:styles.html.twig', [
             'parametre' => $parametre
         ]);
     }
@@ -51,6 +43,13 @@ class ShowcaseController extends Controller
     {
         $parametre = "laurene est très puissante";
         return $this->render('AppBundle:Showcase:login.html.twig', [
+            'parametre' => $parametre
+        ]);
+    }
+    public function timetableAction(Request $request)
+    {
+        $parametre = "laurene est très puissante";
+        return $this->render('AppBundle:Showcase:timetable.html.twig', [
             'parametre' => $parametre
         ]);
     }

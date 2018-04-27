@@ -48,7 +48,7 @@ License URI: http://www.themevault.net/license/-->
             <div class="row">
                 <div class="col-xs-12 visible-xs">
                     <div class="logo-mobile">
-                        <a href="index.html"><img src="{{ asset('images/logoNouEstilreduit.png') }}"/></a>
+                        <a href="index.html"><img src="{{ asset('images/logoNouEstilreduit.png') }}" class="img-fluid"/></a>
                     </div>
                 </div>
                 <div class="col-md-12 col-xs-12">
@@ -62,16 +62,16 @@ License URI: http://www.themevault.net/license/-->
                     <div class="collapse navbar-collapse text-center" id="myNavbar">
                         <ul class="nav navbar-nav margin-l">
                             <li class="active"><a href="index.html">Home</a></li>
-                            <li><a href="{{path('about')}}">About</a></li>
-                            <li><a href="menu.html">Planning</a></li>
+                            <li><a href="{{path('about')}}">L'école</a></li>
+                            <li><a href="{{path('timetable')}}">Les cours</a></li>
                         </ul>
                         <div class="logo hidden-xs">
                             <a href="index.html"><img src="{{ asset('images/logoNouEstil125px.png') }}"/></a>
                         </div>
                         <ul class="nav navbar-nav navbar-right">
-                            <li><a href="service.html">estilos</a></li>
-                            <li><a href="event.html">Contact</a></li>
-                            <li><a href="contact.html">Login</a></li>
+                            <li><a href="{{path('styles')}}">Les styles</a></li>
+                            <li><a href="{{path('contact')}}">Contact</a></li>
+                            <li><a href="{{path('login')}}">Login</a></li>
 
                             <!--                                <li><a class="search" id="searchtoggl"><i class="fa fa-search"></i></a>
                                                                 <div id="searchbar" class="clearfix">
@@ -84,7 +84,7 @@ License URI: http://www.themevault.net/license/-->
 
                     </div>
                 </div>
-                <div class="col-md-1">
+                <!--<div class="col-md-1">
                     <!--<a class="search" id="searchtoggl"><i class="fa fa-search"></i></a>-->
                     <!--                                <div id="searchbar" class="clearfix">
                                                         <form id="searchform">
@@ -93,7 +93,7 @@ License URI: http://www.themevault.net/license/-->
                                                         </form>
                                                     </div>-->
 
-                </div>
+                <!--</div>-->
             </div>
         </div>
     </nav>
@@ -111,29 +111,29 @@ License URI: http://www.themevault.net/license/-->
     <div class="container">
         <div class="row footer-block-main">
             <div class="col-lg-3 col-md-3 col-sm-3 col-xs-12 width-50">
-                <div class="footer-block"><h4>quick links</h4>
+                <div class="footer-block"><h4>Liens rapides</h4>
                     <ul class="list-unstyled">
                         <li class="active"><a href="index.html">Home</a></li>
-                        <li><a href="about.html">About</a></li>
-                        <li><a href="menu.html">Planning</a></li>
-                        <li><a href="service.html">Styles</a></li>
-                        <li> <a href="event.html">Contact</a></li>
-                        <li> <a href="contact.html">Login</a></li>
+                        <li><a href="{{path('about')}}">L'école</a></li>
+                        <li><a href="{{path('timetable')}}">Les cours</a></li>
+                        <li><a href="{{path('styles')}}">Les styles</a></li>
+                        <li> <a href="{{path('contact')}}">Contact</a></li>
+                        <li> <a href="{{path('login')}}">Login</a></li>
                     </ul>
                 </div>
             </div>
             <div class="col-lg-5 col-md-5 col-sm-6 col-xs-12 width-50">
-                <div class="footer-block"><h4>Contact</h4>
+                <div class="footer-block"><h4>Nous Contacter</h4>
                     <ul class="list-unstyled">
-                        <li><p>MOVIL +34 637 49 66 79 </p></li>
-                        <li><p>MAIL nouestil@gmail.com</p></li>
+                        <li><p>TEL : +34 637 49 66 79 </p></li>
+                        <li><p>MAIL: nouestil@gmail.com</p></li>
                         <li><p>SECRETARÍA [mar.-mier.-vier.] 18h-20h</p></li>
                     </ul>
                 </div>
             </div>
 
             <div class="col-lg-4 col-md-4 col-sm-3 col-xs-12">
-                <div class="footer-block margin-t15"><h4>now on instagram</h4>
+                <div class="footer-block margin-t15"><h4>@NOUESTISALOU</h4>
                     <div class="row">
                         <div id="instafeed"></div>
 
@@ -150,11 +150,9 @@ License URI: http://www.themevault.net/license/-->
             <div class="col-md-12">
                 <div class="social-grid text-right">
                     <ul>
-                        <li><a><i class="fa fa-facebook"></i></a></li>
-                        <li><a><i class="fa fa-twitter"></i></a></li>
-                        <li><a><i class="fa fa-instagram"></i></a></li>
-                        <li><a><i class="fa fa-google-plus"></i></a></li>
-                        <li><a><i class="fa fa-youtube-play"></i></a></li>
+                        <li><a target="blank" href="https://www.facebook.com/NouEstilSalou/"><i class="fa fa-facebook"></i></a></li>
+                        <li><a target="blank" href="https://www.instagram.com/nouestilsalou/"><i class="fa fa-instagram"></i></a></li>
+                        <li><a target="blank" href="https://www.youtube.com/user/nouestilsalou"><i class="fa fa-youtube-play"></i></a></li>
                     </ul>
                 </div>
             </div>

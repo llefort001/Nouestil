@@ -1,18 +1,18 @@
 home:
     path:     /
     defaults: { _controller: AppBundle:Showcase:index }
-gallery:
-    path:     /gallery
-    defaults: { _controller: AppBundle:Showcase:gallery }
 contact:
     path:     /contact
     defaults: { _controller: AppBundle:Showcase:contact }
-courses:
-    path:     /courses
-    defaults: { _controller: AppBundle:Showcase:courses }
+styles:
+    path:     /styles
+    defaults: { _controller: AppBundle:Showcase:styles }
 about:
     path:     /about
     defaults: { _controller: AppBundle:Showcase:about }
 login:
     path:     /login
     defaults: { _controller: AppBundle:Showcase:login }
+timetable:
+    path:     /timetable
+    defaults: { _controller: AppBundle:Showcase:timetable }
