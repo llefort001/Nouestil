@@ -3,6 +3,7 @@ app:
     prefix:   /{_locale}/
     requirements:
             _locale: en|fr|es
+
 fos_user:
     resource: "fosuser_routing.yml"
     prefix:   /{_locale}/
