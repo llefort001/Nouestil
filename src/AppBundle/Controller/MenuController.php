@@ -33,20 +33,6 @@ class MenuController extends Controller
             if (!$userManager->isUser($this->getUser()) && $menu['scope'] == "user") {
                 unset($menus[$key]);
             }
-//            if(isset($menu['items'])){
-//                foreach($menu["items"] as $subKey => $subMenu){
-//                    if(isset($subMenu['scope'])){
-//                        if (!$userManager->isGranted('ROLE_ADMIN',$this->getUser()) && $this->getUser()->getGroup()->getCode()!="pwp" && $subMenu['scope'] == "pwp") {
-//                            unset($menus[$key]['items'][$subKey]);
-//                        }
-//                        if (!$this->getUser()->getTimeTracking() && $subMenu['scope'] == "time-tracking") {
-//                            unset($menus[$key]['items'][$subKey]);
-//                        }
-//                    }
-//
-//                }
-//            }
-
         }
 
 

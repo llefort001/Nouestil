@@ -1,0 +1,37 @@
+<form name="sentMessage" id="contactForm">
+    <div class="row">
+        <div class="col-md-6 col-sm-6 col-xs-12">
+            <div class="form-group">
+                <input type="text" id="name1" class="form-control" placeholder="{{ "showcase_contact_name"|trans }}" required="" aria-invalid="false">
+                <p class="help-block text-danger"></p>
+            </div>
+        </div>
+        <div class="col-md-6 col-sm-6 col-xs-12">
+            <div class="form-group">
+                <input type="text" id="contact1" class="form-control" placeholder="{{ "showcase_contact_phone_number"|trans }}" required="">
+                <p class="help-block text-danger"></p>
+            </div>
+        </div>
+        <div class="col-md-6 col-sm-6 col-xs-12">
+            <div class="form-group">
+                <input type="email" id="email1" class="form-control" placeholder="{{ "showcase_contact_email"|trans }}" required="">
+                <p class="help-block text-danger"></p>
+            </div>
+        </div>
+        <div class="col-md-6 col-sm-6 col-xs-12">
+            <div class="form-group">
+                <input type="text" id="category1" class="form-control" placeholder="{{ "showcase_contact_subject"|trans }}" required="">
+                <p class="help-block text-danger"></p>
+            </div>
+        </div>
+    </div>
+    <div class="form-group">
+        <textarea name="message" id="message1" class="form-control" rows="4" placeholder="{{ "showcase_contact_message"|trans }}" required="" aria-invalid="false"></textarea>
+        <p class="help-block text-danger"></p>
+    </div>
+    <div id="success"></div>
+    <div class="text-center">
+        <button type="reset" class="btn btn-lg btn-button">{{ "showcase_contact_reset"|trans }}</button>
+        <button type="submit" class="btn btn-lg btn-button">{{ "showcase_contact_submit"|trans }}</button>
+    </div>
+</form>

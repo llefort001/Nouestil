@@ -1,0 +1,61 @@
+{% extends 'layout.html.twig' %}
+
+{% block body %}
+    <section>
+        <div class="container">
+            <div class="text-head">
+                <h1>Où nous trouver</h1>
+            </div>
+        </div>
+        <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3007.5044299875603!2d1.1269783156853526!3d41.07982402296745!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x12a15a2e9833a4fd%3A0x439cb1f6277c6e71!2sNou+Estil+-+escola+de+ball+-!5e0!3m2!1sfr!2sfr!4v1524835295671"  frameborder="0" style="border:0; width: 100%; height: 350px; margin-top: 50px;" allowfullscreen></iframe>
+    </section>
+    <section>
+
+        <div class="contact-block-full-image">
+            <div class="container">
+                <form name="sentMessage" id="contactForm">
+                    <div class="row">
+                        <div class="col-md-6 col-sm-6 col-xs-12">
+                            <div class="form-group">
+                                <input type="text" id="name1" class="form-control" placeholder="Nom :" required="" aria-invalid="false">
+                                <p class="help-block text-danger"></p>
+                            </div>
+                        </div>
+                        <div class="col-md-6 col-sm-6 col-xs-12">
+                            <div class="form-group">
+                                <input type="text" id="contact1" class="form-control" placeholder="Numéro de téléphone :" required="">
+                                <p class="help-block text-danger"></p>
+                            </div>
+                        </div>
+                        <div class="col-md-6 col-sm-6 col-xs-12">
+                            <div class="form-group">
+                                <input type="email" id="email1" class="form-control" placeholder="Email :" required="">
+                                <p class="help-block text-danger"></p>
+                            </div>
+                        </div>
+                        <div class="col-md-6 col-sm-6 col-xs-12">
+                            <div class="form-group">
+                                <input type="text" id="category1" class="form-control" placeholder="Sujet :" required="">
+                                <p class="help-block text-danger"></p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <textarea name="message" id="message1" class="form-control" rows="4" placeholder="Message :" required="" aria-invalid="false"></textarea>
+                        <p class="help-block text-danger"></p>
+                    </div>
+                    <div id="success"></div>
+                    <div class="text-center">
+                        <button type="submit" class="btn btn-lg btn-button">Effacer</button>
+                        <button type="submit" class="btn btn-lg btn-button">Envoyer</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+        <div class="clearfix"></div>
+    </section>
+    <!---->
+
+
+{% endblock %}
+
