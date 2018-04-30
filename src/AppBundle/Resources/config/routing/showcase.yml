@@ -7,9 +7,12 @@ gallery:
 contact:
     path:     /contact
     defaults: { _controller: AppBundle:Showcase:contact }
-courses:
-    path:     /courses
-    defaults: { _controller: AppBundle:Showcase:courses }
+styles:
+    path:     /styles
+    defaults: { _controller: AppBundle:Showcase:styles }
 about:
     path:     /about
     defaults: { _controller: AppBundle:Showcase:about }
+timetable:
+    path:     /timetable
+    defaults: { _controller: AppBundle:Showcase:timetable }

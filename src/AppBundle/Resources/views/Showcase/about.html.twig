@@ -5,119 +5,149 @@
     <div class="container">
 
         <!-- Introduction Row -->
-        <h1 class="my-4">Sobre la escuela Nou Estil</h1>
-        <p>Le texte est en cours de réalisation par Linda.
-            Lorem ipsum dolor sit amet, consectetur adipisicing elit. Sint, explicabo dolores ipsam aliquam inventore corrupti eveniet quisquam quod totam laudantium repudiandae obcaecati ea consectetur debitis velit facere nisi expedita vel?</p>
+        <div class="text-head">
+            <h1>{{ "showcase_about_title"|trans }}</h1>
+        </div>
+        <p>{{ "showcase_about_introduction_block"|trans }}</p>
 
+         <div class="embed-responsive embed-responsive-16by9">
+            <iframe width="560" height="315" src="https://www.youtube.com/embed/fMfaM-20AR0?rel=0" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
+         </div>
         <!--staff block--->
         <section class="staff-block">
             <div class="container">
                 <div class="text-head">
-                    <h1>Los profesores</h1>
+                    <h1>{{ "showcase_about_teachers_block_title"|trans }}</h1>
                 </div>
-                            <div class="row">
-                                <div class="col-md-3 col-sm-3 col-xs-3">
-                                    <div class="staff-image">
-                                        <img class="img-responsive" src="{{ asset('images/bastidas_virginia.jpg') }}">
-                                        <div class="overlay">
-                                            <a href="#" class="info">Virginia <small>Ritmos Latinos</small></a>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="col-md-3 col-sm-3 col-xs-3">
-                                    <div class="staff-image">
-                                        <img class="img-responsive" src="http://placehold.it/400x400">
-                                        <div class="overlay">
-                                            <a href="#" class="info">Judit <small>Danza Contemporánea</small></a>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="col-md-3 col-sm-3 col-xs-3">
-                                    <div class="staff-image">
-                                        <img class="img-responsive" src="{{ asset('images/faye_salva.jpg') }}">
-                                        <div class="overlay">
-                                            <a href="#" class="info">Salva <small>Hip Hop</small></a>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="col-md-3 col-sm-3 col-xs-3">
-                                    <div class="staff-image">
-                                        <img class="img-responsive" src="{{ asset('images/fernandez_christian.jpg') }}">
-                                        <div class="overlay">
-                                            <a href="#" class="info">Christian <small>Popping, Kizomba</small></a>
-                                        </div>
-                                    </div>
-                                </div>
+                <div class="row">
+                    <div class="col-md-3 col-sm-3 col-xs-3 instructor">
+                        <div class="staff-image">
+                            {#bastidas_virginia.jpg#}
+                            <img class="img-responsive"
+                                 src="{{ asset('images/bastidas_virginia.jpg') }}">
+                            <div class="overlay">
+                                <a href="#" class="info">{{ "showcase_about_teacher_name_1"|trans }}
+                                    <small>{{ "showcase_about_teacher_course_1"|trans }}</small>
+                                </a>
                             </div>
-                            <div class="row">
-                                <div class="col-md-3 col-sm-3 col-xs-3">
-                                    <div class="staff-image">
-                                        <img class="img-responsive" src="{{ asset('images/goncalvez_helena.jpg') }}">
-                                        <div class="overlay">
-                                            <a href="#" class="info">Helena <small>House Dance</small></a>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="col-md-3 col-sm-3 col-xs-3">
-                                    <div class="staff-image">
-                                        <img class="img-responsive" src="{{ asset('images/londono_jerson.jpg') }}">
-                                        <div class="overlay">
-                                            <a href="#" class="info">Jerson  <small>Acrobacias</small></a>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="col-md-3 col-sm-3 col-xs-3">
-                                    <div class="staff-image">
-                                        <img class="img-responsive" src="http://placehold.it/400x400">
-                                        <div class="overlay">
-                                            <a href="#" class="info">Laia  <small>Danza Creativa</small></a>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="col-md-3 col-sm-3 col-xs-3">
-                                    <div class="staff-image">
-                                        <img class="img-responsive" src="http://placehold.it/400x400">
-                                        <div class="overlay">
-                                            <a href="#" class="info">Nerea  <small>Hip Hop, Comercial Dance</small></a>
-                                        </div>
-                                    </div>
-                                </div>
+                        </div>
+                    </div>
+                    <div class="col-md-3 col-sm-3 col-xs-3 instructor">
+                        <div class="staff-image">
+                            <img class="img-responsive" src="http://placehold.it/400x400">
+                            <div class="overlay">
+                                <a href="#" class="info">{{ "showcase_about_teacher_name_2"|trans }}
+                                    <small>{{ "showcase_about_teacher_course_2"|trans }}</small>
+                                </a>
                             </div>
-                            <div class="row">
-                                <div class="col-md-3 col-sm-3 col-xs-3">
-                                    <div class="staff-image">
-                                        <img class="img-responsive" src="{{ asset('images/morales_cristian.jpg') }}">
-                                        <div class="overlay">
-                                            <a href="#" class="info">Cristian <small>Break Dance</small></a>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="col-md-3 col-sm-3 col-xs-3">
-                                    <div class="staff-image">
-                                        <img class="img-responsive" src="{{ asset('images/sans_jurdina.jpg') }}">
-                                        <div class="overlay">
-                                            <a href="#" class="info">Jurdina <small>Comercial Dance</small></a>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="col-md-3 col-sm-3 col-xs-3">
-                                    <div class="staff-image">
-                                        <img class="img-responsive" src="{{ asset('images/torao_max.jpg') }}">
-                                        <div class="overlay">
-                                            <a href="#" class="info">Max<small>Afro</small></a>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="col-md-3 col-sm-3 col-xs-3">
-                                    <div class="staff-image">
-                                        <img class="img-responsive" src="http://placehold.it/400x400">
-                                        <div class="overlay">
-                                            <a href="#" class="info">Anna  <small>Ballet</small></a>
-                                        </div>
-                                    </div>
-                                </div>
+                        </div>
+                    </div>
+                    <div class="col-md-3 col-sm-3 col-xs-3 instructor">
+                        <div class="staff-image">
+                            <img class="img-responsive" src="{{ asset('images/faye_salva.jpg') }}">
+                            <div class="overlay">
+                                <a href="#" class="info">{{ "showcase_about_teacher_name_3"|trans }}
+                                    <small>{{ "showcase_about_teacher_course_3"|trans }}</small>
+                                </a>
                             </div>
+                        </div>
+                    </div>
+                    <div class="col-md-3 col-sm-3 col-xs-3 instructor">
+                        <div class="staff-image">
+                            <img class="img-responsive" src="{{ asset('images/fernandez_christian.jpg') }}">
+                            <div class="overlay">
+                                <a href="#" class="info">{{ "showcase_about_teacher_name_4"|trans }}
+                                    <small>{{ "showcase_about_teacher_course_4"|trans }}</small>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-3 col-sm-3 col-xs-3 instructor">
+                        <div class="staff-image">
+                            <img class="img-responsive" src="{{ asset('images/goncalvez_helena.jpg') }}">
+                            <div class="overlay">
+                                <a href="#" class="info">{{ "showcase_about_teacher_name_5"|trans }}
+                                    <small>{{ "showcase_about_teacher_course_5"|trans }}</small>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-3 col-sm-3 col-xs-3 instructor">
+                        <div class="staff-image">
+                            <img class="img-responsive" src="{{ asset('images/londono_jerson.jpg') }}">
+                            <div class="overlay">
+                                <a href="#" class="info">{{ "showcase_about_teacher_name_6"|trans }}
+                                    <small>{{ "showcase_about_teacher_course_6"|trans }}</small>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-3 col-sm-3 col-xs-3 instructor">
+                        <div class="staff-image">
+                            <img class="img-responsive" src="http://placehold.it/400x400">
+                            <div class="overlay">
+                                <a href="#" class="info">{{ "showcase_about_teacher_name_7"|trans }}
+                                    <small>{{ "showcase_about_teacher_course_7"|trans }}</small>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-3 col-sm-3 col-xs-3 instructor">
+                        <div class="staff-image">
+                            <img class="img-responsive" src="http://placehold.it/400x400">
+                            <div class="overlay">
+                                <a href="#" class="info">{{ "showcase_about_teacher_name_8"|trans }}
+                                    <small>{{ "showcase_about_teacher_course_8"|trans }}</small>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-3 col-sm-3 col-xs-3 instructor">
+                        <div class="staff-image">
+                            <img class="img-responsive" src="{{ asset('images/morales_cristian.jpg') }}">
+                            <div class="overlay">
+                                <a href="#" class="info">{{ "showcase_about_teacher_name_9"|trans }}
+                                    <small>{{ "showcase_about_teacher_course_9"|trans }}</small>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-3 col-sm-3 col-xs-3 instructor">
+                        <div class="staff-image">
+                            <img class="img-responsive" src="{{ asset('images/sans_jurdina.jpg') }}">
+                            <div class="overlay">
+                                <a href="#" class="info">{{ "showcase_about_teacher_name_10"|trans }}
+                                    <small>{{ "showcase_about_teacher_course_10"|trans }}</small>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-3 col-sm-3 col-xs-3 instructor">
+                        <div class="staff-image">
+                            <img class="img-responsive" src="{{ asset('images/torao_max.jpg') }}">
+                            <div class="overlay">
+                                <a href="#" class="info">{{ "showcase_about_teacher_name_11"|trans }}
+                                    <small>{{ "showcase_about_teacher_course_11"|trans }}</small>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-3 col-sm-3 col-xs-3 instructor">
+                        <div class="staff-image">
+                            <img class="img-responsive" src="http://placehold.it/400x400">
+                            <div class="overlay">
+                                <a href="#" class="info">{{ "showcase_about_teacher_name_12"|trans }}
+                                    <small>{{ "showcase_about_teacher_course_12"|trans }}</small>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </div>
-    </div>
         </section>
+    </div>
 {% endblock %}

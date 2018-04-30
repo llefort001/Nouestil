@@ -6,6 +6,13 @@ Author URI: http://www.themevault.net/
 License URI: http://www.themevault.net/license/
 */
 
+/*custom media query*/
+@media (max-width: 1270px){
+    .navbar-default .navbar-nav > li > a {
+        font-size: 0.8em;
+
+    }
+}
 @media(min-width: 1200px) and (max-width: 1260px){
     #myCarousel2 .carousel-control.right, #myCarousel3 .carousel-control.right, #myCarousel6 .carousel-control.right{
         right: -15px;
@@ -236,7 +243,7 @@ License URI: http://www.themevault.net/license/
         font-size: 15px;
     }
     .navbar-toggle {
-        background: #e01931;
+        background: #4b1a70;
         border: none;
         border-radius: 0;
         margin-top: -50px;
