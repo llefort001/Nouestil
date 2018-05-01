@@ -25,7 +25,6 @@ class UserManager
     protected $payments;
     protected $contacts;
     protected $em;
-    protected $tokenGenerator;
 
     /**
      * UserManager constructor.

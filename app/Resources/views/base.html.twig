@@ -14,9 +14,13 @@
     {% block pageStylesheets %}{% endblock %}
     <link rel="icon" type="image/x-icon" href="{{ asset('favicon.ico') }}"/>
 </head>
-<body class="gray-bg">
+<body>
+<div id="wrapper">
+    <div id="page-wrapper" class="gray-bg">
 
         {% block body %}{% endblock %}
+    </div>
+</div>
 
 {% block javascripts %}
     <!-- Mainly scripts -->
