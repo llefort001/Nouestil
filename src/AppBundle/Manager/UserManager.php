@@ -25,6 +25,9 @@ class UserManager
     protected $payments;
     protected $contacts;
     protected $em;
+    protected $publicNote;
+    protected $email;
+    protected $birthdate;
 
     /**
      * UserManager constructor.
@@ -36,6 +39,7 @@ class UserManager
     }
 
     /**
+     * @param $user
      * @return bool
      */
     public function isAdmin($user)
@@ -49,6 +53,7 @@ class UserManager
         return (in_array('ROLE_PROF', $user->getRoles())) ? true : false;
     }
     /**
+     * @param $user
      * @return bool
      */
     public function isUser($user)
@@ -247,4 +252,51 @@ class UserManager
         }
         return $results[1];
     }
+
+    public function updateGroup($id, $group){
+
+        $user = $this->em
+            ->getRepository('AppBundle:User')
+            ->findOneById($id);
+
+        $idgroup = $this->em
+            ->getRepository('AppBundle:Group')
+            ->findOneByName($group);
+
+        $user->setGroup($idgroup);
+
+        try{
+            $this->em->persist($user);
+            $this->em->flush();
+        }catch(\exception $e){
+            $e->getMessage();
+        }
+        return $user;
+    }
+
+    public function updateUser($id, $lastname, $firstname, $birthdate, $phoneNumber, $email, $publicNote){
+
+        //dump($group);die;
+        $user = $this->em
+            ->getRepository('AppBundle:User')
+            ->findOneById($id);
+
+        //if($id != null){
+        $user->setFirstname($firstname);
+        $user->setLastname($lastname);
+        $user->setPhoneNumber($phoneNumber);
+        $user->setPublicNote($publicNote);
+        $user->setEmail($email);
+
+        $user->setBirthDate( new \DateTime($birthdate) );
+
+        try{
+            $this->em->persist($user);
+            $this->em->flush();
+        }catch(\exception $e){
+            $e->getMessage();
+        }
+        return $user;
+    }
+
 }

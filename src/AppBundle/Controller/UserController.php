@@ -40,32 +40,39 @@ class UserController extends Controller
 
     }
 
-    public function updateGroupUserAction($userId, $group)
-    {
-        $entityManager = $this->getDoctrine()->getManager();
-        $userManager = $this->get('nouestil.user');
-        $userToUpdate = $userManager->getUser($userId);
-
-        if ($userToUpdate instanceof User) {
-            $groupToUpdate = $entityManager->getRepository('AppBundle:Group')->find(array("id" => $group));
-            $userToUpdate->setGroup($groupToUpdate);
-            $groupToUpdate->addUserGroup($userToUpdate);
-            $entityManager->flush();
-
-        }
-        return $this->redirect($this->generateUrl('users'));
-    }
+//    public function updateGroupUserAction($userId, $group)
+//    {
+//        $entityManager = $this->getDoctrine()->getManager();
+//        $userManager = $this->get('nouestil.user');
+//        $userToUpdate = $userManager->getUser($userId);
+//
+//        if ($userToUpdate instanceof User) {
+//            $groupToUpdate = $entityManager->getRepository('AppBundle:Group')->find(array("id" => $group));
+//            $userToUpdate->setGroup($groupToUpdate);
+//            $groupToUpdate->addUserGroup($userToUpdate);
+//            $entityManager->flush();
+//
+//        }
+//        return $this->redirect($this->generateUrl('users'));
+//    }
 
     public function updateUserAction(Request $request)
     {
-
         if ($request->isMethod('POST')) {
+
             $data = $request->request->all();
 
-            $userManager = $this->get('nouestil.user');
-            $userToUpdate = $userManager->getUser($data['id']);
+            //dump($data['group']);die;
+
+            $user= $this->get('nouestil.user');
+
+
+            $user->updateGroup($data['id'], $data['group']);
+            $user->updateUser($data['id'],$data['lastname'], $data['firstname'], $data['birthdate'], $data['phoneNumber'], $data['email'], $data['publicNote'] );
 
         }
+
+        $this->addFlash('success', 'L utilisateur a bien été modifié');
         return $this->redirect($this->generateUrl('users'));
     }
 

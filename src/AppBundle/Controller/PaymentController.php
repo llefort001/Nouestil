@@ -46,7 +46,6 @@ class PaymentController extends Controller
             }
         }
 
-
         return $this->render('AppBundle:Payments:create.html.twig', array(
             'formCreatePayment' => $formCreatePayment->createView(),
         ));

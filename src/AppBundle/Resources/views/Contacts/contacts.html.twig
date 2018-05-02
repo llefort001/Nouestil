@@ -38,18 +38,15 @@
                                             <td class="exportable">
                                                 {% for key, user in contact.users %}
                                                     <a href="#"><span class="label label-default" data-toggle="modal"
-                                                                      data-target="#userModal_{{ user.id }}">
-                            {{ user.firstname }} {{ user.lastname }}</span></a>
+                                                                      data-target="#userModal_{{ user.id }}">{{ user.firstname }} {{ user.lastname }}</span></a>
                                                     {#{{ user }}#}
                                                 {% endfor %}
 
                                             </td>
                                             <td>
-                                                <a href="#"><span class="label label-default" data-toggle="modal"
-                                                                  data-target="#contactModal_{{ contact.id }}">+</span></a>
+                                                <a href="#"><span class="label label-default" data-toggle="modal" data-target="#contactModal_{{ contact.id }}">Modifier</span></a>
                                                 {#<a class="label label-warning"  href="{{ path('base_homepage', {'_want_to_be': contact.username}) }}" >Impersonate</a>#}
-                                                <a href="{{ path('deleteContact',{'contactId': contact.id}) }}"
-                                                   onclick="return confirm('Confirmer la suppression ?')"><span
+                                                <a href="{{ path('deleteContact',{'contactId': contact.id}) }}" onclick="return confirm('Confirmer la suppression ?')"><span
                                                             class="label label-danger">Supprimer</span></a>
                                             </td>
                                         </tr>
@@ -78,6 +75,7 @@
                                               class="form-horizontal">
                                             <div class="modal-content">
                                                 <div class="modal-header">
+
                                                     <button type="button" class="close"
                                                             data-dismiss="modal"
                                                             aria-label="Close">
@@ -86,10 +84,27 @@
                                                         {{ contact.firstname }} {{ contact.lastname }}</h4>
                                                 </div>
                                                 <div class="modal-body">
+
                                                     <div class="Group">
                                                         <h5>{{ "Modifier le contact"|trans }}</h5>
                                                     </div>
                                                     <hr/>
+                                                    <div class="Group">
+                                                        <div>
+                                                            <p>{{ "Nom"|trans }} : <input type="text" name="lastname" value="{{ contact.lastname }}">  </p>
+                                                        </div>
+                                                        <div>
+                                                            <p>{{ "Prenom"|trans }} : <input type="text" name="firstname" value="{{ contact.firstname }}"></p>
+                                                        </div>
+                                                        <div>
+                                                            <p>{{ "email"|trans }} : <input type="email" name="email" value="{{ contact.email }}"></p>
+                                                        </div>
+                                                        <div>
+                                                            <p>{{ "numero de telephone"|trans }} : <input type="number" name="phoneNumber" value="{{ contact.phoneNumber }}"></p>
+                                                        </div>
+                                                    </div>
+
+
                                                 </div>
                                                 <div class="modal-footer">
                                                     <input type="hidden" name="id"
