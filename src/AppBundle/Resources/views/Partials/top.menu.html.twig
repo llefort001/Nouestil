@@ -8,11 +8,44 @@
         <ul class="nav navbar-top-links navbar-right">
             {% if is_granted('ROLE_PREVIOUS_ADMIN') %}
             <li>
-                <a href="{{ path('users', {'_want_to_be': '_exit'}) }}" class="m-r-sm text-muted welcome-message"><span class="label label-warning">Quitter la vue utilisateur</span></a>
+                <a href="{{ path('users', {'_want_to_be': '_exit'}) }}" class="m-r-sm text-muted welcome-message"><span class="label label-warning">{{ "Quitter la vue utilisateur"|trans }}</span></a>
             </li>
             {% endif %}
             <li>
                 <span class="m-r-sm text-muted welcome-message">{{ config.title }}</span>
+            </li>
+
+            <li>
+            <li class="dropdown">
+                <a class="dropdown-toggle" data-toggle="dropdown" href="#" aria-expanded="false">
+                    <span class="flag-icon flag-icon-{% if (app.request.locale == "en") %}gb {% else %}{{ app.request.locale }}{% endif %}"></span>
+                </a>
+                <ul class="dropdown-menu" style="width: auto;min-width: 0">
+                    <li>
+                        <a class="text-center" href="{{ path(parentRequest.attributes.get('_route'), app.request.get('_route_params',{})|merge({'_locale': 'es'})) }}">
+                            <span class="flag-icon flag-icon-es"></span>
+                        </a>
+                    </li>
+                    <li class="divider"></li>
+                    <li>
+                        <a href="{{ path(parentRequest.attributes.get('_route'), app.request.get('_route_params',{})|merge({'_locale': 'en'})) }}">
+                            <span class="flag-icon flag-icon-gb"></span>
+
+                        </a>
+                    </li>
+                    <li class="divider"></li>
+                    <li>
+                        <a href="{{ path(parentRequest.attributes.get('_route'), app.request.get('_route_params',{})|merge({'_locale': 'fr'})) }}">
+                            <span class="flag-icon flag-icon-fr"></span>
+
+                        </a>
+                    </li>
+                </ul>
+            </li>
+                {#<a href="{{ path(parentRequest.attributes.get('_route'), app.request.get('_route_params',{})|merge({'_locale': 'en'})) }}">#}
+                    {#<i class="fa fa-flag"></i></a>#}
+                {#<a href="{{ path(parentRequest.attributes.get('_route'), app.request.get('_route_params',{})|merge({'_locale': 'es'})) }}">#}
+                    {#<i class="fa fa-flag"></i></a>#}
             </li>
             <li>
                 <a href="{{ path( "home" ) }}" > <i class="fa fa-home"></i> {{ "Retour au site"|trans }} </a>
