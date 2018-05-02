@@ -42,11 +42,6 @@
                     </li>
                 </ul>
             </li>
-                {#<a href="{{ path(parentRequest.attributes.get('_route'), app.request.get('_route_params',{})|merge({'_locale': 'en'})) }}">#}
-                    {#<i class="fa fa-flag"></i></a>#}
-                {#<a href="{{ path(parentRequest.attributes.get('_route'), app.request.get('_route_params',{})|merge({'_locale': 'es'})) }}">#}
-                    {#<i class="fa fa-flag"></i></a>#}
-            </li>
             <li>
                 <a href="{{ path( "home" ) }}" > <i class="fa fa-home"></i> {{ "Retour au site"|trans }} </a>
             </li>
