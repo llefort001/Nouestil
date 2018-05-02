@@ -171,6 +171,26 @@
                 }
 
             });
+            $('.swal').click(function (e) {
+                e.preventDefault();
+                swal({
+                    title: "{{ "Confirmer ?"|trans }}",
+                    text: "{{ "Cette action est définitive"|trans }}",
+                    icon: "error",
+                    buttons: true,
+                    dangerMode: true,
+                })
+                    .then((willDelete) => {
+                        if (willDelete) {
+                            swal("{{ "Succès"|trans }}", {
+                                icon: "success",
+                            });
+                            window.location.href = this.href;
+                        } else {
+                            swal("{{ "Annulé"|trans }}");
+                        }
+                    });
+            });
 
         });
 

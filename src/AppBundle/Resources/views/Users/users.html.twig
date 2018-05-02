@@ -1,6 +1,7 @@
 {% extends 'base-menu.html.twig' %}
 {% block pageStylesheets %}
     <link href="{{ asset('css/plugins/dataTables/datatables.min.css') }}" rel="stylesheet">
+    <link href="{{ asset('css/plugins/sweetalert/sweetalert.css') }}" rel="stylesheet">
 {% endblock %}
 {% block body %}
     <div class="wrapper wrapper-content animated fadeInRight">
@@ -52,8 +53,8 @@
                                             <a href="#"><span class="label label-default" data-toggle="modal"
                                                               data-target="#userModal_{{ user.id }}">{{ "Modifier"|trans }}</span></a>
                                             {% if is_granted('ROLE_ADMIN') == true %}
-                                            <a class="label label-warning"
-                                            href="{{ path('fos_user_profile_show', {'_want_to_be': user.username}) }}">{{ "Vue utilisateur"|trans }}</a>
+                                                <a class="label label-warning"
+                                                   href="{{ path('fos_user_profile_show', {'_want_to_be': user.username}) }}">{{ "Vue utilisateur"|trans }}</a>
                                             {% endif %}
                                         </td>
                                     </tr>
@@ -195,12 +196,11 @@
                                             <div class="modal-body">
                                                 {{ "Num tel"|trans }} : {{ contact.phoneNumber }}
                                                 <div class="col-12">
-                                                    <a class="btn btn-w-m btn-danger"
-                                                       href="{{ path('unlinkContact',{'userId' : user.id,'contactId': contact.id}) }}"
-                                                       onclick="return confirm('Délier ce contact de l\'utilisateur ?')">{{ "Délier ce contact de l'utilisateur"|trans }}</a>
-                                                    <a class="btn btn-w-m btn-danger"
-                                                       href="{{ path('deleteContact',{'contactId': contact.id}) }}"
-                                                       onclick="return confirm('Confirmer la suppression du contact ?')">{{ "Supprimer"|trans }}</a>
+                                                    <a class="btn btn-w-m btn-danger swal"
+                                                            href="{{ path('unlinkContact',{'userId' : user.id,'contactId': contact.id}) }}"
+                                                    >{{ "Délier ce contact de l'utilisateur"|trans }}</a>
+                                                    <a class="btn btn-w-m btn-danger swal"
+                                                       href="{{ path('deleteContact',{'contactId': contact.id}) }}">{{ "Supprimer"|trans }}</a>
                                                 </div>
                                             </div>
                                         </div>
@@ -213,10 +213,13 @@
             </div>
         </div>
     </div>
+
 {% endblock %}
 {% block pageScripts %}
     <!-- Page-Level Scripts -->
     <script src="{{ asset('js/plugins/dataTables/datatables.min.js') }}"></script>
+    {#<script src="{{ asset('js/plugins/sweetalert/sweetalert.min.js') }}"></script>#}
+    <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
     <script>
         $(document).ready(function () {
             var locale = "{{ asset('js/plugins/dataTables/') }}" + "{{ app.request.get('_locale') }}" + ".json";
@@ -252,10 +255,27 @@
                 language: {
                     url: locale
                 }
-
             });
-
+            $('.swal').click(function (e) {
+                e.preventDefault();
+                swal({
+                    title: "{{ "Confirmer ?"|trans }}",
+                    text: "{{ "Cette action est définitive"|trans }}",
+                    icon: "error",
+                    buttons: true,
+                    dangerMode: true,
+                })
+                    .then((willDelete) => {
+                        if (willDelete) {
+                            swal("{{ "Succès"|trans }}", {
+                                icon: "success",
+                            });
+                            window.location.href = this.href;
+                        } else {
+                            swal("{{ "Annulé"|trans }}");
+                        }
+                    });
+            });
         });
-
     </script>
 {% endblock %}
