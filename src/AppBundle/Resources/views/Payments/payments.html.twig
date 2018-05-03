@@ -3,12 +3,6 @@
     <link href="{{ asset('css/plugins/dataTables/datatables.min.css') }}" rel="stylesheet">
 {% endblock %}
 {% block body %}
-    {{ dump(app.request.get('_route')) }}
-    {#<a href="{{ path(app.request.get('_route'), app.request.get('_route_params',{})|merge({'_locale': 'fr'})) }}">#}
-    {#<i class="fa fa-flag"></i></a>#}
-    {#<a href="{{ path(app.request.get('_route'), app.request.get('_route_params',{})|merge({'_locale': 'es'})) }}">#}
-        {#<i class="fa fa-flag"></i></a>#}
-
     <div class="wrapper wrapper-content animated fadeInRight">
         <div class="row">
             <div class="col-lg-12">
@@ -28,6 +22,7 @@
                                     <th class="exportable">#</th>
                                     <th class="exportable">{{ "Nom d'utilisateur"|trans }}</th>
                                     <th class="exportable">{{ "Montant"|trans }}</th>
+                                    <th class="exportable">{{ "Catégorie"|trans }}</th>
                                     <th class="exportable">{{ "Méthode"|trans }}</th>
                                     <th class="exportable">{{ "Date"|trans }}</th>
                                     <th class="exportable">{{ "Commentaires"|trans }}</th>
@@ -40,6 +35,7 @@
                                         <td class="exportable">{{ payment.id }}</td>
                                         <td class="exportable">{{ payment.user }}</td>
                                         <td class="exportable">{{ payment.amount }}</td>
+                                        <td class="exportable">{{ payment.category }}</td>
                                         <td class="exportable">{{ payment.method }}</td>
                                         <td class="exportable">{{ payment.datetime|date('d-m-Y') }}</td>
                                         <td class="exportable">{{ payment.note }}</td>
@@ -119,6 +115,7 @@
                                     <th>#</th>
                                     <th>{{ "Nom d'utilisateur"|trans }}</th>
                                     <th>{{ "Montant"|trans }}</th>
+                                    <th>{{ "Catégorie"|trans }}</th>
                                     <th>{{ "Méthode"|trans }}</th>
                                     <th>{{ "Date"|trans }}</th>
                                     <th>{{ "Commentaires"|trans }}</th>

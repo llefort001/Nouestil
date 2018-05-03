@@ -50,6 +50,13 @@ class Payment
     private $method;
 
     /**
+     * @var string
+     *
+     * @ORM\Column(name="categorie",type="string")
+     */
+    private $category;
+
+    /**
      * @ORM\Column(type="string", length=255, nullable=true)
      */
     public $note;
@@ -145,18 +152,35 @@ class Payment
     /**
      * @return string
      */
-    public function getComment()
+    public function getCategory()
+    {
+        return $this->category;
+    }
+
+    /**
+     * @param string $category
+     */
+    public function setCategory($category)
+    {
+        $this->category = $category;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getNote()
     {
         return $this->note;
     }
 
     /**
-     * @param string $commentaire
+     * @param mixed $note
      */
-    public function setComment($note)
+    public function setNote($note)
     {
         $this->note = $note;
     }
+
 
 
 }

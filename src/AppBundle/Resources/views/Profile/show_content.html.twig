@@ -37,7 +37,7 @@
                         {% if (is_granted("ROLE_ADMIN")) %}
                             <div class="row">
                                 <div class="col-md-12">
-                                    <h5>{{ "Note privée: "|trans }}{{ user.privateNote }}</h5>
+                                    <h5 data-toggle="tooltip" data-placement="bottom auto" title="" data-original-title="{{ "Visible par l'administrateur seulement"|trans }}">{{ "Note privée: "|trans }}{{ user.privateNote }}</h5>
                                 </div>
                             </div>
                         {% endif %}
@@ -110,7 +110,7 @@
                             {% for payment in user.payments %}
                                 <div class="feed-element">
                                     <div class="media-body ">
-                                        <strong>Paiement n° {{ payment.id }} : {{ payment.amount }} €
+                                        <strong>{{ payment.category }} n° {{ payment.id }} : {{ payment.amount }} €
                                             en {{ payment.method }}</strong><br/>
                                         <small class="text-muted">{{ payment.datetime|date('d-m-Y') }}</small>
                                     </div>

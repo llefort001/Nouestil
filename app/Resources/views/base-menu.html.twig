@@ -16,6 +16,7 @@
     <link rel="icon" type="image/x-icon" href="{{ asset('favicon.ico') }}"/>
 </head>
 <body>
+<div class="sk-spinner sk-spinner-pulse" style="position: fixed;top: 50%;left: 50%;transform: translate(-50%, -50%);z-index: 99999"></div>
 <div id="wrapper">
     {{ render(controller( 'AppBundle:Menu:leftMenu' )) }}
     <div id="page-wrapper" class="gray-bg">
@@ -25,6 +26,7 @@
 </div>
 
 {% block javascripts %}
+
     <!-- Mainly scripts -->
     <script src="{{ asset('js/jquery-3.1.1.min.js') }}"></script>
     <script src="{{ asset('js/bootstrap.min.js') }}"></script>
@@ -37,6 +39,12 @@
     <script src="{{ asset('js/plugins/toastr/toastr.min.js') }}"></script>
 
 
+    {#Stop loader when page is fully loaded#}
+    <script>
+        $(window).on('load', function() {
+            $(".sk-spinner").css({'animation-play-state':'paused','display':'none'});
+        });
+    </script>
 {% block messages %}
     {% for label, messages in app.flashes %}
     {% for message in messages %}
