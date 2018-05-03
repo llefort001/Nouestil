@@ -83,13 +83,13 @@ class UserController extends Controller
         $formRegistration = $this->createForm(UserType::class);
 
         if ($request->isMethod('POST')) {
+            $tokenGenerator = $this->get('fos_user.util.token_generator');
+            $token = substr($tokenGenerator->generateToken(), 0, 20);
             $formRegistration->submit($request->request->get($formRegistration->getName()));
             // Enregistrer après soumission du formulaire les données dans l'objet $user
             if ($formRegistration->isSubmitted() && $formRegistration->isValid()) {
                 $user = $formRegistration->getData();
-                $tokenGenerator = $this->get('fos_user.util.token_generator');
                 if (null === $user->getConfirmationToken()) {
-                    $token = substr($tokenGenerator->generateToken(), 0, 20);
                     $user->setConfirmationToken($token);
                 }
                 $password = substr($tokenGenerator->generateToken(), 0, 8); // 8 chars
@@ -106,14 +106,19 @@ class UserController extends Controller
                 }
                 $user->setPlainpassword($password);
                 $userManager->save($user);
-                $view= $this->renderView('email/register_confirmed.html.twig', array(
+                $route=$_SERVER['HTTP_HOST'] . $this->generateUrl('confirmUser', array(
+                    'token' => $token,
+                    'userId' => $user->getId()
+                ));
+                $view= $this->renderView('email/register_confirmed.email.twig', array(
                     'user' => $user,
-                    'password' => $password
+                    'password' => $password,
+                    'route' => $route
                 ));
                 $mailFrom= $this->getParameter('mailer_user');
                 $mailTo= $user->getEmail();
-                $this->get('mailer')->send($userManager->sendConfirmMail($view,$mailFrom, $mailTo));
-                // on redirige l'administrateur vers la liste des clients si aucune erreur
+                $mail=$userManager->sendConfirmMail($view, $mailFrom, $mailTo);
+                $this->get('mailer')->send($mail);
                 $this->addFlash('success', 'L\'utilisateur ' . $user->getUsername() . ' a bien été enregistré, veuillez maintenant lui créer un contact.');
                 return $this->redirect($this->generateUrl("createContact"));
             }
@@ -140,12 +145,13 @@ class UserController extends Controller
         if (!is_null($userToConfirm) && $userToConfirm->getConfirmationToken() === $token){
             $userToConfirm->setEnabled(true);
             $userManager->save($userToConfirm);
-            $url = $this->generateUrl('fos_user_registration_confirmed');
+            $url = $this->generateUrl('fos_user_security_login');
             $response = new RedirectResponse($url);
-            $this->addFlash('success',  'Succes your account has been activate');
+            $this->addFlash('success',  'Success your account has been activate');
             return $response;
         }
-        $url = $this->generateUrl('fos_user_registration_confirmed');
+        $this->addFlash('danger','echec desole');
+        $url = $this->generateUrl('fos_user_security_login');
         $response = new RedirectResponse($url);
         return $response;
     }

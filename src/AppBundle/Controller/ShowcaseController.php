@@ -39,13 +39,6 @@ class ShowcaseController extends Controller
         ]);
     }
 
-    public function loginAction(Request $request)
-    {
-        $parametre = "laurene est très puissante";
-        return $this->render('AppBundle:Showcase:login.html.twig', [
-            'parametre' => $parametre
-        ]);
-    }
     public function timetableAction(Request $request)
     {
         $parametre = "laurene est très puissante";

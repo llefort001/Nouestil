@@ -1,0 +1,71 @@
+{% extends 'base-menu.html.twig' %}
+{% block pageStylesheets %}
+    <link href="{{ asset('css/plugins/dataTables/datatables.min.css') }}" rel="stylesheet">
+    <link href="{{ asset('css/plugins/AwesomeBootstrapCheckbox/awesome-bootstrap-checkbox.css') }}" rel="stylesheet">
+    <link href="{{ asset('css/plugins/select2/select2.min.css') }}" rel="stylesheet">
+{% endblock %}
+{% block body %}
+    <div class="container">
+        <form method="POST" action="{{ path('updateChecklist') }}" name="checklist" class="form-horizontal">
+            <div class="form-group">
+                <legend>
+                    Liste d'appel du cours: {{ checklist.course.name }}
+                </legend>
+                {% for user in checklist.usersPresents %}
+                    <div class="{{ user.id }} checkbox checkbox-success">
+                        <input id="{{ user.id }}" name="{{ user.id }}" type="checkbox" class="users form-control" value="1" checked="">
+                        <label for="{{ user.id }}">
+                            {{ user.firstname }} -- {{ user.lastname }}
+                        </label>
+                    </div>
+                {% endfor %}
+                {% for user in checklist.usersAbsents %}
+                <div class="{{ user.id }} checkbox checkbox-danger">
+                    <input id="{{ user.id }}" name="{{ user.id }}" type="checkbox" class="users form-control" value="0" checked="">
+                    <label for="{{ user.id }}">
+                        {{ user.firstname }} -- {{ user.lastname }}
+                    </label>
+                </div>
+                {% endfor %}
+                <br>
+            </div>
+            <div class="form-group">
+                <label class="font-normal">Ajouter des utilisateurs</label>
+                <div class="input-group">
+                    <select data-placeholder="Choisir des élèves..." class="user" multiple="" name="users[]" style="width: 350px; display: none;" tabindex="-1">
+                        <option disabled> -- {{ "Selectionner des utilisateurs"|trans }} --</option>
+                        {% for user in results %}
+                            <option value="{{ user.id }}">{{ user.firstname }} {{ user.lastname }}</option>
+                        {% endfor %}
+                    </select>
+                    <br><br>
+                    <input type="hidden" name="id" value="{{ checklist.id }}">
+                    <button type="submit" class="btn btn-primary">Modifier</button>
+                </div>
+            </div>
+        </form>
+    </div>
+{% endblock %}
+{% block pageScripts %}
+    <script src="{{ asset('js/plugins/dataTables/datatables.min.js') }}"></script>
+    <script src="{{ asset('js/plugins/select2/select2.full.min.js') }}"></script>
+    <script>
+        $(document).ready(function(){
+            $('.user').select2();
+        });
+        $('.users').click(function(){
+            var id= "."+this.id;
+            if(this.value === "1"){
+                this.value= "0";
+                this.checked= true;
+                ($(id).toggleClass("checkbox-success"));
+                ($(id).toggleClass("checkbox-danger"));
+            }else{
+                this.value= "1";
+                this.checked=true;
+                ($(id).toggleClass("checkbox-danger"));
+                ($(id).toggleClass("checkbox-success"));
+            }
+        });
+    </script>
+{% endblock %}

@@ -77,17 +77,17 @@ class CourseManager
      * @return mixed
      */
     public function getCourse($id)
-    {
-        $course= $this->em
-            ->getRepository('AppBundle:Course')
-            ->findOneById($id);
-        if (!$course instanceof Course){
-            throw $this->createNotFoundException(
-                'Pas de cours'
-            );
-        }
-        return $course;
+{
+    $course= $this->em
+        ->getRepository('AppBundle:Course')
+        ->findOneById($id);
+    if (!$course instanceof Course){
+        throw $this->createNotFoundException(
+            'Pas de cours'
+        );
     }
+    return $course;
+}
 
     public function addCourse($name, $session, $userTeach)
     {
@@ -101,7 +101,6 @@ class CourseManager
             $this->em->flush();
         } catch (\exception $e){
             $e->getMessage();
-            dump($e);
         }
            return $course;
     }
@@ -111,17 +110,16 @@ class CourseManager
         $course= $this->em
             ->getRepository('AppBundle:Course')
             ->findOneById($id);
-        foreach ($users as $value){
-            $user= $this->em
+        foreach ($users as $value) {
+            $user = $this->em
                 ->getRepository('AppBundle:User')
                 ->findOneById($value);
             $course->addUser($user);
-            try{
-                $this->em->persist($course);
-                $this->em->flush();
-            } catch (\exception $e){
-                $e->getMessage();
-            }
+        }
+        try{
+            $this->em->flush();
+        } catch (\exception $e){
+            $e->getMessage();
         }
     }
 

@@ -12,3 +12,6 @@ teachers:
 
 contacts:
     resource: '@AppBundle/Resources/config/routing/contacts.yml'
+
+checklists:
+    resource: '@AppBundle/Resources/config/routing/checklists.yml'

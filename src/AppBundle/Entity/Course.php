@@ -43,12 +43,14 @@ class Course
     protected $userTeach;
 
     /**
-     * @ORM\ManyToMany(targetEntity="User", inversedBy="courses", cascade= {"persist"})
+     * @ORM\ManyToMany(targetEntity="User", inversedBy="courses", cascade= {"persist"},fetch="EAGER")
      * @ORM\JoinTable(name="user_course")
      */
     protected $users;
 
-    /** @ORM\OneToMany(targetEntity="Checklist", mappedBy="course") */
+    /**
+     * @ORM\OneToMany(targetEntity="Checklist", mappedBy="course", cascade= {"persist"})
+     */
     protected $checklists;
 
     public function __construct() {

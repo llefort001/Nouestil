@@ -22,3 +22,8 @@ services:
             class: AppBundle\Manager\CourseManager
             arguments:
                 - '@doctrine.orm.entity_manager'
+
+    nouestil.checklist:
+            class: AppBundle\Manager\ChecklistManager
+            arguments:
+                - '@doctrine.orm.entity_manager'

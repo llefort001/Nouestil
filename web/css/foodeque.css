@@ -53,12 +53,6 @@ body a:focus, a:hover {
     text-decoration: none;
 }
 
-
-#oui{
-    max-width: 100%;
-    height: auto;
-}
-
 input[type="button"], input[type="submit"], button.btn, button.btn:hover {
     transition: 0.2s all;
     -webkit-transition: 0.2s all;
@@ -158,15 +152,13 @@ a:hover{
     background-color: #4b1a70;
     color: #fff;
 }
-
 .navbar-default .navbar-nav li > a:hover {
     background-color: #4b1a70;
     color: #fff;
 }
-/*
 .margin-l{
     margin-left: 94px;
-}*/
+}
 li.dropdown{
     cursor: pointer;
 }
@@ -251,11 +243,6 @@ li.dropdown{
 .welcome-block, .special-block, .food-block, .service-block, .book-block, .counter-block, .staff-block, .subscribe-block, .contact-block{
     padding-top: 135px;
 }
-
-.instructor{
-    padding-bottom: 15px;
-    padding-top : 15px;
-}
 .remove-padd, .remove-both-padd{
     padding-left: 0;
     padding-right: 0;
@@ -282,7 +269,7 @@ li.dropdown{
     letter-spacing: 6px;
     text-align: center;
     text-transform: uppercase;
-    padding-bottom : 10px;
+     text-shadow: 3px 2px 2px rgb(160, 160, 160);
 }
 .feedback-box {
     border: 1px solid #bcd0d5;
@@ -676,7 +663,6 @@ button.close:hover {
     background: #4b1a70;
     border-color: #4b1a70;
 }
-
 /*contact form*/
 .contact-block-full-image{
     background: url('../images/banner2.jpg') no-repeat scroll 0 0 / cover ;
@@ -1003,6 +989,9 @@ table {
     line-height: 30px;
     margin-bottom: 20px;
 }
+
+
+
 
 /*custom css*/
 .custom-css{
@@ -1416,3 +1405,4 @@ mark, .mark {
          /*float: left;*/
          position: relative;
        }
+        
