@@ -145,14 +145,22 @@ a:hover{
     letter-spacing: 2px;
 }
 .logo {
-    display: inline-block;
+    display: block;
     text-align: center;
-    width: 25%;
 }
 /*navbar*/
 .navbar-default {
     background-color: rgba(0, 0, 0, 0);
     border: medium none;
+}
+
+.navbar .navbar-nav {
+    display: inline-block;
+    float: none;
+    vertical-align: top;
+}
+
+
 }
 .navbar-default .navbar-nav > .active > a, .navbar-default .navbar-nav > .active > a:focus, .navbar-default .navbar-nav > .active > a:hover {
     background-color: #4b1a70;
@@ -167,6 +175,7 @@ a:hover{
 .margin-l{
     margin-left: 94px;
 }*/
+
 li.dropdown{
     cursor: pointer;
 }
