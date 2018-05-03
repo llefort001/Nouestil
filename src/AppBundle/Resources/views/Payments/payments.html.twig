@@ -41,9 +41,8 @@
                                             {#<span class="label label-default" data-toggle="modal" data-target="#userModal_{{ user.id }}">Modifier</span>#}
                                             {#<a class="label label-warning"  href="{{ path('base_homepage', {'_want_to_be': user.username}) }}" >Impersonate</a>#}
                                             {#{% if currentUser != user %}#}
-                                            <a href="{{ path('deletePayment',{'paymentId': payment.id}) }}"
-                                               onclick="return confirm('Confirmer la suppression ?')"><span
-                                                        class="label label-danger">{{ "Supprimer"|trans }}</span></a>
+                                            <a href="#"><span class="label label-default" data-toggle="modal" data-target="#paymentModal_{{ payment.id }}">{{ "Modifier"|trans }}</span></a>
+                                            <a href="{{ path('deletePayment',{'paymentId': payment.id}) }}" onclick="return confirm('Confirmer la suppression ?')"><span class="label label-danger">{{ "Supprimer"|trans }}</span></a>
                                             {#{% endif %}#}
                                             <div class="modal fade" id="paymentModal_{{ payment.id }}" tabindex="-1"
                                                  role="dialog"
@@ -62,23 +61,16 @@
                                                             </div>
                                                             <div class="modal-body">
                                                                 <div>
-                                                                    <p>{{ "Montant"|trans }}: <input type="number"
-                                                                                                     name="amount"
-                                                                                                     value="{{ payment.amount }}">
-                                                                    </p>
+                                                                    <p>{{ "Montant"|trans }}: <input type="number" name="amount" step="0.01" value="{{ payment.amount }}"></p>
                                                                 </div>
                                                                 <br/>
                                                                 <div>
-                                                                    <p>{{ "Date"|trans }}: <input type="date"
-                                                                                                  name="datetime"
-                                                                                                  value="{{ payment.datetime|date('d-m-Y') }}">
-                                                                    </p>
+                                                                    <p>{{ "Date"|trans }}: <input type="date" name="datetime" min="2017-01-01" value="{{ payment.datetime|date('Y-m-d') }}"></p>
                                                                 </div>
                                                                 <br/>
                                                                 <div>
                                                                     <p>{{ "Méthode"|trans }}:
-                                                                        <select name="method" name="method"
-                                                                                value="{{ payment.method }}">
+                                                                        <select name="method" value="{{ payment.method }}">
                                                                             <option value="cb">{{ "Carte bancaire"|trans }}</option>
                                                                             <option value="especes">{{ "Espèces"|trans }}</option>
                                                                             <option value="paypal">{{ "Paypal"|trans }}</option>
@@ -88,8 +80,7 @@
                                                                 </div>
                                                                 <br/>
                                                                 <div>
-                                                                    <p>Commentaires: <input type="text" name="note"
-                                                                                            value="{{ payment.note }}">
+                                                                    <p>Commentaires: <input type="text" name="note" value="{{ payment.note }}">
                                                                     </p>
                                                                 </div>
                                                                 <br/>

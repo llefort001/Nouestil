@@ -7,8 +7,8 @@ deleteContact:
     defaults: { _controller: AppBundle:Contact:deleteContact }
 
 updateContact:
-    path:     /admin/update-user/
-    defaults: { _controller: AppBundle:User:updateUser}
+    path:     /admin/update-contact/
+    defaults: { _controller: AppBundle:Contact:updateContact}
 
 createContact:
     path:     /admin/create-contact/

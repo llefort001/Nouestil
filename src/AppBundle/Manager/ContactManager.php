@@ -118,6 +118,25 @@ class ContactManager
         return $contact;
     }
 
+    public function updateContact($id, $lastname, $firstname, $phoneNumber, $email){
+
+        $contact = $this->em
+            ->getRepository('AppBundle:Contact')
+            ->findOneById($id);
+        $contact->setFirstname($firstname);
+        $contact->setLastname($lastname);
+        $contact->setPhoneNumber($phoneNumber);
+        $contact->setEmail($email);
+
+        try{
+            $this->em->persist($contact);
+            $this->em->flush();
+        }catch(\exception $e){
+            $e->getMessage();
+        }
+        return $contact;
+    }
+
     public function save(Contact $contact){
 
         if (!$contact instanceof Contact) {

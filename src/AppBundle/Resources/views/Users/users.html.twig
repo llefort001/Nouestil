@@ -28,6 +28,7 @@
                                     <th class="exportable">{{ "Email"|trans }}</th>
                                     <th class="exportable">{{ "Contacts"|trans }}</th>
                                     <th class="exportable">{{ "Groupe"|trans }}</th>
+                                    <th class="exportable">{{ "Commentaires"|trans }}</th>
                                     <th>{{ "Actions"|trans }}</th>
                                 </tr>
                                 </thead>
@@ -42,12 +43,11 @@
                                         <td class="exportable">{{ user.phoneNumber }}</td>
                                         <td class="exportable">{{ user.email }}</td>
                                         <td class="exportable">{% for key, contact in user.contacts %}
-                                                <a href="#"><span class="label label-default" data-toggle="modal"
-                                                                  data-target="#contactModal{{ contact.id }}">
-                            {{ contact.firstname }} {{ contact.lastname }}</span></a>
+                                                <a href="#"><span class="label label-default" data-toggle="modal" data-target="#contactModal{{ contact.id }}"> {{ contact.firstname }} {{ contact.lastname }}</span></a>
                                             {% endfor %}
                                         </td>
                                         <td class="exportable">{% if user.group.id is defined %}{{ user.group }}{% endif %}</td>
+                                        <td class="exportable">{{ user.publicNote }}</td>
                                         <td>
                                             <a href="#"><span class="label label-default" data-toggle="modal"
                                                               data-target="#userModal_{{ user.id }}">{{ "Modifier"|trans }}</span></a>
@@ -70,6 +70,7 @@
                                     <th>{{ "Email"|trans }}</th>
                                     <th>{{ "Contacts"|trans }}</th>
                                     <th>{{ "Groupe"|trans }}</th>
+                                    <th>{{ "Commentaires"|trans }}</th>
                                     <th>{{ "Actions"|trans }}</th>
                                 </tr>
                                 </tfoot>
@@ -92,55 +93,53 @@
                                                     {{ user.username }} </h4>
                                             </div>
                                             <div class="modal-body">
-                                                <div>
-                                                    <p>{{ "Note publique:"|trans }}{{ user.publicNote }}</p>
+
+                                                <div class="Group">
+                                                    <div>
+                                                        <p>{{ "Nom : "|trans }}<input type="text" name="lastname" value="{{ user.lastname }}">  </p>
+                                                    </div>
+                                                    <div>
+                                                        <p>{{ "Prenom : "|trans }}<input type="text" name="firstname" value="{{ user.firstname }}"></p>
+                                                    </div>
+                                                    <div>
+                                                        <p>{{ "Date de naissance : "|trans }}<input type="date" name="birthdate" min="1900-01-01" value="{{ user.birthdate|date('Y-m-d') }}"></p>
+                                                    </div>
+                                                    <div>
+                                                        <p>{{ "numero de telephone : "|trans }}<input type="number" name="phoneNumber" value="{{ user.phoneNumber }}"></p>
+                                                    </div>
+                                                    <div>
+                                                        <p>{{ "email : "|trans }}<input type="email" name="email" value="{{ user.email }}"></p>
+                                                    </div>
                                                 </div>
-                                                <hr/>
-                                                <div>
-                                                    <p>{{ "Note privée:"|trans }} {{ user.privateNote }}</p>
-                                                </div>
-                                                <hr/>
-                                                {#<div class="Role">#}
-                                                {#<h5>Modifier le rôle :</h5>#}
-                                                {#<select onchange="window.location.href=this.value"#}
-                                                {#class="form-control">#}
-                                                {#<option>#}
-                                                {#-#}
-                                                {#</option>#}
-                                                {#{% for key, role in roles %}#}
-                                                {#<option value="{{ path('pichet_portailmkg_updateRolesUser',{'userId': user.id,'role':key}) }}" {% if user.roles[0]==key %} selected="selected" {% endif %} >#}
-                                                {#{{ role }}#}
-                                                {#</option>#}
-                                                {#{% endfor %}#}
-                                                {#</select>#}
-                                                {#</div>#}
-                                                <br/>
+                                                <br>
+
                                                 <div class="Group">
                                                     <h5>{{ "Modifier le groupe"|trans }}</h5>
-                                                    <select onchange="window.location.href=this.value"
-                                                            class="form-control">
-                                                        <option disabled selected value>
-                                                            -- {{ "Sélectionner une option"|trans }} --
-                                                        </option>
-                                                        {% for key, group in groups %}
-                                                            <option value="{{ path('updateGroupUser',{'userId': user.id,'group':group.id}) }}" {% if user.group.id is defined and  user.group.id==group.id %} selected="selected" {% endif %} >
-                                                                {{ group }}
+                                                    <p>{{ "Groupe"|trans }}:
+                                                        <select name="group" value="{{ user.group }}">
+                                                            <option>
+                                                                -- {{ "Sélectionner une option"|trans }} --
                                                             </option>
-                                                        {% endfor %}
-                                                    </select>
-                                                    {#</div>#}
-                                                    {#<div class="form-group col-md-6">#}
-                                                    {#<input type="checkbox" name="ressource_planner"#}
-                                                    {#{% if user.ressourcePlanner %} checked {% endif %} />#}
-                                                    {#<label>Activer le ressource planner</label>#}
-                                                    {#</div>#}
-                                                    {#<div class="form-group col-md-6">#}
-                                                    {#<input type="checkbox" name="time_tracking"#}
-                                                    {#{% if user.timeTracking %} checked {% endif %} />#}
-                                                    {#<label>Activer le time tracking</label>#}
-                                                    {#</div>#}
-                                                    <hr/>
-                                                    <label class="col-md-4 col-form-label">{{ "Paiements"|trans }}</label>
+                                                            {% for key, group in groups %}
+                                                                <option value="{{ group }}" {% if user.group.id is defined and user.group.id==group.id %} selected="selected" {% endif %}  >{{ group }}</option>
+                                                            {% endfor %}
+                                                        </select>
+                                                    </p>
+                                                </div>
+
+                                                <br>
+                                                <div class="Group">
+                                                    <h5>{{ "Commentaires"|trans }}</h5>
+                                                    <div>
+                                                        <p>{{ "Note publique : "|trans }}<input type="text" name="publicNote" value="{{ user.publicNote }}"></p>
+                                                    </div>
+                                                    <div>
+                                                        <p>{{ "Note privée : "|trans }}<input type="text" name="privateNote" value="{{ user.privateNote }}"></p>
+                                                    </div>
+                                                </div>
+                                                <br>
+                                                <div class="Group">
+                                                    <h5>{{ "Paiements"|trans }}</h5>
                                                     <table class="table">
                                                         <thead>
                                                         <tr>
@@ -162,6 +161,7 @@
                                                         </tbody>
                                                     </table>
                                                 </div>
+
                                                 <div class="modal-footer">
                                                     {% if currentUser != user %}
                                                         <a class="btn btn-w-m btn-danger pull-left"
@@ -174,6 +174,7 @@
                                                             class="btn btn-primary">{{ "Sauvegarder"|trans }}
                                                     </button>
                                                 </div>
+
                                             </div>
                                         </div>
                                     </form>

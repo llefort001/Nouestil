@@ -39,14 +39,12 @@ class ContactController extends Controller
 
         if ($request->isMethod('POST')) {
             $data = $request->request->all();
-            $contactManager = $this->get('nouestil.contact');
-            $contactToUpdate = $this->getContact($data['id']);
 
-//            $userToUpdate->setRoticoin($data['roticoin']);
-            $contactToUpdate->save();
-
+            $contact= $this->get('nouestil.contact');
+            $contact->updateContact($data['id'],$data['lastname'], $data['firstname'], $data['phoneNumber'], $data['email'] );
         }
-        return $this->redirect($this->generateUrl('users'));
+        $this->addFlash('success', 'Le contact a bien été modifié');
+        return $this->redirect($this->generateUrl('contacts'));
     }
 
     public function createContactAction(Request $request)
