@@ -28,7 +28,10 @@
                                     <th class="exportable">{{ "Email"|trans }}</th>
                                     <th class="exportable">{{ "Contacts"|trans }}</th>
                                     <th class="exportable">{{ "Groupe"|trans }}</th>
-                                    <th class="exportable">{{ "Commentaires"|trans }}</th>
+                                    <th class="exportable">{{ "Note publique"|trans }}</th>
+                                    {% if is_granted('ROLE_ADMIN') %}
+                                        <th class="exportable">{{ "Note privée"|trans }}</th>
+                                    {% endif %}
                                     <th>{{ "Actions"|trans }}</th>
                                 </tr>
                                 </thead>
@@ -48,6 +51,9 @@
                                         </td>
                                         <td class="exportable">{% if user.group.id is defined %}{{ user.group }}{% endif %}</td>
                                         <td class="exportable">{{ user.publicNote }}</td>
+                                        {% if is_granted('ROLE_ADMIN') %}
+                                            <td class="exportable">{{ user.privateNote }}</td>
+                                        {% endif %}
                                         <td>
                                             <a href="#"><span class="label label-default" data-toggle="modal"
                                                               data-target="#userModal_{{ user.id }}">{{ "Modifier"|trans }}</span></a>
@@ -70,7 +76,10 @@
                                     <th>{{ "Email"|trans }}</th>
                                     <th>{{ "Contacts"|trans }}</th>
                                     <th>{{ "Groupe"|trans }}</th>
-                                    <th>{{ "Commentaires"|trans }}</th>
+                                    <th>{{ "Note publique"|trans }}</th>
+                                    {% if is_granted('ROLE_ADMIN') %}
+                                        <th>{{ "Note privée"|trans }}</th>
+                                    {% endif %}
                                     <th>{{ "Actions"|trans }}</th>
                                 </tr>
                                 </tfoot>

@@ -118,7 +118,7 @@ class PaymentManager
             ->findOneById($id);
         $payment->setAmount($amount);
         $payment->setMethod($method);
-        $payment->setComment($note);
+        $payment->setNote($note);
 
         $payment->setDateTime( new \DateTime($datetime) );
 

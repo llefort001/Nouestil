@@ -54,7 +54,6 @@ class Payment
      */
     public $note;
 
-
     /**
      * Get id
      *
@@ -145,7 +144,7 @@ class Payment
     /**
      * @return string
      */
-    public function getComment()
+    public function getNote()
     {
         return $this->note;
     }
@@ -153,10 +152,11 @@ class Payment
     /**
      * @param string $commentaire
      */
-    public function setComment($note)
+    public function setNote($note)
     {
         $this->note = $note;
     }
+
 
 
 }

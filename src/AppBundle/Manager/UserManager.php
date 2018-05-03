@@ -287,7 +287,7 @@ class UserManager
         return $user;
     }
 
-    public function updateUser($id, $lastname, $firstname, $birthdate, $phoneNumber, $email, $publicNote){
+    public function updateUser($id, $lastname, $firstname, $birthdate, $phoneNumber, $email, $publicNote, $privateNote){
 
         //dump($group);die;
         $user = $this->em
@@ -299,6 +299,7 @@ class UserManager
         $user->setLastname($lastname);
         $user->setPhoneNumber($phoneNumber);
         $user->setPublicNote($publicNote);
+        $user->setPrivateNote($privateNote);
         $user->setEmail($email);
 
         $user->setBirthDate( new \DateTime($birthdate) );
