@@ -86,7 +86,7 @@
         <div class="container">
             <div class="row footer-block-main">
                 <div class="col-lg-3 col-md-3 col-sm-3 col-xs-12 width-50">
-                    <div class="footer-block"><h4>{{ "showcase_footer_title_links"|trans }}</h4>
+                    <div class="footer-block wow animated fadeIn"><h4>{{ "showcase_footer_title_links"|trans }}</h4>
                         <ul class="list-unstyled">
                             <li><a href="{{ path('home') }}">{{ "showcase_home_menu"|trans }}</a></li>
                             <li><a href="{{ path('about') }}">{{ "showcase_about_menu"|trans }}</a></li>
@@ -98,7 +98,7 @@
                     </div>
                 </div>
                 <div class="col-lg-5 col-md-5 col-sm-6 col-xs-12 width-50">
-                    <div class="footer-block"><h4>{{ "showcase_footer_title_info"|trans }}</h4>
+                    <div class="footer-block wow animated fadeIn"><h4>{{ "showcase_footer_title_info"|trans }}</h4>
                         <ul class="list-unstyled">
                             <li>{{ "showcase_footer_tel_info"|trans }}</li>
                             <li>{{ "showcase_footer_mail_info"|trans }}</li>
@@ -159,8 +159,14 @@
     <script src="{{ asset('js/waypoints.min.js') }}" type="text/javascript"></script>
     <script src="{{ asset('js/instafeed.min.js') }}" type="text/javascript"></script>
     <script src="{{ asset('js/custom.js') }}" type="text/javascript"></script>
+    <script src="{{ asset('js/plugins/wow/wow.min.js') }}"></script>
+
     <script>
         $('a[href="' + location.pathname + '"]').parents('li,ul').addClass('active');
+    </script>
+
+    <script>
+        new WOW().init();
     </script>
 {% endblock %}
 

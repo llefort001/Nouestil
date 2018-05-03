@@ -34,6 +34,9 @@
     <script src="{{ asset('js/inspinia.js') }}"></script>
     <script src="{{ asset('js/plugins/pace/pace.min.js') }}"></script>
     <script src="{{ asset('js/plugins/toastr/toastr.min.js') }}"></script>
+    <script src="{{ asset('js/plugins/wow/wow.min.js') }}"></script>
+    <script src="{{ asset('js/plugins/wow/wow.min.js') }}"></script>
+
 
 
 {% block messages %}
@@ -59,6 +62,10 @@
             };
             toastr.{{ label }}('{{ message|trans({}, 'FOSUserBundle') }}');
         });
+    </script>
+
+    <script>
+        new WOW().init();
     </script>
     {% endfor %}
     {% endfor %}
