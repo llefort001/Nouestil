@@ -68,7 +68,7 @@ class UserController extends Controller
 
 
             $user->updateGroup($data['id'], $data['group']);
-            $user->updateUser($data['id'],$data['lastname'], $data['firstname'], $data['birthdate'], $data['phoneNumber'], $data['email'], $data['publicNote'] );
+            $user->updateUser($data['id'],$data['lastname'], $data['firstname'], $data['birthdate'], $data['phoneNumber'], $data['email'], $data['publicNote'], $data['privateNote'] );
 
         }
 
