@@ -1,0 +1,13 @@
+<h3> Bonjour {{ user.firstname }} ! </h3>
+
+    <p>Pour valider votre compte utilisateur, merci de vous rendre
+        <a href="{{ route }}"> sur ce lien </a> </p>
+
+<p>
+    Voici votre information de connection: <br />
+    {{ route }} <br />
+    identifiant: {{ user.username }} <br />
+    mot de passe: {{ password }}
+</p>
+Cordialement,
+L'équipe Nouestil

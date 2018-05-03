@@ -215,7 +215,10 @@
 {% block pageScripts %}
     <!-- Page-Level Scripts -->
     <script src="{{ asset('js/plugins/dataTables/datatables.min.js') }}"></script>
+    <script src="{{ asset('js/plugins/dateTimeMoment/moment.js') }}"></script>
+    <script src="{{ asset('js/plugins/dateTimeMoment/sorting_datetime-moment.js') }}"></script>
     <script>
+        $.fn.dataTable.moment( 'DD-MM-YYYY' );
         $(document).ready(function () {
             var locale = "{{ asset('js/plugins/dataTables/') }}" + "{{ app.request.get('_locale') }}" + ".json";
             var buttonCommon = {

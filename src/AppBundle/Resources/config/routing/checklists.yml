@@ -1,0 +1,15 @@
+checklist:
+    path:     /admin/checklist/{courseId}
+    defaults: { _controller: AppBundle:Checklist:checklist }
+
+checklists:
+    path:     /admin/checklists/
+    defaults:  { _controller: AppBundle:Checklist:index }
+
+updateChecklist:
+    path:     /admin/update-checklist/
+    defaults: { _controller: AppBundle:Checklist:updateChecklist }
+
+usersChecklist:
+    path:     /admin/display-checklist/{checklistId}
+    defaults: { _controller: AppBundle:Checklist:displayChecklist }

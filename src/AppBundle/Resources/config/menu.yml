@@ -25,5 +25,5 @@ parameters:
         -
            icon:   fa-list
            label:  Listes d'appel
-           path:   payments
+           path:   checklists
            scope: prof

@@ -40,7 +40,7 @@ class UserRepository extends \Doctrine\ORM\EntityRepository
         return $qb;
     }
 
-    public function queryNotUserCourse($courseId)
+    public function queryNotCourseUsers($courseId)
     {
         $qb2 = $this->_em->createQueryBuilder();
         $qb2->select('u', 'c')

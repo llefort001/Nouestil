@@ -1,5 +1,7 @@
 {% extends 'base-menu.html.twig' %}
-
+{% block pageStylesheets %}
+    <link href="{{ asset('css/plugins/dataTables/datatables.min.css') }}" rel="stylesheet">
+{% endblock %}
 {% block body %}
     <div class="ibox-title">
         <h5>{{ "Liste des cours"|trans }}</h5>
@@ -27,6 +29,8 @@
                             <a href="{{ path('deleteCourse',{'courseId': course.id}) }}"
                                onclick="return confirm('Confirmer la suppression ?')"><span
                                         class="label label-danger">{{ "Supprimer"|trans }}</span></a>
+                            <a href="{{ path('checklist', {'courseId': course.id}) }}">
+                                <span class="label label-info">{{ "Faire l'appel"|trans }}</span></a>
                             <div class="modal fade" id="courseModal_{{ course.id }}" tabindex="-1" role="dialog"
                                  aria-labelledby="myModalLabel">
                                 <div class="modal-dialog" role="document">
@@ -117,11 +121,19 @@
                 </div>
             </div>
         </div>
-        {% if errorMessage is defined %}
-            <br/>
-            <div class="alert alert-danger">
-                {{ error }}
-            </div>
-        {% endif %}
     </div>
+{% endblock %}
+{% block pageScripts %}
+    <script src="{{ asset('js/plugins/dataTables/datatables.min.js') }}"></script>
+    <script>
+        $(document).ready(function () {
+            var locale = "{{ asset('js/plugins/dataTables/') }}" + "{{ app.request.get('_locale') }}" + ".json";
+            var buttonCommon = {
+                exportOptions: {
+                    columns: '.exportable'
+                }
+            };
+        });
+
+    </script>
 {% endblock %}

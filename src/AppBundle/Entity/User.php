@@ -81,6 +81,16 @@ class User extends BaseUser
     protected $courses;
 
     /**
+     * @ORM\ManyToMany(targetEntity="Checklist", mappedBy="usersPresents", cascade={"persist"})
+     */
+    protected $checklistsPresents;
+
+    /**
+     * @ORM\ManyToMany(targetEntity="Checklist", mappedBy="usersAbsents", cascade={"persist"})
+     */
+    protected $checklistsAbsents;
+
+    /**
      * @ORM\OneToMany(targetEntity="Course", mappedBy="userTeach", cascade={"persist"})
      */
     protected $coursesTeach;
@@ -101,6 +111,8 @@ class User extends BaseUser
         $this->contacts = new ArrayCollection();
         $this->payments = new ArrayCollection();
         $this->courses = new ArrayCollection();
+        $this->checklistsAbsents = new ArrayCollection();
+        $this->checklistsPresents= new ArrayCollection();
         $this->coursesTeach = new ArrayCollection();
         // Add role
         $this->addRole("ROLE_USER");
@@ -309,6 +321,21 @@ class User extends BaseUser
         return $this->courses;
     }
 
+    /**
+     * @return mixed
+     */
+    public function getChecklistsPresents()
+    {
+        return $this->checklistsPresents;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getChecklistsAbsents()
+    {
+        return $this->checklistsAbsents;
+    }
 
     /**
      * @return mixed
@@ -332,6 +359,22 @@ class User extends BaseUser
     public function setCourses($courses)
     {
         $this->courses = $courses;
+    }
+
+    /**
+     * @param mixed $checklist
+     */
+    public function setChecklistsAbsents($checklist)
+    {
+        $this->checklistsAbsents= $checklist;
+    }
+
+    /**
+     * @param mixed $checklist
+     */
+    public function setChecklistsPresents($checklist)
+    {
+        $this->checklistsPresents= $checklist;
     }
 
     /**
