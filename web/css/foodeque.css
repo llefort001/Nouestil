@@ -753,7 +753,7 @@ footer .blog-img img:hover{
     color: #fff;
 }
 .footer-block ul li a:hover{
-    color: #4b1a70;
+    color: #b5328b;
 }
 footer .social-grid ul li {
     display: inline-block;
@@ -773,7 +773,7 @@ footer .social-grid.text-right a:hover{
     border-color: #4b1a70;
 }
 .footer-block li.active > a{
-    color: #4b1a70;
+    color: #b5328b;
 }
 .social-grid.text-right a i {
     font-size: 16px;
@@ -790,7 +790,7 @@ footer .social-grid {
     letter-spacing: 2px;
 }
 .copyright > a {
-    color: #4b1a70;
+    color: #b5328b;
     font-weight: 600;
     text-shadow: 1px 1px 4px #000;
 }
