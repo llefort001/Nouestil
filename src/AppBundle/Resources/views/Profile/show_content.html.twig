@@ -1,50 +1,118 @@
 <div class="wrapper wrapper-content">
     <div class="row animated fadeInRight">
-        <div class="col-md-12">
+        <div class="col-md-6">
             <div class="ibox float-e-margins">
                 <div class="ibox-title">
-                    <h5>Détails</h5>
-                    <div class="ibox-tools">
-                        <a class="close-link">
-                            <i class="fa fa-wrench"></i>
-                        </a>
-                    </div>
+                    <h5>{{ "Détails"|trans }}</h5>
                 </div>
                 <div>
                     <div class="ibox-content profile-content">
-                        <div class="row" align="center">
-                            <h3><strong>{{ user.firstname }} {{ user.lastname }}</strong></h3>
-                        </div>
-                        <hr>
+                        <h4><strong>{{ user.firstname }} {{ user.lastname }}</strong></h4>
+                        <br>
                         <h4><strong>Nom d'utilisateur : {{ user.username }}</strong></h4>
                         {% if user.group.id is defined %}
                             <p><i class="fa fa-users"></i> {{ user.group.name }}</p>
                         {% endif %}
                         <div class="row m-t-lg">
                             <div class="col-md-6">
-                                <h5>Numéro de téléphone: <strong>{{ user.phoneNumber }}</strong></h5>
+                                <h5><i class="fa fa-phone"></i> {{ user.phoneNumber }}</h5>
                             </div>
                             <div class="col-md-6">
-                                <h5>Date de naissance: <strong>{{ user.birthdate|date('d-m-Y') }}</strong></h5>
+                                <h5><i class="fa fa-birthday-cake"></i> {{ user.birthdate|date('d-m-Y') }}
+                                </h5>
                             </div>
+                            <div class="col-md-6">
+                                <h5><i class="fa fa-map-marker"></i> {{ user.city }}</h5>
+                            </div>
+                            <div class="col-md-6">
+                                <h5><i class="fa fa-envelope"></i> {{ user.email }}</h5>
+                            </div>
+
+                        </div>
+                        <div class="row m-t-lg">
+                            <div class="col-md-12">
+                                <h5>{{ "Note publique: "|trans }}{{ user.publicNote }}</h5>
+                            </div>
+                        </div>
+                        {% if (is_granted("ROLE_ADMIN")) %}
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <h5 data-toggle="tooltip" data-placement="bottom auto" title="" data-original-title="{{ "Visible par l'administrateur seulement"|trans }}">{{ "Note privée: "|trans }}{{ user.privateNote }}</h5>
+                                </div>
+                            </div>
+                        {% endif %}
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-6">
+            <div class="ibox float-e-margins">
+                <div class="ibox-title">
+                    <h5>{{ "Cours"|trans }}</h5>
+                </div>
+                <div class="ibox-content">
+                    <div>
+                        <div class="feed-activity-list">
+                            {% if (user.courses is empty) %}
+                                <h4 class="text-center">{{ "Vous n'êtes inscrit à aucun cours"|trans }}</h4>
+                            {% endif %}
+                            {% for course in user.courses %}
+                                <div class="feed-element">
+                                    <div class="media-body">
+                                        <strong> {{ course.name }} : {{ course.session }}
+                                        </strong>
+                                    </div>
+                                </div>
+                            {% endfor %}
                         </div>
                     </div>
                 </div>
             </div>
         </div>
-        <div class="col-md-12">
+    </div>
+    <div class="row animated fadeInRight">
+        <div class="col-md-6">
             <div class="ibox float-e-margins">
                 <div class="ibox-title">
-                    <h5>Paiements effectués</h5>
+                    <h5>{{ "Contacts"|trans }}</h5>
+                </div>
+                <div>
+                    <div class="ibox-content profile-content">
+                        {% for contact in user.contacts %}
+                            <div class="row m-t-lg">
+                                <div class="col-md-12">
+                                    <h4><strong>{{ contact.firstname }} {{ contact.lastname }}</strong></h4>
+                                    <p><i class="fa fa-link"></i> {{ contact.kinship }}</p>
+                                </div>
+                                <div class="col-md-6">
+                                    <h5><i class="fa fa-phone"></i> {{ contact.phoneNumber }}</h5>
+                                </div>
+                                <div class="col-md-6">
+                                    <h5><i class="fa fa-envelope"></i> {{ contact.email }}</h5>
+                                </div>
+                            </div>
+                        {% endfor %}
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-6">
+            <div class="ibox float-e-margins">
+                <div class="ibox-title">
+                    <h5>{{ "Paiements"|trans }}</h5>
                 </div>
                 <div class="ibox-content">
                     <div>
                         <div class="feed-activity-list">
+                            {% if (user.payments is empty) %}
+                                <h4 class="text-center">{{ "Aucun paiement enregistré"|trans }}</h4>
+                            {% endif %}
                             {% for payment in user.payments %}
                                 <div class="feed-element">
                                     <div class="media-body ">
-                                        <strong>Paiement n° {{ payment.id }} : + {{ payment.amount }} € en {{ payment.method }}</strong><br/>
-                                        <small class="text-muted">{{ payment.datetime|date('d-m-Y H:i:s') }}</small>
+                                        <strong>{{ payment.category }} n° {{ payment.id }} : {{ payment.amount }} €
+                                            en {{ payment.method }}</strong><br/>
+                                        <small class="text-muted">{{ payment.datetime|date('d-m-Y') }}</small>
                                     </div>
                                 </div>
                             {% endfor %}
@@ -55,3 +123,4 @@
             </div>
         </div>
     </div>
+</div>

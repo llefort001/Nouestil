@@ -54,8 +54,11 @@ class MenuController extends Controller
         // Get menus
         $params = $this->container->getParameter("topbar");
 
+        // Parent route
+        $parentRequest = $this->container->get('request_stack')->getParentRequest();
+
         // Return
-        return $this->render('AppBundle:Partials:top.menu.html.twig', ['config' => $params]);
+        return $this->render('AppBundle:Partials:top.menu.html.twig', ['config' => $params, 'parentRequest' => $parentRequest]);
 
     }
 

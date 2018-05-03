@@ -1,44 +1,48 @@
 'Nom d''utilisateur': 'Nom d''utilisateur'
 Nom: Nom
 Prénom: Prénom
-Contacts: __Contacts
-Email: __Email
-'Num tel': '__Num tel'
-Utilisateurs: __Utilisateurs
-Actions: __Actions
-'Modifier le contact': '__Modifier le contact'
-Fermer: __Fermer
-Sauvegarder: __Sauvegarder
-'Créer un contact': '__Créer un contact'
-'Liste des cours': '__Liste des cours'
-Intitulé: __Intitulé
-Session: __Session
-Professeur: __Professeur
-Supprimer: __Supprimer
-'Sélectionner un professeur': '__Sélectionner un professeur'
-'Créer un cours': '__Créer un cours'
-'Mon Profil': '__Mon Profil'
-Déconnexion: __Déconnexion
-Connexion: __Connexion
-'Créer un paiement': '__Créer un paiement'
-'Descriptif créer un paiement': '__Descriptif créer un paiement'
-Paiements: __Paiements
-Montant: __Montant
-Méthode: __Méthode
-Date: __Date
-'Modifier paiement #%payment.id% effectué par %payment.user.firstname% %payment.user.lastname%.': '__Modifier paiement #%payment.id% effectué par %payment.user.firstname% %payment.user.lastname%.'
-'Carte bancaire': '__Carte bancaire'
-Espèces: __Espèces
-Paypal: __Paypal
-Autre: __Autre
-'Créer un utilisateur': '__Créer un utilisateur'
-'Date de naissance': '__Date de naissance'
-Groupe: __Groupe
-'Numéro de téléphone :': '__Numéro de téléphone :'
-"Délier\n                                                    ce contact de l'utilisateur": "__Délier\n                                                    ce contact de l'utilisateur"
-Modifier: __Modifier
-'Note publique:': '__Note publique:'
-'Note privée:': '__Note privée:'
-'Modifier le groupe': '__Modifier le groupe'
-'Sélectionner une option': '__Sélectionner une option'
-'Supprimer l''utilisateur': '__Supprimer l''utilisateur'
+Contacts: Contacts
+Email: Email
+'Num tel': 'Num tel'
+Utilisateurs: Utilisateurs
+Actions: Actions
+'Modifier le contact': 'Modifier le contact'
+Fermer: Fermer
+Sauvegarder: Sauvegarder
+'Créer un contact': 'Créer un contact'
+'Liste des cours': 'Liste des cours'
+Intitulé: Intitulé
+Session: Session
+Professeur: Professeur
+Supprimer: Supprimer
+'Sélectionner un professeur': 'Sélectionner un professeur'
+'Créer un cours': 'Créer un cours'
+'Mon Profil': 'Mon Profil'
+Déconnexion: Déconnexion
+Connexion: Connexion
+'Créer un paiement': 'Créer un paiement'
+'Descriptif créer un paiement': 'Descriptif créer un paiement'
+Paiements: Paiements
+Montant: Montant
+Méthode: Méthode
+Date: Date
+'Modifier paiement #%payment.id% effectué par %payment.user.firstname% %payment.user.lastname%.': 'Modifier paiement #%payment.id% effectué par %payment.user.firstname% %payment.user.lastname%.'
+'Carte bancaire': 'Carte bancaire'
+Espèces: Espèces
+Paypal: Paypal
+Autre: Autre
+'Créer un utilisateur': 'Créer un utilisateur'
+'Date de naissance': 'Date de naissance'
+Groupe: Groupe
+'Numéro de téléphone :': 'Numéro de téléphone :'
+Modifier: Modifier
+'Note publique:': 'Note publique:'
+'Note privée:': 'Note privée:'
+'Modifier le groupe': 'Modifier le groupe'
+'Sélectionner une option': 'Sélectionner une option'
+'Supprimer l''utilisateur': 'Supprimer l''utilisateur'
+'Délier ce contact de l''utilisateur': 'Délier ce contact de l''utilisateur'
+'Administration': Administration
+'Cours': Cours
+'Documentation': Documentation
+'Tutoriels': Tutoriels

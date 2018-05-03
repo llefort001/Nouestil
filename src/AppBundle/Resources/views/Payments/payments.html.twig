@@ -22,6 +22,7 @@
                                     <th class="exportable">#</th>
                                     <th class="exportable">{{ "Nom d'utilisateur"|trans }}</th>
                                     <th class="exportable">{{ "Montant"|trans }}</th>
+                                    <th class="exportable">{{ "Catégorie"|trans }}</th>
                                     <th class="exportable">{{ "Méthode"|trans }}</th>
                                     <th class="exportable">{{ "Date"|trans }}</th>
                                     <th class="exportable">{{ "Note"|trans }}</th>
@@ -34,6 +35,7 @@
                                         <td class="exportable">{{ payment.id }}</td>
                                         <td class="exportable">{{ payment.user }}</td>
                                         <td class="exportable">{{ payment.amount }}</td>
+                                        <td class="exportable">{{ payment.category }}</td>
                                         <td class="exportable">{{ payment.method }}</td>
                                         <td class="exportable">{{ payment.datetime|date('d-m-Y') }}</td>
                                         <td class="exportable">{{ payment.note }}</td>
@@ -144,6 +146,7 @@
                                     <th>#</th>
                                     <th>{{ "Nom d'utilisateur"|trans }}</th>
                                     <th>{{ "Montant"|trans }}</th>
+                                    <th>{{ "Catégorie"|trans }}</th>
                                     <th>{{ "Méthode"|trans }}</th>
                                     <th>{{ "Date"|trans }}</th>
                                     <th>{{ "Note"|trans }}</th>
@@ -201,6 +204,26 @@
                     url: locale
                 }
 
+            });
+            $('.swal').click(function (e) {
+                e.preventDefault();
+                swal({
+                    title: "{{ "Confirmer ?"|trans }}",
+                    text: "{{ "Cette action est définitive"|trans }}",
+                    icon: "error",
+                    buttons: true,
+                    dangerMode: true,
+                })
+                    .then((willDelete) => {
+                        if (willDelete) {
+                            swal("{{ "Succès"|trans }}", {
+                                icon: "success",
+                            });
+                            window.location.href = this.href;
+                        } else {
+                            swal("{{ "Annulé"|trans }}");
+                        }
+                    });
             });
 
         });

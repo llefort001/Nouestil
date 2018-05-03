@@ -22,7 +22,7 @@ security:
                 always_use_default_target_path: false
                 default_target_path: fos_user_profile_show
             logout:
-                            path:   fos_user_security_logout
+                path:   fos_user_security_logout
             anonymous:    true
             switch_user: { role: ROLE_ADMIN, parameter: _want_to_be }
 
