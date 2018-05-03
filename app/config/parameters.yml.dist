@@ -14,7 +14,7 @@ parameters:
     mailer_host: 127.0.0.1
     mailer_user: negames64300@gmail.com
     mailer_address: negames64300@gmail.com
-    mailer_password: tadrorp7
+    mailer_password: nope
 
     # A secret key that's used to generate certain security-related tokens
     secret: ThisTokenIsNotSoSecretChangeIt
