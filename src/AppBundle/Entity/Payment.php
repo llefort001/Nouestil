@@ -173,7 +173,7 @@ class Payment
     }
 
     /**
-     * @param mixed $note
+     * @param string $note
      */
     public function setNote($note)
     {

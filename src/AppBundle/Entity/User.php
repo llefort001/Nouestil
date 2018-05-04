@@ -48,11 +48,6 @@ class User extends BaseUser
      */
     public $city;
 
-//    /**
-//     * @ORM\Column(type="string", length=255)
-//     */
-//    protected $email;
-
     /**
      * @ORM\Column(type="date", nullable=true)
      */
@@ -122,16 +117,6 @@ class User extends BaseUser
         // Add role
         $this->addRole("ROLE_USER");
     }
-
-//    public function getEmail()
-//    {
-//        return parent::getEmail();
-//    }
-//
-//    public function setEmail($email)
-//    {
-//        return parent::setEmail($email);
-//    }
 
     /**
      * @return mixed

@@ -51,6 +51,7 @@ class UserManager
     {
         return (in_array('ROLE_PROF', $user->getRoles())) ? true : false;
     }
+
     /**
      * @param $user
      * @return bool
@@ -137,8 +138,9 @@ class UserManager
 
     }
 
-    public function getTokenGenerator($userId){
-        $userToToken= $this->getUser($userId);
+    public function getTokenGenerator($userId)
+    {
+        $userToToken = $this->getUser($userId);
         return $userToToken->confirmationToken;
     }
 
@@ -219,8 +221,9 @@ class UserManager
         return $user;
     }
 
-    public function sendConfirmMail($view, $mailFrom, $mailTo){
-        $message= \Swift_Message::newInstance()
+    public function sendConfirmMail($view, $mailFrom, $mailTo)
+    {
+        $message = \Swift_Message::newInstance()
             ->setSubject('confirmer email')
             ->setFrom($mailFrom)
             ->setTo($mailTo)
@@ -252,13 +255,14 @@ class UserManager
 
     }
 
-    public function getNotUsersCourse($courseId){
-        $results= $this->em
+    public function getNotUsersCourse($courseId)
+    {
+        $results = $this->em
             ->getRepository('AppBundle:User')
             ->queryNotCourseUsers($courseId);
-        foreach ($results[0] as $userInscrit){
-            foreach ($results[1] as $index => $allUsers){
-                if ($userInscrit == $allUsers){
+        foreach ($results[0] as $userInscrit) {
+            foreach ($results[1] as $index => $allUsers) {
+                if ($userInscrit == $allUsers) {
                     unset($results[1][$index]);
                     break;
                 }
@@ -267,7 +271,8 @@ class UserManager
         return $results[1];
     }
 
-    public function updateGroup($id, $group){
+    public function updateGroup($id, $group)
+    {
 
         $user = $this->em
             ->getRepository('AppBundle:User')
@@ -279,23 +284,39 @@ class UserManager
 
         $user->setGroup($idgroup);
 
-        try{
+        switch ($group) {
+            case "admin":
+                $user->setRoles(['ROLE_ADMIN']);
+                break;
+            case "professor":
+                $user->setRoles(['ROLE_PROF']);
+                break;
+            case "user":
+                $user->setRoles(['ROLE_USER']);
+                break;
+            case "prospect":
+                $user->setRoles(['ROLE_USER']);
+                break;
+            default:
+                break;
+        }
+
+        try {
             $this->em->persist($user);
             $this->em->flush();
-        }catch(\exception $e){
+        } catch (\exception $e) {
             $e->getMessage();
         }
         return $user;
     }
 
-    public function updateUser($id, $lastname, $firstname, $birthdate, $phoneNumber, $email, $publicNote, $privateNote){
+    public function updateUser($id, $lastname, $firstname, $birthdate, $phoneNumber, $email, $publicNote, $privateNote)
+    {
 
-        //dump($group);die;
         $user = $this->em
             ->getRepository('AppBundle:User')
             ->findOneById($id);
 
-        //if($id != null){
         $user->setFirstname($firstname);
         $user->setLastname($lastname);
         $user->setPhoneNumber($phoneNumber);
@@ -303,12 +324,12 @@ class UserManager
         $user->setPrivateNote($privateNote);
         $user->setEmail($email);
 
-        $user->setBirthDate( new \DateTime($birthdate) );
+        $user->setBirthDate(new \DateTime($birthdate));
 
-        try{
+        try {
             $this->em->persist($user);
             $this->em->flush();
-        }catch(\exception $e){
+        } catch (\exception $e) {
             $e->getMessage();
         }
         return $user;

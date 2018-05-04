@@ -11,8 +11,9 @@
                     <div class="ibox-title">
                         <h5>{{ "Utilisateurs"|trans }}</h5>
                         <div class="ibox-tools">
-                            <a href="{{ path('createUser') }}"
-                               class="btn btn-primary btn-xs">{{ "Créer un utilisateur"|trans }}</a>
+                            {% if is_granted('ROLE_ADMIN') %}
+                                <a href="{{ path('createUser') }}" class="btn btn-primary btn-xs">{{ "Créer un utilisateur"|trans }}</a>
+                            {% endif %}
                         </div>
                     </div>
                     <div class="ibox-content">
@@ -21,7 +22,9 @@
                                 <thead>
                                 <tr>
                                     <th class="exportable">#</th>
-                                    <th class="exportable">{{ "Nom d'utilisateur"|trans }}</th>
+                                    {% if is_granted('ROLE_ADMIN') %}
+                                        <th class="exportable">{{ "Nom d'utilisateur"|trans }}</th>
+                                    {% endif %}
                                     <th class="exportable">{{ "Nom"|trans }}</th>
                                     <th class="exportable">{{ "Prénom"|trans }}</th>
                                     <th class="exportable">{{ "Date de naissance"|trans }}</th>
@@ -32,15 +35,17 @@
                                     <th class="exportable">{{ "Note publique"|trans }}</th>
                                     {% if is_granted('ROLE_ADMIN') %}
                                         <th class="exportable">{{ "Note privée"|trans }}</th>
+                                        <th>{{ "Actions"|trans }}</th>
                                     {% endif %}
-                                    <th>{{ "Actions"|trans }}</th>
                                 </tr>
                                 </thead>
                                 <tbody>
                                 {% for user in users %}
                                     <tr>
                                         <td class="exportable">{{ user.id }}</td>
-                                        <td class="exportable">{{ user.username }}</td>
+                                        {% if is_granted('ROLE_ADMIN') %}
+                                            <td class="exportable">{{ user.username }}</td>
+                                        {% endif %}
                                         <td class="exportable">{{ user.lastname }}</td>
                                         <td class="exportable">{{ user.firstname }}</td>
                                         <td class="exportable">{{ user.birthdate|date('d-m-Y') }}</td>
@@ -69,7 +74,9 @@
                                 <tfoot>
                                 <tr>
                                     <th>#</th>
-                                    <th>{{ "Nom d'utilisateur"|trans }}</th>
+                                    {% if is_granted('ROLE_ADMIN') %}
+                                        <th>{{ "Nom d'utilisateur"|trans }}</th>
+                                    {% endif %}
                                     <th>{{ "Nom"|trans }}</th>
                                     <th>{{ "Prénom"|trans }}</th>
                                     <th>{{ "Date de naissance"|trans }}</th>
@@ -80,8 +87,8 @@
                                     <th>{{ "Note publique"|trans }}</th>
                                     {% if is_granted('ROLE_ADMIN') %}
                                         <th>{{ "Note privée"|trans }}</th>
+                                        <th>{{ "Actions"|trans }}</th>
                                     {% endif %}
-                                    <th>{{ "Actions"|trans }}</th>
                                 </tr>
                                 </tfoot>
                             </table>
@@ -223,7 +230,6 @@
             </div>
         </div>
     </div>
-
 {% endblock %}
 {% block pageScripts %}
     <!-- Page-Level Scripts -->

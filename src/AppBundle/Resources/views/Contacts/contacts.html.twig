@@ -10,8 +10,9 @@
                     <div class="ibox-title">
                         <h5>{{ "Contacts"|trans }}</h5>
                         <div class="ibox-tools">
-                            <a href="{{ path('createContact') }}"
-                               class="btn btn-primary btn-xs">{{ "Créer un contact"|trans }}</a>
+                            {% if is_granted('ROLE_ADMIN') %}
+                                <a href="{{ path('createContact') }}" class="btn btn-primary btn-xs">{{ "Créer un contact"|trans }}</a>
+                            {% endif %}
                         </div>
                         <div class="ibox-content">
                             <div class="table-responsive">
@@ -24,7 +25,9 @@
                                         <th class="exportable">{{ "Email"|trans }}</th>
                                         <th class="exportable">{{ "Num tel"|trans }}</th>
                                         <th class="exportable">{{ "Utilisateurs"|trans }}</th>
-                                        <th>{{ "Actions"|trans }}</th>
+                                        {% if is_granted('ROLE_ADMIN') %}
+                                            <th>{{ "Actions"|trans }}</th>
+                                        {% endif %}
                                     </tr>
                                     </thead>
                                     <tbody>
@@ -43,12 +46,13 @@
                                                 {% endfor %}
 
                                             </td>
-                                            <td>
-                                                <a href="#"><span class="label label-default" data-toggle="modal" data-target="#contactModal_{{ contact.id }}">Modifier</span></a>
-                                                {#<a class="label label-warning"  href="{{ path('base_homepage', {'_want_to_be': contact.username}) }}" >Impersonate</a>#}
-                                                <a href="{{ path('deleteContact',{'contactId': contact.id}) }}" onclick="return confirm('Confirmer la suppression ?')"><span
-                                                            class="label label-danger">Supprimer</span></a>
-                                            </td>
+                                            {% if is_granted('ROLE_ADMIN') %}
+                                                <td>
+                                                    <a href="#"><span class="label label-default" data-toggle="modal" data-target="#contactModal_{{ contact.id }}">Modifier</span></a>
+                                                    {#<a class="label label-warning"  href="{{ path('base_homepage', {'_want_to_be': contact.username}) }}" >Impersonate</a>#}
+                                                    <a href="{{ path('deleteContact',{'contactId': contact.id}) }}" onclick="return confirm('Confirmer la suppression ?')"><span class="label label-danger">Supprimer</span></a>
+                                                </td>
+                                            {% endif %}
                                         </tr>
                                     {% endfor %}
                                     </tbody>
@@ -60,7 +64,9 @@
                                         <th class="exportable">{{ "Email"|trans }}</th>
                                         <th class="exportable">{{ "Num tel"|trans }}</th>
                                         <th>{{ "Utilisateurs"|trans }}</th>
-                                        <th>{{ "Actions"|trans }}</th>
+                                        {% if is_granted('ROLE_ADMIN') %}
+                                            <th>{{ "Actions"|trans }}</th>
+                                        {% endif %}
                                     </tr>
                                     </tfoot>
                                 </table>
