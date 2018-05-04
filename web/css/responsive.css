@@ -35,9 +35,6 @@ License URI: http://www.themevault.net/license/
     } 
 }
 @media(max-width: 1199px){
-    .logo {
-        width: 15%;
-    }
     .banner .carousel-caption{
         top: 15%;
     }
@@ -74,10 +71,6 @@ License URI: http://www.themevault.net/license/
     }
 }
 @media(max-width: 991px){
-
-    .logo {
-        width: 10%;
-    }
     h4{
         font-size: 18px;
     }

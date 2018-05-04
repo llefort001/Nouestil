@@ -139,14 +139,22 @@ a:hover{
     letter-spacing: 2px;
 }
 .logo {
-    display: inline-block;
+    display: block;
     text-align: center;
-    width: 25%;
 }
 /*navbar*/
 .navbar-default {
     background-color: rgba(0, 0, 0, 0);
     border: medium none;
+}
+
+.navbar .navbar-nav {
+    display: inline-block;
+    float: none;
+    vertical-align: top;
+}
+
+
 }
 .navbar-default .navbar-nav > .active > a, .navbar-default .navbar-nav > .active > a:focus, .navbar-default .navbar-nav > .active > a:hover {
     background-color: #4b1a70;
@@ -159,6 +167,7 @@ a:hover{
 .margin-l{
     margin-left: 94px;
 }
+
 li.dropdown{
     cursor: pointer;
 }
@@ -243,6 +252,11 @@ li.dropdown{
 .welcome-block, .special-block, .food-block, .service-block, .book-block, .counter-block, .staff-block, .subscribe-block, .contact-block{
     padding-top: 135px;
 }
+
+.instructor{
+    padding-bottom: 15px;
+    padding-top : 15px;
+}
 .remove-padd, .remove-both-padd{
     padding-left: 0;
     padding-right: 0;
@@ -269,7 +283,7 @@ li.dropdown{
     letter-spacing: 6px;
     text-align: center;
     text-transform: uppercase;
-     text-shadow: 3px 2px 2px rgb(160, 160, 160);
+    padding-bottom : 10px;
 }
 .feedback-box {
     border: 1px solid #bcd0d5;
@@ -739,7 +753,7 @@ footer .blog-img img:hover{
     color: #fff;
 }
 .footer-block ul li a:hover{
-    color: #4b1a70;
+    color: #b5328b;
 }
 footer .social-grid ul li {
     display: inline-block;
@@ -755,11 +769,11 @@ footer .social-grid.text-right a {
     cursor: pointer;
 }
 footer .social-grid.text-right a:hover{
-    color: #4b1a70;
-    border-color: #4b1a70;
+    color: #b5328b;
+    border-color: #b5328b;
 }
 .footer-block li.active > a{
-    color: #4b1a70;
+    color: #b5328b;
 }
 .social-grid.text-right a i {
     font-size: 16px;
@@ -776,7 +790,7 @@ footer .social-grid {
     letter-spacing: 2px;
 }
 .copyright > a {
-    color: #4b1a70;
+    color: #b5328b;
     font-weight: 600;
     text-shadow: 1px 1px 4px #000;
 }
@@ -989,9 +1003,6 @@ table {
     line-height: 30px;
     margin-bottom: 20px;
 }
-
-
-
 
 /*custom css*/
 .custom-css{
@@ -1405,4 +1416,3 @@ mark, .mark {
          /*float: left;*/
          position: relative;
        }
-        
