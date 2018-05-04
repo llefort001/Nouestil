@@ -29,7 +29,6 @@ class CourseController extends controller
 
     public function updateCourseAction(Request $request)
     {
-
         if ($request->isMethod('POST')) {
                 $data = $request->request->all();
                 $course = $this->get('nouestil.course');
@@ -55,7 +54,6 @@ class CourseController extends controller
             $data = $request->request->all();
             $dataCourse = $data['course'];
             $courseManager = $this->get('nouestil.course');
-            dump($dataCourse);die;
             $courseManager->addCourse($dataCourse['name'], $dataCourse['session'], $dataCourse['userTeach']);
             $this->addFlash('success', 'Le cours a bien été enregistré.');
         }
