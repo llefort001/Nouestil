@@ -15,7 +15,7 @@
     <link rel="icon" type="image/x-icon" href="{{ asset('favicon.ico') }}"/>
 </head>
 <body class="gray-bg">
-
+<div class="sk-spinner sk-spinner-pulse" style="position: fixed;top: 50%;left: 50%;transform: translate(-50%, -50%);z-index: 99999;"></div>
         {% block body %}{% endblock %}
 
 {% block javascripts %}
@@ -30,7 +30,12 @@
     <script src="{{ asset('js/plugins/pace/pace.min.js') }}"></script>
     <script src="{{ asset('js/plugins/toastr/toastr.min.js') }}"></script>
 
-
+    {#Stop loader when page is fully loaded#}
+    <script>
+        $(window).on('load', function() {
+            $(".sk-spinner").css('animation-play-state','paused');
+        });
+    </script>
 {% block messages %}
     {% for label, messages in app.flashes %}
     {% for message in messages %}
