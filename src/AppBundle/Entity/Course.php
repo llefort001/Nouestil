@@ -49,7 +49,7 @@ class Course
     protected $users;
 
     /**
-     * @ORM\OneToMany(targetEntity="Checklist", mappedBy="course", cascade= {"persist"})
+     * @ORM\OneToMany(targetEntity="Checklist", mappedBy="course", cascade= {"persist"}, fetch="EAGER")
      */
     protected $checklists;
 

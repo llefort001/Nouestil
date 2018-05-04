@@ -30,7 +30,7 @@ class Checklist
     private $datetime;
 
     /**
-     * @ORM\ManyToOne(targetEntity="Course", inversedBy="checklists", cascade={"persist"})
+     * @ORM\ManyToOne(targetEntity="Course", inversedBy="checklists", cascade={"persist"}, fetch="EAGER")
      */
     protected $course;
 

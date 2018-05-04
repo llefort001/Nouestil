@@ -74,9 +74,8 @@ class PaymentController extends Controller
         $paymentManager->deletePayment($paymentToDelete);
 
         // on redirige l'administrateur vers la liste des paiements si aucune erreur
-        $this->addFlash('success', 'Les payments ont bien été supprimés');
+        $this->addFlash('success', 'Le payment a bien été supprimé');
         return $this->redirect($this->generateUrl("payments"));
 
     }
-
 }

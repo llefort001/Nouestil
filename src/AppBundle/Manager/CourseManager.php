@@ -63,10 +63,10 @@ class CourseManager
         $teacher = $this->em->getRepository('AppBundle:User')->findById($userTeach);
         $course->setUserTeach($teacher[0]);
         try{
-            $this->em->persist($course);
+//            $this->em->persist($course);
             $this->em->flush();
         } catch (\exception $e){
-            dump($e->getMessage());
+            $e->getMessage();
         }
 
         return $course;
