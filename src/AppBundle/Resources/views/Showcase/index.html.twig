@@ -1,7 +1,7 @@
 {% extends 'layout.html.twig' %}
 {% block body %}
     <!--carousel--->
-    <div id="myCarousel" class="carousel slide banner" data-ride="carousel">
+    <div id="myCarousel" class="carousel slide banner wow animated fadeInDown" data-ride="carousel">
         <ol class="carousel-indicators">
             <li data-target="#myCarousel" data-slide-to="0" class="active"></li>
             <li data-target="#myCarousel" data-slide-to="1"></li>
@@ -36,8 +36,8 @@
 
     <!--special block--->
     <section class="welcome-block">
-        <div class="container">
-            <div class="text-head wow animated fadeInUp">
+        <div class="container wow animated fadeInDown">
+            <div class="text-head">
                 <h1>{{ "showcase_index_welcome_message"|trans }}</h1>
             </div>
 
@@ -54,7 +54,7 @@
     <!--special block--->
     <section class="special-block">
         <div class="container">
-            <div class="text-head wow animated fadeInUp">
+            <div class="text-head wow animated fadeInDown">
                 <h1>{{ "showcase_index_taught_styles_title"|trans }}</h1>
             </div>
             <!--carousel--->
@@ -67,7 +67,7 @@
                         </div>
                     </div>
                     <div class="col-md-4 col-sm-4 col-xs-4">
-                        <div class="style-image wow animated fadeInUp">
+                        <div class="style-image wow animated fadeInDown">
                             <a href="{{ path('styles') }}"><img src="{{ asset('images/estil-social2.png') }}" class="img-responsive center-block"></a>
                         </div>
                     </div>
@@ -109,12 +109,12 @@
     <!--contact us-->
     <section class="contact-block">
         <div class="container">
-            <div class="text-head wow animated fadeInUp">
+            <div class="text-head wow animated fadeInDown">
                 <h1>{{ "showcase_footer_title_info"|trans }}</h1>
             </div>
 
         </div>
-        <div class="contact-block-full-image wow animated fadeInUp">
+        <div class="contact-block-full-image wow animated fadeInDown">
             <div class="container">
                 {% block form_content %}
                     {% include "@AppBundle/Partials/contact_content.html.twig" %}
