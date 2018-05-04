@@ -12,7 +12,8 @@
                         <h5>{{ "Utilisateurs"|trans }}</h5>
                         <div class="ibox-tools">
                             {% if is_granted('ROLE_ADMIN') %}
-                                <a href="{{ path('createUser') }}" class="btn btn-primary btn-xs">{{ "Créer un utilisateur"|trans }}</a>
+                                <a href="{{ path('createUser') }}"
+                                   class="btn btn-primary btn-xs">{{ "Créer un utilisateur"|trans }}</a>
                             {% endif %}
                         </div>
                     </div>
@@ -52,7 +53,8 @@
                                         <td class="exportable">{{ user.phoneNumber }}</td>
                                         <td class="exportable">{{ user.email }}</td>
                                         <td class="exportable">{% for key, contact in user.contacts %}
-                                                <a href="#"><span class="label label-default" data-toggle="modal" data-target="#contactModal{{ contact.id }}"> {{ contact.firstname }} {{ contact.lastname }}</span></a>
+                                                <a href="#"><span class="label label-default" data-toggle="modal"
+                                                                  data-target="#contactModal{{ contact.id }}"> {{ contact.firstname }} {{ contact.lastname }}</span></a>
                                             {% endfor %}
                                         </td>
                                         <td class="exportable">{% if user.group.id is defined %}{{ user.group }}{% endif %}</td>
@@ -60,14 +62,15 @@
                                         {% if is_granted('ROLE_ADMIN') %}
                                             <td class="exportable">{{ user.privateNote }}</td>
                                         {% endif %}
-                                        <td>
-                                            <a href="#"><span class="label label-default" data-toggle="modal"
-                                                              data-target="#userModal_{{ user.id }}">{{ "Modifier"|trans }}</span></a>
-                                            {% if is_granted('ROLE_ADMIN') == true %}
+
+                                        {% if is_granted('ROLE_ADMIN') == true %}
+                                            <td>
+                                                <a href="#"><span class="label label-default" data-toggle="modal"
+                                                                  data-target="#userModal_{{ user.id }}">{{ "Modifier"|trans }}</span></a>
                                                 <a class="label label-warning"
                                                    href="{{ path('fos_user_profile_show', {'_want_to_be': user.username}) }}">{{ "Vue utilisateur"|trans }}</a>
-                                            {% endif %}
-                                        </td>
+                                            </td>
+                                        {% endif %}
                                     </tr>
                                 {% endfor %}
                                 </tbody>
@@ -113,19 +116,30 @@
 
                                                 <div class="Group">
                                                     <div>
-                                                        <p>{{ "Nom : "|trans }}<input type="text" name="lastname" value="{{ user.lastname }}">  </p>
+                                                        <p>{{ "Nom : "|trans }}<input type="text" name="lastname"
+                                                                                      value="{{ user.lastname }}"></p>
                                                     </div>
                                                     <div>
-                                                        <p>{{ "Prenom : "|trans }}<input type="text" name="firstname" value="{{ user.firstname }}"></p>
+                                                        <p>{{ "Prenom : "|trans }}<input type="text" name="firstname"
+                                                                                         value="{{ user.firstname }}">
+                                                        </p>
                                                     </div>
                                                     <div>
-                                                        <p>{{ "Date de naissance : "|trans }}<input type="date" name="birthdate" min="1900-01-01" value="{{ user.birthdate|date('Y-m-d') }}"></p>
+                                                        <p>{{ "Date de naissance : "|trans }}<input type="date"
+                                                                                                    name="birthdate"
+                                                                                                    min="1900-01-01"
+                                                                                                    value="{{ user.birthdate|date('Y-m-d') }}">
+                                                        </p>
                                                     </div>
                                                     <div>
-                                                        <p>{{ "numero de telephone : "|trans }}<input type="number" name="phoneNumber" value="{{ user.phoneNumber }}"></p>
+                                                        <p>{{ "numero de telephone : "|trans }}<input type="number"
+                                                                                                      name="phoneNumber"
+                                                                                                      value="{{ user.phoneNumber }}">
+                                                        </p>
                                                     </div>
                                                     <div>
-                                                        <p>{{ "email : "|trans }}<input type="email" name="email" value="{{ user.email }}"></p>
+                                                        <p>{{ "email : "|trans }}<input type="email" name="email"
+                                                                                        value="{{ user.email }}"></p>
                                                     </div>
                                                 </div>
                                                 <br>
@@ -138,7 +152,7 @@
                                                                 -- {{ "Sélectionner une option"|trans }} --
                                                             </option>
                                                             {% for key, group in groups %}
-                                                                <option value="{{ group }}" {% if user.group.id is defined and user.group.id==group.id %} selected="selected" {% endif %}  >{{ group }}</option>
+                                                                <option value="{{ group }}" {% if user.group.id is defined and user.group.id==group.id %} selected="selected" {% endif %} >{{ group }}</option>
                                                             {% endfor %}
                                                         </select>
                                                     </p>
@@ -148,10 +162,16 @@
                                                 <div class="Group">
                                                     <h5>{{ "Commentaires"|trans }}</h5>
                                                     <div>
-                                                        <p>{{ "Note publique : "|trans }}<input type="text" name="publicNote" value="{{ user.publicNote }}"></p>
+                                                        <p>{{ "Note publique : "|trans }}<input type="text"
+                                                                                                name="publicNote"
+                                                                                                value="{{ user.publicNote }}">
+                                                        </p>
                                                     </div>
                                                     <div>
-                                                        <p>{{ "Note privée : "|trans }}<input type="text" name="privateNote" value="{{ user.privateNote }}"></p>
+                                                        <p>{{ "Note privée : "|trans }}<input type="text"
+                                                                                              name="privateNote"
+                                                                                              value="{{ user.privateNote }}">
+                                                        </p>
                                                     </div>
                                                 </div>
                                                 <br>
@@ -214,7 +234,7 @@
                                                 {{ "Num tel"|trans }} : {{ contact.phoneNumber }}
                                                 <div class="col-12">
                                                     <a class="btn btn-w-m btn-danger swal"
-                                                            href="{{ path('unlinkContact',{'userId' : user.id,'contactId': contact.id}) }}"
+                                                       href="{{ path('unlinkContact',{'userId' : user.id,'contactId': contact.id}) }}"
                                                     >{{ "Délier ce contact de l'utilisateur"|trans }}</a>
                                                     <a class="btn btn-w-m btn-danger swal"
                                                        href="{{ path('deleteContact',{'contactId': contact.id}) }}">{{ "Supprimer"|trans }}</a>
@@ -239,7 +259,7 @@
     <script src="{{ asset('js/plugins/dateTimeMoment/moment.js') }}"></script>
     <script src="{{ asset('js/plugins/dateTimeMoment/sorting_datetime-moment.js') }}"></script>
     <script>
-        $.fn.dataTable.moment( 'DD-MM-YYYY' );
+        $.fn.dataTable.moment('DD-MM-YYYY');
         $(document).ready(function () {
             var locale = "{{ asset('js/plugins/dataTables/') }}" + "{{ app.request.get('_locale') }}" + ".json";
             var buttonCommon = {
