@@ -10,8 +10,9 @@
                     <div class="ibox-title">
                         <h5>{{ "Contacts"|trans }}</h5>
                         <div class="ibox-tools">
-                            <a href="{{ path('createContact') }}"
-                               class="btn btn-primary btn-xs">{{ "Créer un contact"|trans }}</a>
+                            {% if is_granted('ROLE_ADMIN') %}
+                                <a href="{{ path('createContact') }}" class="btn btn-primary btn-xs">{{ "Créer un contact"|trans }}</a>
+                            {% endif %}
                         </div>
                         <div class="ibox-content">
                             <div class="table-responsive">
