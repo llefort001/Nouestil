@@ -20,7 +20,7 @@
                                 <thead>
                                 <tr>
                                     <th class="exportable">#</th>
-                                    <th class="exportable">{{ "Nom d'utilisateur"|trans }}</th>
+                                    <th class="exportable">{{ "Utilisateur"|trans }}</th>
                                     <th class="exportable">{{ "Montant"|trans }}</th>
                                     <th class="exportable">{{ "Méthode"|trans }}</th>
                                     <th class="exportable">{{ "Date"|trans }}</th>
@@ -32,7 +32,7 @@
                                 {% for payment in payments %}
                                     <tr>
                                         <td class="exportable">{{ payment.id }}</td>
-                                        <td class="exportable">{{ payment.user }}</td>
+                                        <td class="exportable">{{ payment.user.firstname }} {{ payment.user.lastname}}</td>
                                         <td class="exportable">{{ payment.amount }}</td>
                                         <td class="exportable">{{ payment.method }}</td>
                                         <td class="exportable">{{ payment.datetime|date('d-m-Y') }}</td>
@@ -57,19 +57,6 @@
                                                             </div>
 
                                                             <div class="modal-body">
-
-
-                                                                    {#<p>Sign in today for more expirience.</p>#}
-                                                                    {#<div class="form-group"><label class="col-lg-2 control-label">Email</label>#}
-
-                                                                        {#<div class="col-lg-10"><input type="email" placeholder="Email" class="form-control"> <span class="help-block m-b-none">Example block-level help text here.</span>#}
-                                                                        {#</div>#}
-                                                                    {#</div>#}
-                                                                    {#<div class="form-group"><label class="col-lg-2 control-label">Password</label>#}
-
-                                                                        {#<div class="col-lg-10"><input type="password" placeholder="Password" class="form-control"></div>#}
-                                                                    {#</div>#}
-
 
                                                                 <div class="form-group">
 
@@ -142,7 +129,7 @@
                                 <tfoot>
                                 <tr>
                                     <th>#</th>
-                                    <th>{{ "Nom d'utilisateur"|trans }}</th>
+                                    <th>{{ "Utilisateur"|trans }}</th>
                                     <th>{{ "Montant"|trans }}</th>
                                     <th>{{ "Méthode"|trans }}</th>
                                     <th>{{ "Date"|trans }}</th>

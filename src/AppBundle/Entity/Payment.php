@@ -150,7 +150,7 @@ class Payment
     }
 
     /**
-     * @param string $commentaire
+     * @param string $note
      */
     public function setNote($note)
     {
