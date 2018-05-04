@@ -83,13 +83,13 @@ class UserController extends Controller
         $formRegistration = $this->createForm(UserType::class);
 
         if ($request->isMethod('POST')) {
-            $tokenGenerator = $this->get('fos_user.util.token_generator');
-            $token = substr($tokenGenerator->generateToken(), 0, 20);
             $formRegistration->submit($request->request->get($formRegistration->getName()));
             // Enregistrer après soumission du formulaire les données dans l'objet $user
             if ($formRegistration->isSubmitted() && $formRegistration->isValid()) {
+                $tokenGenerator = $this->get('fos_user.util.token_generator');
                 $user = $formRegistration->getData();
                 if (null === $user->getConfirmationToken()) {
+                    $token = substr($tokenGenerator->generateToken(), 0, 20);
                     $user->setConfirmationToken($token);
                 }
                 $password = substr($tokenGenerator->generateToken(), 0, 8); // 8 chars
@@ -106,19 +106,14 @@ class UserController extends Controller
                 }
                 $user->setPlainpassword($password);
                 $userManager->save($user);
-                $route=$_SERVER['HTTP_HOST'] . $this->generateUrl('confirmUser', array(
-                    'token' => $token,
-                    'userId' => $user->getId()
-                ));
                 $view= $this->renderView('email/register_confirmed.email.twig', array(
                     'user' => $user,
                     'password' => $password,
-                    'route' => $route
+                    'token' => $user->getConfirmationToken()
                 ));
                 $mailFrom= $this->getParameter('mailer_user');
                 $mailTo= $user->getEmail();
-                $mail=$userManager->sendConfirmMail($view, $mailFrom, $mailTo);
-                $this->get('mailer')->send($mail);
+                $this->get('mailer')->send($userManager->sendConfirmMail($view, $mailFrom, $mailTo));
                 $this->addFlash('success', 'L\'utilisateur ' . $user->getUsername() . ' a bien été enregistré, veuillez maintenant lui créer un contact.');
                 return $this->redirect($this->generateUrl("createContact"));
             }

@@ -25,7 +25,7 @@
                         <td>{{ course.userTeach.firstname }}</td>
                         <td>
                             <a href="#"><span class="label label-default" data-toggle="modal"
-                                              data-target="#courseModal_{{ course.id }}">+</span></a>
+                                              data-target="#courseModal_{{ course.id }}">{{ "modifier"|trans }}</span></a>
                             <a href="{{ path('deleteCourse',{'courseId': course.id}) }}"
                                onclick="return confirm('Confirmer la suppression ?')"><span
                                         class="label label-danger">{{ "Supprimer"|trans }}</span></a>
@@ -35,7 +35,7 @@
                                  aria-labelledby="myModalLabel">
                                 <div class="modal-dialog" role="document">
                                     <form method="post" action="{{ path('updateCourse') }}" name="update-course"
-                                          class="form-horizontal">
+                                          class="form form-horizontal">
                                         <div class="modal-content">
                                             <div class="modal-header">
                                                 <button type="button" class="close" data-dismiss="modal"
@@ -43,7 +43,7 @@
                                                     <span aria-hidden="true">&times;</span>
                                                 </button>
                                                 <h4 class="modal-title" id="myModalLabel">
-                                                    {{ course.name }}
+                                                    {{ "modification"|trans }} :{{ course.name }}
                                                 </h4>
                                             </div>
                                             <div class=modal-body">
@@ -51,22 +51,23 @@
 
                                                     <label for="name"> {{ "Intitulé"|trans }} <input type="text"
                                                                                                      name="name"
-                                                                                                     value="{{ course.name }}"/></label><br/>
+                                                                                                     value="{{ course.name }}"
+                                                                                                     class="form form-control"/></label><br/>
                                                     <label for="session"> {{ "Session"|trans }} <input type="text"
                                                                                                        name="session"
-                                                                                                       value="{{ course.session }}"/></label><br/>
-                                                    <select required="required" class="form-control" name="userTeach">
+                                                                                                       value="{{ course.session }}"
+                                                                                                       class="form form-control"/></label><br/>
+                                                    <select required="required" class="form form-control" name="userTeach">
                                                         <option disabled selected value>
                                                             -- {{ "Sélectionner un professeur"|trans }} --
                                                         </option>
                                                         {% for userTeach in usersTeach %}
                                                             {% if course.userTeach == userTeach %}
-                                                                <option selected="selected">
+                                                                <option value="{{ userTeach.id }}" selected="selected">
                                                                     {{ userTeach.firstname }}
                                                                 </option>
                                                             {% endif %}
                                                             <option value="{{ userTeach.id }}">
-
                                                                 {{ userTeach.firstname }}
                                                             </option>
                                                         {% endfor %}
