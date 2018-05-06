@@ -6,10 +6,8 @@ use AppBundle\Form\UserType;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
-use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 
 
-use AppBundle\Entity\User;
 
 /**
  * User controller.
@@ -90,6 +88,8 @@ class UserController extends Controller
                 }
                 $user->setPlainpassword($password);
                 $userManager->save($user);
+                dump($user);
+                $userManager->updateGroup($user,$user->getGroup()); //adds role for security access
                 $view= $this->renderView('email/register_confirmed.email.twig', array(
                     'user' => $user,
                     'password' => $password,
@@ -126,13 +126,12 @@ class UserController extends Controller
             $userManager->save($userToConfirm);
             $url = $this->generateUrl('fos_user_security_login');
             $response = new RedirectResponse($url);
-            $this->addFlash('success',  'Success your account has been activate');
+            $this->addFlash('success',  'Votre compte a bien été activé');
             return $response;
         }
-        $this->addFlash('danger','echec desole');
-        $url = $this->generateUrl('fos_user_security_login');
-        $response = new RedirectResponse($url);
-        return $response;
+        $this->addFlash('danger','Erreur lors de l\'activation de votre compte');
+        return $this->redirect($this->generateUrl('fos_user_security_login'));
+
     }
 
 }

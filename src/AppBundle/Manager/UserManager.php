@@ -2,7 +2,7 @@
 
 namespace AppBundle\Manager;
 
-use AppBundle\Entity\Contact;
+use AppBundle\Entity\Group;
 use AppBundle\Entity\User;
 use Doctrine\ORM\EntityManager;
 use Doctrine\ORM\ORMException;
@@ -211,12 +211,10 @@ class UserManager
         $user->setcity($city);
         $user->setUsername($username);
         $user->setUsernameCanonical($username);
-        $user->setEnabled(true);
         try {
             $this->em->persist($user);
             $this->em->flush();
         } catch (\Exception $e) {
-//            dump($e->getMessage());
         }
         return $user;
     }
@@ -224,7 +222,7 @@ class UserManager
     public function sendConfirmMail($view, $mailFrom, $mailTo)
     {
         $message = \Swift_Message::newInstance()
-            ->setSubject('confirmer email')
+            ->setSubject('Account Confirm Nouestil')
             ->setFrom($mailFrom)
             ->setTo($mailTo)
             ->setCharset('utf-8')
@@ -273,17 +271,9 @@ class UserManager
 
     public function updateGroup($id, $group)
     {
-
         $user = $this->em
             ->getRepository('AppBundle:User')
             ->findOneById($id);
-
-        $idgroup = $this->em
-            ->getRepository('AppBundle:Group')
-            ->findOneByName($group);
-
-        $user->setGroup($idgroup);
-
         switch ($group) {
             case "admin":
                 $user->setRoles(['ROLE_ADMIN']);
@@ -300,6 +290,12 @@ class UserManager
             default:
                 break;
         }
+        if (!$group instanceof Group){
+            $group = $this->em
+                ->getRepository('AppBundle:Group')
+                ->findOneByName($group);
+        }
+            $user->setGroup($group);
 
         try {
             $this->em->persist($user);

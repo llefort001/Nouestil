@@ -2,12 +2,16 @@
 
 namespace AppBundle\Form;
 
+use AppBundle\Entity\Group;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Form\Extension\Core\Type\EmailType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\Extension\Core\Type\DateType;
+use Symfony\Bridge\Doctrine\Form\Type\EntityType;
+use Doctrine\ORM\EntityRepository;
+
 
 class UserType extends AbstractType
 {
@@ -35,6 +39,14 @@ class UserType extends AbstractType
             ))
             ->add('city', TextType::class, array('label' =>false,
                 'attr' => array('class' => 'form-control','placeholder' => 'Ville')
+            ))
+            ->add('group', EntityType::class, array(
+                'class' => Group::class,
+                'query_builder' => function (EntityRepository $er) {
+                    return $er->createQueryBuilder('g');
+                },
+                'label' => false,
+                'attr' => array('class' => 'form-control', 'required' => 'required')
             ))
             ;
 
