@@ -22,20 +22,20 @@
                 </a>
                 <ul class="dropdown-menu" style="width: auto;min-width: 0">
                     <li>
-                        <a class="text-center" href="{{ path(parentRequest.attributes.get('_route'), app.request.get('_route_params',{})|merge({'_locale': 'es'})) }}">
+                        <a class="text-center" href="{{ path(parentRequest.attributes.get('_route'), parentRequest.attributes.get('_route_params',{})|merge({'_locale': 'es'})) }}">
                             <span class="flag-icon flag-icon-es"></span>
                         </a>
                     </li>
                     <li class="divider"></li>
                     <li>
-                        <a href="{{ path(parentRequest.attributes.get('_route'), app.request.get('_route_params',{})|merge({'_locale': 'en'})) }}">
+                        <a href="{{ path(parentRequest.attributes.get('_route'), parentRequest.attributes.get('_route_params',{})|merge({'_locale': 'en'})) }}">
                             <span class="flag-icon flag-icon-gb"></span>
 
                         </a>
                     </li>
                     <li class="divider"></li>
                     <li>
-                        <a href="{{ path(parentRequest.attributes.get('_route'), app.request.get('_route_params',{})|merge({'_locale': 'fr'})) }}">
+                        <a href="{{ path(parentRequest.attributes.get('_route'), parentRequest.attributes.get('_route_params',{})|merge({'_locale': 'fr'})) }}">
                             <span class="flag-icon flag-icon-fr"></span>
 
                         </a>
