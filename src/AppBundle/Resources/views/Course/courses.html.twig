@@ -10,8 +10,9 @@
                 <thead>
                 <tr>
                     <th>#</th>
-                    <th>{{ "Intitulé"|trans }}</th>
-                    <th>{{ "Session"|trans }}</th>
+                    <th>{{ "Style"|trans }}</th>
+                    <th>{{ "Catégorie"|trans }}</th>
+                    <th>{{ "Plage horaire"|trans }}</th>
                     <th>{{ "Professeur"|trans }}</th>
                     <th>{{ "Actions"|trans }}</th>
                 </tr>
@@ -20,9 +21,10 @@
                 {% for course in courses %}
                     <tr>
                         <td>{{ course.id }}</td>
-                        <td>{{ course.name }}</td>
-                        <td>{{ course.session }}</td>
-                        <td>{{ course.userTeach.firstname }}</td>
+                        <td>{{ course.style }}</td>
+                        <td>{{ course.category }}</td>
+                        <td>{{ course.timeslot }}</td>
+                        <td>{{ course.userTeach }}</td>
                         <td>
                             <a href="#"><span class="label label-default" data-toggle="modal"
                                               data-target="#courseModal_{{ course.id }}">{{ "modifier"|trans }}</span></a>
@@ -43,21 +45,32 @@
                                                     <span aria-hidden="true">&times;</span>
                                                 </button>
                                                 <h4 class="modal-title" id="myModalLabel">
-                                                    {{ "modification"|trans }} :{{ course.name }}
+                                                    {{ course.style }} {{ course.category }} {{ course.timeslot }}
                                                 </h4>
                                             </div>
                                             <div class=modal-body">
                                                 <div>
 
-                                                    <label for="name"> {{ "Intitulé"|trans }} <input type="text"
-                                                                                                     name="name"
-                                                                                                     value="{{ course.name }}"
-                                                                                                     class="form form-control"/></label><br/>
-                                                    <label for="session"> {{ "Session"|trans }} <input type="text"
-                                                                                                       name="session"
-                                                                                                       value="{{ course.session }}"
-                                                                                                       class="form form-control"/></label><br/>
-                                                    <select required="required" class="form form-control" name="userTeach">
+                                                    <label for="style"> {{ "Style"|trans }} </label>
+                                                    <input type="text"
+                                                           id="style"
+                                                           name="style"
+                                                           value="{{ course.style }}"
+                                                           class="form form-control"/><br/>
+                                                    <label for="category"> {{ "Catégorie"|trans }} </label>
+                                                    <input type="text"
+                                                           id="category"
+                                                           name="category"
+                                                           value="{{ course.category }}"
+                                                           class="form form-control"/><br/>
+                                                    <label for="timeslot"> {{ "Plage horaire"|trans }} </label>
+                                                    <input type="text"
+                                                           id="timeslot"
+                                                           name="timeslot"
+                                                           value="{{ course.timeslot }}"
+                                                           class="form form-control"/><br/>
+                                                    <select title="professor" required="required" class="form form-control"
+                                                            name="userTeach">
                                                         <option disabled selected value>
                                                             -- {{ "Sélectionner un professeur"|trans }} --
                                                         </option>
@@ -109,12 +122,14 @@
                             </h4>
                         </div>
                         <div class=modal-body">
-                            {{ form_row(formCreateCourse.name) }}
-                            {{ form_row(formCreateCourse.session) }}
+                            {{ form_row(formCreateCourse.style) }}
+                            {{ form_row(formCreateCourse.category) }}
+                            {{ form_row(formCreateCourse.timeslot) }}
                             {{ form_row(formCreateCourse.userTeach) }}
                         </div>
                         <div class="modal-footer">
-                            <button type="button" class="btn btn-default" data-dismiss="modal">{{ "Fermer"|trans }}</button>
+                            <button type="button" class="btn btn-default"
+                                    data-dismiss="modal">{{ "Fermer"|trans }}</button>
                             <button type="submit" class="btn btn-primary">{{ "Sauvegarder"|trans }}</button>
                         </div>
                     </div>
@@ -128,8 +143,8 @@
     <script src="{{ asset('js/plugins/dataTables/datatables.min.js') }}"></script>
     <script>
         $(document).ready(function () {
-            var locale = "{{ asset('js/plugins/dataTables/') }}" + "{{ app.request.get('_locale') }}" + ".json";
-            var buttonCommon = {
+            const locale = "{{ asset('js/plugins/dataTables/') }}" + "{{ app.request.get('_locale') }}" + ".json";
+            const buttonCommon = {
                 exportOptions: {
                     columns: '.exportable'
                 }

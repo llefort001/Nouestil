@@ -11,8 +11,9 @@ use Doctrine\ORM\EntityManager;
  */
 class CourseManager
 {
-    protected $name;
-    protected $session;
+    protected $style;
+    protected $category;
+    protected $timeslot;
     protected $professor;
     protected $em;
 
@@ -53,13 +54,14 @@ class CourseManager
      * @param $session
      * @return null|object
      */
-    public function updateCourse($id, $name, $session, $userTeach)
+    public function updateCourse($id, $style, $category,$timeslot, $userTeach)
     {
         $course= $this->em
             ->getRepository('AppBundle:Course')
             ->findOneById($id);
-        $course->setName($name);
-        $course->setSession($session);
+        $course->setStyle($style);
+        $course->setCategory($category);
+        $course->setTimeslot($timeslot);
         $teacher = $this->em->getRepository('AppBundle:User')->findById($userTeach);
         $course->setUserTeach($teacher[0]);
         try{
@@ -89,11 +91,12 @@ class CourseManager
     return $course;
 }
 
-    public function addCourse($name, $session, $userTeach)
+    public function addCourse($style, $category, $timeslot,$userTeach)
     {
         $course =new Course();
-        $course->setName($name);
-        $course->setSession($session);
+        $course->setStyle($style);
+        $course->setCategory($category);
+        $course->setTimeslot($timeslot);
         $teacher = $this->em->getRepository('AppBundle:User')->findById($userTeach);
         $course->setUserTeach($teacher[0]);
         try{

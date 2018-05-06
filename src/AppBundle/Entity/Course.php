@@ -2,7 +2,6 @@
 
 namespace AppBundle\Entity;
 
-use Doctrine\ORM\Mapping as ORM;
 use Doctrine\Common\Collections\ArrayCollection;
 
 /**
@@ -25,16 +24,23 @@ class Course
     /**
      * @var string
      *
-     * @ORM\Column(name="name", type="string", length=255, unique=true)
+     * @ORM\Column(name="style", type="string", length=255)
      */
-    protected $name;
+    protected $style;
 
     /**
      * @var string
      *
-     * @ORM\Column(name="session", type="string", length=255, unique=true)
+     * @ORM\Column(name="category", type="string", length=255)
      */
-    protected $session;
+    protected $category;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="timeslot", type="string", length=255)
+     */
+    protected $timeslot;
 
     /**
      * @ORM\ManyToOne(targetEntity="User", inversedBy="coursesTeach")
@@ -70,27 +76,27 @@ class Course
     }
 
     /**
-     * Set name
+     * Set style
      *
-     * @param string $name
+     * @param string $style
      *
      * @return Course
      */
-    public function setName($name)
+    public function setStyle($style)
     {
-        $this->name = $name;
+        $this->style = $style;
 
         return $this;
     }
 
     /**
-     * Get name
+     * Get style
      *
      * @return string
      */
-    public function getName()
+    public function getStyle()
     {
-        return $this->name;
+        return $this->style;
     }
 
     /**
@@ -155,17 +161,33 @@ class Course
     /**
      * @return string
      */
-    public function getSession()
+    public function getCategory()
     {
-        return $this->session;
+        return $this->category;
     }
 
     /**
-     * @param string $session
+     * @param string $category
      */
-    public function setSession($session)
+    public function setCategory($category)
     {
-        $this->session = $session;
+        $this->category = $category;
+    }
+
+    /**
+     * @return string
+     */
+    public function getTimeslot()
+    {
+        return $this->timeslot;
+    }
+
+    /**
+     * @param string $timeslot
+     */
+    public function setTimeslot($timeslot)
+    {
+        $this->timeslot = $timeslot;
     }
 
 }

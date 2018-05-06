@@ -2,7 +2,6 @@
 
 namespace AppBundle\Form;
 
-use AppBundle\AppBundle;
 use AppBundle\Entity\User;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
@@ -19,11 +18,13 @@ class CourseType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('name', TextType::class, array('label' => false,
-                'attr' => array('class' => 'form-control', 'placeholder' => 'Nom du cours', 'required' => 'required')
+            ->add('style', TextType::class, array('label' => false,
+                'attr' => array('class' => 'form-control', 'placeholder' => 'Style')
             ))
-            ->add('session', TextType::class, array('label' => false,
-                'attr' => array('class' => 'form-control', 'placeholder' => 'Intitulé de la session', 'required' => 'required')
+            ->add('category', TextType::class, array('label' => false,
+                'attr' => array('class' => 'form-control', 'placeholder' => 'Catégorie')
+            ))->add('timeslot', TextType::class, array('label' => false,
+                'attr' => array('class' => 'form-control', 'placeholder' => 'Plage horaire')
             ))
             ->add('userTeach', EntityType::class, array(
                 'label' => 'Nom du professeur ',
