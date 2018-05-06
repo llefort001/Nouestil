@@ -21,6 +21,7 @@
                                 <tr>
                                     <th class="exportable">#</th>
                                     <th class="exportable">{{ "Utilisateur"|trans }}</th>
+                                    <th class="exportable">{{ "Intitulé"|trans }}</th>
                                     <th class="exportable">{{ "Montant"|trans }}</th>
                                     <th class="exportable">{{ "Catégorie"|trans }}</th>
                                     <th class="exportable">{{ "Méthode"|trans }}</th>
@@ -34,18 +35,15 @@
                                     <tr>
                                         <td class="exportable">{{ payment.id }}</td>
                                         <td class="exportable">{{ payment.user.firstname }} {{ payment.user.lastname}}</td>
+                                        <td class="exportable">{{ payment.title }} </td>
                                         <td class="exportable">{{ payment.amount }}</td>
-                                        <td class="exportable">{{ payment.category }}</td>
-                                        <td class="exportable">{{ payment.method }}</td>
+                                        <td class="exportable">{{ payment.category|trans }}</td>
+                                        <td class="exportable">{{ payment.method|trans }}</td>
                                         <td class="exportable">{{ payment.datetime|date('d-m-Y') }}</td>
                                         <td class="exportable">{{ payment.note }}</td>
                                         <td>
-                                            {#<span class="label label-default" data-toggle="modal" data-target="#userModal_{{ user.id }}">Modifier</span>#}
-                                            {#<a class="label label-warning"  href="{{ path('base_homepage', {'_want_to_be': user.username}) }}" >Impersonate</a>#}
-                                            {#{% if currentUser != user %}#}
                                             <a href="#"><span class="label label-default" data-toggle="modal" data-target="#paymentModal_{{ payment.id }}">{{ "Modifier"|trans }}</span></a>
                                             <a href="{{ path('deletePayment',{'paymentId': payment.id}) }}" onclick="return confirm('Confirmer la suppression ?')"><span class="label label-danger">{{ "Supprimer"|trans }}</span></a>
-                                            {#{% endif %}#}
                                             <div class="modal fade" id="paymentModal_{{ payment.id }}" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
                                                 <div class="modal-dialog" role="document">
                                                     <form method="post" class="form-horizontal" action="{{ path('updatePayment') }}" name="update-payment" role="form">
@@ -61,9 +59,16 @@
                                                             <div class="modal-body">
 
                                                                 <div class="form-group">
+                                                                    <div class="col-lg-5">
+                                                                        <label class="control-label" for="Ptitle">{{ "Intitulé"|trans }}:</label>
+                                                                    </div>
+
+                                                                    <div class="col-lg-8">
+                                                                        <input title="title" type="text" class="form-control" id="title" name="title" value="{{ payment.title }}">
+                                                                    </div>
 
                                                                     <div class="col-lg-5">
-                                                                        <label class="control-label" for="Pamount">{{ "Montant"|trans }}:</label>
+                                                                        <label class="control-label" for="amount">{{ "Montant"|trans }}:</label>
                                                                     </div>
 
                                                                     <div class="col-lg-8">
@@ -87,15 +92,25 @@
                                                                 <div class="form-group">
 
                                                                     <div class="col-lg-5">
+                                                                        <label class="control-label">{{ "Catégorie"|trans }}:</label>
+                                                                    </div>
+                                                                    <div class="col-lg-8">
+                                                                        <select name="category" class="form-control">
+                                                                            <option {% if payment.category is not defined %} selected="selected" {% endif %} value="">{{ "--Choisir une catégorie--"|trans }}</option>
+                                                                            <option {% if payment.category is defined and payment.category=="Payment" %} selected="selected" {% endif %} value="Payment">{{ "Paiement"|trans }}</option>
+                                                                            <option {% if payment.category is defined and payment.category=="Refund" %} selected="selected" {% endif %} value="Refund">{{ "Remboursement"|trans }}</option>
+                                                                        </select>
+                                                                    </div>
+                                                                    <div class="col-lg-5">
                                                                         <label class="control-label">{{ "Méthode"|trans }}:</label>
                                                                     </div>
-
                                                                     <div class="col-lg-8">
-                                                                        <select name="method" class="form-control" value="{{ payment.method }}">
-                                                                            <option value="cb">{{ "Carte bancaire"|trans }}</option>
-                                                                            <option value="especes">{{ "Espèces"|trans }}</option>
-                                                                            <option value="paypal">{{ "Paypal"|trans }}</option>
-                                                                            <option value="autre">{{ "Autre"|trans }}</option>
+                                                                        <select name="method" class="form-control">
+                                                                            <option {% if payment.method is not defined %} selected="selected" {% endif %} value="">{{ "--Choisir une méthode--"|trans }}</option>
+                                                                            <option {% if payment.method is defined and payment.method=="Credit Card" %} selected="selected" {% endif %} value="Credit Card">{{ "Carte bancaire"|trans }}</option>
+                                                                            <option {% if payment.method is defined and payment.method=="Cash" %} selected="selected" {% endif %} value="Cash">{{ "Espèces"|trans }}</option>
+                                                                            <option {% if payment.method is defined and payment.method=="Transfer" %} selected="selected" {% endif %} value="Transfer">{{ "Virement"|trans }}</option>
+                                                                            <option {% if payment.method is defined and payment.method=="Other" %} selected="selected" {% endif %} value="Other">{{ "Autre"|trans }}</option>
                                                                         </select>
                                                                     </div>
 
@@ -132,6 +147,7 @@
                                 <tr>
                                     <th>#</th>
                                     <th>{{ "Utilisateur"|trans }}</th>
+                                    <th>{{ "Intitulé"|trans }}</th>
                                     <th>{{ "Montant"|trans }}</th>
                                     <th>{{ "Catégorie"|trans }}</th>
                                     <th>{{ "Méthode"|trans }}</th>

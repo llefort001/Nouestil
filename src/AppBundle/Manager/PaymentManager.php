@@ -102,7 +102,7 @@ class PaymentManager
 
         if (!$payment instanceof Payment) {
             throw $this->createNotFoundException(
-                'Pas de paiement '
+                'Error'
             );
         }
 
@@ -111,11 +111,13 @@ class PaymentManager
     }
 
 
-    public function updatePayment($id, $amount, $datetime, $method, $note){
+    public function updatePayment($id,$title,$category,$amount, $datetime, $method, $note){
 
         $payment = $this->em
             ->getRepository('AppBundle:Payment')
             ->findOneById($id);
+        $payment->setTitle($title);
+        $payment->setCategory($category);
         $payment->setAmount($amount);
         $payment->setMethod($method);
         $payment->setNote($note);

@@ -62,6 +62,11 @@ class Payment
     public $note;
 
     /**
+     * @ORM\Column(type="string", length=255)
+     */
+    public $title;
+
+    /**
      * Get id
      *
      * @return int
@@ -179,6 +184,23 @@ class Payment
     {
         $this->note = $note;
     }
+
+    /**
+     * @return mixed
+     */
+    public function getTitle()
+    {
+        return $this->title;
+    }
+
+    /**
+     * @param mixed $title
+     */
+    public function setTitle($title)
+    {
+        $this->title = $title;
+    }
+
 
 
 }

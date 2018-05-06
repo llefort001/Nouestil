@@ -408,4 +408,8 @@ class User extends BaseUser
             $contact->removeUser($this); // synchronously updating inverse side
         }
     }
+
+    public function __toString(){
+        return ($this->firstname." ".$this->lastname);
+    }
 }

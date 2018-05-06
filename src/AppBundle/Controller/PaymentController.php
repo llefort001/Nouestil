@@ -56,8 +56,8 @@ class PaymentController extends Controller
         if ($request->isMethod('POST')) {
             $data = $request->request->all();
 
-            $payment= $this->get('nouestil.payment');
-            $payment->updatePayment($data['id'], $data['amount'], $data['datetime'], $data['method'], $data['note']);
+            $paymentManager= $this->get('nouestil.payment');
+            $paymentManager->updatePayment($data['id'],$data['title'],$data['category'], $data['amount'], $data['datetime'], $data['method'], $data['note']);
 
             //dump($data['note']); die;
         }

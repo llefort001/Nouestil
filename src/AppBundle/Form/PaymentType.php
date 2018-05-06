@@ -22,11 +22,14 @@ class PaymentType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
+            ->add('title', TextType::class, array('label' => false,
+                'attr' => array('class' => 'form-control', 'placeholder' => 'Intitulé')
+            ))
             ->add('amount', NumberType::class, array('label' => false,
-                'attr' => array('class' => 'form-control', 'placeholder' => 'Montant', 'required' => 'required')
+                'attr' => array('class' => 'form-control', 'placeholder' => 'Montant')
             ))
             ->add('datetime', DateType::class, array('label' => false,
-                'attr' => array('class' => 'form-control','required' => 'required'),
+                'attr' => array('class' => 'form-control'),
                 'widget' => 'single_text',
                 'years' => range(date('Y'), date('Y') + 100),
                 'months' => range(date('m'), 12),
@@ -34,47 +37,33 @@ class PaymentType extends AbstractType
             ))
             ->add('user', EntityType::class, array('label' => false,
                 'class' => User::class,
-                'choice_label' => 'username',
-                'attr' => array('class' => 'form-control', 'required' => 'required')
+//                'choice_label' => 'username', not needed because class has a __toString() method sending name + surname
+                'attr' => array('class' => 'form-control')
             ))
-            ->add('note', TextType::class, array('label' =>false,
-                'attr' => array('class' => 'form-control','placeholder' => 'Note'),'required' => false
+            ->add('note', TextType::class, array('label' => false,
+                'attr' => array('class' => 'form-control', 'placeholder' => 'Note'), 'required' => false
             ))
             ->add('method', ChoiceType::class, array('label' => false,
                 'choices' => array(
-                    '--Choisir une méthode--' => null,
                     'CB' => 'Credit Card',
                     'Especes' => 'Cash',
                     'Virement' => 'Transfer',
-                    'PayPal' => 'Paypal',
                     'Autre' => 'Other'
                 ),
-                'choice_attr' => function($val, $key, $index) {
-                    if ($val==null) {
-                        $disabled = true;
-                    } else {
-                        $disabled = false;
-                    }
-                    return $disabled ? ['disabled' => 'disabled'] : [];
-                },
-                'attr' => array('class' => 'form-control', 'required' => 'required')
+                'placeholder' => '-- Choisir une méthode --',
+                'required' => true,
+                'attr' => array('class' => 'form-control')
 
             ))
             ->add('category', ChoiceType::class, array('label' => false,
                 'choices' => array(
-                    '--Choisir une catégorie--' => null,
                     'Paiement' => 'Payment',
                     'Remboursement' => 'Refund',
                 ),
-                'choice_attr' => function($val, $key, $index) {
-                    if ($val==null) {
-                        $disabled = true;
-                    } else {
-                        $disabled = false;
-                    }
-                    return $disabled ? ['disabled' => 'disabled'] : [];
-                },
-                'attr' => array('class' => 'form-control', 'required' => 'required')
+                'placeholder' => '-- Choisir une catégorie --',
+                'required' => true,
+                'attr' => array('class' => 'form-control')
+
             ));
     }
 
