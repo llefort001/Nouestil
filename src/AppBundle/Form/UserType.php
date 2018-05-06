@@ -3,7 +3,6 @@
 namespace AppBundle\Form;
 
 use Symfony\Component\Form\AbstractType;
-use Symfony\Component\Form\Extension\Core\Type\PasswordType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Form\Extension\Core\Type\EmailType;
@@ -19,23 +18,23 @@ class UserType extends AbstractType
     {
         $builder
             ->add('email', EmailType::class, array('label' =>false,
-                'attr' => array('class' => 'form-control','placeholder' => 'Email','required' => 'required')
+                'attr' => array('class' => 'form-control','placeholder' => 'Email')
             ))
             ->add('firstname', TextType::class, array('label' =>false,
-                'attr' => array('class' => 'form-control','placeholder' => 'Prénom','required' => 'required')
+                'attr' => array('class' => 'form-control','placeholder' => 'Prénom')
             ))
             ->add('lastname', TextType::class, array('label' =>false,
-                'attr' => array('class' => 'form-control','placeholder' => 'Nom','required' => 'required')
+                'attr' => array('class' => 'form-control','placeholder' => 'Nom')
             ))
             ->add('phone_number', TextType::class, array('label' =>false,
-                'attr' => array('class' => 'form-control','placeholder' => 'Numéro de téléphone','required' => 'required')
+                'attr' => array('class' => 'form-control','placeholder' => 'Numéro de téléphone')
             ))
             ->add('birth_date', DateType::class, array('label' =>false,
-                'attr' => array('class' => 'form-control','placeholder' => 'Date de naissance','required' => 'required'),
+                'attr' => array('class' => 'form-control','placeholder' => 'Date de naissance'),
                 'widget'=>'single_text'
             ))
             ->add('city', TextType::class, array('label' =>false,
-                'attr' => array('class' => 'form-control','placeholder' => 'Adresse','required' => 'required')
+                'attr' => array('class' => 'form-control','placeholder' => 'Ville')
             ))
             ;
 
