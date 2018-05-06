@@ -71,7 +71,7 @@ class User extends BaseUser
     protected $contacts;
 
     /**
-     * @ORM\OneToMany(targetEntity="Payment", mappedBy="user", cascade={"persist"})
+     * @ORM\OneToMany(targetEntity="Payment", mappedBy="user", cascade={"remove"})
      */
     protected $payments;
 
@@ -94,12 +94,6 @@ class User extends BaseUser
      * @ORM\OneToMany(targetEntity="Course", mappedBy="userTeach", cascade={"persist"})
      */
     protected $coursesTeach;
-
-    /**
-     * @ORM\OneToMany(targetEntity="Notification", mappedBy="user", cascade={"persist"})
-     */
-    protected $notifications;
-
 
     /**
      * User constructor.
@@ -337,13 +331,6 @@ class User extends BaseUser
         return $this->checklistsAbsents;
     }
 
-    /**
-     * @return mixed
-     */
-    public function getNotifications()
-    {
-        return $this->notifications;
-    }
 
     /**
      * @param mixed $contacts
@@ -383,14 +370,6 @@ class User extends BaseUser
     public function setPayments($payments)
     {
         $this->payments = $payments;
-    }
-
-    /**
-     * @param mixed $notifications
-     */
-    public function setNotifications($notifications)
-    {
-        $this->notifications = $notifications;
     }
 
     public function addContact(Contact $contact)

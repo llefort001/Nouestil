@@ -37,6 +37,8 @@ class UserController extends Controller
             $this->addFlash('danger', 'Impossible de supprimer l\'utilisateur actuellement connecté.');
         } else {
             $userManager->deleteUser($userToDelete);
+            $this->addFlash('success', 'L utilisateur a bien été supprimé');
+
         }
         return $this->redirect($this->generateUrl('users'));
 

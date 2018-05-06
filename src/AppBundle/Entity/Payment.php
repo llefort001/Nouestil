@@ -24,7 +24,7 @@ class Payment
     /**
      * @var float
      *
-     * @ORM\Column(name="amount", type="float")
+     * @ORM\Column(name="amount", type="float",  precision=6, scale=2)
      */
     private $amount;
 
