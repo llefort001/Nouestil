@@ -35,7 +35,7 @@
     {#Stop loader when page is fully loaded#}
     <script>
         $(window).on('load', function() {
-            $(".sk-spinner").css('animation-play-state','paused');
+            $(".sk-spinner").css({'animation-play-state':'paused','display':'none'});
         });
     </script>
 {% block messages %}

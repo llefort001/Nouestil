@@ -28,8 +28,6 @@ security:
 
     access_control:
         - { path: ^/login$, role: IS_AUTHENTICATED_ANONYMOUSLY }
-        - { path: ^/register, role: IS_AUTHENTICATED_ANONYMOUSLY }
-        - { path: ^/resetting, role: IS_AUTHENTICATED_ANONYMOUSLY }
-        - { path: ^/_error/*, role: IS_AUTHENTICATED_ANONYMOUSLY } #dev error pages preview
+        - { path: ^/resetting$, role: IS_AUTHENTICATED_ANONYMOUSLY }
+        - { path: ^/(en|fr|es)/admin/payments/, role: ROLE_ADMIN }
         - { path: ^/(en|fr|es)/admin/, role: ROLE_PROF }
-        - { path: ^/(en|fr|es)/admin/payments, role: ROLE_ADMIN }

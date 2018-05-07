@@ -274,18 +274,13 @@ class UserManager
         $user = $this->em
             ->getRepository('AppBundle:User')
             ->findOneById($id);
+        $user->setRoles([]);
         switch ($group) {
             case "admin":
                 $user->setRoles(['ROLE_ADMIN']);
                 break;
             case "professor":
                 $user->setRoles(['ROLE_PROF']);
-                break;
-            case "user":
-                $user->setRoles(['ROLE_USER']);
-                break;
-            case "prospect":
-                $user->setRoles(['ROLE_USER']);
                 break;
             default:
                 break;

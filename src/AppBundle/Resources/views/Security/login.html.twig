@@ -1,18 +1,25 @@
 {% extends 'base.html.twig' %}
 {% block body %}
     {% if is_granted("IS_AUTHENTICATED_REMEMBERED") %}
-        {{ 'Connecté' }}
-        <a href="{{ path('fos_user_security_logout') }}">
-            Se déconnecter
-        </a>
+        <div class="middle-box text-center animated fadeInDown">
+            <h1>...</h1>
+            <h3 class="font-bold">{{ "Vous êtes déjà connecté"|trans }}</h3>
+            <div class="error-desc">
+                <br/>
+                <p>
+                    <a href="{{ path('home') }}">{{ "Retourner à l'accueil"|trans }}</a>
+                </p>
+                <p>
+                    {{ "Pour toute demande de support :"|trans }} <a href="mailto:nouestil.secretaria@gmail.com">nouestil.secretaria@gmail.com</a>
+                </p>
+            </div>
+        </div>
     {% else %}
         <body class="gray-bg">
 
         <div class="middle-box text-center loginscreen animated fadeInDown">
             <div>
                 <div>
-
-                    {#<h1 class="logo-name">NE</h1>#}
                     <img alt="image" class="img-circle" src="{{ asset('favicon-196x196.png') }}"/>
 
                 </div>

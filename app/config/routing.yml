@@ -10,9 +10,23 @@ fos_user:
     requirements:
             _locale: en|fr|es
 
-root:
+rootRedirect:
     path: /
     defaults:
         _controller: FrameworkBundle:Redirect:redirect
         route: home
+        permanent: true
+
+loginRedirect:
+    path: /login
+    defaults:
+        _controller: FrameworkBundle:Redirect:redirect
+        route: fos_user_security_login
+        permanent: true
+
+registerRedirect:
+    path: /(en|fr|es)/register/
+    defaults:
+        _controller: FrameworkBundle:Redirect:redirect
+        route: createUser #app public registration is forbidden
         permanent: true

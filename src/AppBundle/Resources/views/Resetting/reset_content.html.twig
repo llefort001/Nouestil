@@ -1,0 +1,32 @@
+{% trans_default_domain 'FOSUserBundle' %}
+{% block body %}
+    <div class="form-horizontal">
+        {{ form_start(form, { 'action': path('fos_user_resetting_reset', {'token': token}),
+            'attr': { 'class': 'fos_user_resetting_reset' } }) }}
+        <div class="form-group"><label class="col-lg-4 control-label">Nouveau mot de passe:</label>
+            {% for passwordField in form.plainPassword %}
+                <div class="col-lg-4">
+                    <input type="password" class="form-control" id="new_password" placeholder="Nouveau mot de passe"{{ form_widget(passwordField, { 'attr': {'class': 'form-input'} }) }}
+                    {% if form_errors(passwordField) != "" %}
+                        <div class="alert alert-danger">
+                            <strong>Erreur!</strong>{{ form_errors(passwordField) }}
+                        </div>
+                    {% endif %}
+                </div>
+            {% endfor %}
+        </div>
+        <button type="submit" class="btn btn-primary btn-rounded btn-block">
+            <i class="fa fa-check"></i> Valider
+        </button>
+        {% if error is defined %}
+            <br/>
+            <div class="alert alert-danger">
+                {{ error }}
+            </div>
+
+        {% endif %}
+        {{ form_end(form) }}
+    </div>
+{% endblock body %}
+
+

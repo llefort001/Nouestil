@@ -1,0 +1,21 @@
+{% extends 'base.html.twig' %}
+{% block body %}
+    <div class="ibox-content">
+        <div class="row">
+            <div class="col-md-12">
+
+                <h2 class="font-bold">{{ "Votre demande a été prise en compte" }}</h2>
+                <p>
+                    {{ "Veuillez vérifier votre boîte mail afin d'accéder au lien de réinitialisation du mot de passe."|trans }}<br/>
+                    {{ "Si vous n'avez rien reçu après 30 minutes, veuillez joindre un administrateur."|trans }}
+                </p>
+            </div>
+        </div>
+        <hr>
+        <div class="row">
+            <div class="col-md-12">
+                {{ "Pour toute demande de support : " }}<a href="mailto:nouestil.secretaria@gmail.com">nouestil.secretaria@gmail.com</a>
+            </div>
+        </div>
+    </div>
+{% endblock body %}

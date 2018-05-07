@@ -143,7 +143,7 @@ fos_user:
     user_class: AppBundle\Entity\User
     from_email:
         address: '%mailer_user%'
-        sender_name: Admin test
+        sender_name: '%mailer_name%'
     service:
         mailer: fos_user.mailer.twig_swift
     registration:
@@ -153,4 +153,7 @@ fos_user:
                     enabled: true
     resetting:
         email:
+            from_email:
+                address: '%mailer_user%'
+                sender_name: '%mailer_user%'
             template: FOSUserBundle:Resetting:email.txt.twig
