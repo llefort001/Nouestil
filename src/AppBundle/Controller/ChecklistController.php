@@ -21,12 +21,11 @@ class ChecklistController extends controller
         $userManager= $this->get('nouestil.user');
         $checklistManager= $this->get('nouestil.checklist');
         $usersNotRegister= $userManager->getNotUsersCourse($courseId);
-        $checklist = $courseManager->getCourse($courseId);
+        $course = $courseManager->getCourse($courseId);
 
         if($checklistManager->CourseIsChecked($courseId)){
-            $courseName= $checklist->getName();
             $checklist= $checklistManager->getLastChecklist($courseId);
-            $this->addFlash('warning','La liste d\'appel du cours ' . $courseName . ' à deja été effectué');
+            $this->addFlash('warning','La liste d\'appel du cours ' . $course->getStyle().$course->getCategory() . ' à deja été effectué');
             return $this->render('AppBundle:Checklist:updateChecklist.html.twig', array(
                 'results' => $usersNotRegister,
                 'checklist' => $checklist
@@ -42,7 +41,7 @@ class ChecklistController extends controller
 
         return $this->render('AppBundle:Checklist:usersChecklist.html.twig', array(
             'results' => $usersNotRegister,
-            'checklist' => $checklist
+            'course' => $course
         ));
 
     }

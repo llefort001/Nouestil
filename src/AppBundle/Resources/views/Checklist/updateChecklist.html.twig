@@ -9,7 +9,7 @@
         <form method="POST" action="{{ path('updateChecklist') }}" name="checklist" class="form-horizontal">
             <div class="form-group">
                 <legend>
-                    Liste d'appel du cours: {{ checklist.course.name }}
+                    Liste d'appel du cours: {{ checklist.course.style }} {{ checklist.course.category }}
                 </legend>
                 {% for user in checklist.usersPresents %}
                     <div class="{{ user.id }} checkbox checkbox-success">

@@ -16,8 +16,8 @@
                                 <thead>
                                 <tr>
                                     <th class="exportable">#</th>
-                                    <th class="exportable">{{ "Nom du cours"|trans }}</th>
-                                    <th class="exportable">{{ "Session"|trans }}</th>
+                                    <th class="exportable">{{ "Style"|trans }}</th>
+                                    <th class="exportable">{{ "Categorie"|trans }}</th>
                                     <th class="exportable">{{ "Date"|trans }}</th>
                                     <th>{{ "Action"|trans }}</th>
                                 </tr>
@@ -26,18 +26,18 @@
                                 {% for checklist in checklists %}
                                     <tr>
                                         <td class="exportable">{{ checklist.id }}</td>
-                                        <td class="exportable">{{ checklist.course.name }}</td>
-                                        <td class="exportable">{{ checklist.course.session }}</td>
+                                        <td class="exportable">{{ checklist.course.style }}</td>
+                                        <td class="exportable">{{ checklist.course.category }}</td>
                                         <td class="exportable">{{ checklist.datetime|date('d-m-Y') }}</td>
                                         <td><a href="{{ path('usersChecklist', {'checklistId': checklist.id}) }}">
-                                                <span class="label label-info">{{ "Afficher liste d'\appel"|trans }}</span></a></td>
+                                                <span class="label label-info">{{ "Afficher liste d'appel"|trans }}</span></a></td>
                                 {% endfor %}
                                 </tbody>
                                 <tfoot>
                                 <tr>
                                     <th>#</th>
-                                    <th>{{ "Nom du cours"|trans }}</th>
-                                    <th>{{ "Session"|trans }}</th>
+                                    <th>{{ "Style"|trans }}</th>
+                                    <th>{{ "Catégorie"|trans }}</th>
                                     <th>{{ "Date"|trans }}</th>
                                     <th>{{ "Actions"|trans }}</th>
                                 </tr>
