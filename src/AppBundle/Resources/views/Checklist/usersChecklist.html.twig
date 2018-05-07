@@ -6,12 +6,12 @@
 {% endblock %}
 {% block body %}
     <div class="container">
-        <form method="POST" action="{{ path('checklist',{'courseId': checklist.id}) }}" name="checklist" class="form-horizontal">
+        <form method="POST" action="{{ path('checklist',{'courseId': course.id}) }}" name="checklist" class="form-horizontal">
             <div class="form-group">
                 <legend>
                     {{ course.style }} {{ course.category }}
                 </legend>
-                {% for user in checklist.users %}
+                {% for user in course.users %}
                     <div class="{{ user.id }} checkbox checkbox-success">
                         <input id="{{ user.id }}" name="{{ user.id }}" type="checkbox" class="users form-control" value="1" checked="">
                         <label for="{{ user.id }}">
@@ -31,7 +31,7 @@
                         {% endfor %}
                     </select>
                     <br><br>
-                    <input type="hidden" name="id" value="{{ checklist.id }}">
+                    <input type="hidden" name="id" value="{{ course.id }}">
                     <button type="submit" class="btn btn-primary">Save</button>
                 </div>
             </div>
