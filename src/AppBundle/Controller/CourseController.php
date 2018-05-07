@@ -51,7 +51,7 @@ class CourseController extends controller
             $data = $request->request->all();
             $dataCourse = $data['course'];
             $courseManager = $this->get('nouestil.course');
-            $courseManager->addCourse($dataCourse['style'], $dataCourse['category'],$data['timeslot'], $dataCourse['userTeach']);
+            $courseManager->addCourse($dataCourse['style'], $dataCourse['category'],$dataCourse['timeslot'], $dataCourse['userTeach']);
             $this->addFlash('success', 'Le cours a bien été enregistré.');
         }
         return $this->redirect($this->generateUrl('courses'));
