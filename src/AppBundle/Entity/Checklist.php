@@ -36,13 +36,13 @@ class Checklist
 
     /**
      * @ORM\ManyToMany(targetEntity="User", inversedBy="checklistsPresents", cascade= {"persist"},fetch="EAGER")
-     * @ORM\JoinTable(name="user_checklistPresent")
+     * @ORM\JoinTable(name="user_checklist_present")
      */
     protected $usersPresents;
 
     /**
      * @ORM\ManyToMany(targetEntity="User", inversedBy="checklistsAbsents", cascade={"persist"},fetch="EAGER")
-     * @ORM\JoinTable(name="user_checklistAbsent")
+     * @ORM\JoinTable(name="user_checklist_absent")
      */
     protected $usersAbsents;
 
