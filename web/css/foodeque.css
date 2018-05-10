@@ -28,7 +28,7 @@ body {
     padding: 0;
     margin: 0;
     background: #FFF;
-    font-family: 'Oswald', sans-serif;
+    font-family: 'Arial', sans-serif;
 }
 
 html, html a {
@@ -1178,6 +1178,11 @@ table {
     font-size: 15px;
     font-weight: normal;
     letter-spacing: 2px;
+}
+
+.planning{
+    width: 100%;
+    height: auto;
 }
 /*buttons*/
 .margin-t20{
