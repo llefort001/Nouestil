@@ -1180,8 +1180,8 @@ table {
     letter-spacing: 2px;
 }
 
-.planning{
-    width: 100%;
+#planning{
+    width: 80%;
     height: auto;
 }
 /*buttons*/
