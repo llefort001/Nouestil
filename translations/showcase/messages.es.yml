@@ -1,0 +1,119 @@
+#global strings (menus and index)
+showcase_page_title: 'Nou Estil | Ecola de ball [Salou]'
+showcase_address: 'c\ Maria Castillo 2, local 3, 43840 Salou, España'
+showcase_opening_hours: 'SECRETARÍA [mar.-mier.-vier.] 18h-20h'
+showcase_home_menu: "Inicio"
+showcase_about_menu: "Escuela"
+showcase_timetable_menu: "Clases"
+showcase_styles_menu: "Estilos"
+showcase_contact_menu: "Contacto"
+showcase_profile_menu: "Perfil"
+showcase_footer_title_links: "Enlaces rápidos"
+showcase_footer_title_info: "Contactarnos"
+showcase_footer_tel_info: 'TEL : +34 637 49 66 79'
+showcase_footer_mail_info: 'MAIL: nouestil@gmail.com'
+showcase_footer_title_insta: '@NOUESTILSALOU'
+showcase_login_menu: "Connectarse"
+#index page
+showcase_index_taught_styles_title: "Los estilos impartidos"
+showcase_index_carousel_el1: "Encuentra tu estilo"
+showcase_index_carousel_el2: "Comparte tu pasion"
+showcase_index_carousel_el3: "Baila con nosotros"
+showcase_index_welcome_message: "Bienvenido a la escuela de baile Nou Estil"
+showcase_index_welcome_text: "Escuela de baile fundada en 2006 por Salva FAYE, pionero de las Danzas Urbanas en la provincia de Tarragona. Centro especializado en HipHop Dance y sus variantes de danzas urbanas. Se imparten también danzas de otras disciplinas: Ballet, Contemporáneo, Salsa, etc…"
+showcase_index_welcome_pre_text: "¿Quienes somos?"
+#about page
+showcase_about_title: "Sobre Nou Estil"
+showcase_about_introduction_block: 'La escuela de bail Nou Estil se fundió en 2006 por Salva FAYE, pionero de las Danzas Urbanas en la provincia de Tarragona.
+
+
+Especializada en HipHop, la academia propone ahora clases de Danzas Urbanos (HipHop, House, break Dance, Popping, …),  pero también los "clásicos” Ballet y Danza contemporánea, como estilos mas variados abiertos a todas edades (Kizomba, Afro, Ritmos Latinos, BellyDance, …)."
+
+
+Nou Estil propone clases para todas edades (a partir de 3 años, hasta adultos sin limite de edad), y sobre todo para todos niveles (de principiantes a avanzados). Lo importante es que cada uno pueda disfrutar de la música y del movimiento con cual este mas a gusto, compartiendo su energía y su buen rollo!'
+showcase_about_teachers_block_title: "Profesorado"
+showcase_about_teacher_name_1: 'Virginia'
+showcase_about_teacher_course_1: 'Ritmos Latinos'
+showcase_about_teacher_name_2: 'Judit'
+showcase_about_teacher_course_2: 'Danza Contemporánea'
+showcase_about_teacher_name_3: 'Salva'
+showcase_about_teacher_course_3: 'Hip Hop'
+showcase_about_teacher_name_4: 'Christian'
+showcase_about_teacher_course_4: 'Popping, Kizomba'
+showcase_about_teacher_name_5: 'Helena'
+showcase_about_teacher_course_5: 'House Dance'
+showcase_about_teacher_name_6: 'Jerson'
+showcase_about_teacher_course_6: 'Acrobacias'
+showcase_about_teacher_name_7: 'Laia'
+showcase_about_teacher_course_7: 'Danza Creativa'
+showcase_about_teacher_name_8: 'Nerea'
+showcase_about_teacher_course_8: 'Hip Hop, Comercial Dance'
+showcase_about_teacher_name_9: 'Cristian'
+showcase_about_teacher_course_9: 'Break Dance'
+showcase_about_teacher_name_10: 'Jurdina'
+showcase_about_teacher_course_10: 'Comercial Dance'
+showcase_about_teacher_name_11: 'Max'
+showcase_about_teacher_course_11: 'Afro'
+showcase_about_teacher_name_12: 'Anna'
+showcase_about_teacher_course_12: 'Ballet'
+#styles page
+showcase_styles_cat1_title: "Estilos Urbanos"
+showcase_styles_cat1_el1_title: 'Hip hop'
+showcase_styles_cat1_el1_content: 'Nivel iniciación a avanzado (grupos de edades y niveles, incluyendo adultos principiantes). También hay grupos de competición categorías infantil, junior, absoluta'
+showcase_styles_cat1_el1_age: "A partir de 4 años"
+showcase_styles_cat1_el2_title: 'Popping'
+showcase_styles_cat1_el2_content: 'Nivel iniciación a avanzado (grupos de edades y niveles)'
+showcase_styles_cat1_el2_age: "A partir de 12 años"
+showcase_styles_cat1_el3_title: 'House'
+showcase_styles_cat1_el3_content: 'Nivel iniciación a intermedio (grupos de edades y niveles, incluyendo adultos principiantes)'
+showcase_styles_cat1_el3_age: "A partir de 12 años"
+showcase_styles_cat1_el4_title: 'Break dance'
+showcase_styles_cat1_el4_content: 'Nivel iniciación y intermedio (grupos de edades y niveles)'
+showcase_styles_cat1_el4_age: "A partir de 6 años"
+showcase_styles_cat1_el5_title: 'Acrobacia'
+showcase_styles_cat1_el5_content: 'Nivel iniciación (grupos de edades). Un complemento perfecto para Hip Hop, Break y Comercial Dance'
+showcase_styles_cat1_el5_age: "A partir de 6 años"
+showcase_styles_cat1_el6_title: 'Comercial dance'
+showcase_styles_cat1_el6_content: 'El estilo de los video clips. Nivel iniciación y intermedio (grupos de edades y niveles)'
+showcase_styles_cat1_el6_age: "A partir de 8 años"
+showcase_styles_cat1_el7_title: 'Freestyle'
+showcase_styles_cat1_el7_content: 'Nivel iniciación a avanzado (grupos de edades y niveles)'
+showcase_styles_cat1_el7_age: "A partir de 8 años"
+showcase_styles_cat2_title: "Estilos Clasicos"
+showcase_styles_cat1_el8_title: 'Danza Creativa'
+showcase_styles_cat1_el8_content: 'Ideal para que los más pequeños mejoren su motricidad, conocimiento del espacio, y musicalidad mediante la danza.'
+showcase_styles_cat1_el8_age: "A partir de 3 años"
+showcase_styles_cat1_el9_title: 'Iniciación à la danza'
+showcase_styles_cat1_el9_content: 'Una introducción al Ballet, adaptada a la edad y a la motricidad de los niños'
+showcase_styles_cat1_el9_age: "A partir de 5 años"
+showcase_styles_cat1_el10_title: 'Ballet'
+showcase_styles_cat1_el10_content: 'Nivel iniciación a intermedio (grupos de edades y niveles, incluyendo adultos principiantes)'
+showcase_styles_cat1_el10_age: "A partir de 8 años."
+showcase_styles_cat1_el11_title: 'Contemporáneo'
+showcase_styles_cat1_el11_content: 'Nivel iniciación y intermedio (grupos de edades y niveles, incluyendo adultos principiantes). Una danza en la que se busca expresar una idea, un sentimiento, una emoción… al igual que en el ballet, pero mezclando movimientos corporales propios.'
+showcase_styles_cat1_el11_age: "A partir de 6 años"
+showcase_styles_cat3_title: "Estilos del Mundo"
+showcase_styles_cat1_el12_title: 'Afro'
+showcase_styles_cat1_el12_content: 'Nivel iniciación (grupos de adultos). Un baile muy completo, tanto para niños como para adultos, que trabaja lo que es el espacio, el tiempo, el ritmo y la coordinación. En la danza afro todo el cuerpo se mueve!'
+showcase_styles_cat1_el12_age: "A partir de 15 años"
+showcase_styles_cat1_el13_title: 'Fusion Tribal Bellydance'
+showcase_styles_cat1_el13_content: 'La forma más divertida de mejorar tu salud! Mezclando ritmos modernos, la version Tribal es más moderna que la danza del vientre Oriental.'
+showcase_styles_cat1_el13_age: "A partir de 15 años"
+showcase_styles_cat1_el14_title: 'Kizomba'
+showcase_styles_cat1_el14_content: 'Solo o en pareja (no se necesita venir en pareja). La kizomba tonifica los sentidos, y puede eliminar gran parte de la tensión acumulada. Es un destructor de estrés!'
+showcase_styles_cat1_el14_age: "A partir de 15 años"
+showcase_styles_cat1_el15_title: "Ritmos Latinos"
+showcase_styles_cat1_el15_content: 'Solo o en pareja (no se necesita venir en pareja). Salsa, merengue, bachata… todos son bailes latinos, ricos en ritmo y alegría, beneficiando al cuerpo como a la mente.'
+showcase_styles_cat1_el15_age: "A partir de 15 años"
+showcase_styles_cat1_el16_title: 'Electro swing'
+showcase_styles_cat1_el16_content: 'Solo o en pareja (no se necesita venir en pareja)'
+showcase_styles_cat1_el16_age: "A partir de 15 años"
+#contact page
+showcase_contact_location_title: "Donde encontrarnos"
+showcase_contact_name: "Nombre:"
+showcase_contact_phone_number: "Teléfono:"
+showcase_contact_email: 'Email:'
+showcase_contact_subject: "Asunto:"
+showcase_contact_message: "Mensaje:"
+showcase_contact_reset: "Suprimir"
+showcase_contact_submit: "Enviar"
