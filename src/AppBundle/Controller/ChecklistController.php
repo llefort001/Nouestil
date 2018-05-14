@@ -65,6 +65,15 @@ class ChecklistController extends controller
         return $this->redirect($this->generateUrl('courses'));
     }
 
+    public function deleteChecklistAction($checklistId){
+        $checklistManager= $this->get('nouestil.checklist');
+        $checklist= $checklistManager->getChecklistById($checklistId);
+        $checklistManager->deleteChecklist($checklist);
+        $this->addFlash('success', 'La liste d\'appel à bien été supprimé');
+
+        return $this->redirect($this->generateUrl('checklists'));
+    }
+
     public function displayChecklistAction($checklistId){
         $checklistManager= $this->get('nouestil.checklist');
         $userManager= $this->get('nouestil.user');

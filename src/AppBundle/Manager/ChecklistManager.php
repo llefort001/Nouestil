@@ -40,6 +40,16 @@ class ChecklistManager
         return $checklist;
     }
 
+    /**
+     * @param Checklist $checklist
+     * @throws \Doctrine\ORM\OptimisticLockException
+     */
+    public function deleteChecklist(Checklist $checklist)
+    {
+        $this->em->remove($checklist);
+        $this->em->flush();
+    }
+
     public function getLastChecklist($courseId){
 
         $checklist= $this->em->getRepository('AppBundle:Checklist')->queryLastChecklist($courseId);

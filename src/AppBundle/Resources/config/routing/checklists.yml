@@ -13,3 +13,7 @@ updateChecklist:
 usersChecklist:
     path:     /admin/display-checklist/{checklistId}
     defaults: { _controller: AppBundle:Checklist:displayChecklist }
+
+deleteChecklist:
+    path:     /admin/delete-checklist/{checklistId}
+    defaults: { _controller: AppBundle:Checklist:deleteChecklist }

@@ -30,7 +30,9 @@
                                         <td class="exportable">{{ checklist.course.category }}</td>
                                         <td class="exportable">{{ checklist.datetime|date('d-m-Y') }}</td>
                                         <td><a href="{{ path('usersChecklist', {'checklistId': checklist.id}) }}">
-                                                <span class="label label-info">{{ "Afficher liste d'appel"|trans }}</span></a></td>
+                                                <span class="label label-warning">{{ "Liste d'appel"|trans }}</span></a>
+                                        <a href="{{ path('deleteChecklist', {'checklistId': checklist.id}) }}">
+                                            <span class="label label-danger">{{ "supprimer"|trans }}</span></a></td>
                                 {% endfor %}
                                 </tbody>
                                 <tfoot>
@@ -88,6 +90,7 @@
                         title: 'NOUESTIL Checklists Export'
                     })
                 ],
+                order: [[3,'desc']],
                 language: {
                     url: locale
                 }
