@@ -44,9 +44,10 @@
                                         <td>
                                             <a href="#"><span class="label label-default" data-toggle="modal" data-target="#paymentModal_{{ payment.id }}">{{ "Modifier"|trans }}</span></a>
                                             <a href="{{ path('deletePayment',{'paymentId': payment.id}) }}" onclick="return confirm('Confirmer la suppression ?')"><span class="label label-danger">{{ "Supprimer"|trans }}</span></a>
+
                                             <div class="modal fade" id="paymentModal_{{ payment.id }}" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
                                                 <div class="modal-dialog" role="document">
-                                                    <form method="post" class="form-horizontal" action="{{ path('updatePayment') }}" name="update-payment" role="form">
+                                                    <form method="post" class="form-horizontal" action="{{ path('updatePayment') }}" name="update-payment">
                                                         <div class="modal-content">
 
                                                             <div class="modal-header">
@@ -59,52 +60,55 @@
                                                             <div class="modal-body">
 
                                                                 <div class="form-group">
-                                                                    <div class="col-lg-5">
-                                                                        <label class="control-label" for="Ptitle">{{ "Intitulé"|trans }}:</label>
+
+                                                                    <div class="col-lg-4">
+                                                                        <label class="control-label" for="payment_title">{{ "Intitulé"|trans }}:</label>
                                                                     </div>
 
-                                                                    <div class="col-lg-8">
-                                                                        <input title="title" type="text" class="form-control" id="title" name="title" value="{{ payment.title }}">
+                                                                    <div class="col-lg-6">
+                                                                        <input title="i_payment_title" type="text" class="form-control" id="payment_title" name="title" value="{{ payment.title }}">
                                                                     </div>
 
-                                                                    <div class="col-lg-5">
-                                                                        <label class="control-label" for="amount">{{ "Montant"|trans }}:</label>
+                                                                    <div class="col-lg-4">
+                                                                        <label class="control-label" for="payment_amount">{{ "Montant"|trans }}:</label>
                                                                     </div>
 
-                                                                    <div class="col-lg-8">
-                                                                        <input type="number" class="form-control" id="Pamount" name="amount" step="0.01" value="{{ payment.amount }}">
+                                                                    <div class="col-lg-6">
+                                                                        <input type="number" class="form-control" id="payment_amount" name="amount" step="0.01" value="{{ payment.amount }}">
+                                                                    </div>
+
+                                                                </div>
+
+                                                                <br/>
+
+                                                                <div class="form-group">
+
+                                                                    <div class="col-lg-4">
+                                                                        <label class="control-label" for="payment_datetime" >{{ "Date"|trans }}:</label>
+                                                                    </div>
+
+                                                                    <div class="col-lg-6">
+                                                                        <input type="date" class="form-control" id="payment_datetime" name="datetime" min="2017-01-01" value="{{ payment.datetime|date('Y-m-d') }}">
                                                                     </div>
 
                                                                 </div>
                                                                 <br/>
                                                                 <div class="form-group">
 
-                                                                    <div class="col-lg-5">
-                                                                        <label class="control-label">{{ "Date"|trans }}:</label>
-                                                                    </div>
-
-                                                                    <div class="col-lg-8">
-                                                                        <input type="date" class="form-control" name="datetime" min="2017-01-01" value="{{ payment.datetime|date('Y-m-d') }}">
-                                                                    </div>
-
-                                                                </div>
-                                                                <br/>
-                                                                <div class="form-group">
-
-                                                                    <div class="col-lg-5">
+                                                                    <div class="col-lg-4">
                                                                         <label class="control-label">{{ "Catégorie"|trans }}:</label>
                                                                     </div>
-                                                                    <div class="col-lg-8">
+                                                                    <div class="col-lg-6">
                                                                         <select name="category" class="form-control">
                                                                             <option {% if payment.category is not defined %} selected="selected" {% endif %} value="">{{ "--Choisir une catégorie--"|trans }}</option>
                                                                             <option {% if payment.category is defined and payment.category=="Payment" %} selected="selected" {% endif %} value="Payment">{{ "Paiement"|trans }}</option>
                                                                             <option {% if payment.category is defined and payment.category=="Refund" %} selected="selected" {% endif %} value="Refund">{{ "Remboursement"|trans }}</option>
                                                                         </select>
                                                                     </div>
-                                                                    <div class="col-lg-5">
+                                                                    <div class="col-lg-4">
                                                                         <label class="control-label">{{ "Méthode"|trans }}:</label>
                                                                     </div>
-                                                                    <div class="col-lg-8">
+                                                                    <div class="col-lg-6">
                                                                         <select name="method" class="form-control">
                                                                             <option {% if payment.method is not defined %} selected="selected" {% endif %} value="">{{ "--Choisir une méthode--"|trans }}</option>
                                                                             <option {% if payment.method is defined and payment.method=="Credit Card" %} selected="selected" {% endif %} value="Credit Card">{{ "Carte bancaire"|trans }}</option>
@@ -118,12 +122,12 @@
                                                                 <br/>
                                                                 <div class="form-group">
 
-                                                                    <div class="col-lg-5">
-                                                                        <label class="control-label">{{ "Note"|trans }}:</label>
+                                                                    <div class="col-lg-4">
+                                                                        <label class="control-label" for="payment_note" >{{ "Note"|trans }}:</label>
                                                                     </div>
 
-                                                                    <div class="col-lg-8">
-                                                                        <input type="text" class="form-control" name="note" value="{{ payment.note }}">
+                                                                    <div class="col-lg-6">
+                                                                        <input title="i_payment_note" type="text" class="form-control" id="payment_note" name="note" value="{{ payment.note }}">
                                                                     </div>
 
                                                                 </div>
@@ -216,17 +220,16 @@
                     icon: "error",
                     buttons: true,
                     dangerMode: true,
-                })
-                    .then((willDelete) => {
-                        if (willDelete) {
-                            swal("{{ "Succès"|trans }}", {
-                                icon: "success",
-                            });
-                            window.location.href = this.href;
-                        } else {
-                            swal("{{ "Annulé"|trans }}");
-                        }
-                    });
+                }).then((willDelete) => {
+                    if (willDelete) {
+                        swal("{{ "Succès"|trans }}", {
+                            icon: "success",
+                        });
+                        window.location.href = this.href;
+                    } else {
+                        swal("{{ "Annulé"|trans }}");
+                    }
+                });
             });
 
         });
