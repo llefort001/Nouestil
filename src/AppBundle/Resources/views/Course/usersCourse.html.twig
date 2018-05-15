@@ -24,9 +24,8 @@
                         <td>{{ user.username }}</td>
                         <td>{{ user.lastname }}</td>
                         <td>{{ user.firstname }}</td>
-                        <td><a href="{{ path('deleteUserCourse',{'userId': user.id, 'courseId': course.Id}) }}"
-                               onclick="return confirm('Confirmer la suppression ?')">
-                                <span class="label label-danger">{{ "Supprimer"|trans }}</span></a></td>
+                        <td><a class="label label-danger swal" href="{{ path('deleteUserCourse',{'userId': user.id, 'courseId': course.Id}) }}">
+                                {{ "Supprimer"|trans }}</a></td>
                     </tr>
                 {% endfor %}
                 </tbody>
@@ -52,9 +51,28 @@
 {% endblock %}
 {% block pageScripts %}
     <script src="{{ asset('js/plugins/select2/select2.full.min.js') }}"></script>
+    <script src="{{ asset('js/plugins/sweetalert/sweetalert.min.js') }}"></script>
     <script>
     $(document).ready(function(){
         $('.user').select2();
+        $('.swal').click(function (e) {
+            e.preventDefault();
+            swal({
+                title: "{{ "Confirmer ?"|trans }}",
+                text: "{{ "Cette action est définitive"|trans }}",
+                icon: "error",
+                buttons: true,
+                dangerMode: true,
+            }).then((willDelete) => {
+                if (willDelete) {
+                    swal("{{ "Succès"|trans }}", {
+                        icon: "success",
+                        buttons: false
+                    });
+                    window.location.href = this.href;
+                }
+            });
+        });
     });
     </script>
 {% endblock %}

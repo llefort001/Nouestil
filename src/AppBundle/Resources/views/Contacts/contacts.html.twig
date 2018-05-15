@@ -49,8 +49,7 @@
                                             {% if is_granted('ROLE_ADMIN') %}
                                                 <td>
                                                     <a href="#"><span class="label label-default" data-toggle="modal" data-target="#contactModal_{{ contact.id }}">Modifier</span></a>
-                                                    {#<a class="label label-warning"  href="{{ path('base_homepage', {'_want_to_be': contact.username}) }}" >Impersonate</a>#}
-                                                    <a href="{{ path('deleteContact',{'contactId': contact.id}) }}" onclick="return confirm('Confirmer la suppression ?')"><span class="label label-danger">Supprimer</span></a>
+                                                    <a class="label label-danger swal" href="{{ path('deleteContact',{'contactId': contact.id}) }}">{{ "Supprimer"|trans }}</a>
                                                 </td>
                                             {% endif %}
                                         </tr>
@@ -153,10 +152,11 @@
 {% block pageScripts %}
     <!-- Page-Level Scripts -->
     <script src="{{ asset('js/plugins/dataTables/datatables.min.js') }}"></script>
+    <script src="{{ asset('js/plugins/sweetalert/sweetalert.min.js') }}"></script>
     <script>
         $(document).ready(function () {
-            var locale = "{{ asset('js/plugins/dataTables/') }}" + "{{ app.request.get('_locale') }}" + ".json";
-            var buttonCommon = {
+            const locale = "{{ asset('js/plugins/dataTables/') }}" + "{{ app.request.get('_locale') }}" + ".json";
+            const buttonCommon = {
                 exportOptions: {
                     columns: '.exportable'
                 }
@@ -198,17 +198,15 @@
                     icon: "error",
                     buttons: true,
                     dangerMode: true,
-                })
-                    .then((willDelete) => {
-                        if (willDelete) {
-                            swal("{{ "Succès"|trans }}", {
-                                icon: "success",
-                            });
-                            window.location.href = this.href;
-                        } else {
-                            swal("{{ "Annulé"|trans }}");
-                        }
-                    });
+                }).then((willDelete) => {
+                    if (willDelete) {
+                        swal("{{ "Succès"|trans }}", {
+                            icon: "success",
+                            buttons: false
+                        });
+                        window.location.href = this.href;
+                    }
+                });
             });
 
         });

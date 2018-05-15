@@ -43,7 +43,7 @@
                                         <td class="exportable">{{ payment.note }}</td>
                                         <td>
                                             <a href="#"><span class="label label-default" data-toggle="modal" data-target="#paymentModal_{{ payment.id }}">{{ "Modifier"|trans }}</span></a>
-                                            <a href="{{ path('deletePayment',{'paymentId': payment.id}) }}" onclick="return confirm('Confirmer la suppression ?')"><span class="label label-danger">{{ "Supprimer"|trans }}</span></a>
+                                            <a class="label label-danger swal" href="{{ path('deletePayment',{'paymentId': payment.id}) }}">{{ "Supprimer"|trans }}</a>
 
                                             <div class="modal fade" id="paymentModal_{{ payment.id }}" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
                                                 <div class="modal-dialog" role="document">
@@ -172,13 +172,14 @@
 {% block pageScripts %}
     <!-- Page-Level Scripts -->
     <script src="{{ asset('js/plugins/dataTables/datatables.min.js') }}"></script>
+    <script src="{{ asset('js/plugins/sweetalert/sweetalert.min.js') }}"></script>
     <script src="{{ asset('js/plugins/dateTimeMoment/moment.js') }}"></script>
     <script src="{{ asset('js/plugins/dateTimeMoment/sorting_datetime-moment.js') }}"></script>
     <script>
         $.fn.dataTable.moment( 'DD-MM-YYYY' );
         $(document).ready(function () {
-            var locale = "{{ asset('js/plugins/dataTables/') }}" + "{{ app.request.get('_locale') }}" + ".json";
-            var buttonCommon = {
+            const locale = "{{ asset('js/plugins/dataTables/') }}" + "{{ app.request.get('_locale') }}" + ".json";
+            const buttonCommon = {
                 exportOptions: {
                     columns: '.exportable'
                 }
@@ -224,10 +225,9 @@
                     if (willDelete) {
                         swal("{{ "Succès"|trans }}", {
                             icon: "success",
+                            buttons: false
                         });
                         window.location.href = this.href;
-                    } else {
-                        swal("{{ "Annulé"|trans }}");
                     }
                 });
             });

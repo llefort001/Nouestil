@@ -234,9 +234,9 @@
 
                                                 <div class="modal-footer">
                                                     {% if currentUser != user %}
-                                                        <a class="btn btn-w-m btn-danger pull-left"
-                                                           href="{{ path('deleteUser',{'userId': user.id}) }}"
-                                                           onclick="return confirm('Supprimer {{ user.firstname }} {{ user.lastname }} ?')">{{ "Supprimer l'utilisateur"|trans }}</a>
+                                                        <a class="btn btn-w-m btn-danger pull-left swal"
+                                                           href="{{ path('deleteUser',{'userId': user.id}) }}">{{ "Supprimer l'utilisateur"|trans }}
+                                                        </a>
                                                     {% endif %}
                                                     <input type="hidden" name="id"
                                                            value="{{ user.id }}">
@@ -288,14 +288,13 @@
     <!-- Page-Level Scripts -->
     <script src="{{ asset('js/plugins/dataTables/datatables.min.js') }}"></script>
     <script src="{{ asset('js/plugins/sweetalert/sweetalert.min.js') }}"></script>
-    {#<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>#}
     <script src="{{ asset('js/plugins/dateTimeMoment/moment.js') }}"></script>
     <script src="{{ asset('js/plugins/dateTimeMoment/sorting_datetime-moment.js') }}"></script>
     <script>
         $.fn.dataTable.moment('DD-MM-YYYY');
         $(document).ready(function () {
-            var locale = "{{ asset('js/plugins/dataTables/') }}" + "{{ app.request.get('_locale') }}" + ".json";
-            var buttonCommon = {
+            const locale = "{{ asset('js/plugins/dataTables/') }}" + "{{ app.request.get('_locale') }}" + ".json";
+            const buttonCommon = {
                 exportOptions: {
                     columns: '.exportable'
                 }
@@ -336,17 +335,15 @@
                     icon: "error",
                     buttons: true,
                     dangerMode: true,
-                })
-                    .then((willDelete) => {
-                        if (willDelete) {
-                            swal("{{ "Succès"|trans }}", {
-                                icon: "success",
-                            });
-                            window.location.href = this.href;
-                        } else {
-                            swal("{{ "Annulé"|trans }}");
-                        }
-                    });
+                }).then((willDelete) => {
+                    if (willDelete) {
+                        swal("{{ "Succès"|trans }}", {
+                            icon: "success",
+                            buttons: false
+                        });
+                        window.location.href = this.href;
+                    }
+                });
             });
         });
     </script>
