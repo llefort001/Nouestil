@@ -48,7 +48,7 @@
                                             </td>
                                             {% if is_granted('ROLE_ADMIN') %}
                                                 <td>
-                                                    <a href="#"><span class="label label-default" data-toggle="modal" data-target="#contactModal_{{ contact.id }}">Modifier</span></a>
+                                                    <a href="#"><span class="label label-success" data-toggle="modal" data-target="#contactModal_{{ contact.id }}">{{ "Modifier"|trans }}</span></a>
                                                     <a class="label label-danger swal" href="{{ path('deleteContact',{'contactId': contact.id}) }}">{{ "Supprimer"|trans }}</a>
                                                 </td>
                                             {% endif %}
@@ -167,22 +167,25 @@
                 dom: '<"html5buttons"B>lTfgitp',
                 buttons: [
                     $.extend(true, {}, buttonCommon, {
-                        extend: 'copyHtml5'
+                        extend: 'copyHtml5',
+                        text: "{{ "Copier"|trans }}"
                     }),
                     $.extend(true, {}, buttonCommon, {
                         extend: 'csvHtml5',
-                        title: 'NOUESTIL Contacts Export'
+                        title: "{{ "Export contacts NOUESTIL"|trans }}"
                     }),
                     $.extend(true, {}, buttonCommon, {
                         extend: 'excelHtml5',
-                        title: 'NOUESTIL Contacts Export'
+                        title: "{{ "Export contacts NOUESTIL"|trans }}"
                     }),
                     $.extend(true, {}, buttonCommon, {
-                        extend: 'print'
+                        extend: 'print',
+                        text: "{{ "Imprimer"|trans }}"
                     }),
                     $.extend(true, {}, buttonCommon, {
                         extend: 'pdfHtml5',
-                        title: 'NOUESTIL Contacts Export'
+                        title: "{{ "Export contacts NOUESTIL"|trans }}",
+                        orientation: 'landscape'
                     })
                 ],
                 language: {

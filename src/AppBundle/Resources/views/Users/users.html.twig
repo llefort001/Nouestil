@@ -64,7 +64,7 @@
                                         {% endif %}
                                         {% if is_granted('ROLE_ADMIN') == true %}
                                             <td>
-                                                <a href="#"><span class="label label-default" data-toggle="modal" data-target="#userModal_{{ user.id }}">{{ "Modifier"|trans }}</span></a>
+                                                <a href="#"><span class="label label-success" data-toggle="modal" data-target="#userModal_{{ user.id }}">{{ "Modifier"|trans }}</span></a>
                                                 <a class="label label-warning" href="{{ path('fos_user_profile_show', {'_want_to_be': user.username}) }}">{{ "Vue utilisateur"|trans }}</a>
                                             </td>
                                         {% endif %}
@@ -164,7 +164,7 @@
                                                     </div>
 
                                                     <div class="col-lg-6">
-                                                        <select name="group" class="form-control" value="{{ user.lastname }}">
+                                                        <select name="group" class="form-control">
                                                             <option>
                                                                 -- {{ "Sélectionner une option"|trans }} --
                                                             </option>
@@ -305,22 +305,25 @@
                 dom: '<"html5buttons"B>lTfgitp',
                 buttons: [
                     $.extend(true, {}, buttonCommon, {
-                        extend: 'copyHtml5'
+                        extend: 'copyHtml5',
+                        text: "{{ "Copier"|trans }}"
                     }),
                     $.extend(true, {}, buttonCommon, {
                         extend: 'csvHtml5',
-                        title: 'NOUESTIL Users Export'
+                        title: "{{ "Export utilisateurs NOUESTIL"|trans }}"
                     }),
                     $.extend(true, {}, buttonCommon, {
                         extend: 'excelHtml5',
-                        title: 'NOUESTIL Users Export'
+                        title: "{{ "Export utilisateurs NOUESTIL"|trans }}"
                     }),
                     $.extend(true, {}, buttonCommon, {
-                        extend: 'print'
+                        extend: 'print',
+                        text: "{{ "Imprimer"|trans }}"
                     }),
                     $.extend(true, {}, buttonCommon, {
                         extend: 'pdfHtml5',
-                        title: 'NOUESTIL Users Export'
+                        title: "{{ "Export utilisateurs NOUESTIL"|trans }}",
+                        orientation: 'landscape'
                     })
                 ],
                 language: {

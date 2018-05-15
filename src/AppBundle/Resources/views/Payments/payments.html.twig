@@ -42,7 +42,7 @@
                                         <td class="exportable">{{ payment.datetime|date('d-m-Y') }}</td>
                                         <td class="exportable">{{ payment.note }}</td>
                                         <td>
-                                            <a href="#"><span class="label label-default" data-toggle="modal" data-target="#paymentModal_{{ payment.id }}">{{ "Modifier"|trans }}</span></a>
+                                            <a href="#"><span class="label label-success" data-toggle="modal" data-target="#paymentModal_{{ payment.id }}">{{ "Modifier"|trans }}</span></a>
                                             <a class="label label-danger swal" href="{{ path('deletePayment',{'paymentId': payment.id}) }}">{{ "Supprimer"|trans }}</a>
 
                                             <div class="modal fade" id="paymentModal_{{ payment.id }}" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
@@ -190,22 +190,25 @@
                 dom: '<"html5buttons"B>lTfgitp',
                 buttons: [
                     $.extend(true, {}, buttonCommon, {
-                        extend: 'copyHtml5'
+                        extend: 'copyHtml5',
+                        text: "{{ "Copier"|trans }}"
                     }),
                     $.extend(true, {}, buttonCommon, {
                         extend: 'csvHtml5',
-                        title: 'NOUESTIL Payments Export'
+                        title: "{{ "Export paiements NOUESTIL"|trans }}"
                     }),
                     $.extend(true, {}, buttonCommon, {
                         extend: 'excelHtml5',
-                        title: 'NOUESTIL Payments Export'
+                        title: "{{ "Export paiements NOUESTIL"|trans }}"
                     }),
                     $.extend(true, {}, buttonCommon, {
-                        extend: 'print'
+                        extend: 'print',
+                        text: "{{ "Imprimer"|trans }}"
                     }),
                     $.extend(true, {}, buttonCommon, {
                         extend: 'pdfHtml5',
-                        title: 'NOUESTIL Payments Export'
+                        title: "{{ "Export paiements NOUESTIL"|trans }}",
+                        orientation: 'landscape'
                     })
                 ],
                 language: {

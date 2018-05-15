@@ -29,10 +29,10 @@
                                         <td class="exportable">{{ checklist.course.style }}</td>
                                         <td class="exportable">{{ checklist.course.category }}</td>
                                         <td class="exportable">{{ checklist.datetime|date('d-m-Y') }}</td>
-                                        <td><a href="{{ path('usersChecklist', {'checklistId': checklist.id}) }}">
-                                                <span class="label label-warning">{{ "Liste d'appel"|trans }}</span></a>
-                                        <a href="{{ path('deleteChecklist', {'checklistId': checklist.id}) }}">
-                                            <span class="label label-danger">{{ "supprimer"|trans }}</span></a></td>
+                                        <td>
+                                            <a href="{{ path('usersChecklist', {'checklistId': checklist.id}) }}"><span class="label label-success">{{ "Afficher/Modifier"|trans }}</span></a>
+                                            <a class="label label-danger swal" href="{{ path('deleteChecklist',{'checklistId': checklist.id}) }}">{{ "Supprimer"|trans }}</a>
+                                        </td>
                                 {% endfor %}
                                 </tbody>
                                 <tfoot>
@@ -57,11 +57,30 @@
     <script src="{{ asset('js/plugins/dataTables/datatables.min.js') }}"></script>
     <script src="{{ asset('js/plugins/dateTimeMoment/moment.js') }}"></script>
     <script src="{{ asset('js/plugins/dateTimeMoment/sorting_datetime-moment.js') }}"></script>
+    <script src="{{ asset('js/plugins/sweetalert/sweetalert.min.js') }}"></script>
     <script>
         $.fn.dataTable.moment( 'DD-MM-YYYY' );
         $(document).ready(function () {
-            var locale = "{{ asset('js/plugins/dataTables/') }}" + "{{ app.request.get('_locale') }}" + ".json";
-            var buttonCommon = {
+            $('.swal').click(function (e) {
+                e.preventDefault();
+                swal({
+                    title: "{{ "Confirmer ?"|trans }}",
+                    text: "{{ "Cette action est définitive"|trans }}",
+                    icon: "error",
+                    buttons: true,
+                    dangerMode: true,
+                }).then((willDelete) => {
+                    if (willDelete) {
+                        swal("{{ "Succès"|trans }}", {
+                            icon: "success",
+                            buttons: false
+                        });
+                        window.location.href = this.href;
+                    }
+                });
+            });
+            const locale = "{{ asset('js/plugins/dataTables/') }}" + "{{ app.request.get('_locale') }}" + ".json";
+            const buttonCommon = {
                 exportOptions: {
                     columns: '.exportable'
                 }
@@ -72,22 +91,25 @@
                 dom: '<"html5buttons"B>lTfgitp',
                 buttons: [
                     $.extend(true, {}, buttonCommon, {
-                        extend: 'copyHtml5'
+                        extend: 'copyHtml5',
+                        text: "{{ "Copier"|trans }}"
                     }),
                     $.extend(true, {}, buttonCommon, {
                         extend: 'csvHtml5',
-                        title: 'NOUESTIL Checklists Export'
+                        title: "{{ "Export listes d'appel NOUESTIL"|trans }}"
                     }),
                     $.extend(true, {}, buttonCommon, {
                         extend: 'excelHtml5',
-                        title: 'NOUESTIL Checklists Export'
+                        title: "{{ "Export listes d'appel NOUESTIL"|trans }}"
                     }),
                     $.extend(true, {}, buttonCommon, {
-                        extend: 'print'
+                        extend: 'print',
+                        text: "{{ "Imprimer"|trans }}"
                     }),
                     $.extend(true, {}, buttonCommon, {
                         extend: 'pdfHtml5',
-                        title: 'NOUESTIL Checklists Export'
+                        title: "{{ "Export listes d'appel NOUESTIL"|trans }}"
+
                     })
                 ],
                 order: [[3,'desc']],
