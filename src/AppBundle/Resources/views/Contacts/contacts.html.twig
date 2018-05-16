@@ -77,6 +77,7 @@
                                     <div class="modal-dialog" role="document">
                                         <form method="post" action="{{ path('updateContact') }}" name="update-contact" class="form-horizontal">
                                             <div class="modal-content">
+
                                                 <div class="modal-header">
 
                                                     <button type="button" class="close"
@@ -86,25 +87,43 @@
                                                     <h4 class="modal-title" id="myModalLabel">
                                                         {{ contact.firstname }} {{ contact.lastname }}</h4>
                                                 </div>
+
                                                 <div class="modal-body">
 
-                                                    <div class="Group">
-                                                        <h5>{{ "Modifier le contact"|trans }}</h5>
-                                                    </div>
-                                                    <hr/>
-                                                    <div class="Group">
-                                                        <div>
-                                                            <p>{{ "Nom"|trans }} : <input type="text" name="lastname" value="{{ contact.lastname }}">  </p>
+                                                    <div class="form-group">
+
+                                                        <div class="col-lg-4">
+                                                            <label class="control-label" for="contact_lastname">{{ "Nom"|trans }}</label>
                                                         </div>
-                                                        <div>
-                                                            <p>{{ "Prenom"|trans }} : <input type="text" name="firstname" value="{{ contact.firstname }}"></p>
+
+                                                        <div class="col-lg-6">
+                                                            <input title="i_contact_lastname" type="text" class="form-control" id="contact_lastname" name="lastname" value="{{ contact.lastname }}">
                                                         </div>
-                                                        <div>
-                                                            <p>{{ "email"|trans }} : <input type="email" name="email" value="{{ contact.email }}"></p>
+
+                                                        <div class="col-lg-4">
+                                                            <label class="control-label" for="contact_firstname">{{ "Prenom"|trans }}</label>
                                                         </div>
-                                                        <div>
-                                                            <p>{{ "numero de telephone"|trans }} : <input type="number" name="phoneNumber" value="{{ contact.phoneNumber }}"></p>
+
+                                                        <div class="col-lg-6">
+                                                            <input title="i_contact_firstname" type="text" class="form-control" id="contact_firstname" name="firstname" value="{{ contact.firstname }}">
                                                         </div>
+
+                                                        <div class="col-lg-4">
+                                                            <label class="control-label" for="contact_email">{{ "email"|trans }}</label>
+                                                        </div>
+
+                                                        <div class="col-lg-6">
+                                                            <input title="i_contact_email" type="text" class="form-control" id="contact_email" name="email" value="{{ contact.email }}">
+                                                        </div>
+
+                                                        <div class="col-lg-4">
+                                                            <label class="control-label" for="contact_phoneNumber">{{ "numero de telephone"|trans }}</label>
+                                                        </div>
+
+                                                        <div class="col-lg-6">
+                                                            <input title="i_contact_phoneNumber" type="number" class="form-control" id="contact_phoneNumber" name="phoneNumber" value="{{ contact.phoneNumber }}">
+                                                        </div>
+                                                        
                                                     </div>
 
 
