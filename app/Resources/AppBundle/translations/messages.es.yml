@@ -1,7 +1,7 @@
 Contacts: Contactos
 Nom: Apellido
 Prénom: Nombre
-Email: Correo electrónico
+Email: 'Correo electrónico'
 'Num tel': 'Número de teléfono'
 Utilisateurs: Usuarios
 Actions: Acciones
@@ -46,3 +46,66 @@ Modifier: Editar
 'Documentation': "Documentación"
 'Tutoriels': "Tutoriales"
 'Numero de telephone': "Número de teléfono"
+Administration: Administración
+Cours: Curso
+Documentation: Documentación
+Tutoriels: Tutoriales
+Utilisateur: Usuario
+Catégorie: Categoría
+Note: Nota
+'--Choisir une catégorie--': '--Elige una categoría--'
+Paiement: Pago
+Remboursement: Reembolso
+'--Choisir une méthode--': "--Elige un método--"
+Virement: Transferencia
+Copier: Copia
+'Export paiements NOUESTIL': 'Exportación pagos NOUESTIL'
+Imprimer: Imprimir
+'Confirmer ?': 'Confirmar ?'
+'Cette action est définitive': 'Esta acción es definitiva'
+Succès: éxito
+Action: Acción
+'Selectionner des utilisateurs': 'Seleccionar usuarios'
+Style: Estilo
+'Plage horaire': 'Ranura de tiempo'
+Élèves: Alumnos
+'Faire l''appel': "Hacer la llamada"
+'Élèves inscrits': 'Estudiantes registrados'
+modifier: Editar
+Élève: Alumnos
+'Export cours NOUESTIL': 'Exportación cursos NOUESTIL'
+'Demande de nouveau mot de passe.': 'Solicite una nueva contraseña.'
+'Veuillez vérifier votre boîte mail afin d''accéder au lien de réinitialisation du mot de passe.': 'Verifique su casilla de correo para acceder al enlace de restablecimiento de contraseña.'
+'Si vous n''avez rien reçu après 30 minutes, veuillez joindre un administrateur.': 'Si no ha recibido nada después de 30 minutos, póngase en contacto con un administrador.'
+'Réinitialisation de mot de passe': 'Restablecer contraseña'
+'Cet espace vous permettra de modifier le mot de passe de votre compte en cas d''oubli.': 'Este espacio le permitirá cambiar la contraseña de su cuenta en caso de olvido.'
+'Vous êtes déjà connecté': 'Ya estás conectado'
+'Retourner à l''accueil': 'Regresar a casa'
+'Pour toute demande de support :': 'Para cualquier solicitud de soporte :'
+Prenom: 'Primero Nombre'
+email: email
+'numero de telephone': 'número de teléfono'
+'Export contacts NOUESTIL': 'Exportación contactso NOUESTIL'
+Détails: Detalles
+'Visible par l''administrateur seulement': 'Visible solo para el administrador'
+'Vous n''êtes inscrit à aucun cours': 'No estás inscrito en ningún curso'
+Annulé: Cancelado
+'Note publique': 'Nota pública'
+'Note privée': 'Nota privada'
+'Vue utilisateur': 'Vista del usuario'
+'Nom :': 'Apellido :'
+'Prenom :': 'Primero nombre :'
+'Date de naissance :': 'Fecha de nacimiento :'
+'numero de telephone :': 'número de teléfono :'
+'email :': 'email :'
+'Note publique :': 'Nota pública :'
+'Note privée :': 'Nota privada :'
+'Derniers paiements': 'Últimos pagos'
+'Export utilisateurs NOUESTIL': "Exportación usuarios NOUESTIL"
+'Quitter la vue utilisateur': 'Salir vista del usuario'
+'Retour au site': 'Volver al sitio'
+Enregistrer: Registro
+Checklists: Checklists
+Categorie: Categoría
+Afficher/Modifier: Ver/Editar
+'Export listes d''appel NOUESTIL': "Exportación listas de llamadas NOUESTIL"

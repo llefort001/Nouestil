@@ -7,43 +7,37 @@ use Symfony\Component\HttpFoundation\Request;
 
 class ShowcaseController extends Controller
 {
-    public function indexAction(Request $request)
+    public function indexAction()
     {
-        $parametre = "laurene est très puissante";
-        return $this->render('AppBundle:Showcase:index.html.twig', [
-            'parametre' => $parametre
-        ]);
+        return $this->render('AppBundle:Showcase:index.html.twig');
+
     }
 
-    public function stylesAction(Request $request)
+    public function stylesAction()
     {
-        $parametre = "laurene est très puissante";
-        return $this->render('AppBundle:Showcase:styles.html.twig', [
-            'parametre' => $parametre
-        ]);
+        return $this->render('AppBundle:Showcase:styles.html.twig');
+
     }
 
-    public function contactAction(Request $request)
+    public function contactAction()
     {
-        $parametre = "laurene est très puissante";
-        return $this->render('AppBundle:Showcase:contact.html.twig', [
-            'parametre' => $parametre
-        ]);
+        return $this->render('AppBundle:Showcase:contact.html.twig');
+
     }
 
-    public function aboutAction(Request $request)
+    public function aboutAction()
     {
-        $parametre = "laurene est très puissante";
-        return $this->render('AppBundle:Showcase:about.html.twig', [
-            'parametre' => $parametre
-        ]);
+        return $this->render('AppBundle:Showcase:about.html.twig');
     }
 
-    public function timetableAction(Request $request)
+
+    public function timetableAction()
     {
-        $parametre = "laurene est très puissante";
-        return $this->render('AppBundle:Showcase:timetable.html.twig', [
-            'parametre' => $parametre
-        ]);
+        return $this->render('AppBundle:Showcase:timetable.html.twig');
+    }
+
+    public function privacyAction()
+    {
+        return $this->render('AppBundle:Showcase:privacy.html.twig');
     }
 }
