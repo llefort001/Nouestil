@@ -73,9 +73,10 @@
 
                                         <div class="modal fade" id="courseModal_{{ course.id }}" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
                                             <div class="modal-dialog" role="document">
-                                                <form method="post" action="{{ path('updateCourse') }}" name="update-course"
-                                                      class="form form-horizontal">
+
+                                                <form method="post" action="{{ path('updateCourse') }}" name="update-course" class="form-horizontal">
                                                     <div class="modal-content">
+
                                                         <div class="modal-header">
                                                             <button type="button" class="close" data-dismiss="modal"
                                                                     aria-label="Close">
@@ -85,42 +86,63 @@
                                                                 {{ course.style }} {{ course.category }} {{ course.timeslot }}
                                                             </h4>
                                                         </div>
+
                                                         <div class=modal-body">
-                                                            <div>
-                                                                <label for="style"> {{ "Style"|trans }} </label>
-                                                                <input type="text"
-                                                                       id="style"
-                                                                       name="style"
-                                                                       value="{{ course.style }}"
-                                                                       class="form form-control"/><br/>
-                                                                <label for="category"> {{ "Catégorie"|trans }} </label>
-                                                                <input type="text"
-                                                                       id="category"
-                                                                       name="category"
-                                                                       value="{{ course.category }}"
-                                                                       class="form form-control"/><br/>
-                                                                <label for="timeslot"> {{ "Plage horaire"|trans }} </label>
-                                                                <input type="text"
-                                                                       id="timeslot"
-                                                                       name="timeslot"
-                                                                       value="{{ course.timeslot }}"
-                                                                       class="form form-control"/><br/>
-                                                                <select title="professor" required="required" class="form form-control"
-                                                                        name="userTeach">
-                                                                    <option disabled selected value>
-                                                                        -- {{ "Sélectionner un professeur"|trans }} --
-                                                                    </option>
-                                                                    {% for userTeach in usersTeach %}
-                                                                        {% if course.userTeach == userTeach %}
-                                                                            <option value="{{ userTeach.id }}" selected="selected">
+
+                                                            <div class="form-group">
+
+                                                                <div class="col-lg-4">
+                                                                    <label class="control-label" for="cours_style">{{ "Style"|trans }}</label>
+                                                                </div>
+
+                                                                <div class="col-lg-6">
+                                                                    <input title="i_cours_style" type="text" class="form-control" id="cours_style" name="style" value="{{ course.style }}">
+                                                                </div>
+
+                                                                <div class="col-lg-4">
+                                                                    <label class="control-label" for="cours_category">{{ "Catégorie"|trans }}</label>
+                                                                </div>
+
+                                                                <div class="col-lg-6">
+                                                                    <input title="i_cours_category" type="text" class="form-control" id="cours_category" name="category" value="{{ course.category }}">
+                                                                </div>
+
+                                                                <div class="col-lg-4">
+                                                                    <label class="control-label" for="cours_timeslot">{{ "Plage horaire"|trans }}</label>
+                                                                </div>
+
+                                                                <div class="col-lg-6">
+                                                                    <input title="i_cours_timeslot" type="text" class="form-control" id="cours_timeslot" name="timeslot" value="{{ course.timeslot }}">
+                                                                </div>
+
+                                                            </div>
+
+                                                            <br>
+
+                                                            <div class="form-group">
+
+                                                                <div class="col-lg-4">
+                                                                    <label class="control-label" for="userTeach">{{ "Professeur"|trans }}</label>
+                                                                </div>
+
+                                                                <div class="col-lg-6">
+                                                                    <select title="professor" id="userTeach" name="userTeach" class="form-control">
+                                                                        <option disabled selected value>
+                                                                            -- {{ "Sélectionner un professeur"|trans }} --
+                                                                        </option>
+                                                                        {% for userTeach in usersTeach %}
+                                                                            {% if course.userTeach == userTeach %}
+                                                                                <option value="{{ userTeach.id }}" selected="selected">
+                                                                                    {{ userTeach.firstname }}
+                                                                                </option>
+                                                                            {% endif %}
+                                                                            <option value="{{ userTeach.id }}">
                                                                                 {{ userTeach.firstname }}
                                                                             </option>
-                                                                        {% endif %}
-                                                                        <option value="{{ userTeach.id }}">
-                                                                            {{ userTeach.firstname }}
-                                                                        </option>
-                                                                    {% endfor %}
-                                                                </select>
+                                                                        {% endfor %}
+                                                                    </select>
+                                                                </div>
+
                                                             </div>
                                                         </div>
                                                         <div class="modal-footer">

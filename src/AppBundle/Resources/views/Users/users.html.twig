@@ -157,24 +157,28 @@
 
                                                 <br>
 
-                                                <div class="form-group">
+                                                {% if currentUser != user %}
 
-                                                    <div class="col-lg-4">
-                                                        <label class="control-label" for="user_group">{{ "Groupe"|trans }}</label>
+                                                    <div class="form-group">
+
+                                                        <div class="col-lg-4">
+                                                            <label class="control-label" for="user_group">{{ "Groupe"|trans }}</label>
+                                                        </div>
+
+                                                        <div class="col-lg-6">
+                                                            <select name="group" class="form-control">
+                                                                <option>
+                                                                    -- {{ "Sélectionner une option"|trans }} --
+                                                                </option>
+                                                                {% for key, group in groups %}
+                                                                    <option value="{{ group }}" {% if user.group.id is defined and user.group.id==group.id %} selected="selected" {% endif %} >{{ group }}</option>
+                                                                {% endfor %}
+                                                            </select>
+                                                        </div>
+
                                                     </div>
 
-                                                    <div class="col-lg-6">
-                                                        <select name="group" class="form-control">
-                                                            <option>
-                                                                -- {{ "Sélectionner une option"|trans }} --
-                                                            </option>
-                                                            {% for key, group in groups %}
-                                                                <option value="{{ group }}" {% if user.group.id is defined and user.group.id==group.id %} selected="selected" {% endif %} >{{ group }}</option>
-                                                            {% endfor %}
-                                                        </select>
-                                                    </div>
-
-                                                </div>
+                                                {% endif %}
 
                                                 <br>
 

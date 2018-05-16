@@ -67,7 +67,9 @@
                                         <a href="{{ path( "fos_user_profile_show" ) }}">{{ "showcase_profile_menu"|trans }} </a>
                                     </li>
                                 {% else %}
-                                    <li><a href="{{ path('fos_user_security_login') }}">{{ "showcase_login_menu"|trans }}</a></li>
+                                    <li>
+                                        <a href="{{ path('fos_user_security_login') }}">{{ "showcase_login_menu"|trans }}</a>
+                                    </li>
                                 {% endif %}
                                 <li class="dropdown">
                                     <a class="dropdown-toggle" data-toggle="dropdown" href="#" aria-expanded="false">
@@ -75,7 +77,8 @@
                                     </a>
                                     <ul class="dropdown-menu animated fadeInDown" style="width: auto;min-width: 0">
                                         <li style="margin-left: 0">
-                                            <a class="text-center" href="{{ path(app.request.get('_route'), app.request.get('_route_params',{})|merge({'_locale': 'es'})) }}">
+                                            <a class="text-center"
+                                               href="{{ path(app.request.get('_route'), app.request.get('_route_params',{})|merge({'_locale': 'es'})) }}">
                                                 <span class="flag-icon flag-icon-es"></span>
                                             </a>
                                         </li>
@@ -121,7 +124,8 @@
                             <li><a href="{{ path('timetable') }}">{{ "showcase_timetable_menu"|trans }}</a></li>
                             <li><a href="{{ path('styles') }}">{{ "showcase_styles_menu"|trans }}</a></li>
                             <li><a href="{{ path('contact') }}">{{ "showcase_contact_menu"|trans }}</a></li>
-                            <li><a href="{{ path('fos_user_security_login') }}">{{ "showcase_login_menu"|trans }}</a></li>
+                            <li><a href="{{ path('fos_user_security_login') }}">{{ "showcase_login_menu"|trans }}</a>
+                            </li>
                         </ul>
                     </div>
                 </div>
@@ -138,7 +142,7 @@
                 <div class="col-lg-4 col-md-4 col-sm-3 col-xs-12">
                     <div class="footer-block margin-t15"><h4>{{ "showcase_footer_title_insta"|trans }}</h4>
                         <div class="row">
-                            <div id="instafeed"></div>
+                            <!-- LightWidget WIDGET --><script src="https://cdn.lightwidget.com/widgets/lightwidget.js"></script><iframe src="//lightwidget.com/widgets/9ab0e9d94a455af2bc058c4c707dbda8.html" scrolling="no" allowtransparency="true" class="lightwidget-widget" style="width:100%;border:0;overflow:hidden;"></iframe>
                         </div>
                     </div>
                 </div>
@@ -164,7 +168,8 @@
             <div class="row">
                 <div class="col-md-12">
                     <div class="copyright">
-                        © 2018 All right reserved Nouestil. Designed by <a href="http://www.themevault.net/" target="_blank">ThemeVault.</a>
+                        © 2018 All right reserved Nouestil. Designed by <a href="http://www.themevault.net/"
+                                                                           target="_blank">ThemeVault.</a>
                     </div>
                 </div>
             </div>
@@ -188,12 +193,11 @@
     <script src="{{ asset('js/instafeed.min.js') }}" type="text/javascript"></script>
     <script src="{{ asset('js/custom.js') }}" type="text/javascript"></script>
     <script src="{{ asset('js/plugins/wow/wow.min.js') }}"></script>
+    <script src='https://unpkg.com/masonry-layout@4/dist/masonry.pkgd.min.js'></script>
+    <script src='https://unpkg.com/imagesloaded@4.1/imagesloaded.pkgd.min.js'></script>
 
     <script>
         $('a[href="' + location.pathname + '"]').parents('li,ul').addClass('active');
-    </script>
-
-    <script>
         new WOW().init();
     </script>
 {% endblock %}
