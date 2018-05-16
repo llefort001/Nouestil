@@ -29,6 +29,7 @@ class UserController extends Controller
 
     public function deleteUserAction($userId)
     {
+        $this->denyAccessUnlessGranted('ROLE_ADMIN', 'Access denied', 'You cannot edit this item.');
         $userManager = $this->get('nouestil.user');
         $userToDelete = $userManager->getUser($userId);
         if ($userToDelete == $this->getUser()) {
@@ -44,6 +45,7 @@ class UserController extends Controller
 
     public function updateUserAction(Request $request)
     {
+        $this->denyAccessUnlessGranted('ROLE_ADMIN', 'Access denied', 'You cannot edit this item.');
         if ($request->isMethod('POST')) {
 
             $data = $request->request->all();
@@ -61,6 +63,7 @@ class UserController extends Controller
 
     public function createUserAction(Request $request)
     {
+        $this->denyAccessUnlessGranted('ROLE_ADMIN', 'Access denied', 'You cannot edit this item.');
         $userManager = $this->get('nouestil.user');
         $formRegistration = $this->createForm(UserType::class);
 
@@ -109,6 +112,7 @@ class UserController extends Controller
 
     public function unlinkContactAction($userId, $contactId)
     {
+        $this->denyAccessUnlessGranted('ROLE_ADMIN', 'Access denied', 'You cannot edit this item.');
         $userManager = $this->get('nouestil.user');
         $contactManager = $this->get('nouestil.contact');
         $contactToDelete = $contactManager->getContactById($contactId);
@@ -124,10 +128,8 @@ class UserController extends Controller
         if (!is_null($userToConfirm) && $userToConfirm->getConfirmationToken() === $token){
             $userToConfirm->setEnabled(true);
             $userManager->save($userToConfirm);
-            $url = $this->generateUrl('fos_user_security_login');
-            $response = new RedirectResponse($url);
             $this->addFlash('success',  'Votre compte a bien été activé');
-            return $response;
+            return $this->redirect($this->generateUrl('fos_user_security_login'));
         }
         $this->addFlash('danger','Erreur lors de l\'activation de votre compte');
         return $this->redirect($this->generateUrl('fos_user_security_login'));

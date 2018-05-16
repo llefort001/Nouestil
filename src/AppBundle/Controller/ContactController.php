@@ -20,11 +20,11 @@ class ContactController extends Controller
     {
         $contacts = $this->get('nouestil.contact');
         return $this->render('AppBundle:Contacts:contacts.html.twig', array('contacts' => $contacts->getContactsList()));
-
     }
 
     public function deleteContactAction($contactId)
     {
+        $this->denyAccessUnlessGranted('ROLE_ADMIN', 'Access denied', 'You cannot edit this item.');
         $contactManager = $this->get('nouestil.contact');
         $contactToDelete = $contactManager->getContact($contactId);
         $contactManager->deleteContact($contactToDelete);
@@ -36,6 +36,7 @@ class ContactController extends Controller
 
     public function updateContactAction(Request $request)
     {
+        $this->denyAccessUnlessGranted('ROLE_ADMIN', 'Access denied', 'You cannot edit this item.');
 
         if ($request->isMethod('POST')) {
             $data = $request->request->all();
@@ -49,6 +50,7 @@ class ContactController extends Controller
 
     public function createContactAction(Request $request)
     {
+        $this->denyAccessUnlessGranted('ROLE_ADMIN', 'Access denied', 'You cannot edit this item.');
         $formContact = $this->createForm(ContactType::class);
         if ($request->isMethod('POST')) {
             $formContact->submit($request->request->get($formContact->getName()));
@@ -61,8 +63,6 @@ class ContactController extends Controller
                 return $this->redirect($this->generateUrl("contacts"));
             }
         }
-
-
         return $this->render('AppBundle:Contacts:create.html.twig', array(
             'formContact' => $formContact->createView(),
         ));

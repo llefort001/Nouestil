@@ -26,6 +26,8 @@ class PaymentController extends Controller
 
   public function createPaymentAction(Request $request)
     {
+        $this->denyAccessUnlessGranted('ROLE_ADMIN', 'Access denied', 'You cannot edit this item.');
+
         $formCreatePayment = $this->createForm(PaymentType::class);
 
         if ($request->isMethod('POST')) {
@@ -53,6 +55,7 @@ class PaymentController extends Controller
 
     public function updatePaymentAction(Request $request)
     {
+        $this->denyAccessUnlessGranted('ROLE_ADMIN', 'Access denied', 'You cannot edit this item.');
         if ($request->isMethod('POST')) {
             $data = $request->request->all();
 
@@ -68,6 +71,8 @@ class PaymentController extends Controller
 
     public function deletePaymentAction($paymentId)
     {
+        $this->denyAccessUnlessGranted('ROLE_ADMIN', 'Access denied', 'You cannot edit this item.');
+
         $paymentManager = $this->get('nouestil.payment');
         $paymentToDelete = $paymentManager->getPayment($paymentId);
         $paymentManager->deletePayment($paymentToDelete);

@@ -8,7 +8,7 @@ use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 
 class ChecklistController extends controller
 {
-    public function indexAction(Request $request){
+    public function indexAction(){
         $checklistManager = $this->get('nouestil.checklist');
         $checklists= $checklistManager->getChecklists();
         return $this->render('AppBundle:Checklist:checklists.html.twig',array(

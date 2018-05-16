@@ -26,6 +26,8 @@ class CourseController extends controller
 
     public function updateCourseAction(Request $request)
     {
+        $this->denyAccessUnlessGranted('ROLE_ADMIN', 'Access denied', 'You cannot edit this item.');
+
         if ($request->isMethod('POST')) {
                 $data = $request->request->all();
                 $course = $this->get('nouestil.course');
@@ -37,6 +39,8 @@ class CourseController extends controller
 
     public function deleteCourseAction($courseId)
     {
+        $this->denyAccessUnlessGranted('ROLE_ADMIN', 'Access denied', 'You cannot edit this item.');
+
         $course = $this->get('nouestil.course');
         $courseToDelete = $course->getCourse($courseId);
         $course->deleteCourse($courseToDelete);
