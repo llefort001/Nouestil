@@ -167,8 +167,17 @@
             </div>
             <div class="row">
                 <div class="col-md-12">
+                    {#<div class="copyright">#}
+                        {#© 2018 All right reserved Nouestil. Designed by <a href="http://www.themevault.net/"#}
+                                                                           {#target="_blank">ThemeVault.</a>#}
+                    {#</div>#}
+                {#</div>#}
                     <div class="copyright">
-                        © 2018 All right reserved Nouestil. Designed by <a href="http://www.themevault.net/"
+                        © 2018 All right reserved Nouestil |
+
+                        <a href="{{ path('privacy') }}">{{ "showcase_privacy_footer"|trans }}</a>
+
+                        | Designed by <a href="http://www.themevault.net/"
                                                                            target="_blank">ThemeVault.</a>
                     </div>
                 </div>

@@ -594,6 +594,10 @@ button.close:hover {
     margin-top: 135px;
     padding: 65px 0;
 }
+/*legal note page*/
+#mentions{
+    font-size : medium;
+}
 
 /*contact input box*/
 #contactForm .form-control {

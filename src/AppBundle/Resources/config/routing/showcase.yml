@@ -16,3 +16,7 @@ about:
 timetable:
     path:     /timetable
     defaults: { _controller: AppBundle:Showcase:timetable }
+privacy:
+    path:     /privacy-policy
+    defaults: { _controller: AppBundle:Showcase:privacy }
+

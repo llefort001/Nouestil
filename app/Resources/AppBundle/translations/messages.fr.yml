@@ -42,7 +42,66 @@ Modifier: Modifier
 'Sélectionner une option': 'Sélectionner une option'
 'Supprimer l''utilisateur': 'Supprimer l''utilisateur'
 'Délier ce contact de l''utilisateur': 'Délier ce contact de l''utilisateur'
-'Administration': Administration
-'Cours': Cours
-'Documentation': Documentation
-'Tutoriels': Tutoriels
+Administration: Administration
+Cours: Cours
+Documentation: Documentation
+Tutoriels: Tutoriels
+Utilisateur: Utilisateur
+Catégorie: Catégorie
+Note: Note
+'--Choisir une catégorie--': '--Choisir une catégorie--'
+Paiement: Paiement
+Remboursement: Remboursement
+'--Choisir une méthode--': '--Choisir une méthode--'
+Virement: Virement
+Copier: Copier
+'Export paiements NOUESTIL': 'Export paiements NOUESTIL'
+Imprimer: Imprimer
+'Confirmer ?': 'Confirmer ?'
+'Cette action est définitive': 'Cette action est définitive'
+Succès: Succès
+Action: Action
+'Selectionner des utilisateurs': 'Sélectionner des utilisateurs'
+Style: Style
+'Plage horaire': 'Plage horaire'
+Élèves: Élèves
+'Faire l''appel': 'Faire l''appel'
+'Élèves inscrits': 'Élèves inscrits'
+modifier: modifier
+Élève: Élève
+'Export cours NOUESTIL': 'Export cours NOUESTIL'
+'Demande de nouveau mot de passe.': 'Demande de nouveau mot de passe.'
+'Veuillez vérifier votre boîte mail afin d''accéder au lien de réinitialisation du mot de passe.': 'Veuillez vérifier votre boîte mail afin d''accéder au lien de réinitialisation du mot de passe.'
+'Si vous n''avez rien reçu après 30 minutes, veuillez joindre un administrateur.': 'Si vous n''avez rien reçu après 30 minutes, veuillez joindre un administrateur.'
+'Réinitialisation de mot de passe': 'Réinitialisation de mot de passe'
+'Cet espace vous permettra de modifier le mot de passe de votre compte en cas d''oubli.': 'Cet espace vous permettra de modifier le mot de passe de votre compte en cas d''oubli.'
+'Vous êtes déjà connecté': 'Vous êtes déjà connecté'
+'Retourner à l''accueil': 'Retourner à l''accueil'
+'Pour toute demande de support :': 'Pour toute demande de support :'
+Prenom: Prenom
+email: email
+'numero de telephone': 'numéro de téléphone'
+'Export contacts NOUESTIL': 'Export contacts NOUESTIL'
+Détails: Détails
+'Visible par l''administrateur seulement': 'Visible par l''administrateur seulement'
+'Vous n''êtes inscrit à aucun cours': 'Vous n''êtes inscrit à aucun cours'
+Annulé: Annulé
+'Note publique': 'Note publique'
+'Note privée': 'Note privée'
+'Vue utilisateur': 'Vue utilisateur'
+'Nom :': 'Nom :'
+'Prenom :': 'Prénom :'
+'Date de naissance :': 'Date de naissance :'
+'numero de telephone :': 'numéro de téléphone :'
+'email :': 'email :'
+'Note publique :': 'Note publique :'
+'Note privée :': 'Note privée :'
+'Derniers paiements': 'Derniers paiements'
+'Export utilisateurs NOUESTIL': 'Export utilisateurs NOUESTIL'
+'Quitter la vue utilisateur': 'Quitter la vue utilisateur'
+'Retour au site': 'Retour au site'
+Enregistrer: Enregistrer
+Checklists: Checklists
+Categorie: Categorie
+Afficher/Modifier: Afficher/Modifier
+'Export listes d''appel NOUESTIL': 'Export listes d''appel NOUESTIL'

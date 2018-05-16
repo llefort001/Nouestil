@@ -11,7 +11,7 @@ showcase_profile_menu: "Perfil"
 showcase_footer_title_links: "Enlaces rápidos"
 showcase_footer_title_info: "Contactarnos"
 showcase_footer_tel_info: 'TEL : +34 637 49 66 79'
-showcase_footer_mail_info: 'MAIL: nouestil@gmail.com'
+showcase_footer_mail_info: 'MAIL: nouestil.secretaria@gmail.com'
 showcase_footer_title_insta: '@NOUESTILSALOU'
 showcase_login_menu: "Connectarse"
 #index page
@@ -117,3 +117,5 @@ showcase_contact_subject: "Asunto:"
 showcase_contact_message: "Mensaje:"
 showcase_contact_reset: "Suprimir"
 showcase_contact_submit: "Enviar"
+showcase_privacy_footer: "Notas legales"
+

@@ -41,8 +41,66 @@ Modifier: Update
 'Sélectionner une option': 'Pick a value'
 'Supprimer l''utilisateur': 'Delete user'
 'Délier ce contact de l''utilisateur': 'Unlink this contact from his user'
-'Administration': Admin
-'Cours': Courses
-'Documentation': Documentation
-'Tutoriels': Tutorials
-
+Administration: Admin
+Cours: Courses
+Documentation: Documentation
+Tutoriels: Tutorials
+Utilisateur: User
+Catégorie: Category
+Note: Note
+'--Choisir une catégorie--': '--Choose a category--'
+Paiement: Payment
+Remboursement: Refund
+'--Choisir une méthode--': '--Choose a method--'
+Virement: Transfer
+Copier: Copy
+'Export paiements NOUESTIL': 'Payments export NOUESTIL'
+Imprimer: Print
+'Confirmer ?': 'Confirm ?'
+'Cette action est définitive': 'This action is definitive'
+Succès: Sucess
+Action: Action
+'Selectionner des utilisateurs': 'Select users'
+Style: Style
+'Plage horaire': 'Time slot'
+Élèves: Student
+'Faire l''appel': 'Make the call'
+'Élèves inscrits': 'Enrolled students'
+modifier: edit
+Élève: Student
+'Export cours NOUESTIL': 'Course export NOUESTIL'
+'Demande de nouveau mot de passe.': 'Request a new password.'
+'Veuillez vérifier votre boîte mail afin d''accéder au lien de réinitialisation du mot de passe.': 'Please check your mailbox to access the password reset link.'
+'Si vous n''avez rien reçu après 30 minutes, veuillez joindre un administrateur.': 'If you have not received anything after 30 minutes, please contact an administrator.'
+'Réinitialisation de mot de passe': 'Reset password'
+'Cet espace vous permettra de modifier le mot de passe de votre compte en cas d''oubli.': 'This field will allow you to change the password of your account in case of forgetfulness.'
+'Vous êtes déjà connecté': 'You are already connected'
+'Retourner à l''accueil': 'Return to homepage'
+'Pour toute demande de support :': 'For any support request :'
+Prenom: Firstname
+email: email
+'numero de telephone': 'phone number'
+'Export contacts NOUESTIL': 'Contacts export NOUESTIL'
+Détails: Details
+'Visible par l''administrateur seulement': 'Visible to the administrator only'
+'Vous n''êtes inscrit à aucun cours': 'You are not enrolled in any courses'
+Annulé: Canceled
+'Note publique': 'Public note'
+'Note privée': 'Private note'
+'Vue utilisateur': 'User view'
+'Nom :': 'lastname :'
+'Prenom :': 'Firstname :'
+'Date de naissance :': 'Date of birth :'
+'numero de telephone :': 'phone number :'
+'email :': 'email :'
+'Note publique :': 'public note :'
+'Note privée :': 'private note :'
+'Derniers paiements': 'Latest payments'
+'Export utilisateurs NOUESTIL': 'Users export NOUESTIL'
+'Quitter la vue utilisateur': 'Leave user view'
+'Retour au site': 'Return to website'
+Enregistrer: Register
+Checklists: Checklists
+Categorie: Category
+Afficher/Modifier: View/Edit
+'Export listes d''appel NOUESTIL': "Call lists export NOUESTIL"
