@@ -42,7 +42,6 @@
                                                 {% for key, user in contact.users %}
                                                     <a href="#"><span class="label label-default" data-toggle="modal"
                                                                       data-target="#userModal_{{ user.id }}">{{ user.firstname }} {{ user.lastname }}</span></a>
-                                                    {#{{ user }}#}
                                                 {% endfor %}
 
                                             </td>
@@ -109,7 +108,7 @@
                                                         </div>
 
                                                         <div class="col-lg-4">
-                                                            <label class="control-label" for="contact_email">{{ "email"|trans }}</label>
+                                                            <label class="control-label" for="contact_email">{{ "Email"|trans }}</label>
                                                         </div>
 
                                                         <div class="col-lg-6">
@@ -117,7 +116,7 @@
                                                         </div>
 
                                                         <div class="col-lg-4">
-                                                            <label class="control-label" for="contact_phoneNumber">{{ "numero de telephone"|trans }}</label>
+                                                            <label class="control-label" for="contact_phoneNumber">{{ "Numero de telephone"|trans }}</label>
                                                         </div>
 
                                                         <div class="col-lg-6">
