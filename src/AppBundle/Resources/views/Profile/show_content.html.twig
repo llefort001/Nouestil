@@ -31,14 +31,14 @@
                         </div>
                         <div class="row m-t-lg">
                             <div class="col-md-6">
-                                <h5>{{ "Note publique: "|trans }}{{ user.publicNote }}</h5>
+                                <h5>{{ "Note publique"|trans }} : {{ user.publicNote }}</h5>
                             </div>
                         </div>
                         {% if (is_granted("ROLE_ADMIN")) %}
                             <div class="row">
                                 <div class="col-md-6">
                                     <h5 data-toggle="tooltip" data-placement="bottom auto" title=""
-                                        data-original-title="{{ "Visible par l'administrateur seulement"|trans }}">{{ "Note privée: "|trans }}{{ user.privateNote }}</h5>
+                                        data-original-title="{{ "Visible par l'administrateur seulement"|trans }}">{{ "Note privée"|trans }} : {{ user.privateNote }}</h5>
                                 </div>
                             </div>
                         {% endif %}
