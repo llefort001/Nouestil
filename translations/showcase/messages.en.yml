@@ -118,4 +118,7 @@ showcase_contact_message: "Message :"
 showcase_contact_reset: "Clear"
 showcase_contact_submit: "Send"
 showcase_privacy_footer: "Legal notice"
-
+#privacy-policy_page
+showcase_privacy_policy_content: "The information and personal data collected on this website are recorded in a client file by Nou Estil dance school to allow us to contact the client by email or phone if necessary.
+                                           They are kept up to 1 year and are intended for the secretariat and teachers of the Nou Estil dance school.
+                                               You can exercise your right of access to the data concerning you and have them rectified by contacting: Secretariat Nou Estil, Salou, tel: +34 637 49 66 79, mail: nouestil.secretaria@gmail.com."
