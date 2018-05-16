@@ -76,22 +76,21 @@
                                         <span class="flag-icon flag-icon-{% if (app.request.locale == "en") %}gb {% else %}{{ app.request.locale }}{% endif %}"></span>
                                     </a>
                                     <ul class="dropdown-menu animated fadeInDown" style="width: auto;min-width: 0">
-                                        <li style="margin-left: 0">
-                                            <a class="text-center"
-                                               href="{{ path(app.request.get('_route'), app.request.get('_route_params',{})|merge({'_locale': 'es'})) }}">
+                                        <li>
+                                            <a class="text-center" style="padding: 0;" href="{{ path(app.request.get('_route'), app.request.get('_route_params',{})|merge({'_locale': 'es'})) }}">
                                                 <span class="flag-icon flag-icon-es"></span>
                                             </a>
                                         </li>
                                         <li class="divider"></li>
-                                        <li style="margin-left: 0">
-                                            <a href="{{ path(app.request.get('_route'), app.request.get('_route_params',{})|merge({'_locale': 'en'})) }}">
+                                        <li>
+                                            <a class="text-center" style="padding: 0;" href="{{ path(app.request.get('_route'), app.request.get('_route_params',{})|merge({'_locale': 'en'})) }}">
                                                 <span class="flag-icon flag-icon-gb"></span>
 
                                             </a>
                                         </li>
                                         <li class="divider"></li>
-                                        <li style="margin-left: 0">
-                                            <a href="{{ path(app.request.get('_route'), app.request.get('_route_params',{})|merge({'_locale': 'fr'})) }}">
+                                        <li>
+                                            <a class="text-center" style="padding: 0;" href="{{ path(app.request.get('_route'), app.request.get('_route_params',{})|merge({'_locale': 'fr'})) }}">
                                                 <span class="flag-icon flag-icon-fr"></span>
 
                                             </a>
