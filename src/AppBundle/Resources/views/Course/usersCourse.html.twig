@@ -5,46 +5,50 @@
 {% endblock %}
 {% block body %}
     <div class="ibox-title">
-        <h5>{{ course.style }} - {{  course.category }}</h5>
-        <div class="ibox-content">
-            <table class="table">
-                <thead>
+        <h5>{{ course.style }} - {{ course.category }}</h5>
+    </div>
+    <div class="ibox-content">
+        <table class="table">
+            <thead>
+            <tr>
+                <th>#</th>
+                <th>{{ "Nom d\'utilisateur"|trans }}</th>
+                <th>{{ "Nom"|trans }}</th>
+                <th>{{ "Prénom"|trans }}</th>
+                <th>{{ "Action"|trans }}</th>
+            </tr>
+            </thead>
+            <tbody>
+            {% for user in course.users %}
                 <tr>
-                    <th>#</th>
-                    <th>{{ "Nom d\'utilisateur"|trans }}</th>
-                    <th>{{ "Nom"|trans }}</th>
-                    <th>{{ "Prénom"|trans }}</th>
-                    <th>{{ "Action"|trans }}</th>
+                    <td>{{ user.id }}</td>
+                    <td>{{ user.username }}</td>
+                    <td>{{ user.lastname }}</td>
+                    <td>{{ user.firstname }}</td>
+                    <td><a class="label label-danger swal"
+                           href="{{ path('deleteUserCourse',{'userId': user.id, 'courseId': course.Id}) }}">
+                            {{ "Supprimer"|trans }}</a></td>
                 </tr>
-                </thead>
-                <tbody>
-                {% for user in course.users %}
-                    <tr>
-                        <td>{{ user.id }}</td>
-                        <td>{{ user.username }}</td>
-                        <td>{{ user.lastname }}</td>
-                        <td>{{ user.firstname }}</td>
-                        <td><a class="label label-danger swal" href="{{ path('deleteUserCourse',{'userId': user.id, 'courseId': course.Id}) }}">
-                                {{ "Supprimer"|trans }}</a></td>
-                    </tr>
-                {% endfor %}
-                </tbody>
-            </table>
-        </div>
-        <hr />
-        <form method="POST" action="{{ path('usersCourse',{'courseId' : course.id}) }}" name="usersCourse" class="form-horizontal">
+            {% endfor %}
+            </tbody>
+        </table>
+        <hr/>
+        <form method="POST" action="{{ path('usersCourse',{'courseId' : course.id}) }}" name="usersCourse"
+              class="form-horizontal">
             <div class="form-group">
                 <label class="font-noraml">Ajouter des utilisateurs</label>
                 <div class="input-group">
-                    <select data-placeholder="Choisir des élèves..." class="user" multiple="" name="users[]" style="width: 350px; display: none;" tabindex="-1">
+                    <select data-placeholder="Choisir des élèves..." class="user" multiple="" name="users[]"
+                            style="width: 350px; display: none;" tabindex="-1">
                         <option disabled> -- {{ "Selectionner des utilisateurs"|trans }} --</option>
                         {% for user in results %}
-                        <option value="{{ user.id }}">{{ user.firstname }} {{ user.lastname }}</option>
+                            <option value="{{ user.id }}">{{ user.firstname }} {{ user.lastname }}</option>
                         {% endfor %}
                     </select>
                 </div>
                 <input type="hidden" name="id" value="{{ course.id }}">
-                <button type="submit" class="btn btn-primary">Save</button>
+                <br/>
+                <button type="submit" class="btn btn-primary">{{ "Sauvegarder"|trans }}</button>
             </div>
         </form>
     </div>
@@ -53,26 +57,26 @@
     <script src="{{ asset('js/plugins/select2/select2.full.min.js') }}"></script>
     <script src="{{ asset('js/plugins/sweetalert/sweetalert.min.js') }}"></script>
     <script>
-    $(document).ready(function(){
-        $('.user').select2();
-        $('.swal').click(function (e) {
-            e.preventDefault();
-            swal({
-                title: "{{ "Confirmer ?"|trans }}",
-                text: "{{ "Cette action est définitive"|trans }}",
-                icon: "error",
-                buttons: true,
-                dangerMode: true,
-            }).then((willDelete) => {
-                if (willDelete) {
-                    swal("{{ "Succès"|trans }}", {
-                        icon: "success",
-                        buttons: false
-                    });
-                    window.location.href = this.href;
-                }
+        $(document).ready(function () {
+            $('.user').select2();
+            $('.swal').click(function (e) {
+                e.preventDefault();
+                swal({
+                    title: "{{ "Confirmer ?"|trans }}",
+                    text: "{{ "Cette action est définitive"|trans }}",
+                    icon: "error",
+                    buttons: true,
+                    dangerMode: true,
+                }).then((willDelete) => {
+                    if (willDelete) {
+                        swal("{{ "Succès"|trans }}", {
+                            icon: "success",
+                            buttons: false
+                        });
+                        window.location.href = this.href;
+                    }
+                });
             });
         });
-    });
     </script>
 {% endblock %}
