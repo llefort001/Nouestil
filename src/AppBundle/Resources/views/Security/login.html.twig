@@ -23,8 +23,7 @@
                     <img alt="image" class="img-circle" src="{{ asset('favicon-196x196.png') }}"/>
 
                 </div>
-                <h3>Bienvenue sur Nouestil</h3>
-                <p>Texte exemple.
+                <h3>{{ "Bienvenue sur Nouestil"|trans }}</h3>
                 </p>
                 {% block fos_user_content %}
                     {{ include('@FOSUser/Security/login_content.html.twig') }}
